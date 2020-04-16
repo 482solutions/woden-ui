@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -35,6 +35,7 @@ class CreateForm extends Component {
 
   render() {
     const { layout = "horizontal", scheme, buttonName, className, form: { getFieldDecorator, getFieldsError } } = this.props;
+    console.log(scheme);
     const { isLoading } = this.state;
     return (
       <Form
@@ -76,7 +77,7 @@ class CreateForm extends Component {
                 disabled={this.hasErrors(getFieldsError()) || isLoading}
                 loading={isLoading}
               >
-                { buttonName }
+                {buttonName}
               </Button>
             )
           }

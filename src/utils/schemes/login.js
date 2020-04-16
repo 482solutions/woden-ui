@@ -4,6 +4,7 @@ export const login = () => [
   {
     name: 'name',
     label: 'Username',
+    placeholder: 'hello@482.solutions',
     component: String,
     required: true,
     message: 'Username can not be empty'
