@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 

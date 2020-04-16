@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Breadcrumb, Icon} from 'antd';
+import { TeamOutlined } from '@ant-design/icons';
+import { Breadcrumb } from 'antd';
 
 import { actions } from '../../../state-management';
 
@@ -18,14 +19,12 @@ const Path = ({ filesystem, goBack, showPermissions }) => (
           {element}
           {
             i === arr.length - 1 && element !== 'shared' && arr[i - 1] !== 'shared' && (
-              <Icon
-                type="team"
+              <TeamOutlined
                 className="breadcrumb-item__permissions"
                 style={{
                   fontSize: 16
                 }}
-                onClick={() => showPermissions(arr.slice(0, i + 1).join('/'))}
-              />
+                onClick={() => showPermissions(arr.slice(0, i + 1).join('/'))} />
             )
           }
         </Breadcrumb.Item>
