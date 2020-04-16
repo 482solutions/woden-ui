@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Icon, Avatar } from "antd";
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Card, Avatar } from "antd";
 
 import "./style.css";
 
@@ -12,7 +13,7 @@ const CardWrapper = ({ selected, children, ...props }) => (
     {...props}
   >
     <Meta
-      avatar={<Icon type={selected.type} />}
+      avatar={<LegacyIcon type={selected.type} />}
       title={selected.name} />
     <hr />
     {children}
