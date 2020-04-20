@@ -1,4 +1,4 @@
-// import { message } from 'antd';
+import { message } from 'antd';
 import { LOGIN, LOGOUT } from "../types";
 import { api, functions } from "../../utils";
 import { savePermission } from "./permissions";
@@ -29,7 +29,7 @@ const registration = async (user) => {
   const { data } = await api.register(user.name, user.password);
 
   if (data.error && data.error !== "User already exists") {
-    // message.error(data.error);
+    message.error(data.error);
     console.log(data);
     return;
   } else if (data.error === "User already exists") {
@@ -41,7 +41,7 @@ const registration = async (user) => {
 const logIn = async (user, dispatch) => {
   const { data: { token, error } } = await api.login(user.name, user.password);
   if (error) {
-    // message.error(error);
+    message.error(error);
     return;
   }
   functions.setAuthorizationToken(token);
@@ -51,7 +51,8 @@ const logIn = async (user, dispatch) => {
 
 
 export const loginRequest = (user) => async dispatch => {
-  const isRegistered = await checkRegistered(user, dispatch);
+  const isRegistered = await checkRegistered(user, dispatch) || true;
+  //TODO: Заглушка для API: убрать `|| true` выше
   if (isRegistered) {
     await logIn(user, dispatch);
     return;

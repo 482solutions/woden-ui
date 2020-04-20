@@ -58,7 +58,9 @@ section {
 .flex-direction-column {
   flex-direction: column;
 }
-
+.align-self-start {
+  align-self: flex-start;
+}
 .flex-up {
   display: flex;
   justify-content: center;
@@ -103,6 +105,9 @@ section {
 
 .h100 {
   height: 100%;
+}
+.w100 {
+  width: 100%;
 }
 
 .w40 {

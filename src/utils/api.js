@@ -58,7 +58,12 @@ const auth = {
       name,
       password,
     };
-    return sendRequest({ data });
+    // TODO: Заглушка для API убрать всё что после `||` ниже
+    return sendRequest({ data }) || {
+      data: {
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiVXNlcklkIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.rtW2JEwcFX_oy8ff3BdHwvGqqMEwn4-oQcit4F48Qkw',
+      },
+    };
   },
   logout: serverRequest({
     method: 'POST',
@@ -81,8 +86,7 @@ const filesystem = {
       method: 'PUT',
       url: urls.file(path),
     });
-
-    console.log(file);
+    // console.log(file);
 
     const form = new FormData();
     form.append('file', file, file.name);
@@ -95,7 +99,7 @@ const filesystem = {
       url: urls.sharedFile(path),
     });
 
-    console.log(file);
+    // console.log(file);
 
     const form = new FormData();
     form.append('file', file, file.name);

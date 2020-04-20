@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon as LegacyIcon } from '@ant-design/compatible';
-import { Card, Avatar } from "antd";
+import { Card } from "antd";
 
 import "./style.css";
 

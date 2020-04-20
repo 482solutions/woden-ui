@@ -6,3 +6,4 @@ export { default as Stats } from './Stats';
 export { default as Search } from './Search';
 export { default as ChangePermissions } from './ChangePermissions';
 export { default as Permissions } from './Permissions';
+export { default as LoginForm } from './LoginForm';

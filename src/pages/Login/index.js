@@ -1,21 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Row, Col } from 'antd';
-import { actions } from '../../state-management';
-import { schemes } from "../../utils";
-import { CreateForm } from "../../components";
+import { LoginForm } from "../../components";
 import loginWelcome from '../../assets/images/loginWelcome.svg';
 import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
+import { actions } from '../../state-management';
 
 class Login extends React.Component {
-
   replace = () => {
     this.props.history.replace('/');
   };
-
-  loginRequest = ({ name, password }) => {
-    this.props.loginRequest({ name, password });
+  loginRequest = async ({ loginEmail, password, remember }) => {
+    await this.props.loginRequest({ name: loginEmail, password });
     this.replace();
   };
 
@@ -33,14 +29,8 @@ class Login extends React.Component {
             <img src={loginWelcome} alt="Welcome"/>
           </div>
           <div className="loginBlock flex-direction-column flex-center">
-            <img src={logoCol} alt="Welcome"/>
-            <CreateForm
-              layout="horizontal"
-              onSubmit={this.loginRequest}
-              scheme={schemes.login()}
-              buttonName="Log In"
-              className="flex-direction-column flex-center"
-            />
+            <img className="logoUpForm" src={logoCol} alt="Welcome"/>
+            <LoginForm onFinish={this.loginRequest}/>
           </div>
         </div>
       </div>
