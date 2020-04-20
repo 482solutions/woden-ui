@@ -26,10 +26,10 @@ class Login extends React.Component {
       <div className="login flex-direction-column flex-center">
         <div className="loginBox">
           <div className="loginBlock BGBlue flex-direction-column flex-center">
+            <img src={logoCol} alt="WodenLogo"/>
             <img src={loginWelcome} alt="Welcome"/>
           </div>
           <div className="loginBlock flex-direction-column flex-center">
-            <img className="logoUpForm" src={logoCol} alt="Welcome"/>
             <LoginForm onFinish={this.loginRequest}/>
           </div>
         </div>

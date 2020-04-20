@@ -9,3 +9,4 @@ export { default as KeyValueList } from "./KeyValueList";
 export { default as CardWrapper } from "./CardWrapper";
 export { default as CardWithList } from "./CardWithList";
 export { default as Select } from "./Select";
+export { default as FileInMemory } from "./FileInMemory";
