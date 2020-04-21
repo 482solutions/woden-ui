@@ -68,7 +68,7 @@ class LoginForm extends Component {
       >
         <label className='loginLabel'>Sign In</label>
         <Form.Item
-          name="loginEmail"
+          name="name"
           rules={[
             {
               required: true,

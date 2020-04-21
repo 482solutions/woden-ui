@@ -10,8 +10,8 @@ class Login extends React.Component {
   replace = () => {
     this.props.history.replace('/');
   };
-  loginRequest = async ({ loginEmail, password, remember }) => {
-    await this.props.loginRequest({ name: loginEmail, password });
+  loginRequest = async (loginData) => {
+    await this.props.loginRequest(loginData);
     this.replace();
   };
 
