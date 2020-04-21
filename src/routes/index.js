@@ -6,6 +6,8 @@ import {
   // eslint-disable-next-line import/named
   Login,
   NotFound,
+  // eslint-disable-next-line import/named
+  Registration,
 } from '../pages';
 
 import PrivateRouter from './PrivateRoute';
@@ -16,6 +18,7 @@ const AppRouter = () => (
       <Switch>
         <PrivateRouter exact path="/" component={Home} redirect="/login"/>
         <Route exact path="/login" component={Login}/>
+        <Route exact path="/registration" component={Registration}/>
         <Route component={NotFound}/>
       </Switch>
     </App>

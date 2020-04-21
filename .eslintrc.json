@@ -63,13 +63,8 @@
       },
       "propWrapperFunctions": [
         "forbidExtraProps",
-        {
-          "property": "freeze",
-          "object": "Object"
-        },
-        {
-          "property": "myFavoriteWrapper"
-        }
+        {"property": "freeze", "object": "Object"},
+        {"property": "myFavoriteWrapper"}
       ],
       "linkComponents": [
         "Hyperlink",
