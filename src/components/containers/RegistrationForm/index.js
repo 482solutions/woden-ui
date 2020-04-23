@@ -9,9 +9,6 @@ class RegistrationForm extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      certificate: "",
-      privateKey: "",
-      identity: "",
     };
     this.onFinish = this.onFinish.bind(this);
   }
