@@ -1,0 +1,15 @@
+.list__header {
+    text-align: center;
+}
+
+.permissions-title__link {
+    display: inline-block;
+    font-size: 10px;
+    color: #1890ff;
+    border-bottom: 1px solid #1890ff;
+}
+
+.permissions-title__link:hover {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}

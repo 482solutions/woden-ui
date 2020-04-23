@@ -1,0 +1,8 @@
+.footer__link {
+    display: inline-block;
+}
+
+.footer__text {
+    color: hsla(221.1428571428571, 15.02%, 45.69%, 1.00);
+    font-size: 13px;
+}
