@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Breadcrumb} from 'antd';
+import { Breadcrumb } from 'antd';
 
 import { actions } from '../../../state-management';
 

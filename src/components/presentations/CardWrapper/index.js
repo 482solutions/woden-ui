@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Card } from "antd";
 
 import "./style.css";

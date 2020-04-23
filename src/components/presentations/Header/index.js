@@ -12,7 +12,7 @@ const Header = ({ location, logout, isLoggedIn }) => (
       "flex-start": isLoggedIn,
       "flex-center": !isLoggedIn
     })}>
-      Docmans UI
+      Woden
     </Col>
     {
       isLoggedIn && (

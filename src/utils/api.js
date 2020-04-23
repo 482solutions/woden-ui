@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = "http://167.71.36.3:3000/api";
+const host = 'http://167.71.36.3:3000/api';
 
 const urls = {
   register: `${host}/register`,
@@ -30,7 +30,10 @@ const urls = {
 //   }
 // };
 
-const serverRequest = config => async ({ data = false, params = false } = { data: false, params: false }) => {
+const serverRequest = (config) => async({ data = false, params = false } = {
+  data: false,
+  params: false,
+}) => {
   try {
     const response = await axios({
       ...config,
@@ -41,7 +44,7 @@ const serverRequest = config => async ({ data = false, params = false } = { data
   } catch (e) {
     if ((e.response.status === 400 || e.response.status === 500) && !e.response.data.error) {
       e.response.data = {
-        error: "Check that server is running"
+        error: 'Check that server is running',
       };
     }
     return e.response;
@@ -59,7 +62,7 @@ const auth = {
       name,
       password,
     };
-    return sendRequest({ data })
+    return sendRequest({ data });
   },
   login: (name, password) => {
     const sendRequest = serverRequest({
@@ -71,11 +74,16 @@ const auth = {
       name,
       password,
     };
-    return sendRequest({ data })
+    // TODO: Заглушка для API убрать всё что после `||` ниже
+    return sendRequest({ data }) || {
+      data: {
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiVXNlcklkIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.rtW2JEwcFX_oy8ff3BdHwvGqqMEwn4-oQcit4F48Qkw',
+      },
+    };
   },
   logout: serverRequest({
     method: 'POST',
-    url: urls.logout
+    url: urls.logout,
   }),
 };
 
@@ -94,12 +102,11 @@ const filesystem = {
       method: 'PUT',
       url: urls.file(path),
     });
-
-    console.log(file);
+    // console.log(file);
 
     const form = new FormData();
     form.append('file', file, file.name);
-    return sendRequest({ data: form })
+    return sendRequest({ data: form });
   },
   uploadSharedFile: (path, file) => {
     const sendRequest = serverRequest({
@@ -108,33 +115,33 @@ const filesystem = {
       url: urls.sharedFile(path),
     });
 
-    console.log(file);
+    // console.log(file);
 
     const form = new FormData();
     form.append('file', file, file.name);
-    return sendRequest({ data: form })
+    return sendRequest({ data: form });
   },
   downloadFile: (path) => serverRequest({
     method: 'GET',
     url: urls.file(path),
-    responseType: 'blob'
+    responseType: 'blob',
   })(),
   downloadSharedFile: (path) => serverRequest({
     method: 'GET',
     url: urls.sharedFile(path),
-    responseType: 'blob'
+    responseType: 'blob',
   })(),
   createDirectory: (path) => {
     const sendRequest = serverRequest({
       method: 'PUT',
-      url: urls.directory
+      url: urls.directory,
     });
 
     const data = {
       directory: path,
     };
     return sendRequest({ data });
-  }
+  },
 };
 
 const permissions = {
@@ -150,7 +157,7 @@ const permissions = {
   },
   getPermissions: (path) => serverRequest({
     method: 'GET',
-    url: urls.permissions(path)
+    url: urls.permissions(path),
   })(),
 };
 
@@ -159,4 +166,4 @@ export default {
   ...auth,
   ...filesystem,
   ...permissions,
-}
+};

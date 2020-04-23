@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { List, Card } from "antd";
 
 import { models } from '../../../utils';
@@ -62,62 +63,60 @@ class Permissions extends React.Component {
 
   render() {
     const { isShow } = this.props.permissions;
-    return(
-      <>
-        {
-          isShow && (
-            <Card
-              // title={
-              //   this.getMyPermissions().owner ?
-              //   <ChangePermissions
-              //     path={this.props.permissions.isShow}
+    return <>
+      {
+        isShow && (
+          <Card
+            //title={
+              //this.getMyPermissions().owner ?
+              //<ChangePermissions
+              //  path={this.props.permissions.isShow}
               //   /> : "Permissions"
-              // }
-              // extra={
-              //   Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
-              //     <Icon
-              //       key={type}
-              //       type={permissionView[type]}
-              //       style={{
-              //         color: amIHave ? "" : "#c0c0c0",
-              //         fontSize: "16px"
-              //       }}
-              //     />
-              //   ))
-              // }
-            >
-              {
-                Object.entries(this.getAllPermissions()).map(([type, permissions]) => {
-                  if (type === models.Permissions.Owner) {
-                    return (
-                      <KeyValueList
-                        key={type}
-                        list={{
-                          owner: permissions
-                        }}
-                      />
-                    )
-                  }
-
+            //}
+            //extra={
+              //Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
+              //     <LegacyIcon
+              //    key={type}
+              //    type={permissionView[type]}
+              //    style={{
+              //      color: amIHave ? "" : "#c0c0c0",
+              //      fontSize: "16px"
+              //    }}
+                //     />
+              //))
+            //}
+          >
+            {
+              Object.entries(this.getAllPermissions()).map(([type, permissions]) => {
+                if (type === models.Permissions.Owner) {
                   return (
-                    <List
+                    <KeyValueList
                       key={type}
-                      header={<h5 className="list__header">{type}</h5>}
-                      bordered
-                      size="small"
-                      dataSource={permissions}
-                      renderItem={item => (
-                        <List.Item key={item}>{item}</List.Item>
-                      )}
+                      list={{
+                        owner: permissions
+                      }}
                     />
                   )
-                })
-              }
-            </Card>
-          )
-        }
-      </>
-    )
+                }
+
+                return (
+                  <List
+                    key={type}
+                    header={<h5 className="list__header">{type}</h5>}
+                    bordered
+                    size="small"
+                    dataSource={permissions}
+                    renderItem={item => (
+                      <List.Item key={item}>{item}</List.Item>
+                    )}
+                  />
+                )
+              })
+            }
+          </Card>
+        )
+      }
+    </>;
   }
 }
 

@@ -1,40 +1,19 @@
 import React, { Component } from "react";
-import { Form, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
+// import '@ant-design/compatible/assets/index.css';
 
 const FormItem = Form.Item;
 
 class CreateForm extends Component {
-  state = {
-    isLoading: false,
-  };
-
-  toggleLoading = () => {
-    this.setState(prevState => ({
-      isLoading: !prevState.isLoading,
-    }))
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { onSubmit, form: { validateFields, resetFields } } = this.props;
-    validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      this.toggleLoading();
-      console.log(values);
-      onSubmit(values);
-      resetFields();
-      this.toggleLoading();
-    });
-  };
-
-  hasErrors = (fieldsError) => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    };
+  }
 
   render() {
-    const { layout = "horizontal", scheme, buttonName, className, form: { getFieldDecorator, getFieldsError } } = this.props;
+    const { layout = "horizontal", scheme, buttonName, className } = this.props;
     const { isLoading } = this.state;
     return (
       <Form
@@ -44,25 +23,21 @@ class CreateForm extends Component {
       >
         {
           scheme.map(field => (
-            <FormItem
-              label={field.label}
-              key={field.name}
-            >
-              {getFieldDecorator(field.name, {
-                rules: [
-                  {
-                    ...field.rules
-                  },
+            field.hasOwnProperty('className') ?
+              <label
+                className={field.className}
+                key={field.label}>{field.label}</label> :
+              <FormItem
+                name={field.name}
+                rules={[
                   {
                     required: field.required || false,
-                    message: field.message || 'Please fill this input',
+                    message: field.message || 'Please fill this input'
                   }
-                ],
-                initialValue: field.initialValue || "",
-              })(
-                field.component({ disabled: isLoading, ...field.props })
-              )}
-            </FormItem>
+                ]}
+                label={field.label}
+                key={field.name}><Input/>
+              </FormItem>
           ))
         }
         <FormItem
@@ -73,10 +48,9 @@ class CreateForm extends Component {
               <Button
                 type="primary"
                 htmlType="submit"
-                disabled={this.hasErrors(getFieldsError()) || isLoading}
                 loading={isLoading}
               >
-                { buttonName }
+                {buttonName}
               </Button>
             )
           }
@@ -87,4 +61,4 @@ class CreateForm extends Component {
   }
 }
 
-export default Form.create()(CreateForm);
+export default CreateForm;
