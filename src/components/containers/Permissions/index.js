@@ -6,13 +6,13 @@ import { List, Card } from "antd";
 import { models } from '../../../utils';
 import {KeyValueList} from "../../presentations";
 import './style.css';
-import {ChangePermissions} from "../index";
+// import {ChangePermissions} from "../index";
 
-const permissionView = {
-  [models.Permissions.Owner]: 'user',
-  [models.Permissions.View]: 'eye',
-  [models.Permissions.Edit]: 'edit',
-};
+// const permissionView = {
+//   [models.Permissions.Owner]: 'user',
+//   [models.Permissions.View]: 'eye',
+//   [models.Permissions.Edit]: 'edit',
+// };
 
 const ownerPermission = {
   owner: true,
@@ -67,24 +67,24 @@ class Permissions extends React.Component {
       {
         isShow && (
           <Card
-            title={
-              this.getMyPermissions().owner ?
-              <ChangePermissions
-                path={this.props.permissions.isShow}
-              /> : "Permissions"
-            }
-            extra={
-              Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
-                <LegacyIcon
-                  key={type}
-                  type={permissionView[type]}
-                  style={{
-                    color: amIHave ? "" : "#c0c0c0",
-                    fontSize: "16px"
-                  }}
-                />
-              ))
-            }
+            //title={
+              //this.getMyPermissions().owner ?
+              //<ChangePermissions
+              //  path={this.props.permissions.isShow}
+              //   /> : "Permissions"
+            //}
+            //extra={
+              //Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
+              //     <LegacyIcon
+              //    key={type}
+              //    type={permissionView[type]}
+              //    style={{
+              //      color: amIHave ? "" : "#c0c0c0",
+              //      fontSize: "16px"
+              //    }}
+                //     />
+              //))
+            //}
           >
             {
               Object.entries(this.getAllPermissions()).map(([type, permissions]) => {
