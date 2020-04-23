@@ -14,21 +14,21 @@ const urls = {
   permissions: (path) => `${host}/permissions/${path}`,
 };
 
-let cache = {};
+// let cache = {};
 
-const callThenWait = (fn, time) => {
-  let timer;
-  return async (data) => {
-    if (!timer) {
-      timer = setTimeout(() => {
-        clearTimeout(timer);
-        timer = undefined;
-      }, time);
-      cache = await fn(data);
-    }
-    return cache;
-  }
-};
+// const callThenWait = (fn, time) => {
+//   let timer;
+//   return async (data) => {
+//     if (!timer) {
+//       timer = setTimeout(() => {
+//         clearTimeout(timer);
+//         timer = undefined;
+//       }, time);
+//       cache = await fn(data);
+//     }
+//     return cache;
+//   }
+// };
 
 const serverRequest = config => async ({ data = false, params = false } = { data: false, params: false }) => {
   try {

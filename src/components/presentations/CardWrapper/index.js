@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Avatar } from "antd";
+import { Card } from "antd";
 
 import "./style.css";
 
-const Meta = Card.Meta;
+// const Meta = Card.Meta;
 
 const CardWrapper = ({ selected, children, ...props }) => (
   <Card

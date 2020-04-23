@@ -5,13 +5,13 @@ import { List, Card } from "antd";
 import { models } from '../../../utils';
 import {KeyValueList} from "../../presentations";
 import './style.css';
-import {ChangePermissions} from "../index";
+// import {ChangePermissions} from "../index";
 
-const permissionView = {
-  [models.Permissions.Owner]: 'user',
-  [models.Permissions.View]: 'eye',
-  [models.Permissions.Edit]: 'edit',
-};
+// const permissionView = {
+//   [models.Permissions.Owner]: 'user',
+//   [models.Permissions.View]: 'eye',
+//   [models.Permissions.Edit]: 'edit',
+// };
 
 const ownerPermission = {
   owner: true,

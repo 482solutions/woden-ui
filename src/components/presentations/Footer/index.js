@@ -8,7 +8,7 @@ const Footer = () => (
       © {new Date().getFullYear()} 482.solutions. All rights reserved.
     </Col>
     <Col span={3} offset={10} className="flex-end">
-      <a href="" className="footer__link">
+      <a href="/#" className="footer__link">
         Privacy Notice
       </a>
     </Col>
