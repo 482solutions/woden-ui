@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Icon, Card } from "antd";
+import { List, Card } from "antd";
 
 import { models } from '../../../utils';
 import {KeyValueList} from "../../presentations";
@@ -67,24 +67,24 @@ class Permissions extends React.Component {
         {
           isShow && (
             <Card
-              title={
-                this.getMyPermissions().owner ?
-                <ChangePermissions
-                  path={this.props.permissions.isShow}
-                /> : "Permissions"
-              }
-              extra={
-                Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
-                  <Icon
-                    key={type}
-                    type={permissionView[type]}
-                    style={{
-                      color: amIHave ? "" : "#c0c0c0",
-                      fontSize: "16px"
-                    }}
-                  />
-                ))
-              }
+              // title={
+              //   this.getMyPermissions().owner ?
+              //   <ChangePermissions
+              //     path={this.props.permissions.isShow}
+              //   /> : "Permissions"
+              // }
+              // extra={
+              //   Object.entries(this.getMyPermissions()).map(([type, amIHave]) => (
+              //     <Icon
+              //       key={type}
+              //       type={permissionView[type]}
+              //       style={{
+              //         color: amIHave ? "" : "#c0c0c0",
+              //         fontSize: "16px"
+              //       }}
+              //     />
+              //   ))
+              // }
             >
               {
                 Object.entries(this.getAllPermissions()).map(([type, permissions]) => {

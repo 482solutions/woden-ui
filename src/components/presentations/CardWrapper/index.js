@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Avatar } from "antd";
+import { Card, Avatar } from "antd";
 
 import "./style.css";
 
@@ -11,9 +11,9 @@ const CardWrapper = ({ selected, children, ...props }) => (
 
     {...props}
   >
-    <Meta
-      avatar={<Icon type={selected.type} />}
-      title={selected.name} />
+    {/*<Meta*/}
+    {/*  avatar={<Icon type={selected.type} />}*/}
+    {/*  title={selected.name} />*/}
     <hr />
     {children}
   </Card>
