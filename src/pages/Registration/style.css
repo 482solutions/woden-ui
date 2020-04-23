@@ -1,0 +1,28 @@
+.login {
+    height: 100%;
+}
+.loginBox {
+    display: flex;
+    height: 708px;
+    width: 60%;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 5px #A6B1C2;
+}
+.loginBlock {
+    height: 100%;
+    width: 50%;
+}
+.BGBlue {
+    background-color: #8BADF0;
+}
+.loginLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px !important;
+    line-height: 28px;
+    letter-spacing: -0.06px;
+    color: #646464;
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = 'http://167.71.36.3:3000/api';
+const host = 'http://localhost:8080/';
 
 const urls = {
   register: `${host}/register`,

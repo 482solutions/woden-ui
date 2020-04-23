@@ -105,6 +105,7 @@ class LoginForm extends Component {
         </Form.Item>
         <Form.Item>
           <Button
+            style={{"marginTop": "70px"}}
             type='primary'
             htmlType='submit'
             loading={isLoading}
