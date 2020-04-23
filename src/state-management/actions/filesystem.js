@@ -4,14 +4,13 @@ import {
   FORWARD,
   SAVE_TREE,
   CREATE_DIRECTORY,
-  SAVE_PERMISSIONS,
   UPLOAD_FILE,
   SELECT_ITEM,
   UNSELECT_ITEM,
   CLEAN_STORAGE
 } from "../types";
 import { savePermission } from './permissions';
-import { api, functions } from "../../utils";
+import { api } from "../../utils";
 
 export const goBack = (dirname) => async dispatch => {
   dispatch({
@@ -40,11 +39,11 @@ export const getFullTree = () => async dispatch => {
   if (shared.error) {
     console.log(shared.error);
     return;
-  } 
+  }
 
   if (shared.entries.length) {
     response.entries.push(shared);
-  } 
+  }
 
   dispatch({
     type: SAVE_TREE,

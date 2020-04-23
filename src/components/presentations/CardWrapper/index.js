@@ -4,7 +4,7 @@ import { Card } from "antd";
 
 import "./style.css";
 
-const Meta = Card.Meta;
+// const Meta = Card.Meta;
 
 const CardWrapper = ({ selected, children, ...props }) => (
   <Card
@@ -12,9 +12,9 @@ const CardWrapper = ({ selected, children, ...props }) => (
 
     {...props}
   >
-    <Meta
-      avatar={<LegacyIcon type={selected.type} />}
-      title={selected.name} />
+    {/*<Meta*/}
+    {/*  avatar={<Icon type={selected.type} />}*/}
+    {/*  title={selected.name} />*/}
     <hr />
     {children}
   </Card>

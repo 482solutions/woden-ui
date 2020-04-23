@@ -5,7 +5,6 @@ import { Input } from 'antd';
 // TODO: add search
 class Search extends React.Component {
   searchFile = (value) => {
-    const { filesystem } = this.props;
     const file = 'a';
     console.log(file);
   };
