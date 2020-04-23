@@ -3,6 +3,7 @@ import Woden from 'woden';
 import { LOGIN, LOGOUT } from "../types";
 import { functions } from "../../utils";
 import { savePermission } from "./permissions";
+const { encryptData } = functions;
 
 const api = new Woden.UserApi();
 
@@ -28,13 +29,13 @@ export const regRequest = (user) => async dispatch => {
 }
 
 const registration = async (user) => {
-  const { password, email, name } = user;
+  const password = (encryptData(user.password));
+  const { email, name } = user;
   const { data } = await api.createUser(name, email, password, "/path/to/file.txt");
 
   if (data.error && data.error !== "User already exists") {
     message.error(data.error);
     console.log(data);
-    return;
   } else if (data.error === "User already exists") {
     return true;
   }
@@ -42,8 +43,9 @@ const registration = async (user) => {
 
 
 const logIn = async (user, dispatch) => {
+  const password = (encryptData(user.password));
   const { data: { token, error } } = await api.login(user.name,
-    user.password,
+    password,
     "certificate_file",
     "private_key");
   if (error) {
