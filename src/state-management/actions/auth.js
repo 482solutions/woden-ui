@@ -3,11 +3,11 @@ import Woden from 'woden';
 import { LOGIN, LOGOUT } from "../types";
 import { functions } from "../../utils";
 import { savePermission } from "./permissions";
-import axios from 'axios';
 
 const { encryptData } = functions;
 
 const api = new Woden.UserApi();
+const defaultClient = Woden.ApiClient.instance;
 
 export const login = (username) => dispatch => {
   dispatch(savePermission(
@@ -56,7 +56,7 @@ const logIn = async (user, dispatch) => {
       }
       if (response.status === 200) {
         const token = response.text.replace(/["]/g, '').trim();
-        functions.setAuthorizationToken(token);
+        // functions.setAuthorizationToken(token);
         localStorage.setItem('token', token);
         dispatch(login(user.name));
       }
@@ -71,14 +71,16 @@ export const loginRequest = (user) => async dispatch => {
 
 
 export const logout = () => async dispatch => {
-  console.log(axios.defaults)
+  const token = localStorage.getItem('token');
+  const oAuth2 = defaultClient.authentications['oAuth2'];
+  oAuth2.accessToken = token;
   api.logout((error, data, response)=>{
     if(error){
       console.log('Error:', response);
     }
     else{
       localStorage.removeItem('token');
-      functions.setAuthorizationToken();
+      // functions.setAuthorizationToken();
 
       dispatch({
         type: LOGOUT,
