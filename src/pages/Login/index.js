@@ -11,7 +11,6 @@ class Login extends React.Component {
     this.props.history.replace('/');
   };
   loginRequest = async (loginData) => {
-    console.log(loginData);
     await this.props.loginRequest(loginData);
     this.replace();
   };

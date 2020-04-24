@@ -36,7 +36,6 @@ const registration = async (user) => {
 
   if (data.error && data.error !== "User already exists") {
     message.error(data.error);
-    console.log(data);
   } else if (data.error === "User already exists") {
     return true;
   }
