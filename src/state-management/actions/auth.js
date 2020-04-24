@@ -3,6 +3,7 @@ import Woden from 'woden';
 import { LOGIN, LOGOUT } from "../types";
 import { functions } from "../../utils";
 import { savePermission } from "./permissions";
+import axios from 'axios';
 
 const { encryptData } = functions;
 
@@ -54,7 +55,7 @@ const logIn = async (user, dispatch) => {
         return;
       }
       if (response.status === 200) {
-        const token = response.text;
+        const token = response.text.replace(/["]/g, '').trim();
         functions.setAuthorizationToken(token);
         localStorage.setItem('token', token);
         dispatch(login(user.name));
@@ -70,11 +71,19 @@ export const loginRequest = (user) => async dispatch => {
 
 
 export const logout = () => async dispatch => {
-  api.logout();
-  localStorage.removeItem('token');
-  functions.setAuthorizationToken();
+  console.log(axios.defaults)
+  api.logout((error, data, response)=>{
+    if(error){
+      console.log('Error:', response);
+    }
+    else{
+      localStorage.removeItem('token');
+      functions.setAuthorizationToken();
 
-  dispatch({
-    type: LOGOUT,
+      dispatch({
+        type: LOGOUT,
+      });
+    }
   });
+
 };
