@@ -3,6 +3,7 @@ import Woden from 'woden';
 import { LOGIN, LOGOUT } from "../types";
 import { functions } from "../../utils";
 import { savePermission } from "./permissions";
+
 const { encryptData } = functions;
 
 const api = new Woden.UserApi();
@@ -44,17 +45,22 @@ const registration = async (user) => {
 
 const logIn = async (user, dispatch) => {
   const password = (encryptData(user.password));
-  const { data: { token, error } } = await api.login(user.name,
+  api.login(
+    user.name,
     password,
-    "certificate_file",
-    "private_key");
-  if (error) {
-    message.error(error);
-    return;
-  }
-  functions.setAuthorizationToken(token);
-  localStorage.setItem('token', token);
-  dispatch(login(user.name));
+    user.certificate,
+    user.privateKey, (error, data, response) => {
+      if (error) {
+        message.error(JSON.parse(response.text).error);
+        return;
+      }
+      if (response.status === 200) {
+        const token = response.text;
+        functions.setAuthorizationToken(token);
+        localStorage.setItem('token', token);
+        dispatch(login(user.name));
+      }
+    });
 }
 
 
@@ -65,7 +71,7 @@ export const loginRequest = (user) => async dispatch => {
 
 
 export const logout = () => async dispatch => {
-  await api.logout();
+  api.logout();
   localStorage.removeItem('token');
   functions.setAuthorizationToken();
 

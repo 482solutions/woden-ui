@@ -26,7 +26,20 @@ class LoginForm extends Component {
   };
 
   onFinish(e) {
-    this.props.onFinish(e);
+    const { certificate, privateKey } = this.state;
+    if (!certificate) {
+      message.error('Please provide your certificate');
+      return;
+    }
+    if (!privateKey) {
+      message.error('Please provide your private key');
+      return;
+    }
+    const files = {
+      certificate: certificate,
+      privateKey: privateKey
+    }
+    this.props.onFinish(Object.assign(e,files));
     this.toggleLoading();
   }
 
@@ -54,7 +67,6 @@ class LoginForm extends Component {
       }
     };
     reader.readAsText(file);
-
     return false;
   };
 
