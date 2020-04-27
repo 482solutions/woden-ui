@@ -1,21 +1,20 @@
 import { message } from 'antd';
 import Woden from 'woden';
-import { LOGIN, LOGOUT } from "../types";
-import { functions } from "../../utils";
-import { savePermission } from "./permissions";
-
-const { encryptData } = functions;
+import download from 'downloadjs';
+import { LOGIN, LOGOUT, REGISTRATION } from '../types';
+import { encryptData } from '../../utils/functions';
+import { savePermission } from './permissions';
 
 const api = new Woden.UserApi();
 const defaultClient = Woden.ApiClient.instance;
 
-export const login = (username) => dispatch => {
+export const login = (username) => (dispatch) => {
   dispatch(savePermission(
     username,
     {
       owner: username,
       view: [],
-      edit: []
+      edit: [],
     },
   ));
 
@@ -26,21 +25,36 @@ export const login = (username) => dispatch => {
 };
 
 
-export const regRequest = (user) => async dispatch => {
-  return await registration(user, dispatch);
-}
+export const regRequest = (user) => async (dispatch) => await registration(user, dispatch);
 
-const registration = async (user) => {
+const registration = async (user, dispatch) => {
   const password = (encryptData(user.password));
-  const { email, name } = user;
-  const { data } = await api.createUser(name, email, password, "/path/to/file.txt");
-
-  if (data.error && data.error !== "User already exists") {
-    message.error(data.error);
-  } else if (data.error === "User already exists") {
-    return true;
+  const { email, name, csr } = user;
+  try {
+    api.createUser(
+      name,
+      email,
+      password,
+      csr.csrPem, (error, data, response) => {
+        if (error) {
+          message.error(JSON.parse(response.text).error);
+        } else if (response.status === 201) {
+          if(JSON.parse(response.text).cert) {
+            download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
+            download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
+          }
+          message.success('Registration are successful');
+        }
+      },
+    );
   }
-}
+  catch (e) {
+    message.error(e.message, 3);
+  }
+  dispatch({
+    type: REGISTRATION,
+  });
+};
 
 
 const logIn = async (user, dispatch) => {
@@ -56,26 +70,25 @@ const logIn = async (user, dispatch) => {
       }
       if (response.status === 200) {
         const token = response.text.replace(/["]/g, '').trim();
-        // functions.setAuthorizationToken(token);
         localStorage.setItem('token', token);
         dispatch(login(user.name));
       }
-    });
-}
-
-
-export const loginRequest = (user) => async dispatch => {
-  await logIn(user, dispatch);
-
+    },
+  );
 };
 
 
-export const logout = () => async dispatch => {
+export const loginRequest = (user) => async (dispatch) => {
+  await logIn(user, dispatch);
+};
+
+
+export const logout = () => async (dispatch) => {
   const token = localStorage.getItem('token');
-  const oAuth2 = defaultClient.authentications['oAuth2'];
+  const { oAuth2 } = defaultClient.authentications;
   oAuth2.accessToken = token;
-  api.logout((error, data, response)=>{
-    if(error){
+  api.logout((error, data, response) => {
+    if (error) {
       console.log('Error:', response);
     }
   });

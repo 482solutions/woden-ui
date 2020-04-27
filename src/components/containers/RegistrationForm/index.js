@@ -20,7 +20,6 @@ class RegistrationForm extends Component {
   };
 
   onFinish(e) {
-    console.log(this.props);
     this.props.onFinish(e);
     this.toggleLoading();
   }

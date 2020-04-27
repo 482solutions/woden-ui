@@ -1,2 +1,3 @@
 export const LOGIN = 'AUTH_ACTION::LOGIN';
 export const LOGOUT = 'AUTH_ACTION::LOGOUT';
+export const REGISTRATION = 'AUTH_ACTION::REGISTRATION';
