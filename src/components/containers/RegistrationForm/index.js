@@ -97,21 +97,21 @@ class RegistrationForm extends Component {
             className='formItem inputItem'
             placeholder='Password Confirmation'/>
         </Form.Item>
-        <Form.Item
-          name="agreement"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) => value ? Promise.resolve() : Promise.reject(
-                'Should accept agreement')
-            },
-          ]}
-        >
-          <Checkbox style={{ color: "#9EA0A5" }} className='formItem'>
-            I have read the <a href="" style={{ color: "#000000", textDecoration: 'underline' }}>Terms
-            and Conditions</a>
-          </Checkbox>
-        </Form.Item>
+        {/*<Form.Item*/}
+        {/*  name="agreement"*/}
+        {/*  valuePropName="checked"*/}
+        {/*  rules={[*/}
+        {/*    {*/}
+        {/*      validator: (_, value) => value ? Promise.resolve() : Promise.reject(*/}
+        {/*        'Should accept agreement')*/}
+        {/*    },*/}
+        {/*  ]}*/}
+        {/*>*/}
+        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='formItem'>*/}
+        {/*    I have read the <a href="" style={{ color: "#000000", textDecoration: 'underline' }}>Terms*/}
+        {/*    and Conditions</a>*/}
+        {/*  </Checkbox>*/}
+        {/*</Form.Item>*/}
         <Form.Item>
           <Button
             type='primary'
@@ -119,7 +119,7 @@ class RegistrationForm extends Component {
             loading={isLoading}
             className='formItem buttonItem'
           >
-            Log In
+            Sign up now
           </Button>
         </Form.Item>
         <Row className='formItem w100'>

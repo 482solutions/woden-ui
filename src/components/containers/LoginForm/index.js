@@ -126,7 +126,7 @@ class LoginForm extends Component {
             Log In
           </Button>
         </Form.Item>
-        <Link className='formItem' to={'reset'}>Forgot password</Link>
+        {/*<Link className='formItem' to={'reset'}>Forgot password</Link>*/}
         <Row className='w100'>
           <Col span={10}>Don't have an account?</Col>
           <Col span={10} offset={2}>
