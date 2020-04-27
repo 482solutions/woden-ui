@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import forge from 'node-forge';
-import { Form, Button, Checkbox, Row, Col, Input, message } from 'antd';
-import {validationPrivateKey, validationCertificate} from '../../../utils/functions';
+import { Button, Col, Form, Input, message, Row } from 'antd';
+import { validationCertificate, validationPrivateKey } from '../../../utils/functions';
 import { FileInMemory } from '../../presentations'
 import './styles.css';
 
@@ -103,9 +103,6 @@ class LoginForm extends Component {
             className='formItem inputItem'
             type='password'
             placeholder='Password'/>
-        </Form.Item>
-        <Form.Item name='remember' valuePropName='checked'>
-          <Checkbox className='formItem'>Remember me</Checkbox>
         </Form.Item>
         <Form.Item>
           <FileInMemory

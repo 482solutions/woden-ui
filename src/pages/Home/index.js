@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { actions } from "../../state-management";
 
 import './style.css';
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.getFullTree();
   }
 
   render() {
@@ -18,4 +16,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect(null, { getFullTree: actions.getFullTree })(Home);
+export default connect(null, {})(Home);

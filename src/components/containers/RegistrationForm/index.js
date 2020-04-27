@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Button, Checkbox, Row, Col, Input } from 'antd';
+import { Button, Col, Form, Input, message, Row } from 'antd';
 import './styles.css';
 
 class RegistrationForm extends Component {
@@ -20,6 +20,14 @@ class RegistrationForm extends Component {
   };
 
   onFinish(e) {
+    if (!e.name.match(/^[a-zA-Z][a-zA-Z0-9-_.]{1,20}$/g)) {
+      message.warning("Incorrect Username");
+      return;
+    }
+    if (!e.password.match(/^[a-zA-Z0-9-_.]{8,}$/g)) {
+      message.warning("Incorrect Password");
+      return;
+    }
     this.props.onFinish(e);
     this.toggleLoading();
   }
@@ -40,6 +48,11 @@ class RegistrationForm extends Component {
               required: true,
               message: 'Username can not be empty',
               whitespace: true
+            },
+            {
+              type: "regexp",
+              pattern: new RegExp(/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/g),
+              message: "For User name, only Latin letters and numbers are allowed. Symbols 2 - 20",
             }
           ]}>
           <Input
