@@ -78,14 +78,9 @@ export const logout = () => async dispatch => {
     if(error){
       console.log('Error:', response);
     }
-    else{
-      localStorage.removeItem('token');
-      // functions.setAuthorizationToken();
-
-      dispatch({
-        type: LOGOUT,
-      });
-    }
   });
-
+  localStorage.removeItem('token');
+  dispatch({
+    type: LOGOUT,
+  });
 };
