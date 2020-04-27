@@ -3,21 +3,11 @@ import Woden from 'woden';
 import download from 'downloadjs';
 import { LOGIN, LOGOUT, REGISTRATION } from '../types';
 import { encryptData } from '../../utils/functions';
-import { savePermission } from './permissions';
 
 const api = new Woden.UserApi();
 const defaultClient = Woden.ApiClient.instance;
 
 export const login = (username) => (dispatch) => {
-  dispatch(savePermission(
-    username,
-    {
-      owner: username,
-      view: [],
-      edit: [],
-    },
-  ));
-
   dispatch({
     type: LOGIN,
     payload: username,
@@ -39,7 +29,7 @@ const registration = async (user, dispatch) => {
         if (error) {
           message.error(JSON.parse(response.text).error);
         } else if (response.status === 201) {
-          if(JSON.parse(response.text).cert) {
+          if (JSON.parse(response.text).cert) {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
