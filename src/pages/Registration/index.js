@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RegistrationForm } from "../../components";
+import { actions } from '../../state-management';
+import { getCSR } from '../../utils/functions/csr';
 import loginWelcome from '../../assets/images/loginWelcome.svg';
 import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
-import { actions } from '../../state-management';
+
 
 class Registration extends React.Component {
-  replace = () => {
+  constructor(props) {
+    super(props);
+  }
+
+  replace() {
     this.props.history.replace('/');
   };
+
   regRequest = async (regData) => {
+    regData.csr = await getCSR(regData.name);
     await this.props.regRequest(regData);
     this.replace();
   };
