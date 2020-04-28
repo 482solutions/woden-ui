@@ -1,12 +1,4 @@
 export { default as Header } from "./Header";
 export { default as Footer } from "./Footer";
-export { default as String } from "./String";
-export { default as CreateForm } from "./CreateForm";
 export { default as Loading } from "./Loading";
-export { default as Sidebar } from "./Sidebar";
-export { default as Data } from "./Data";
-export { default as KeyValueList } from "./KeyValueList";
-export { default as CardWrapper } from "./CardWrapper";
-export { default as CardWithList } from "./CardWithList";
-export { default as Select } from "./Select";
 export { default as FileInMemory } from "./FileInMemory";

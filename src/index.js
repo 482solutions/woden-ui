@@ -7,20 +7,19 @@ import './index.css';
 import AppRouter from './routes';
 import store, { actions } from './state-management';
 import * as serviceWorker from './serviceWorker';
-import {functions} from "./utils";
 
 const token = localStorage.getItem('token');
 if (token) {
-  const { UserId } = jwt.decode(token);
-  if (UserId) {
-    functions.setAuthorizationToken(token);
-    store.dispatch(actions.login(UserId));
+  // eslint-disable-next-line camelcase
+  const { user_id } = jwt.decode(token);
+  // eslint-disable-next-line camelcase
+  if (user_id) {
+    store.dispatch(actions.login(user_id));
   }
 }
-
 ReactDOM.render(
   <Provider store={store}>
-    <AppRouter />
+    <AppRouter/>
   </Provider>,
   document.getElementById('root'),
 );
