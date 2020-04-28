@@ -59,11 +59,11 @@ class RegistrationForm extends Component {
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Invalid email address entered!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!'
+              message: 'Please input your Email!'
             }
           ]}>
           <Input
