@@ -24,7 +24,7 @@ class RegistrationForm extends Component {
       message.warning("Incorrect Username");
       return;
     }
-    if (!e.password.match(/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
+    if (!e.password.match(/(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
       message.warning("Incorrect Password");
       return;
     }
