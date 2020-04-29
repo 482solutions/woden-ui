@@ -5,10 +5,10 @@ const initialState = {
   user: {}
 };
 
-const handleLogin = (username) => ({
+const handleLogin = (userId) => ({
   isLoggedIn: true,
   user: {
-    name: username,
+    name: userId,
   }
 });
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { Logout } from '../../containers';
+import { ChangePassword, Logout } from '../../containers';
 
 const Header = ({ isLoggedIn }) => (
   <Row className="holder">
@@ -17,7 +17,10 @@ const Header = ({ isLoggedIn }) => (
     {
       isLoggedIn && (
         <>
-          <Col span={6} offset={14} className="flex-end">
+          <Col span={1} offset={13} className="flex-end">
+            <ChangePassword/>
+          </Col>
+          <Col span={6} className="flex-end">
             <Logout/>
           </Col>
         </>

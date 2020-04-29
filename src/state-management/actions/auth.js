@@ -7,10 +7,10 @@ import { encryptData } from '../../utils/functions';
 const api = new Woden.UserApi();
 const defaultClient = Woden.ApiClient.instance;
 
-export const login = (username) => (dispatch) => {
+export const login = (userId) => (dispatch) => {
   dispatch({
     type: LOGIN,
-    payload: username,
+    payload: userId,
   });
 };
 
@@ -33,7 +33,7 @@ const registration = async (user, dispatch) => {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
-          message.success('Registration are successful');
+          message.success('Registration was successful');
         }
       },
     );
@@ -72,7 +72,9 @@ export const loginRequest = (user) => async (dispatch) => {
   await logIn(user, dispatch);
 };
 
+export const changePassword = (password) => async (dispatch) => {
 
+}
 export const logout = () => async (dispatch) => {
   const token = localStorage.getItem('token');
   const { oAuth2 } = defaultClient.authentications;

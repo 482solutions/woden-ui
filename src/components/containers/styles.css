@@ -1,18 +1,44 @@
 .ant-form-item {
   margin-bottom: 0;
 }
-.inputItem {
+
+.upperLabel {
+  margin-top: 20px;
+  text-transform: uppercase;
+  color: #8999AC;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 1.125px;
+}
+
+.loginInputItem {
   width: 360px;
   height: 50px;
   font-size: 16px;
-  color: rgba(0,0,0,0.5);
+  color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
-.formItem {
+
+.inputItem {
+  width: 329px;
+  height: 41px;
+  font-size: 15px;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.loginFormItem {
   margin-top: 20px;
   line-height: 24px;
   letter-spacing: 0.15px;
 }
+
+.formItem {
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  margin-top: 8px;
+}
+
 .buttonItem {
   font-weight: 500;
   font-size: 20px;
@@ -21,4 +47,10 @@
   height: 58px;
   text-transform: uppercase;
   margin-top: 18px;
+}
+
+.ant-input-password .ant-input-suffix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

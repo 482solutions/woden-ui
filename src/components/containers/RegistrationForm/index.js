@@ -38,7 +38,6 @@ class RegistrationForm extends Component {
       <Form
         onFinish={this.onFinish}
         className='flex-direction-column flex-up'
-        layout={this.layout}
       >
         <label className='loginLabel'>Sign up</label>
         <Form.Item
@@ -51,7 +50,7 @@ class RegistrationForm extends Component {
             }
           ]}>
           <Input
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Username'/>
         </Form.Item>
         <Form.Item
@@ -67,7 +66,7 @@ class RegistrationForm extends Component {
             }
           ]}>
           <Input
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Email'/>
         </Form.Item>
         <Form.Item
@@ -79,7 +78,7 @@ class RegistrationForm extends Component {
             }
           ]}>
           <Input.Password
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             type='password'
             placeholder='Password'/>
         </Form.Item>
@@ -102,7 +101,7 @@ class RegistrationForm extends Component {
           ]}
         >
           <Input.Password
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Password Confirmation'/>
         </Form.Item>
         {/*<Form.Item*/}
@@ -115,7 +114,7 @@ class RegistrationForm extends Component {
         {/*    },*/}
         {/*  ]}*/}
         {/*>*/}
-        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='formItem'>*/}
+        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='loginFormItem'>*/}
         {/*    I have read the <a href="" style={{ color: "#000000", textDecoration: 'underline' }}>Terms*/}
         {/*    and Conditions</a>*/}
         {/*  </Checkbox>*/}
@@ -125,12 +124,12 @@ class RegistrationForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='formItem buttonItem'
+            className='loginFormItem buttonItem'
           >
             Sign up now
           </Button>
         </Form.Item>
-        <Row className='formItem w100'>
+        <Row className='loginFormItem w100'>
           <Col style={{ color: "#9EA0A5" }} span={10}>Have an account?</Col>
           <Col span={10} offset={2}>
             <Link to={"login"}>Sign In</Link>
