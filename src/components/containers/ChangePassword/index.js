@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Input, Modal } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
+import actions from '../../../state-management'
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class ChangePassword extends Component {
       loading: false,
     };
     this.showModal = this.showModal.bind(this);
-    this.handleOk = this.handleOk.bind(this);
+    this.onFinish = this.onFinish.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
 
@@ -21,11 +22,10 @@ class ChangePassword extends Component {
     this.setState({ visible: true });
   };
 
-  handleOk() {
+  onFinish = async (e) => {
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 2000);
+    this.props.onFinish(e);
+    this.setState({ loading: false, visible: false });
   };
 
   handleCancel() {
@@ -41,14 +41,9 @@ class ChangePassword extends Component {
       <Modal
         title="Change password"
         visible={visible}
-        onOk={this.handleOk}
         onCancel={this.handleCancel}
         width={377}
-        footer={
-          <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
-            Save Changes
-          </Button>
-        }
+        footer={null}
       >
         <Form
           onFinish={this.onFinish}
@@ -75,11 +70,23 @@ class ChangePassword extends Component {
           >
             <Input.Password className='formItem inputItem'/>
           </Form.Item>
+          <Form.Item>
+            <Button
+              type='primary'
+              htmlType='submit'
+              loading={loading}
+              className='formItem buttonItem'
+            >
+              Save Changes
+            </Button>
+          </Form.Item>
         </Form>
       </Modal>
     </div>);
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
-)(ChangePassword);
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
+  { logout: actions.logout, cleanStorage: actions.cleanStorage }
+)(
+  ChangePassword);

@@ -124,7 +124,7 @@ class RegistrationForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='loginFormItem buttonItem'
+            className='loginFormItem LoginButtonItem'
           >
             Sign up now
           </Button>

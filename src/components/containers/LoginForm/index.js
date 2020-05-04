@@ -118,7 +118,7 @@ class LoginForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='loginFormItem buttonItem'
+            className='loginFormItem LoginButtonItem'
           >
             Log In
           </Button>
