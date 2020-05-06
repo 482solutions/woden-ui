@@ -88,7 +88,7 @@ class LoginForm extends Component {
             }
           ]}>
           <Input
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Username or email'/>
         </Form.Item>
         <Form.Item
@@ -100,7 +100,7 @@ class LoginForm extends Component {
             }
           ]}>
           <Input.Password
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             type='password'
             placeholder='Password'/>
         </Form.Item>
@@ -118,12 +118,12 @@ class LoginForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='formItem buttonItem'
+            className='loginFormItem LoginButtonItem'
           >
             Log In
           </Button>
         </Form.Item>
-        {/*<Link className='formItem' to={'reset'}>Forgot password</Link>*/}
+        {/*<Link className='loginFormItem' to={'reset'}>Forgot password</Link>*/}
         <Row className='w100'>
           <Col span={10}>Don't have an account?</Col>
           <Col span={10} offset={2}>

@@ -7,13 +7,12 @@ import { encryptData } from '../../utils/functions';
 const api = new Woden.UserApi();
 const defaultClient = Woden.ApiClient.instance;
 
-export const login = (username) => (dispatch) => {
+export const login = (userId) => (dispatch) => {
   dispatch({
     type: LOGIN,
-    payload: username,
+    payload: userId,
   });
 };
-
 
 export const regRequest = (user) => async (dispatch) => await registration(user, dispatch);
 
@@ -33,7 +32,7 @@ const registration = async (user, dispatch) => {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
-          message.success('Registration are successful');
+          message.success('Registration was successful');
         }
       },
     );
@@ -46,6 +45,9 @@ const registration = async (user, dispatch) => {
   });
 };
 
+export const loginRequest = (user) => async (dispatch) => {
+  await logIn(user, dispatch);
+};
 
 const logIn = async (user, dispatch) => {
   const password = (encryptData(user.password));
@@ -67,17 +69,33 @@ const logIn = async (user, dispatch) => {
   );
 };
 
-
-export const loginRequest = (user) => async (dispatch) => {
-  await logIn(user, dispatch);
+export const changePasswordRequest = (data) => async (dispatch) => {
+  await changePassword(data, dispatch);
 };
 
+const changePassword = (data, dispatch) => {
+  const { currentPassword, newPassword } = data;
+  const token = localStorage.getItem('token');
+  const { oAuth2 } = defaultClient.authentications;
+  oAuth2.accessToken = token;
 
+  const body = new Woden.Body();
+  body.oldPassword = currentPassword;
+  body.newPassword = newPassword;
+  api.changeUser(body, (error, data, response) => {
+    if (error) {
+      console.log("Error", response);
+    } else {
+      console.log("Response", response);
+    }
+  });
+}
 export const logout = () => async (dispatch) => {
   const token = localStorage.getItem('token');
   const { oAuth2 } = defaultClient.authentications;
   oAuth2.accessToken = token;
-  api.logout((error, data, response) => {
+  const body = new Woden.Body();
+  api.logout(body, (error, data, response) => {
     if (error) {
       console.log('Error:', response);
     }

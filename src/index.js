@@ -10,11 +10,9 @@ import * as serviceWorker from './serviceWorker';
 
 const token = localStorage.getItem('token');
 if (token) {
-  // eslint-disable-next-line camelcase
-  const { user_id } = jwt.decode(token);
-  // eslint-disable-next-line camelcase
-  if (user_id) {
-    store.dispatch(actions.login(user_id));
+  const { user_id: userId } = jwt.decode(token);
+  if (userId) {
+    store.dispatch(actions.login(userId));
   }
 }
 ReactDOM.render(

@@ -20,11 +20,11 @@ class RegistrationForm extends Component {
   };
 
   onFinish(e) {
-    if (!e.name.match(/^[a-zA-Z][a-zA-Z0-9-_.]{1,20}$/g)) {
+    if (!e.name.match(/^[a-zA-Z0-9-_.]{1,20}$/g)) {
       message.warning("Incorrect Username");
       return;
     }
-    if (!e.password.match(/^[a-zA-Z0-9-_.]{8,}$/g)) {
+    if (!e.password.match(/(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
       message.warning("Incorrect Password");
       return;
     }
@@ -38,7 +38,6 @@ class RegistrationForm extends Component {
       <Form
         onFinish={this.onFinish}
         className='flex-direction-column flex-up'
-        layout={this.layout}
       >
         <label className='loginLabel'>Sign up</label>
         <Form.Item
@@ -48,15 +47,10 @@ class RegistrationForm extends Component {
               required: true,
               message: 'Username can not be empty',
               whitespace: true
-            },
-            {
-              type: "regexp",
-              pattern: new RegExp(/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/g),
-              message: "For User name, only Latin letters and numbers are allowed. Symbols 2 - 20",
             }
           ]}>
           <Input
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Username'/>
         </Form.Item>
         <Form.Item
@@ -64,15 +58,15 @@ class RegistrationForm extends Component {
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Invalid email address entered!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!'
+              message: 'Please input your Email!'
             }
           ]}>
           <Input
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Email'/>
         </Form.Item>
         <Form.Item
@@ -84,7 +78,7 @@ class RegistrationForm extends Component {
             }
           ]}>
           <Input.Password
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             type='password'
             placeholder='Password'/>
         </Form.Item>
@@ -107,7 +101,7 @@ class RegistrationForm extends Component {
           ]}
         >
           <Input.Password
-            className='formItem inputItem'
+            className='loginFormItem loginInputItem'
             placeholder='Password Confirmation'/>
         </Form.Item>
         {/*<Form.Item*/}
@@ -120,7 +114,7 @@ class RegistrationForm extends Component {
         {/*    },*/}
         {/*  ]}*/}
         {/*>*/}
-        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='formItem'>*/}
+        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='loginFormItem'>*/}
         {/*    I have read the <a href="" style={{ color: "#000000", textDecoration: 'underline' }}>Terms*/}
         {/*    and Conditions</a>*/}
         {/*  </Checkbox>*/}
@@ -130,12 +124,12 @@ class RegistrationForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='formItem buttonItem'
+            className='loginFormItem LoginButtonItem'
           >
             Sign up now
           </Button>
         </Form.Item>
-        <Row className='formItem w100'>
+        <Row className='loginFormItem w100'>
           <Col style={{ color: "#9EA0A5" }} span={10}>Have an account?</Col>
           <Col span={10} offset={2}>
             <Link to={"login"}>Sign In</Link>
