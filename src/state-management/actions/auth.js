@@ -19,6 +19,7 @@ export const regRequest = (user) => async (dispatch) => await registration(user,
 const registration = async (user, dispatch) => {
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
+  console.log(csr);
   try {
     api.createUser(
       name,
@@ -73,7 +74,7 @@ export const changePasswordRequest = (data) => async (dispatch) => {
   await changePassword(data, dispatch);
 };
 
-const changePassword = (data, dispatch) => {
+export const changePassword = (data, dispatch) => {
   const { currentPassword, newPassword } = data;
   const token = localStorage.getItem('token');
   const { oAuth2 } = defaultClient.authentications;

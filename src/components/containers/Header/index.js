@@ -5,6 +5,7 @@ import cn from "classnames";
 import "./style.css";
 import { ChangePassword, Logout } from '../../containers';
 import { actions } from '../../../state-management';
+import NewFolder from '../NewFolder';
 
 class Header extends Component {
   constructor(props) {
@@ -13,6 +14,9 @@ class Header extends Component {
 
   changePassword = async (data) => {
     await this.props.changePasswordRequest(data);
+  };
+  createDirectory = async (data) => {
+    await this.props.createDirectory(data);
   };
 
   render() {
@@ -29,6 +33,9 @@ class Header extends Component {
           isLoggedIn && (
             <>
               <Col span={1} offset={13} className="flex-end">
+                <NewFolder onFinish={this.createDirectory}/>
+              </Col>
+              <Col span={1} offset={13} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
               <Col span={6} className="flex-end">
@@ -43,5 +50,5 @@ class Header extends Component {
 }
 
 export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { changePasswordRequest: actions.changePasswordRequest }
+  { changePasswordRequest: actions.changePasswordRequest, createDirectory: actions.createDirectory }
 )(Header);

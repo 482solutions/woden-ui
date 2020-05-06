@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RegistrationForm } from "../../components";
 import { actions } from '../../state-management';
-import { getCSR } from '../../utils/functions/csr';
+import { getCSR } from '../../utils/functions';
 import loginWelcome from '../../assets/images/loginWelcome.svg';
 import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
@@ -18,7 +18,9 @@ class Registration extends React.Component {
   };
 
   regRequest = async (regData) => {
-    regData.csr = await getCSR(regData.name);
+    const csr = await getCSR({ username: regData.name });
+    console.log(csr.csrPem);
+    regData.csr = csr;
     await this.props.regRequest(regData);
     this.replace();
   };

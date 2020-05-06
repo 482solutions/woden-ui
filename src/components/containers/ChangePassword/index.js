@@ -9,7 +9,7 @@ class ChangePassword extends Component {
     super(props);
     this.state = {
       ModalText: 'Content of the modal',
-      visible: true, //TODO: сменить на false после завершения модуля!
+      visible: false,
       confirmLoading: false,
       loading: false,
     };
