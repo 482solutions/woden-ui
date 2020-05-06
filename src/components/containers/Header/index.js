@@ -32,10 +32,10 @@ class Header extends Component {
         {
           isLoggedIn && (
             <>
-              <Col span={1} offset={13} className="flex-end">
+              <Col span={3} offset={10} className="flex-end">
                 <NewFolder onFinish={this.createDirectory}/>
               </Col>
-              <Col span={1} offset={13} className="flex-end">
+              <Col span={1} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
               <Col span={6} className="flex-end">

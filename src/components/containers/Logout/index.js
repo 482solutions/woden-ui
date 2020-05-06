@@ -4,13 +4,15 @@ import { Button } from 'antd';
 
 import { actions } from '../../../state-management';
 
-const Logout = ({ logout, cleanStorage }) => (
+const Logout = ({ logout }) => (
   <Button
-    onClick={() => { logout(); cleanStorage() }}
+    onClick={() => {
+      logout()
+    }}
     className="button"
   >
     Logout
   </Button>
 );
 
-export default connect(null, { logout: actions.logout, cleanStorage: actions.cleanStorage })(Logout);
+export default connect(null, { logout: actions.logout })(Logout);
