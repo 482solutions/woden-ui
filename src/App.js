@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Layout } from 'antd';
 import './App.css';
 import { Footer as AppFooter, Header as AppHeader, Loading, } from "./components";
-import { changePassword } from './state-management/actions';
 
 const {
   Header,
