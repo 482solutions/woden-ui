@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { ChangePassword, Logout } from '../../containers';
+import {ChangePassword, Logout, FileUpload} from '../../containers';
 import { actions } from '../../../state-management';
 import NewFolder from '../NewFolder';
 
@@ -29,6 +29,7 @@ class Header extends Component {
         })}>
           Woden
         </Col>
+        <FileUpload />
         {
           isLoggedIn && (
             <>
