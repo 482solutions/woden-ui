@@ -4,4 +4,4 @@ export { default as RegistrationForm } from './RegistrationForm';
 export { default as ChangePassword } from './ChangePassword';
 export { default as FileUpload } from './FileUpload';
 export { default as NewFolder } from './NewFolder';
-import './styles.css'
+import './styles.css';
