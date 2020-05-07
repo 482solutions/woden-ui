@@ -10,9 +10,9 @@ import * as serviceWorker from './serviceWorker';
 
 const token = localStorage.getItem('token');
 if (token) {
-  const { user_id: userId } = jwt.decode(token);
-  if (userId) {
-    store.dispatch(actions.login(userId));
+  const { data: userName } = jwt.decode(token);
+  if (userName) {
+    store.dispatch(actions.login(userName));
   }
 }
 ReactDOM.render(

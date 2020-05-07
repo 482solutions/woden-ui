@@ -18,9 +18,7 @@ class Registration extends React.Component {
   };
 
   regRequest = async (regData) => {
-    const csr = await getCSR({ username: regData.name });
-    console.log(csr.csrPem);
-    regData.csr = csr;
+    regData.csr = await getCSR({ username: regData.name });
     await this.props.regRequest(regData);
     this.replace();
   };

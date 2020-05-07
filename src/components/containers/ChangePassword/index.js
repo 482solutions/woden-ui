@@ -51,7 +51,7 @@ class ChangePassword extends Component {
         >
           <label className='upperLabel'>Current password</label>
           <Form.Item
-            name="currentPassword"
+            name="oldPassword"
             rules={[{ required: true, message: 'Please input your current password!' }]}
           >
             <Input.Password className='formItem inputItem'/>

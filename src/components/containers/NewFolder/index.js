@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Form, Input, Modal } from 'antd';
-import { SettingFilled } from '@ant-design/icons';
 import Col from 'antd/es/grid/col';
 
 class NewFolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ModalText: 'Content of the modal',
-      visible: true, //TODO: сменить на false после завершения модуля!
+      visible: false,
       confirmLoading: false,
       loading: false,
     };
@@ -35,7 +33,7 @@ class NewFolder extends Component {
     const { visible, loading } = this.state;
     return (<div>
       <Button onClick={this.showModal}>
-        <SettingFilled/>
+        New Folder
       </Button>
       <Modal
         title="Create Folder"
