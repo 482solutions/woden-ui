@@ -12,7 +12,7 @@ export const getCSR = (userData) => {
   // TODO: replace static data to dynemic
   const { username } = userData;
   const country = 'UA';
-  const state = 'Odes\'ka oblast\'';
+  const state = 'Odessa';
   const city = 'Odessa';
   //-----------------
   const csrPem = KJUR.asn1.csr.CSRUtil.newCSRPEM({

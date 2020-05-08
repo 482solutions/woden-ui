@@ -4,13 +4,16 @@ import { connect } from "react-redux";
 import './style.css';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
   }
 
   render() {
     return (
       <div className="m20">
-
       </div>
     );
   }
