@@ -28,13 +28,15 @@ class Header extends Component {
 				})}>
 					Woden
 				</Col>
-				<FileUpload/>
 				{
 					isLoggedIn && (
 						<>
-							<Col span={3} offset={10} className="flex-end">
-								<NewFolder onFinish={this.createDirectory}/>
-							</Col>
+								<Col span={3} offset={6} className="flex-end">
+									<FileUpload/>
+								</Col>
+								<Col span={3} className="flex-end">
+									<NewFolder onFinish={this.createDirectory}/>
+								</Col>
 							<Col span={1} className="flex-end">
 								<ChangePassword onFinish={this.changePassword}/>
 							</Col>
