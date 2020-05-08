@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { ChangePassword, Logout, NewFolder, FileUpload } from '../../containers';
+import { ChangePassword, Logout, NewFolder, FileUpload, Profile } from '../../containers';
+import { Logo } from '../../presentations';
+
 import { actions } from '../../../state-management';
 
 class Header extends Component {
@@ -26,22 +28,26 @@ class Header extends Component {
           "flex-start": isLoggedIn,
           "flex-center": !isLoggedIn
         })}>
-          Woden
+          <Logo/>
         </Col>
         {
           isLoggedIn && (
             <>
-              <Col span={3} offset={6} className="flex-end">
-                <FileUpload/>
-              </Col>
-              <Col span={3} className="flex-end">
-                <NewFolder onFinish={this.createDirectory}/>
-              </Col>
-              <Col span={1} className="flex-end">
+              {/*<Col span={3} offset={4} className="flex-end">*/}
+              {/*  <FileUpload/>*/}
+              {/*</Col>*/}
+              {/*<Col span={3} className="flex-end">*/}
+              {/*  <NewFolder onFinish={this.createDirectory}/>*/}
+              {/*</Col>*/}
+              <Col span={1} offset={3} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
-              <Col span={6} className="flex-end">
+              <Col span={3} className="flex-end">
                 <Logout/>
+              </Col>
+              <Col span={2} offset={2} className="flex-end">
+                <Profile/>
+                <span className="username">Ivan</span>
               </Col>
             </>
           )

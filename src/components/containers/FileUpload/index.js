@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Upload, message, Button } from 'antd';
+import { Upload, Button } from 'antd';
 import { FileAddTwoTone } from '@ant-design/icons';
-import Col from 'antd/es/grid/col';
 
 class FileUpload extends Component {
   constructor(props) {
@@ -20,22 +19,19 @@ class FileUpload extends Component {
     // eslint-disable-next-line no-console
     console.log(file);
     return false;
-  };
+  }
 
   render() {
     return (
       <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
-        <Col span={3}>
-          <Button className="upload-button">
+        <Button className="upload-button">
 					<span role="img">
 					</span>
-            <FileAddTwoTone/> File Upload
-          </Button>
-        </Col>
+          <FileAddTwoTone/> File Upload
+        </Button>
       </Upload>
     );
   }
-
 }
 
 export default FileUpload;
