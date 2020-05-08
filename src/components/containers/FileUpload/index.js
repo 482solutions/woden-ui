@@ -13,24 +13,18 @@ class FileUpload extends Component {
         authorization: 'authorization-text',
       },
     };
-    this.onChange = this.onChange.bind(this);
+    this.beforeUpload = this.beforeUpload.bind(this);
   }
 
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-      console.log(info);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
+  beforeUpload(file) {
+    // eslint-disable-next-line no-console
+    console.log(file);
+    return false;
+  };
 
   render() {
     return (
-      <Upload name="file" onChange={this.onChange} showUploadList={false}>
+      <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
         <Col span={3}>
           <Button className="upload-button">
 					<span role="img">
