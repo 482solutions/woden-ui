@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import Woden from 'woden';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import download from 'downloadjs';
 import { LOGIN, LOGOUT, REGISTRATION } from '../types';
 import { encryptData } from '../../utils/functions';
@@ -15,9 +16,10 @@ export const login = (username) => (dispatch) => {
 };
 
 
-export const regRequest = (user) => async (dispatch) => await registration(user, dispatch);
+// eslint-disable-next-line no-return-await,no-use-before-define
+export const regRequest = (user) => async(dispatch) => await registration(user, dispatch);
 
-const registration = async (user, dispatch) => {
+const registration = async(user, dispatch) => {
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   try {
@@ -33,12 +35,11 @@ const registration = async (user, dispatch) => {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
-          message.success('Registration are successful');
+          message.success('Registration successful');
         }
       },
     );
-  }
-  catch (e) {
+  } catch (e) {
     message.error(e.message, 3);
   }
   dispatch({
@@ -47,7 +48,7 @@ const registration = async (user, dispatch) => {
 };
 
 
-const logIn = async (user, dispatch) => {
+const logIn = async(user, dispatch) => {
   const password = (encryptData(user.password));
   api.login(
     user.name,
@@ -68,12 +69,12 @@ const logIn = async (user, dispatch) => {
 };
 
 
-export const loginRequest = (user) => async (dispatch) => {
+export const loginRequest = (user) => async(dispatch) => {
   await logIn(user, dispatch);
 };
 
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async(dispatch) => {
   const token = localStorage.getItem('token');
   const { oAuth2 } = defaultClient.authentications;
   oAuth2.accessToken = token;

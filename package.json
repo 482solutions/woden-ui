@@ -62,7 +62,7 @@
     "build": "webpack --mode production",
     "test": "react-scripts test --all",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --spec cypress/integration/API/*.feature",
+    "cypress:run": "cypress run --spec \"**/*.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
     "cypress:report": "cypress run --spec cypress/integration/API/POST_user.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",
     "lint:js": "eslint src/**/*.js",

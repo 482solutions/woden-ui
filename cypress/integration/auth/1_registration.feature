@@ -18,10 +18,10 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
-#
+
   @positive
   Scenario: 2 Username can contain 2 lowercase letters
     Given User username field that contains 2 lowercase letters
@@ -29,8 +29,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -40,8 +40,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -51,8 +51,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -62,10 +62,10 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
-#
+
   @positive
   Scenario: 6 Username can contain 3 lowercase letters
     Given User username field that contains 3 lowercase letters
@@ -73,10 +73,10 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
-#
+
   @positive
   Scenario: 7 Username can contain 19 uppercase letters
     Given User username field that contains 19 uppercase letters
@@ -84,10 +84,10 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
-#
+
   @positive
   Scenario: 8 Username can contain 19 lowercase letters
     Given User username field that contains 19 lowercase letters
@@ -95,8 +95,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -106,8 +106,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -117,8 +117,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -128,8 +128,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -139,8 +139,8 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
 #
   @positive
@@ -150,220 +150,204 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-#    Then User is registered
-#    And The User got certificate
+    Then User is registered
+#    And The User got certificate and private key in pem format
 #    And This User can sign in with his credentials and certificate
-#
+
   @negative
   Scenario: 14 Username can not contain only 1 letter
     Given User username field that contain only 1 letter
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-#    Then User is not registered
-#    And Error notification is shown
-#
-  @negative
+    Then User is not registered
+    And Error notification about not correct name "Incorrect Username" is shown
+
+  @negative @BAG
   Scenario: 15 Username can not contain 21 characters
     Given User username field that contain 21 characters
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-#    Then User is not registered
-#    And Error notification is shown
-#
+    Then User is not registered
+    And Error notification "Incorrect Username" is shown
+
   @negative
   Scenario: 16 Username can not contain email
     Given User username field that contain email
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-#    Then User is not registered
-#    And Error notification is shown
-#
+    Then User is not registered
+    And Error notification about not correct name "Incorrect Username" is shown
+
   @negative
   Scenario: 17 Username can not contain only spaces
     Given User username field that contain only spaces
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-#    Then User is not registered
-#    And Error notification is shown
-#
-##  @negative @email
-##  Scenario: 18 Email can not contain 2 characters @@
-#    Given User fills in the username field
-##    And fills in the email field that contains the username, @@, and domain
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @email
-##  Scenario: 19 Email must contain @ and a domain name ("@gmail.com")
-#    Given User fills in the username field
-##    And fills in the email field that contain only username
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @email
-##  Scenario: 20 Email must contain a domain name (".com")
-#    Given User fills in the username field
-##    And fills in the email field that contain username, @, and servername
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @email
-##  Scenario: 21 Email can not contain username
-#    Given User fills in the username field
-##    And fills in the email field that contain only username
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 22 Password and Confirm Password should be the same
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with other data
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 23 Password should contain min 1 character in uppercase
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field without characters in uppercase
-##    And fills in the confirm password field without characters in uppercase
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 24 Password should contain min 1 character in lowercase
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field without characters in lowercase
-##    And fills in the confirm password field without characters in lowercase
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 25 Password should contain min 1 number
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field without numbers
-##    And fills in the confirm password field without numbers
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 26 Password should contain upper and lower case characters
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with only numbers
-##    And fills in the confirm password field only numbers
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 27 Password can not contain only symbols
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with only symbols
-##    And fills in the confirm password field only symbols
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @one_field_empty
-##  Scenario: 28 User can not register without username
-#    Given fills in the email field
-##    And field username is empty
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @one_field_empty
-##  Scenario: 29 User can not register without email
-#    Given User fills in the username field
-##    And field email is empty
-##    And fills in the password field
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @one_field_empty
-##  Scenario: 30 User can not register without password
-#    Given User fills in the username field
-##    And fills in the email field
-##    And field password is empty
-##    And fills in the confirm password field
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @one_field_empty
-##  Scenario: 30 User can not register without confirm password
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field
-##    And field confirm password is empty
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative
-##  Scenario: 31 Form is not filled, negative case
-##    Given The user does not fill in the fields
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 32 User can not register with password that contain 7 characters
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with 7 symbols
-##    And fills in the confirm password field 7 symbols
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @negative @password
-##  Scenario: 33 User can not register with password that contain 101 characters
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with 101 symbols
-##    And fills in the confirm password field 101 symbols
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
-##
-##  @positive @password
-##  Scenario: 34 User can register with password tha contain 100 characters
-#    Given User fills in the username field
-##    And fills in the email field
-##    And fills in the password field with 100 symbols
-##    And fills in the confirm password field 100 symbols
-##    When The user press Sign up button
-##    Then User is not registered
-##    And Error notification is shown
+    Then User is not registered
+    And Notification about empty username "Please enter your username!" is shown
+
+  @negative @email
+
+# # TODO change error message
+
+  Scenario: 18 Email can not contain 2 characters @@
+    Given User fills in the username field
+    And fills in the email field that contains the username, @@, and domain
+    And fills in the password and confirm password field that contain 8 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about not valid email "Invalid email address entered!" is shown
+
+  @negative @email
+  Scenario: 19 Email must contain @ and a domain name ("@gmail.com")
+    Given User fills in the username field
+    And fills in the email field that contain only username
+    And fills in the password and confirm password field that contain 8 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about not valid email "Invalid email address entered!" is shown
+
+  @negative @email @BAG
+  Scenario: 20 Email must contain a domain name (".com")
+    Given User fills in the username field
+    And fills in the email field that contain username, @, and servername
+    And fills in the password and confirm password field that contain 8 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about not valid email "Invalid email address entered!" is shown
+
+  @negative @password
+  Scenario: 21 Password and Confirm Password should be the same
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and repeat password fields with different data
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about different passwords "The two passwords that you entered do not match!" is shown
+
+  @negative @password
+  Scenario: 22 Password should contain min 1 character in uppercase
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field without characters in uppercase
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @password
+  Scenario: 23 Password should contain min 1 character in lowercase
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field without characters in lowercase
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @password
+  Scenario: 24 Password should contain min 1 number
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field without numbers
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @password
+  Scenario: 25 Password should contain upper and lower case characters
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password that contain only numbers
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @password
+  Scenario: 26 Password can not contain only symbols
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password that contain only symbols
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @one_field_empty
+  Scenario: 27 User can not register without username
+    Given fills in the email field
+#    And field username is empty
+    And fills in the password and confirm password field that contain 8 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about empty username "Please enter your username!" is shown
+
+  @negative @one_field_empty
+  Scenario: 28 User can not register without email
+    Given User fills in the username field
+#    And field email is empty
+    And fills in the password and confirm password field that contain 8 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about empty email field "Please enter your email!" is shown
+
+  @negative @one_field_empty
+  Scenario: 29 User can not register without password
+    Given User fills in the username field
+    And fills in the email field
+#    And field password is empty
+    And fills in the confirm password field
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about empty password field "Please enter your password!" is shown
+    And Notification about different passwords "The two passwords that you entered do not match!" is shown
+
+  @negative @one_field_empty
+  Scenario: 30 User can not register without confirm password
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password field
+#    And field confirm password is empty
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about empty confirm password field "Please confirm your password!" is shown
+
+  @negative
+  Scenario: 31 Form is not filled, negative case
+    Given Sign Up form is open
+    When The user press Sign up button
+    Then User is not registered
+    And Notification about empty username "Please enter your username!" is shown
+    And Notification about empty email field "Please enter your email!" is shown
+    And Notification about empty password field "Please enter your password!" is shown
+    And Notification about empty confirm password field "Please confirm your password!" is shown
+
+  @negative @password
+  Scenario: 32 User can not register with password that contain 7 characters
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field that contain 7 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @negative @password
+  Scenario: 33 User can not register with password that contain 101 characters
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field that contain 101 characters
+    When The user press Sign up button
+    Then User is not registered
+    And Error notification about not correct password "Incorrect Password" is shown
+
+  @positive @password
+  Scenario: 34 User can register with password tha contain 100 characters
+    Given User fills in the username field
+    And fills in the email field
+    And fills in the password and confirm password field that contain 100 characters
+    When The user press Sign up button
+    Then User is registered
+#    And The User got certificate and private key in pem format
+#    And This User can sign in with his credentials and certificate
 
