@@ -15,6 +15,7 @@ if (token) {
     store.dispatch(actions.login(userName));
   }
 }
+
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter/>

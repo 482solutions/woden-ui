@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { ChangePassword, Logout } from '../../containers';
+import { ChangePassword, Logout, NewFolder, FileUpload } from '../../containers';
 import { actions } from '../../../state-management';
-import NewFolder from '../NewFolder';
 
 class Header extends Component {
   constructor(props) {
@@ -32,7 +31,10 @@ class Header extends Component {
         {
           isLoggedIn && (
             <>
-              <Col span={3} offset={10} className="flex-end">
+              <Col span={3} offset={6} className="flex-end">
+                <FileUpload/>
+              </Col>
+              <Col span={3} className="flex-end">
                 <NewFolder onFinish={this.createDirectory}/>
               </Col>
               <Col span={1} className="flex-end">
