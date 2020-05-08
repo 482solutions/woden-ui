@@ -7,8 +7,7 @@ class Profile extends Component {
     return (
       <div>
         <div>
-          <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined/>}/>
-
+          <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>}/>
         </div>
       </div>
     );

@@ -24,7 +24,7 @@ class Header extends Component {
     const { isLoggedIn } = this.props;
     return (
       <Row className="holder">
-        <Col span={4} className={cn("header__logo", {
+        <Col span={3} className={cn("header__logo", {
           "flex-start": isLoggedIn,
           "flex-center": !isLoggedIn
         })}>
@@ -39,15 +39,17 @@ class Header extends Component {
               {/*<Col span={3} className="flex-end">*/}
               {/*  <NewFolder onFinish={this.createDirectory}/>*/}
               {/*</Col>*/}
-              <Col span={1} offset={3} className="flex-end">
+              <Col span={1} offset={14} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
-              <Col span={3} className="flex-end">
-                <Logout/>
-              </Col>
-              <Col span={2} offset={2} className="flex-end">
+              {/*<Col span={3} className="flex-end">*/}
+              {/*  <Logout/>*/}
+              {/*</Col>*/}
+              <Col span={1} offset={1}>
                 <Profile/>
-                <span className="username">Ivan</span>
+              </Col>
+              <Col span={2}>
+                <div className="user__name">Ivan</div>
               </Col>
             </>
           )
