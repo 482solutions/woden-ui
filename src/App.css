@@ -46,6 +46,11 @@ section {
 .flex-direction-column {
   flex-direction: column;
 }
+
+.flex-direction-row {
+  display: flex;
+}
+
 .align-self-start {
   align-self: flex-start;
 }

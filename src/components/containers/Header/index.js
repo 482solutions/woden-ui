@@ -33,13 +33,7 @@ class Header extends Component {
         {
           isLoggedIn && (
             <>
-              {/*<Col span={3} offset={4} className="flex-end">*/}
-              {/*  <FileUpload/>*/}
-              {/*</Col>*/}
-              {/*<Col span={3} className="flex-end">*/}
-              {/*  <NewFolder onFinish={this.createDirectory}/>*/}
-              {/*</Col>*/}
-              <Col span={1} offset={14} className="flex-end">
+              <Col span={1} offset={17} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
               {/*<Col span={3} className="flex-end">*/}
@@ -48,7 +42,7 @@ class Header extends Component {
               <Col span={1} offset={1}>
                 <Profile/>
               </Col>
-              <Col span={2}>
+              <Col span={1}>
                 <div className="user__name">Ivan</div>
               </Col>
             </>

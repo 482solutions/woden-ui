@@ -1,0 +1,28 @@
+.sidebar {
+  width: 312px;
+  margin-top: 5px;
+}
+
+.sidebar__title {
+  font-size: 16px;
+  line-height: 24px;
+  color: #8998ac;
+  letter-spacing: 0.44px;
+  padding: 25px 0px;
+}
+
+.content {
+  border: 1px solid #e5e5e5;
+  border-left: none;
+  border-right: none;
+  padding: 15px 0px;
+}
+
+.tree {
+  color: #8998AC;
+}
+
+.shared {
+  margin-top: 15px;
+  color: #8998AC;
+}
