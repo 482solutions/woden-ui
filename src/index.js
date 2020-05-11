@@ -8,14 +8,13 @@ import AppRouter from './routes';
 import store, { actions } from './state-management';
 import * as serviceWorker from './serviceWorker';
 
-// const token = localStorage.getItem('token');
-// if (token) {
-//   const { data: userName } = jwt.decode(token);
-//   if (userName) {
-//     store.dispatch(actions.login(userName));
-//   }
-// }
-store.dispatch(actions.login('userName'));
+const token = localStorage.getItem('token');
+if (token) {
+  const { data: userName } = jwt.decode(token);
+  if (userName) {
+    store.dispatch(actions.login(userName));
+  }
+}
 
 
 ReactDOM.render(
