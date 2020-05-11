@@ -20,7 +20,7 @@ class Sidebar extends Component {
             switcherIcon={<DownOutlined/>}
             defaultExpandedKeys={['0-0-0']}
             onSelect={this.onSelect}
-            className="tree"
+            className="folders__tree"
           >
             <TreeNode title="Root" key="0-0">
               <TreeNode title="Example-1.1" key="0-0-0-0"/>

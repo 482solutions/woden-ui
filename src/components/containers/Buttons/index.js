@@ -6,7 +6,7 @@ import { Col } from 'antd';
 class Buttons extends Component {
   render() {
     return (
-      <div className="buttons">
+      <div className="home__buttons">
         <Col offset={17}>
           <FileUpload/>
         </Col>
