@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tree } from 'antd';
-import { DownOutlined, TeamOutlined, FolderOutlined } from '@ant-design/icons';
+import { DownOutlined, TeamOutlined } from '@ant-design/icons';
 import './style.css';
 
 const { TreeNode } = Tree;

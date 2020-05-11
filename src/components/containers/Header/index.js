@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { ChangePassword, Logout, NewFolder, FileUpload, Profile } from '../../containers';
+import { ChangePassword, Profile } from '../../containers';
 import { Logo } from '../../presentations';
 
 import { actions } from '../../../state-management';

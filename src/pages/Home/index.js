@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Sidebar, Buttons } from '../../components/containers';
+import { Sidebar, Buttons, Data } from '../../components/containers';
 
 import './style.css';
 
@@ -18,9 +18,9 @@ class Home extends React.Component {
         <div>
           <Sidebar/>
         </div>
-        <div>
+        <div className="main flex-direction-column w100">
           <Buttons/>
-
+          <Data/>
         </div>
       </div>
     );
