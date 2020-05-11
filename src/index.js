@@ -16,6 +16,7 @@ if (token) {
   }
 }
 
+
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter/>

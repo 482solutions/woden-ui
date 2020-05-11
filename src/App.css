@@ -10,9 +10,7 @@ section {
 }
 
 .app-header {
-  background-color: transparent;
-  color: rgba(216, 36, 36, 0);
-  border-bottom: 1px solid #dde5ed;
+  background-color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,13 +37,17 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1120px;
   width: 100%;
 }
 
 .flex-direction-column {
   flex-direction: column;
 }
+
+.flex-direction-row {
+  display: flex;
+}
+
 .align-self-start {
   align-self: flex-start;
 }

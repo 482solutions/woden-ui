@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+}
+
+.main {
+  background: #F9FAFC;
+  height: 100vh;
+}
+
