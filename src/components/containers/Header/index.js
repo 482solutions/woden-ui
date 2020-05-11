@@ -4,7 +4,7 @@ import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
 import { ChangePassword, Profile, Logout } from '../../containers';
-import { logoRow } from '../../../assets/images/logoRow.svg';
+import logoRow from '../../../assets/images/logoRow.svg';
 import { actions } from '../../../state-management';
 
 class Header extends Component {
@@ -24,7 +24,7 @@ class Header extends Component {
           "flex-start": isLoggedIn,
           "flex-center": !isLoggedIn
         })}>
-          <logoRow/>
+          <img src={logoRow} alt="Woden logo"/>
         </Col>
         {
           isLoggedIn && (
