@@ -28,7 +28,7 @@ class Sidebar extends Component {
               <TreeNode title="Example-1.3" key="0-0-0-2"/>
             </TreeNode>
           </Tree>
-          <a href="#" className="shared"><TeamOutlined/> Shared with me</a>
+          <div className="shared"><TeamOutlined/> Shared with me</div>
         </div>
       </div>
     );

@@ -14,7 +14,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="m20 container flex-direction-row">
+      <div className="container flex-direction-row">
         <div>
           <Sidebar/>
         </div>

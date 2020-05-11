@@ -7,10 +7,10 @@ class Buttons extends Component {
   render() {
     return (
       <div className="buttons">
-        <Col offset={16}>
+        <Col offset={17}>
           <FileUpload/>
         </Col>
-        <Col offset={1}>
+        <Col>
           <NewFolder onFinish={this.createDirectory}/>
         </Col>
       </div>

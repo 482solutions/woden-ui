@@ -1,5 +1,6 @@
 .sidebar {
   width: 230px;
+  padding-left: 50px;
 }
 
 .sidebar__title {

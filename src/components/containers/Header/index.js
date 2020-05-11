@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
+import jwt from 'jsonwebtoken';
 import "./style.css";
 import { ChangePassword, Profile } from '../../containers';
 import { Logo } from '../../presentations';
@@ -11,6 +12,20 @@ import { actions } from '../../../state-management';
 class Header extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      userName: 'loading'
+    }
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const { data: userName } = jwt.decode(token);
+      if (userName) {
+        this.setState({ userName: userName });
+      }
+    }
   }
 
   changePassword = async (data) => {
@@ -22,6 +37,7 @@ class Header extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
+    const { userName } = this.state;
     return (
       <Row className="holder">
         <Col span={3} className={cn("header__logo", {
@@ -33,7 +49,7 @@ class Header extends Component {
         {
           isLoggedIn && (
             <>
-              <Col span={1} offset={17} className="flex-end">
+              <Col span={1} offset={15} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
               {/*<Col span={3} className="flex-end">*/}
@@ -42,8 +58,8 @@ class Header extends Component {
               <Col span={1} offset={1}>
                 <Profile/>
               </Col>
-              <Col span={1}>
-                <div className="user__name">Ivan</div>
+              <Col span={3}>
+                <div className="user__name">{userName}</div>
               </Col>
             </>
           )
