@@ -72,6 +72,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
   "browserslist": {
     "production": [
       ">0.2%",

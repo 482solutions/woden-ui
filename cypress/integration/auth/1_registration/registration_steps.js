@@ -3,13 +3,11 @@ import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 const generator = require('generate-password');
 
-const basic = 'login';
+
 // https://www.npmjs.com/package/generate-password
 let login;
 let email;
 let password;
-let privateKey;
-let cert;
 
 beforeEach(() => {
   login = generator.generate({});
@@ -17,31 +15,12 @@ beforeEach(() => {
   password = `${login}12345`;
 });
 
-Given(/^The application is opened$/, () => {
-  cy.visit(basic);
-});
-
-Given(/^there is no open session$/, () => {
-  const cookie = cy.getCookies().should('have.length', 0);
-  if (cookie.length !== 0) {
-    cy.clearCookies();
-  }
-});
-
-When(/^The user press Register now button$/, () => {
-  cy.get('.ant-col-offset-2 > a').click();
-});
-
-Then(/^Sign Up form is open$/, () => {
-  cy.get('.ant-form').should('be.visible');
-});
-
 Given(/^User username field that contains 2 uppercase letters$/, () => {
   login = generator.generate({
     length: 20,
     lowercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 2 lowercase letters$/, () => {
@@ -49,7 +28,7 @@ Given(/^User username field that contains 2 lowercase letters$/, () => {
     length: 2,
     uppercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 20 lowercase letters$/, () => {
@@ -57,7 +36,7 @@ Given(/^User username field that contains 20 lowercase letters$/, () => {
     length: 20,
     uppercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 20 uppercase letters$/, () => {
@@ -65,7 +44,7 @@ Given(/^User username field that contains 20 uppercase letters$/, () => {
     length: 20,
     lowercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 3 uppercase letters$/, () => {
@@ -73,7 +52,7 @@ Given(/^User username field that contains 3 uppercase letters$/, () => {
     length: 3,
     lowercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 3 lowercase letters$/, () => {
@@ -81,7 +60,7 @@ Given(/^User username field that contains 3 lowercase letters$/, () => {
     length: 3,
     uppercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 19 uppercase letters$/, () => {
@@ -89,7 +68,7 @@ Given(/^User username field that contains 19 uppercase letters$/, () => {
     length: 19,
     lowercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 19 lowercase letters$/, () => {
@@ -97,7 +76,7 @@ Given(/^User username field that contains 19 lowercase letters$/, () => {
     length: 19,
     uppercase: false,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 9 numbers$/, () => {
@@ -107,14 +86,14 @@ Given(/^User username field that contains 9 numbers$/, () => {
     uppercase: false,
     numbers: true,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 10 letters in uppercase and lowercase$/, () => {
   login = generator.generate({
     length: 10,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 1 letter in uppercase, 8 letters in lowercase and 1 number$/, () => {
@@ -129,7 +108,7 @@ Given(/^User username field that contains 1 letter in uppercase, 8 letters in lo
     numbers: true,
   });
   login = `A${name}${num}`;
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 2 words with uppercase and lowercase$/, () => {
@@ -137,7 +116,7 @@ Given(/^User username field that contains 2 words with uppercase and lowercase$/
     length: 5,
   });
   login = `${name} ${name}`;
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contains 2 words with uppercase and lowercase and space after name$/, () => {
@@ -145,21 +124,21 @@ Given(/^User username field that contains 2 words with uppercase and lowercase a
     length: 6,
   });
   login = ` ${name} ${name}`;
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contain only 1 letter$/, () => {
   login = generator.generate({
     length: 1,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contain 21 characters$/, () => {
   login = generator.generate({
     length: 21,
   });
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contain email$/, () => {
@@ -167,16 +146,16 @@ Given(/^User username field that contain email$/, () => {
     length: 5,
   });
   login = `${name}@gmail.com`;
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User username field that contain only spaces$/, () => {
   login = '             ';
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^User fills in the username field$/, () => {
-  cy.typeLogin(login)
+  cy.get('#name').type(login);
 });
 
 Given(/^fills in the email field$/, () => {
@@ -394,45 +373,6 @@ Then(/^User is registered$/, () => {
     .should('contain.text', 'Registration was successful');
 });
 
-Then(/^The User got private key$/, async () => {
-  cy.get('a[download]')
-    .then((anchor) => (
-      new Cypress.Promise((resolve) => {
-        //XHR to get the blob that corresponds to the object URL.
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', anchor.prop('href'), true);
-        xhr.responseType = 'blob';
-        //fileReader to get the string back from the blob.
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            const blob = xhr.response;
-            const reader = new FileReader();
-            reader.onload = () => {
-              resolve(reader.result);
-              privateKey = cy.writeFile('cypress/fixtures/privateKey.pem', reader.result)
-            };
-            reader.readAsText(blob);
-          }
-        };
-        xhr.send();
-      })
-    ))
-  cy.readFile('cypress/fixtures/privateKey.pem').then((text) => {
-    expect(text).to.include('-----BEGIN PRIVATE KEY-----')
-    expect(text).to.include('-----END PRIVATE KEY-----');
-  })
-});
-
-Then(/^The User got certificate in pem format$/, () => {
-  cy.wait('@getCert').then(function (xhr) {
-    const response = xhr.responseBody
-    cert = cy.writeFile('cypress/fixtures/cert.pem', response.cert)
-  })
-  cy.readFile('cypress/fixtures/cert.pem').then((text) => {
-    expect(text).to.include('-----BEGIN CERTIFICATE-----')
-    expect(text).to.include('-----END CERTIFICATE-----');
-  })
-});
 
 Then(/^Error notification "([^"]*)" is shown$/, (message) => {
   cy.get('.ant-message-custom-content').as('messageIncorrectUsername')
