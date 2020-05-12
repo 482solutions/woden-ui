@@ -1,0 +1,6 @@
+.home__profile{
+  display: flex;
+  max-width: 110px;
+  justify-content: space-between;
+  align-items: center;
+}

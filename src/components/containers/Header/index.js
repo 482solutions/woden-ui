@@ -3,14 +3,11 @@ import { connect } from "react-redux";
 import { Col, Row } from "antd";
 import cn from "classnames";
 import "./style.css";
-import { ChangePassword, Logout } from '../../containers';
+import { ChangePassword, Profile, Logout } from '../../containers';
+import logoRow from '../../../assets/images/logoRow.svg';
 import { actions } from '../../../state-management';
-import NewFolder from '../NewFolder';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   changePassword = async (data) => {
     await this.props.changePasswordRequest(data);
@@ -23,23 +20,23 @@ class Header extends Component {
     const { isLoggedIn } = this.props;
     return (
       <Row className="holder">
-        <Col span={4} className={cn("header__logo", {
+        <Col span={3} className={cn("header__logo", {
           "flex-start": isLoggedIn,
           "flex-center": !isLoggedIn
         })}>
-          Woden
+          <img src={logoRow} alt="Woden logo"/>
         </Col>
         {
           isLoggedIn && (
             <>
-              <Col span={3} offset={10} className="flex-end">
-                <NewFolder onFinish={this.createDirectory}/>
-              </Col>
-              <Col span={1} className="flex-end">
+              <Col span={1} offset={13} className="flex-end">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
-              <Col span={6} className="flex-end">
+              <Col span={4} className="flex-end">
                 <Logout/>
+              </Col>
+              <Col span={3}>
+                <Profile/>
               </Col>
             </>
           )

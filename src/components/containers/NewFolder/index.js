@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Input, Modal } from 'antd';
 import Col from 'antd/es/grid/col';
+import { FolderAddTwoTone } from '@ant-design/icons';
 
 class NewFolder extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class NewFolder extends Component {
     const { visible, loading } = this.state;
     return (<div>
       <Button onClick={this.showModal}>
+        <FolderAddTwoTone/>
         New Folder
       </Button>
       <Modal

@@ -2,5 +2,10 @@ export { default as Logout } from "./Logout";
 export { default as LoginForm } from './LoginForm';
 export { default as RegistrationForm } from './RegistrationForm';
 export { default as ChangePassword } from './ChangePassword';
+export { default as FileUpload } from './FileUpload';
 export { default as NewFolder } from './NewFolder';
-import './styles.css'
+export { default as Profile } from './Profile';
+export { default as Sidebar } from './Sidebar';
+export { default as Buttons } from './Buttons';
+export { default as Data } from './Data';
+import './styles.css';
