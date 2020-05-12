@@ -1,7 +1,6 @@
 @test_case_1.1
 @registration
-# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_1.1'
-
+# ./node_modules/.bin/cypress-tags run -e TAGS='@'
 Feature: Registration
   As a user (any role), I want to sign up in the system so that I can use it
 
@@ -19,8 +18,8 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 
   @positive
   Scenario: 2 Username can contain 2 lowercase letters
@@ -41,9 +40,9 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    And The User got private key
+    And The User got certificate in pem format
+
   @positive
   Scenario: 4 Username can contain 20 uppercase letters
     Given User username field that contains 20 uppercase letters
@@ -52,9 +51,9 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    And The User got private key
+    And The User got certificate in pem format
+
   @positive
   Scenario: 5 Username can contain 3 uppercase letters
     Given User username field that contains 3 uppercase letters
@@ -63,8 +62,8 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 
   @positive
   Scenario: 6 Username can contain 3 lowercase letters
@@ -74,8 +73,8 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 
   @positive
   Scenario: 7 Username can contain 19 uppercase letters
@@ -85,8 +84,8 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 
   @positive
   Scenario: 8 Username can contain 19 lowercase letters
@@ -96,8 +95,8 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 #
   @positive
   Scenario: 9 Username can contain only numbers
@@ -107,9 +106,9 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    And The User got private key
+    And The User got certificate in pem format
+
   @positive
   Scenario: 10 Username can contain 10 letters in uppercase and lowercase
     Given User username field that contains 10 letters in uppercase and lowercase
@@ -118,9 +117,9 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    And The User got private key
+    And The User got certificate in pem format
+
   @positive
   Scenario: 11 Username can contain 1 letter in uppercase, 8 letters in lowercase and 1 number
     Given User username field that contains 1 letter in uppercase, 8 letters in lowercase and 1 number
@@ -129,41 +128,40 @@ Feature: Registration
     And the data is valid
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    And The User got private key
+    And The User got certificate in pem format
+
   @positive
-  Scenario: 12 Username can contain 2 words with uppercase and lowercase
+  Scenario: 12 Username can not contain 2 words with uppercase and lowercase
     Given User username field that contains 2 words with uppercase and lowercase
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-    Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
-#
+    Then User is not registered
+    And Error notification about not correct name "Incorrect Username" is shown
+
   @positive
-  Scenario: 13 Username can contain 2 words with uppercase and lowercase and space after name
+  Scenario: 13 Username can not contain 2 words with uppercase and lowercase and space after name
     Given User username field that contains 2 words with uppercase and lowercase and space after name
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
-    Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    Then User is not registered
+    And Error notification about not correct name "Incorrect Username" is shown
 
-  @negative
+  @negative @BAG
   Scenario: 14 Username can not contain only 1 letter
     Given User username field that contain only 1 letter
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
     Then User is not registered
+#    TODO: https://jira.482.solutions/browse/WGRND-582
     And Error notification about not correct name "Incorrect Username" is shown
 
-  @negative @BAG
+  @negative
   Scenario: 15 Username can not contain 21 characters
     Given User username field that contain 21 characters
     And fills in the email field
@@ -188,12 +186,10 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
     Then User is not registered
+        #    TODO: change error message
     And Notification about empty username "Please enter your username!" is shown
 
   @negative @email
-
-# # TODO change error message
-
   Scenario: 18 Email can not contain 2 characters @@
     Given User fills in the username field
     And fills in the email field that contains the username, @@, and domain
@@ -210,7 +206,7 @@ Feature: Registration
     When The user press Sign up button
     Then User is not registered
     And Notification about not valid email "Invalid email address entered!" is shown
-
+#
   @negative @email @BAG
   Scenario: 20 Email must contain a domain name (".com")
     Given User fills in the username field
@@ -237,7 +233,7 @@ Feature: Registration
     When The user press Sign up button
     Then User is not registered
     And Error notification about not correct password "Incorrect Password" is shown
-
+#
   @negative @password
   Scenario: 23 Password should contain min 1 character in lowercase
     Given User fills in the username field
@@ -274,25 +270,27 @@ Feature: Registration
     Then User is not registered
     And Error notification about not correct password "Incorrect Password" is shown
 
-  @negative @one_field_empty
+  @negative @one_field_empty @BAG
   Scenario: 27 User can not register without username
     Given fills in the email field
 #    And field username is empty
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
     Then User is not registered
+      #    TODO: change error message
     And Notification about empty username "Please enter your username!" is shown
 
-  @negative @one_field_empty
+  @negative @one_field_empty @BAG
   Scenario: 28 User can not register without email
     Given User fills in the username field
 #    And field email is empty
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
     Then User is not registered
+        #    TODO: change error message
     And Notification about empty email field "Please enter your email!" is shown
 
-  @negative @one_field_empty
+  @negative @one_field_empty @BAG
   Scenario: 29 User can not register without password
     Given User fills in the username field
     And fills in the email field
@@ -300,6 +298,7 @@ Feature: Registration
     And fills in the confirm password field
     When The user press Sign up button
     Then User is not registered
+    #    TODO: change error message
     And Notification about empty password field "Please enter your password!" is shown
     And Notification about different passwords "The two passwords that you entered do not match!" is shown
 
@@ -313,11 +312,12 @@ Feature: Registration
     Then User is not registered
     And Notification about empty confirm password field "Please confirm your password!" is shown
 
-  @negative
+  @negative @BAG
   Scenario: 31 Form is not filled, negative case
     Given Sign Up form is open
     When The user press Sign up button
     Then User is not registered
+#    TODO: change error message
     And Notification about empty username "Please enter your username!" is shown
     And Notification about empty email field "Please enter your email!" is shown
     And Notification about empty password field "Please enter your password!" is shown
@@ -342,12 +342,12 @@ Feature: Registration
     And Error notification about not correct password "Incorrect Password" is shown
 
   @positive @password
-  Scenario: 34 User can register with password tha contain 100 characters
+  Scenario: 34 User can register with password that contain 100 characters
     Given User fills in the username field
     And fills in the email field
     And fills in the password and confirm password field that contain 100 characters
     When The user press Sign up button
     Then User is registered
-#    And The User got certificate and private key in pem format
-#    And This User can sign in with his credentials and certificate
+    And The User got private key
+    And The User got certificate in pem format
 

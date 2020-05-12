@@ -28,5 +28,6 @@ jobs:
     - run: npm run lint:js
     - run: npm run build
     - run: npm test
+    - run: npm run cypress:run
       env:
         CI: true
