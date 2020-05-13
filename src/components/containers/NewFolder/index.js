@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Input, Modal } from 'antd';
-import Col from 'antd/es/grid/col';
+import { Button, Form, Input, Modal, Col } from 'antd';
 import { FolderAddTwoTone } from '@ant-design/icons';
 
 class NewFolder extends Component {
