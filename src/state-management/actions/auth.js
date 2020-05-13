@@ -64,8 +64,9 @@ const logIn = async (user, dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
-        const token = response.body.token;
+        const { token, folder } = response.body;
         localStorage.setItem('token', token);
+        localStorage.setItem('rootFolder', folder);
         dispatch(login(user.name));
       } else {
         message.warn(response.body.message);

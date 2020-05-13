@@ -87,6 +87,4 @@ class ChangePassword extends Component {
 }
 
 export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { logout: actions.logout, cleanStorage: actions.cleanStorage }
-)(
-  ChangePassword);
+  { logout: actions.logout, cleanStorage: actions.cleanStorage })(ChangePassword);
