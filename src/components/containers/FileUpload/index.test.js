@@ -15,8 +15,7 @@ afterEach(() => {
   container = null;
 });
 
-it('рендер и обновление счётчика', () => {
-  // Тестируем первый рендер и метод componentDidMount
+it('renders without crashing', () => {
   act(() => {
     ReactDOM.render(<FileUpload/>, container);
   });

@@ -16,7 +16,6 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  // Тестируем первый рендер и метод componentDidMount
   act(() => {
     ReactDOM.render(<NewFolder/>, container);
   });

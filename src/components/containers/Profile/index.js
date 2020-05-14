@@ -11,7 +11,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      userName: '',
+      userName: 'loading',
     };
   }
 
@@ -28,9 +28,9 @@ class Profile extends Component {
   render() {
     const { userName } = this.state;
     return (
-      <div className="home__profile">
+      <div className="homeProfile">
         <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>}/>
-        <div className="user__name">{userName}</div>
+        <div className="userName">{userName}</div>
       </div>
     );
   }

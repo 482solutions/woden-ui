@@ -16,13 +16,12 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  // Тестируем первый рендер и метод componentDidMount
   act(() => {
     ReactDOM.render(<Profile/>, container);
   });
   const avatar = container.getElementsByTagName('Avatar');
-  const name = container.querySelector('div');
+  const name = container.querySelector('userName');
 
   expect(avatar.length).toBe(0);
-  expect(name.textContent).toBe('');
+  expect(name.textContent).toBe('loading');
 });
