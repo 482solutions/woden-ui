@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Col } from 'antd';
 import { NewFolder, FileUpload } from '../../containers';
 import './style.css';
-import { Col } from 'antd';
 
 class Buttons extends Component {
   render() {

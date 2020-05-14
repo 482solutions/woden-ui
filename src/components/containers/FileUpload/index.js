@@ -27,7 +27,7 @@ class FileUpload extends Component {
         <Button className="upload-button">
 					<span role="img">
 					</span>
-          <FileAddTwoTone/> File Upload
+          <FileAddTwoTone/>File Upload
         </Button>
       </Upload>
     );
