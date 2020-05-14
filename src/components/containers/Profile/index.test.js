@@ -20,7 +20,7 @@ it('renders without crashing', () => {
     ReactDOM.render(<Profile/>, container);
   });
   const avatar = container.getElementsByTagName('Avatar');
-  const name = container.querySelector('userName');
+  const name = container.querySelector('div');
 
   expect(avatar.length).toBe(0);
   expect(name.textContent).toBe('loading');
