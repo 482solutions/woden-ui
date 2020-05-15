@@ -19,9 +19,9 @@ it('renders without crashing', () => {
   act(() => {
     ReactDOM.render(<Sidebar/>, container);
   });
-  const title = container.querySelector('h2');
-  const root = container.getElementsByTagName('foldersTree');
+  const title = container.getElementsByClassName('sidebarTitle')[0];
+  const root = container.getElementsByClassName('ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close');
 
   expect(title.textContent).toBe('All Folders');
-  expect(root.length).toBe(0);
+  expect(root.length).toBe(1);
 });

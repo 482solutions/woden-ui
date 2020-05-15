@@ -19,9 +19,10 @@ it('renders without crashing', () => {
   act(() => {
     ReactDOM.render(<NewFolder/>, container);
   });
-  const button = container.querySelector('button');
-  const modal = container.getElementsByTagName('Modal');
+
+  const button = container.getElementsByClassName('ant-btn')[0];
+
+  // Не могу проверить наличие модального окна т.к. его нет на странице и надо проверять через redux
 
   expect(button.textContent).toBe('New Folder');
-  expect(modal.length).toBe(0);
 });

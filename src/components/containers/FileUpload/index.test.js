@@ -19,7 +19,8 @@ it('renders without crashing', () => {
   act(() => {
     ReactDOM.render(<FileUpload/>, container);
   });
-  const button = container.querySelector('button');
+  const button = container.getElementsByTagName('button')[0];
+
   expect(button.textContent).toBe('File Upload');
 
 })
