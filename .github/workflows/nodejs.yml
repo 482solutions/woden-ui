@@ -18,7 +18,7 @@ jobs:
     steps:
     - run: |
         git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
-        cd ./woden-server-js.git
+        cd woden-server-js
         docker-compose -f woden-server-js/docker-compose-tests.yml up --build -d 
  #&& docker-compose up --build -d && npm run cypress:run
     - name: Checkout
