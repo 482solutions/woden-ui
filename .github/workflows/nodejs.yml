@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 1
     - run: |
         git clone https://andrii482:${{secrets.woden_server_js_workflow_actions_repo}}@github.com/482solutions/woden-server-js
         docker-compose up --build  
