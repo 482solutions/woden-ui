@@ -24,7 +24,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        path: main
+        ref: my-branch workflow_actions
     - run: docker-compose up --build -d
     - run: npm run cypress:run
         
