@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FolderTwoTone } from '@ant-design/icons/lib/icons';
 import { actions } from '../../../state-management';
 
 class Data extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    const rootFolder = localStorage.getItem('rootFolder');
-    if (rootFolder) {
-      console.log(this.props.getFolderData(rootFolder));
-    }
-    console.log(this.props);
+    console.log(props);
+    this.state = {
+      folders: props.entryFolders,
+      files: props.entryFiles,
+    };
   }
 
   render() {
+    const { folders, files } = this.state;
+    const { entryFolders } = this.props;
+    console.log('Folders:', folders);
     return (
       <div>
-        <img src="" alt=""/>
+        {
+          folders.map((folder) => (
+            <div key={folder.hash}><FolderTwoTone/>{folder.name}</div>
+          ))
+        }
       </div>
     );
   }
@@ -26,5 +31,4 @@ class Data extends Component {
 
 export default connect(({ auth, filesystem }) => ({
   isLoggedIn: auth.isLoggedIn,
-  directory: filesystem.directory,
 }), { getFolderData: actions.getFolderData })(Data);

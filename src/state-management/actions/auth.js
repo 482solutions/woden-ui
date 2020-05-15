@@ -28,7 +28,7 @@ const registration = async (user, dispatch) => {
     api.createUser(
       body, (error, data, response) => {
         if (error) {
-          message.error(JSON.parse(response.text).error);
+          message.error(response.body.message);
         } else if (response.status === 201) {
           if (JSON.parse(response.text).cert) {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
@@ -66,6 +66,7 @@ const logIn = async (user, dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
+        message.success(response.body.message);
         const { token, folder } = response.body;
         localStorage.setItem('token', token);
         localStorage.setItem('rootFolder', folder);
@@ -98,21 +99,14 @@ export const changePassword = (data, dispatch) => {
     }
   });
 };
-export const logout = () => async (dispatch) => {
+export const logout = () => async(dispatch) => {
   const { Bearer } = defaultClient.authentications;
   Bearer.apiKey = getTokenForHeader();
   api.logout((error, data, response) => {
-    if (error) {
-      console.warn(error);
-      message.warn(response.message);
-    } else if (response.status === 200 || response.status === 203) {
-      message.success(response.body.message);
-      localStorage.removeItem('token');
-      dispatch({
-        type: LOGOUT,
-      });
-    } else {
-      message.warn(response.body.message);
-    }
+    message.success(response.body.message);
+    localStorage.removeItem('token');
+    dispatch({
+      type: LOGOUT,
+    });
   });
 };
