@@ -21,9 +21,7 @@ jobs:
         cd woden-server-js
         docker-compose -f docker-compose-tests.yml up --build -d 
  #&& docker-compose up --build -d && npm run cypress:run
-    - run: docker-compose up --build -d
-      with:
-        ref: my-branch workflow_actions
+    - run: cd ..
     - run: docker-compose up --build -d
     - run: npm run cypress:run
         
