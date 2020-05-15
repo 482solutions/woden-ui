@@ -17,7 +17,6 @@ jobs:
 
     steps:
       - name: 1
-        uses: actions/checkout@v2
         with:
           repository: https://github.com/482solutions/woden-server-js
           token: ${{ secrets.woden_server_js_workflow_actions_repo }}
