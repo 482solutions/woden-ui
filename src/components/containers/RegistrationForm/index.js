@@ -20,7 +20,7 @@ class RegistrationForm extends Component {
   };
 
   onFinish(e) {
-    if (!e.name.match(/^[a-zA-Z0-9-_.]{1,20}$/g)) {
+    if (!e.name.match(/^[a-zA-Z0-9-_.]{2,20}$/g)) {
       message.warning("Incorrect Username");
       return;
     }

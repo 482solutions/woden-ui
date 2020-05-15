@@ -1,8 +1,7 @@
 import Woden from 'woden';
 import { message } from 'antd';
-import {
-  BACK, CREATE_DIRECTORY, FORWARD, GET_DIRECTORY_DATA,
-} from '../types';
+import { BACK, FORWARD, GET_FOLDER_DATA, SET_FOLDER_DATA } from '../types';
+import { getTokenForHeader } from '../../utils/functions';
 
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -18,50 +17,17 @@ export const goForward = (dirname) => async(dispatch) => {
     payload: dirname,
   });
 };
-export const createDirectory = (dirData) => async(dispatch) => {
-  const { name, parentFolder } = dirData;
-  try {
-    const token = localStorage.getItem('token');
-    const { oAuth2 } = defaultClient.authentications;
-    oAuth2.accessToken = token;
-    const body = new Woden.Body2();
-    body.name = name;
-    body.parentFolder = parentFolder;
-    api.createFolder(
-      body,
-      (error, data, response) => {
-        if (error) {
-          message.error(JSON.parse(response.text).error);
-        } else if (response.status === 201) {
-          message.success('Folder created successful');
-        }
-      },
-    );
-  } catch (e) {
-    message.error(e.message, 3);
-  }
+export const setFolderData = (folderData) => async(dispatch) => {
   dispatch({
-    type: CREATE_DIRECTORY,
-    payload: name,
+    type: SET_FOLDER_DATA,
+    payload: folderData,
   });
 };
 export const getFolderData = (folderHash) => async(dispatch) => {
   try {
-    const token = localStorage.getItem('token');
-    const options = {
-      method: 'GET',
-      url: 'http://localhost:8080/api/v1/folder',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ hash: folderHash }),
-
-    };
-    request(options, (error, response) => {
-      if (error) throw new Error(error);
-      console.log(response.body);
-    });
+    const { Bearer } = defaultClient.authentications;
+    Bearer.apiKey = getTokenForHeader();
+    // const body = new Woden.GetFolder();
     api.getFolder(
       body,
       (error, data, response) => {
@@ -69,7 +35,7 @@ export const getFolderData = (folderHash) => async(dispatch) => {
           console.log(response);
         } else if (response.status === 201) {
           dispatch({
-            type: GET_DIRECTORY_DATA,
+            type: GET_FOLDER_DATA,
             payload: response,
           });
           console.log(response.body);

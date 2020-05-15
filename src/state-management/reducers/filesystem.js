@@ -1,28 +1,43 @@
-import { BACK, CREATE_DIRECTORY, FORWARD, GET_DIRECTORY_DATA } from '../types';
+import {
+  BACK, SET_FOLDER_DATA, FORWARD, GET_FOLDER_DATA,
+} from '../types';
 
 const initialState = {
-  directory: 'root',
-  entryFolders: [],
-  entryFiles: []
+  folderName: null,
+  folderHash: null,
+  parentHash: null,
+  entryFolders: [2],
+  entryFiles: [],
 };
 
 const handleBack = (state, dirname) => ({
-  //TODO: Реализация для обработки возврата в предыдущую директорию
+  // TODO: Реализация для обработки возврата в предыдущую директорию
 });
 const handleForward = (state, dirname) => ({
-  //TODO: Реализация для обработки перехода в следующую директорию
+  // TODO: Реализация для обработки перехода в следующую директорию
 });
-const handleCreateDirectory = (state, dirname) => ({
-  //TODO: Реализация для создания новой директории
-});
-const handleGetDirectory = (dirData) => ({
-  mess: dirData,
+const handleSetFolder = (state, folderData) => (
+  {
+    ...state,
+    folderName: folderData.name,
+    folderHash: folderData.hash,
+    parentHash: folderData.parentHash,
+    entryFolders: folderData.folders,
+    entryFiles: folderData.files,
+  }
+);
+const handleGetFolder = (state, folderData) => ({
+  folderName: folderData.name,
+  folderHash: folderData.hash,
+  parentHash: folderData.parentHash,
+  entryFolders: folderData.folders,
+  entryFiles: folderData.files,
 });
 const handlers = {
   [BACK]: handleBack,
   [FORWARD]: handleForward,
-  [CREATE_DIRECTORY]: handleCreateDirectory,
-  [GET_DIRECTORY_DATA]: handleGetDirectory,
+  [SET_FOLDER_DATA]: handleSetFolder,
+  [GET_FOLDER_DATA]: handleGetFolder,
 };
 
 export default (state = initialState, action) => {
