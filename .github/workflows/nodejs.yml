@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: https://github.com/482solutions/woden-server-js
+        repository: https://andrii482@github.com/482solutions/woden-server-js
         token: ${{ secrets.woden_server_js_workflow_actions_repo }}
     - run: docker-compose up --build  
 
