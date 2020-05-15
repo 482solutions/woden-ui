@@ -18,8 +18,8 @@ jobs:
     steps:
     - run: |
         git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
-        docker-compose -f woden-server-js/docker-compose-tests.yml up --build
-    - run: docker-compose up --build
+        docker-compose -f woden-server-js/docker-compose-tests.yml up --build -d
+    - run: docker-compose up --build -d
     - run: npm run cypress:run
         
 #    with:
