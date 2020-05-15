@@ -8,7 +8,7 @@ on:
     branches:
       - workflow_actions
 
-  pull_request:
+#  pull_request:
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: git clone https://andrii482:${{ secrets.woden_server_js_workflow_actions_repo }}@github.com/482solutions/woden-server-js.git
+    - run: git clone https://andrii482:${{ secrets.woden_server_js_workflow_actions }}@github.com/482solutions/woden-server-js.git
 #        token: ${{ secrets.woden_server_js_workflow_actions_repo }}
     - run: cd woden-server-js
     - run: docker-compose up --build  
