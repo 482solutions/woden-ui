@@ -21,8 +21,7 @@ jobs:
         cd woden-server-js
         docker-compose -f docker-compose-tests.yml up --build -d 
  #&& docker-compose up --build -d && npm run cypress:run
-    - name: Checkout
-      uses: actions/checkout@v2
+    - run: docker-compose up --build -d
       with:
         ref: my-branch workflow_actions
     - run: docker-compose up --build -d
