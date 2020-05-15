@@ -138,3 +138,7 @@ section {
     -o-transition: all .3s;
     transition: all .3s;
 }
+.folderFileSize {
+  max-width: 120px;
+  overflow: hidden;
+}
