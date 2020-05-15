@@ -17,9 +17,8 @@ jobs:
 
     steps:
     - run: |
-        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git
-        cd woden-server-js
-        docker-compose up --build  
+        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
+        docker-compose -f woden-server-js/docker-compose-tests.yml up --build
 #    with:
 #        repository: https://github.com/482solutions/woden-server-js
 #        token: ${{secrets.woden_server_js_workflow_actions_repo}}
