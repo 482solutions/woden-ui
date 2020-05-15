@@ -24,6 +24,7 @@ jobs:
         git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git  -b  workflow_actions --single-branch 
         cd woden-ui
         docker-compose up --build -d
+        npm i
         npm run cypress:run
         
 #    with:
