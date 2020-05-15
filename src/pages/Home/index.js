@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { message } from 'antd';
-import { FolderTwoTone } from '@ant-design/icons/lib/icons';
+import download from 'downloadjs';
 import Woden from 'woden';
 import { Sidebar, Buttons } from '../../components/containers';
 import { getRootFolderHash, getTokenForHeader } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import FolderImage from '../../assets/images/folder.svg';
+import FileImage from '../../assets/images/file.svg';
 
 
 const api = new Woden.FileSystemApi();
@@ -56,20 +57,36 @@ class Home extends React.Component {
 
   uploadFile(file) {
     const parentFolder = this.state.folderHash;
-    const { name } = file;
     console.log(file);
+    const { name } = file;
     api.uploadFile(
       name, parentFolder, file,
       (error, data, response) => {
-        console.log('UploadFile: ', response);
+        if (error) {
+          message.error(response.body.message);
+        } else if (response.status === 200) {
+          message.success('Folder created successful');
+          const folderData = response.body.folder;
+          folderData.folders = JSON.parse(folderData.folders);
+          folderData.files = JSON.parse(folderData.files);
+          this.props.setFolderData(folderData);
+          this.setState({
+            folderName: folderData.name,
+            folderHash: folderData.hash,
+            parentHash: folderData.parenthash,
+            entryFolders: folderData.folders,
+            entryFiles: folderData.files,
+          });
+        }
       },
     );
     return false;
   }
 
-  createFolder(data) {
-    const { newFolder } = data;
+  createFolder(dataRequest) {
+    const { newFolder } = dataRequest;
     const parentFolder = this.state.folderHash;
+    console.log('FoldesHash:', parentFolder);
     const body = new Woden.CreateFolder();
     body.name = newFolder;
     body.parentFolder = parentFolder;
@@ -97,7 +114,6 @@ class Home extends React.Component {
   }
 
   openFolder(hash) {
-    console.log(hash);
     api.getFolder(
       hash,
       (error, data, response) => {
@@ -120,8 +136,21 @@ class Home extends React.Component {
     );
   }
 
+  downloadFile(hash) {
+    api.downloadFile(
+      hash,
+      (error, data, response) => {
+        if (error) {
+          message.error(response.body.message);
+        } else {
+          const { name, type, file } = response.body;
+          download(file, name, type);
+        }
+      },
+    );
+  }
+
   render() {
-    const { entryFolders, entryFiles } = this.state;
     return (
       <div className="container flex-direction-row">
         <div>
@@ -131,12 +160,22 @@ class Home extends React.Component {
           <Buttons newFolder={this.createFolder} uploadFile={this.uploadFile}/>
           <div className="flex-start ff-rw">
             {
-              entryFolders.map((folder) => (
+              this.state.entryFolders.map((folder, i) => (
                 <div className="flex-center flex-direction-column m10"
-                     key={folder.hash} onClick={() => this.openFolder(folder.hash)}>
+                     key={i} onClick={() => this.openFolder(folder.hash)}>
                   <img src={FolderImage}
                        alt={'Folder'}
                        title={`Folder - ${folder.name}`}/>{folder.name}
+                </div>
+              ))
+            }
+            {
+              this.state.entryFiles.map((files, i) => (
+                <div className="flex-center flex-direction-column m10 folderFileSize"
+                     key={i} onClick={() => this.downloadFile(files.hash, files.name)}>
+                  <img src={FileImage}
+                       alt={'File'}
+                       title={`File - ${files.name}`}/>{files.name}
                 </div>
               ))
             }
@@ -148,14 +187,14 @@ class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem }) => ({
-  isLoggedIn: auth.isLoggedIn,
-  userName: auth.user,
-  entryFolders: filesystem.entryFolders,
-  currentFolder: filesystem.folderName,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  setFolderData: actions.setFolderData,
-})(
+    isLoggedIn: auth.isLoggedIn,
+    userName: auth.user,
+    entryFolders: filesystem.entryFolders,
+    currentFolder: filesystem.folderName,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    setFolderData: actions.setFolderData,
+  })(
   Home,
 );
