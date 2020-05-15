@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 1
     - run: docker-compose up --build  
       with:
         repository: https://github.com/482solutions/woden-server-js
