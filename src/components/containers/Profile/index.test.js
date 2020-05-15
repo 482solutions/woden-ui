@@ -19,9 +19,9 @@ it('renders without crashing', () => {
   act(() => {
     ReactDOM.render(<Profile/>, container);
   });
-  const avatar = container.getElementsByTagName('Avatar');
-  const name = container.querySelector('div');
+  const avatar = container.getElementsByClassName('ant-avatar ant-avatar-circle ant-avatar-icon');
+  const name = container.getElementsByClassName('userName')[0];
 
-  expect(avatar.length).toBe(0);
+  expect(avatar.length).toBe(1);
   expect(name.textContent).toBe('loading');
 });

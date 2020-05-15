@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import jwt from 'jsonwebtoken';
-import './style.css'
+import './style.css';
 
 
 class Profile extends Component {
-
   constructor(props) {
     super(props);
 
@@ -20,7 +19,8 @@ class Profile extends Component {
     if (token) {
       const { data: userName } = jwt.decode(token);
       if (userName) {
-        this.setState({ userName: userName });
+
+        this.setState({ userName });
       }
     }
   }
