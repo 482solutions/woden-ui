@@ -17,10 +17,12 @@ jobs:
 
     steps:
     - name: 1
-      with:
+    - run: |
+        git clone https://github.com/482solutions/woden-server-js
+        docker-compose up --build  
+    with:
         repository: https://github.com/482solutions/woden-server-js
         token: ${{ secrets.woden_server_js_workflow_actions_repo }}
-     - run: docker-compose up --build  
 #    - run: npm i
 #    - run: npm run lint:js
 #    - run: npm run build

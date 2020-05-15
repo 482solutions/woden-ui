@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: 1
+    - name: 1
       with:
         repository: https://github.com/482solutions/woden-server-js
         token: ${{ secrets.woden_server_js_workflow_actions_repo }}
