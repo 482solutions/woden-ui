@@ -32,7 +32,6 @@ class Home extends React.Component {
 
   componentDidMount() {
     const hash = getRootFolderHash();
-    console.log(hash);
     api.getFolder(
       hash,
       (error, data, response) => {
@@ -57,7 +56,6 @@ class Home extends React.Component {
 
   uploadFile(file) {
     const parentFolder = this.state.folderHash;
-    console.log(file);
     const { name } = file;
     api.uploadFile(
       name, parentFolder, file,
@@ -86,7 +84,6 @@ class Home extends React.Component {
   createFolder(dataRequest) {
     const { newFolder } = dataRequest;
     const parentFolder = this.state.folderHash;
-    console.log('FoldesHash:', parentFolder);
     const body = new Woden.CreateFolder();
     body.name = newFolder;
     body.parentFolder = parentFolder;
@@ -96,7 +93,6 @@ class Home extends React.Component {
         if (error) {
           message.error(response.body.message);
         } else if (response.status === 201) {
-          message.success('Folder created successful');
           const folderData = response.body.folder;
           folderData.folders = JSON.parse(folderData.folders);
           folderData.files = JSON.parse(folderData.files);
@@ -186,15 +182,13 @@ class Home extends React.Component {
   }
 }
 
-export default connect(({ auth, filesystem }) => ({
-    isLoggedIn: auth.isLoggedIn,
-    userName: auth.user,
-    entryFolders: filesystem.entryFolders,
-    currentFolder: filesystem.folderName,
-  }),
-  {
-    changePasswordRequest: actions.changePasswordRequest,
-    setFolderData: actions.setFolderData,
-  })(
+export default connect(({ auth }) => ({
+  isLoggedIn: auth.isLoggedIn,
+  userName: auth.user,
+}),
+{
+  changePasswordRequest: actions.changePasswordRequest,
+  setFolderData: actions.setFolderData,
+})(
   Home,
 );
