@@ -17,13 +17,11 @@ jobs:
     steps:
     - run: |
         git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
-        cd woden-server-js
-        docker-compose up --build -d 
-        cd ..
-        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git 
-        cd woden-ui
+        docker-compose -f ./woden-server-js/docker-compose.yml up --build -d 
+#        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git 
+#        cd woden-ui
         npm i
-        npm start &
+        npm start 
         git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git  -b  WGRND-553 --single-branch 
         cd woden-ui 
         npm i 
