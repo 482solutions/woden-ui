@@ -42,15 +42,9 @@ class RegistrationForm extends Component {
               message: 'Username can not be empty',
               whitespace: true,
             },
-            // {
-            //   required: true,
-            //   type: 'regexp',
-            //   pattern: /^[a-zA-Z0-9-_.]{2,20}$/g,
-            //   message: 'Incorrect Username',
-            // },
             () => ({
               validator(rule, value) {
-                if (!value || value.match(/^[a-zA-Z0-9-_.]{2,20}$/g) || value.indexOf(' ') === -1) {
+                if (!value && !value.match(/^[a-zA-Z0-9-_.]{2,20}$/g) && value.indexOf(' ') === -1) {
                   return Promise.resolve();
                 }
                 // eslint-disable-next-line prefer-promise-reject-errors
