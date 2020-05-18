@@ -33,6 +33,11 @@ const registration = async(user, dispatch) => {
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
           message.success('Registration was successful');
+          dispatch({
+            type: REGISTRATION,
+          });
+        } else {
+          message.error(response.body.message);
         }
       },
     );
@@ -43,9 +48,6 @@ const registration = async(user, dispatch) => {
   } catch (e) {
     message.error(e.message, 3);
   }
-  dispatch({
-    type: REGISTRATION,
-  });
 };
 export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
