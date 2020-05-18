@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Col, Form, Input, message, Row } from 'antd';
+import {
+  Button, Col, Form, Input, Row,
+} from 'antd';
 import './styles.css';
 
 class RegistrationForm extends Component {
@@ -13,21 +15,13 @@ class RegistrationForm extends Component {
     this.onFinish = this.onFinish.bind(this);
   }
 
-  toggleLoading = () => {
-    this.setState(prevState => ({
+  toggleLoading() {
+    this.setState((prevState) => ({
       isLoading: !prevState.isLoading,
-    }))
-  };
+    }));
+  }
 
   onFinish(e) {
-    if (!e.name.match(/^[a-zA-Z0-9-_.]{2,20}$/g)) {
-      message.warning("Incorrect Username");
-      return;
-    }
-    if (!e.password.match(/(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
-      message.warning("Incorrect Password");
-      return;
-    }
     this.props.onFinish(e);
     this.toggleLoading();
   }
@@ -46,8 +40,14 @@ class RegistrationForm extends Component {
             {
               required: true,
               message: 'Username can not be empty',
-              whitespace: true
-            }
+              whitespace: true,
+            },
+            {
+              required: true,
+              type: 'regexp',
+              pattern: /^[a-zA-Z0-9-_.]{2,20}$/g,
+              message: 'Incorrect Username',
+            },
           ]}>
           <Input
             className='loginFormItem loginInputItem'
@@ -62,8 +62,8 @@ class RegistrationForm extends Component {
             },
             {
               required: true,
-              message: 'Please input your Email!'
-            }
+              message: 'Please input your Email!',
+            },
           ]}>
           <Input
             className='loginFormItem loginInputItem'
@@ -74,8 +74,17 @@ class RegistrationForm extends Component {
           rules={[
             {
               required: true,
-              message: 'Please input your password!'
-            }
+              message: 'Please input password!',
+            },
+            () => ({
+              validator(rule, value) {
+                if (!value || value.match(/(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
+                  return Promise.resolve();
+                }
+                // eslint-disable-next-line prefer-promise-reject-errors
+                return Promise.reject('Incorrect password!');
+              },
+            }),
           ]}>
           <Input.Password
             className='loginFormItem loginInputItem'
@@ -84,7 +93,6 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name='confirm'
-          dependencies={['password']}
           rules={[
             {
               required: true,
@@ -95,6 +103,7 @@ class RegistrationForm extends Component {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
+                // eslint-disable-next-line prefer-promise-reject-errors
                 return Promise.reject('The two passwords that you entered do not match!');
               },
             }),
@@ -104,21 +113,6 @@ class RegistrationForm extends Component {
             className='loginFormItem loginInputItem'
             placeholder='Password Confirmation'/>
         </Form.Item>
-        {/*<Form.Item*/}
-        {/*  name="agreement"*/}
-        {/*  valuePropName="checked"*/}
-        {/*  rules={[*/}
-        {/*    {*/}
-        {/*      validator: (_, value) => value ? Promise.resolve() : Promise.reject(*/}
-        {/*        'Should accept agreement')*/}
-        {/*    },*/}
-        {/*  ]}*/}
-        {/*>*/}
-        {/*  <Checkbox style={{ color: "#9EA0A5" }} className='loginFormItem'>*/}
-        {/*    I have read the <a href="" style={{ color: "#000000", textDecoration: 'underline' }}>Terms*/}
-        {/*    and Conditions</a>*/}
-        {/*  </Checkbox>*/}
-        {/*</Form.Item>*/}
         <Form.Item>
           <Button
             type='primary'
@@ -130,15 +124,14 @@ class RegistrationForm extends Component {
           </Button>
         </Form.Item>
         <Row className='loginFormItem w100'>
-          <Col style={{ color: "#9EA0A5" }} span={10}>Have an account?</Col>
+          <Col style={{ color: '#9EA0A5' }} span={10}>Have an account?</Col>
           <Col span={10} offset={2}>
-            <Link to={"login"}>Sign In</Link>
+            <Link to={'login'}>Sign In</Link>
           </Col>
         </Row>
       </Form>
-    )
+    );
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
-)(RegistrationForm);
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }))(RegistrationForm);

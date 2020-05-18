@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Input, Modal } from 'antd';
+import {
+  Button, Form, Input, Modal,
+} from 'antd';
 import { SettingFilled } from '@ant-design/icons';
+// eslint-disable-next-line import/no-named-as-default
 import actions from '../../../state-management';
 
 class ChangePassword extends Component {
@@ -20,17 +23,17 @@ class ChangePassword extends Component {
 
   showModal() {
     this.setState({ visible: true });
-  };
+  }
 
-  onFinish = async (e) => {
+  async onFinish(e) {
     this.setState({ loading: true });
     this.props.onFinish(e);
     this.setState({ loading: false, visible: false });
-  };
+  }
 
   handleCancel() {
     this.setState({ visible: false });
-  };
+  }
 
   render() {
     const { visible, loading } = this.state;
@@ -59,14 +62,44 @@ class ChangePassword extends Component {
           <label className='upperLabel'>New password</label>
           <Form.Item
             name="newPassword"
-            rules={[{ required: true, message: 'Please input your new password!' }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please input password!',
+              },
+              () => ({
+                validator(rule, value) {
+                  if (!value || value.match(
+                    /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
+                  )) {
+                    return Promise.resolve();
+                  }
+                  // eslint-disable-next-line prefer-promise-reject-errors
+                  return Promise.reject('Incorrect password!');
+                },
+              }),
+            ]}
           >
             <Input.Password className='formItem inputItem'/>
           </Form.Item>
           <label className='upperLabel'>Confirm password</label>
           <Form.Item
             name="confirmPassword"
-            rules={[{ required: true, message: 'Please input your confirm password!' }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('newPassword') === value) {
+                    return Promise.resolve();
+                  }
+                  // eslint-disable-next-line prefer-promise-reject-errors
+                  return Promise.reject('The two passwords that you entered do not match!');
+                },
+              }),
+            ]}
           >
             <Input.Password className='formItem inputItem'/>
           </Form.Item>

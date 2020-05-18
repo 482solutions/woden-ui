@@ -14,9 +14,7 @@ export const login = (userName) => (dispatch) => {
   });
 };
 
-export const regRequest = (user) => async (dispatch) => await registration(user, dispatch);
-
-const registration = async (user, dispatch) => {
+const registration = async(user, dispatch) => {
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   const body = new Woden.CreateUser();
@@ -38,22 +36,20 @@ const registration = async (user, dispatch) => {
         }
       },
     );
+    // eslint-disable-next-line no-console
     console.log('CSR:', csr.csrPem);
+    // eslint-disable-next-line no-console
     console.log('PrivateKey:', csr.privateKeyPem);
-  }
-  catch (e) {
+  } catch (e) {
     message.error(e.message, 3);
   }
   dispatch({
     type: REGISTRATION,
   });
 };
+export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
-export const loginRequest = (user) => async (dispatch) => {
-  await logIn(user, dispatch);
-};
-
-const logIn = async (user, dispatch) => {
+const logIn = async(user, dispatch) => {
   const password = (encryptData(user.password));
   const body = new Woden.Login();
   body.login = user.name;
@@ -62,7 +58,6 @@ const logIn = async (user, dispatch) => {
   body.privateKey = user.privateKey;
   api.login(
     body, (error, data, response) => {
-      console.log(response);
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
@@ -77,14 +72,13 @@ const logIn = async (user, dispatch) => {
     },
   );
 };
-
-export const changePasswordRequest = (data) => async (dispatch) => {
-  await changePassword(data, dispatch);
+export const loginRequest = (user) => async(dispatch) => {
+  await logIn(user, dispatch);
 };
 
-export const changePassword = (data, dispatch) => {
-  const oldPassword = encryptData(data.oldPassword);
-  const newPassword = encryptData(data.newPassword);
+export const changePassword = (userData) => {
+  const oldPassword = encryptData(userData.oldPassword);
+  const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;
   Bearer.apiKey = getTokenForHeader();
 
@@ -98,6 +92,9 @@ export const changePassword = (data, dispatch) => {
       message.success(response.body.message);
     }
   });
+};
+export const changePasswordRequest = (data) => async(dispatch) => {
+  await changePassword(data, dispatch);
 };
 export const logout = () => async(dispatch) => {
   const { Bearer } = defaultClient.authentications;
