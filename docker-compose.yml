@@ -10,15 +10,15 @@ services:
       dockerfile: Dockerfile_ui
     ports:
       - 3000:3000
-    network_mode: host
+#    network_mode: host
   
   
-#  nginx:
-#    image: nginx:alpine
-#    container_name: nginx
-#    network_mode: bridge
-#    volumes:
-#     - ./nginx.conf:/etc/nginx/nginx.conf:ro
-#     - ./build:/root/build
-#    ports:
-#     - 80:80
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    network_mode: bridge
+    volumes:
+     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+     - ./build:/root/build
+    ports:
+     - 80:80
