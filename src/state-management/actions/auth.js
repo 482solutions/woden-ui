@@ -2,7 +2,7 @@ import { message } from 'antd';
 import Woden from 'woden';
 import download from 'downloadjs';
 import { LOGIN, LOGOUT, REGISTRATION } from '../types';
-import { encryptData } from '../../utils/functions';
+import { encryptData, getTokenForHeader } from '../../utils/functions';
 
 const api = new Woden.UserApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -14,58 +14,59 @@ export const login = (userName) => (dispatch) => {
   });
 };
 
-export const regRequest = (user) => async (dispatch) => await registration(user, dispatch);
-
-const registration = async (user, dispatch) => {
+const registration = async(user, dispatch) => {
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
-  console.log(csr);
+  const body = new Woden.CreateUser();
+  body.login = name;
+  body.email = email;
+  body.password = password;
+  body.CSR = csr.csrPem;
   try {
     api.createUser(
-      name,
-      email,
-      password,
-      csr.csrPem, (error, data, response) => {
+      body, (error, data, response) => {
         if (error) {
-          message.error(JSON.parse(response.text).error);
+          message.error(response.body.message);
         } else if (response.status === 201) {
           if (JSON.parse(response.text).cert) {
             download(csr.privateKeyPem, `${csr.privateHex}_sk.pem`, 'text/plain');
             download(JSON.parse(response.text).cert, 'cert.pem', 'text/plain');
           }
           message.success('Registration was successful');
+          dispatch({
+            type: REGISTRATION,
+          });
+        } else {
+          message.error(response.body.message);
         }
-      }
+      },
     );
-    console.log("CSR:", csr.csrPem)
-    console.log("PrivateKey:", csr.privateKeyPem)
-  }
-  catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('CSR:', csr.csrPem);
+    // eslint-disable-next-line no-console
+    console.log('PrivateKey:', csr.privateKeyPem);
+  } catch (e) {
     message.error(e.message, 3);
   }
-  dispatch({
-    type: REGISTRATION,
-  });
 };
+export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
-export const loginRequest = (user) => async (dispatch) => {
-  await logIn(user, dispatch);
-};
-
-const logIn = async (user, dispatch) => {
+const logIn = async(user, dispatch) => {
   const password = (encryptData(user.password));
-  console.log("Login | userData", user);
+  const body = new Woden.Login();
+  body.login = user.name;
+  body.password = password;
+  body.certificate = user.certificate;
+  body.privateKey = user.privateKey;
   api.login(
-    user.name,
-    password,
-    user.certificate,
-    user.privateKey, (error, data, response) => {
-      console.log(response);
+    body, (error, data, response) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
-        const token = response.body.token;
+        message.success(response.body.message);
+        const { token, folder } = response.body;
         localStorage.setItem('token', token);
+        localStorage.setItem('rootFolder', folder);
         dispatch(login(user.name));
       } else {
         message.warn(response.body.message);
@@ -73,19 +74,17 @@ const logIn = async (user, dispatch) => {
     },
   );
 };
-
-export const changePasswordRequest = (data) => async (dispatch) => {
-  await changePassword(data, dispatch);
+export const loginRequest = (user) => async(dispatch) => {
+  await logIn(user, dispatch);
 };
 
-export const changePassword = (data, dispatch) => {
-  const oldPassword = encryptData(data.oldPassword);
-  const newPassword = encryptData(data.newPassword);
-  const token = localStorage.getItem('token');
-  const { oAuth2 } = defaultClient.authentications;
-  oAuth2.accessToken = token;
+export const changePassword = (userData) => {
+  const oldPassword = encryptData(userData.oldPassword);
+  const newPassword = encryptData(userData.newPassword);
+  const { Bearer } = defaultClient.authentications;
+  Bearer.apiKey = getTokenForHeader();
 
-  const body = new Woden.Body();
+  const body = new Woden.ChangePassword();
   body.oldPassword = oldPassword;
   body.newPassword = newPassword;
   api.changeUser(body, (error, data, response) => {
@@ -95,24 +94,18 @@ export const changePassword = (data, dispatch) => {
       message.success(response.body.message);
     }
   });
-}
-export const logout = () => async (dispatch) => {
-  const token = localStorage.getItem('token');
-  const { oAuth2 } = defaultClient.authentications;
-  oAuth2.accessToken = token;
+};
+export const changePasswordRequest = (data) => async(dispatch) => {
+  await changePassword(data, dispatch);
+};
+export const logout = () => async(dispatch) => {
+  const { Bearer } = defaultClient.authentications;
+  Bearer.apiKey = getTokenForHeader();
   api.logout((error, data, response) => {
-    if (error) {
-      console.warn(error);
-      message.warn(response.message);
-    } else if (response.status === 200 || response.status === 203) {
-      message.success(response.body.message);
-      localStorage.removeItem('token');
-      dispatch({
-        type: LOGOUT,
-      });
-    } else {
-      message.warn(response.body.message);
-    }
+    message.success(response.body.message);
+    localStorage.removeItem('token');
+    dispatch({
+      type: LOGOUT,
+    });
   });
-
 };

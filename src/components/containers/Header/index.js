@@ -1,28 +1,29 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Col, Row } from "antd";
-import cn from "classnames";
-import "./style.css";
-import { ChangePassword, Profile, Logout } from '../../containers';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Col, Row } from 'antd';
+import cn from 'classnames';
+import './style.css';
+import { ChangePassword, Profile, Logout } from '..';
 import logoRow from '../../../assets/images/logoRow.svg';
 import { actions } from '../../../state-management';
 
 class Header extends Component {
-
-  changePassword = async (data) => {
+  constructor(props) {
+    super(props);
+    this.changePassword = this.changePassword.bind(this);
+  }
+  async changePassword(data) {
+    console.log(this.props);
     await this.props.changePasswordRequest(data);
-  };
-  createDirectory = async (data) => {
-    await this.props.createDirectory(data);
-  };
+  }
 
   render() {
     const { isLoggedIn } = this.props;
     return (
       <Row className="holder">
-        <Col span={3} className={cn("header__logo", {
-          "flex-start": isLoggedIn,
-          "flex-center": !isLoggedIn
+        <Col span={3} className={cn('header__logo', {
+          'flex-start': isLoggedIn,
+          'flex-center': !isLoggedIn,
         })}>
           <img src={logoRow} alt="Woden logo"/>
         </Col>
@@ -46,6 +47,9 @@ class Header extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { changePasswordRequest: actions.changePasswordRequest, createDirectory: actions.createDirectory }
-)(Header);
+export default connect(({ auth }) => ({
+  isLoggedIn: auth.isLoggedIn,
+}),
+{ changePasswordRequest: actions.changePasswordRequest, createDirectory: actions.createFolderRequest })(
+  Header,
+);

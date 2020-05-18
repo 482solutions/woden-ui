@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { RegistrationForm } from "../../components";
+import { RegistrationForm } from '../../components';
 import { actions } from '../../state-management';
 import { getCSR } from '../../utils/functions';
 import loginWelcome from '../../assets/images/loginWelcome.svg';
@@ -11,17 +11,19 @@ import './style.css';
 class Registration extends React.Component {
   constructor(props) {
     super(props);
+    this.regRequest = this.regRequest.bind(this);
   }
 
   replace() {
     this.props.history.replace('/');
-  };
+  }
 
-  regRequest = async (regData) => {
-    regData.csr = await getCSR({ username: regData.name });
-    await this.props.regRequest(regData);
+  async regRequest(regData) {
+    const userData = regData;
+    userData.csr = await getCSR({ username: userData.name });
+    await this.props.regRequest(userData);
     this.replace();
-  };
+  }
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -46,6 +48,5 @@ class Registration extends React.Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { regRequest: actions.regRequest }
-)(Registration);
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn, regStatus: auth.regStatus }),
+  { regRequest: actions.regRequest })(Registration);
