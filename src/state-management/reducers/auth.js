@@ -14,6 +14,7 @@ const handleLogin = (userName) => ({
 
 const handleLogout = () => initialState;
 
+
 const handlers = {
   [LOGIN]: handleLogin,
   [LOGOUT]: handleLogout,
