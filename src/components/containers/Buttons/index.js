@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col, Upload } from 'antd';
 import { FileAddTwoTone } from '@ant-design/icons';
 import { NewFolder } from '..';
+import { NewFolder } from '..';
 import './style.css';
 
 class Buttons extends Component {
