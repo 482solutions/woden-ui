@@ -78,11 +78,11 @@ export const loginRequest = (user) => async(dispatch) => {
   await logIn(user, dispatch);
 };
 
-export const changePassword = (userData) => {
+export const changePassword = async(userData) => {
   const oldPassword = encryptData(userData.oldPassword);
   const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;
-  Bearer.apiKey = getTokenForHeader();
+  Bearer.apiKey = await getTokenForHeader();
 
   const body = new Woden.ChangePassword();
   body.oldPassword = oldPassword;
@@ -100,7 +100,7 @@ export const changePasswordRequest = (data) => async(dispatch) => {
 };
 export const logout = () => async(dispatch) => {
   const { Bearer } = defaultClient.authentications;
-  Bearer.apiKey = getTokenForHeader();
+  Bearer.apiKey = await getTokenForHeader();
   api.logout((error, data, response) => {
     message.success(response.body.message);
     localStorage.removeItem('token');
