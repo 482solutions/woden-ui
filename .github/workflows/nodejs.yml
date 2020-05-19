@@ -17,19 +17,19 @@ jobs:
 
     steps:
     - run: |
-        git clone https://andrii482:${{ secrets.woden_server_js_workflow_actions_repo }}@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
+        git clone https://andrii482:${{ secrets.woden_server_ui_workflow_actions_repo }}@github.com/482solutions/woden-server-js.git  -b feature/WGRND-597 --single-branch 
         cd woden-server-js
         docker-compose up --build -d 
         cd ..
     - run: |
-        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git
+        git clone https://andrii482:${{ secrets.woden_server_ui_workflow_actions_repo }}@github.com/482solutions/woden-ui.git
         cd woden-ui 
         npm i
         npm start &
     - run:  |
         mkdir cypress
         cd cypress
-        git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-ui.git  -b  WGRND-553 --single-branch 
+        git clone https://andrii482:${{ secrets.woden_server_ui_workflow_actions_repo }}@github.com/482solutions/woden-ui.git  -b  WGRND-553 --single-branch 
         cd woden-ui 
         npm i 
         npm run cypress:run    
