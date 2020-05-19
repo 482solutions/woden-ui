@@ -1,5 +1,5 @@
 import {
-  BACK, SET_FOLDER_DATA, FORWARD, GET_FOLDER_DATA,
+  BACK, FORWARD, GET_FOLDER_DATA, SET_FOLDER_DATA,
 } from '../types';
 
 const initialState = {
@@ -10,10 +10,10 @@ const initialState = {
   entryFiles: [],
 };
 
-const handleBack = (state, dirname) => ({
+const handleBack = () => ({
   // TODO: Реализация для обработки возврата в предыдущую директорию
 });
-const handleForward = (state, dirname) => ({
+const handleForward = () => ({
   // TODO: Реализация для обработки перехода в следующую директорию
 });
 const handleSetFolder = (state, folderData) => (
@@ -41,7 +41,6 @@ const handlers = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action);
   const handler = handlers[action.type];
   return handler ? handler(state, action.payload) : state;
 };
