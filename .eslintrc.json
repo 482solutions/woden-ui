@@ -30,6 +30,7 @@
     "class-methods-use-this": 0,
     "import/prefer-default-export": 0,
     "import/extensions": "off",
+    "prefer-promise-reject-errors": "off",
     "space-infix-ops": [
       "error",
       {
