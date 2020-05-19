@@ -7,7 +7,8 @@
   "extends": [
     "airbnb-base",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -21,6 +22,10 @@
     }
   },
   "rules": {
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
     "space-before-function-paren": [
       "error",
       "never"
@@ -45,7 +50,8 @@
     "react/prop-types": "off"
   },
   "plugins": [
-    "react"
+    "react",
+    "cypress"
   ],
   "settings": {
     "import/resolver": {
