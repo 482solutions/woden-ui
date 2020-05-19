@@ -5,13 +5,6 @@ import { FileAddTwoTone } from '@ant-design/icons';
 class FileUpload extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: 'file',
-      action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-      headers: {
-        authorization: 'authorization-text',
-      },
-    };
     this.beforeUpload = this.beforeUpload.bind(this);
   }
 
@@ -27,7 +20,7 @@ class FileUpload extends Component {
         <Button className="upload-button">
 					<span role="img">
 					</span>
-          <FileAddTwoTone/> File Upload
+          <FileAddTwoTone/>File Upload
         </Button>
       </Upload>
     );

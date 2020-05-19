@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import jwt from 'jsonwebtoken';
-import './style.css'
+import './style.css';
 
 
 class Profile extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      userName: 'loading'
+      userName: 'loading',
     };
   }
 
@@ -20,7 +19,8 @@ class Profile extends Component {
     if (token) {
       const { data: userName } = jwt.decode(token);
       if (userName) {
-        this.setState({ userName: userName });
+
+        this.setState({ userName });
       }
     }
   }
@@ -28,9 +28,9 @@ class Profile extends Component {
   render() {
     const { userName } = this.state;
     return (
-      <div className="home__profile">
+      <div className="homeProfile">
         <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>}/>
-        <div className="user__name">{userName}</div>
+        <div className="userName">{userName}</div>
       </div>
     );
   }

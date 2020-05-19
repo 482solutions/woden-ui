@@ -13,22 +13,22 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <h2 className="sidebar__title">All Folders</h2>
+        <h2 className="sidebarTitle">All Folders</h2>
         <div className="folders content">
           <Tree
             showLine
             switcherIcon={<DownOutlined/>}
             defaultExpandedKeys={['0-0-0']}
             onSelect={this.onSelect}
-            className="folders__tree"
+            className="foldersTree"
           >
-            <TreeNode title="Root" key="0-0">
+            <TreeNode className="treeNode" title="Root" key="0-0">
               <TreeNode title="Example-1.1" key="0-0-0-0"/>
               <TreeNode title="Example-1.2" key="0-0-0-1"/>
               <TreeNode title="Example-1.3" key="0-0-0-2"/>
             </TreeNode>
           </Tree>
-          <div className="shared"><TeamOutlined/> Shared with me</div>
+          <div className="shared"><TeamOutlined/>Shared with me</div>
         </div>
       </div>
     );

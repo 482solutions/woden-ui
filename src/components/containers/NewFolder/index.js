@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Input, Modal } from 'antd';
-import Col from 'antd/es/grid/col';
+import {
+  Button, Form, Input, Modal, Col,
+} from 'antd';
 import { FolderAddTwoTone } from '@ant-design/icons';
 
 class NewFolder extends Component {
@@ -18,17 +19,17 @@ class NewFolder extends Component {
 
   showModal() {
     this.setState({ visible: true });
-  };
+  }
 
-  onFinish = async (e) => {
+  onFinish(e) {
     this.setState({ loading: true });
     this.props.onFinish(e);
     this.setState({ loading: false, visible: false });
-  };
+  }
 
   handleCancel() {
     this.setState({ visible: false });
-  };
+  }
 
   render() {
     const { visible, loading } = this.state;
@@ -39,6 +40,7 @@ class NewFolder extends Component {
       </Button>
       <Modal
         title="Create Folder"
+        className="createFolder"
         visible={visible}
         onCancel={this.handleCancel}
         width={377}
