@@ -4,7 +4,6 @@ import {
   Button, Form, Input, Modal,
 } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
-// eslint-disable-next-line import/no-named-as-default
 import actions from '../../../state-management';
 
 class ChangePassword extends Component {
@@ -74,7 +73,6 @@ class ChangePassword extends Component {
                   )) {
                     return Promise.resolve();
                   }
-                  // eslint-disable-next-line prefer-promise-reject-errors
                   return Promise.reject('Incorrect password!');
                 },
               }),
@@ -95,7 +93,6 @@ class ChangePassword extends Component {
                   if (!value || getFieldValue('newPassword') === value) {
                     return Promise.resolve();
                   }
-                  // eslint-disable-next-line prefer-promise-reject-errors
                   return Promise.reject('The two passwords that you entered do not match!');
                 },
               }),
