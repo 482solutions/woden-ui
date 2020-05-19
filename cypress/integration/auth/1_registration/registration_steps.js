@@ -3,7 +3,6 @@ import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 const generator = require('generate-password');
 
-
 // https://www.npmjs.com/package/generate-password
 let login;
 let email;
@@ -187,7 +186,7 @@ Then(/^User is not registered$/, () => {
 });
 
 Then(/^Error notification about not correct name "([^"]*)" is shown$/, (invalidUsername) => {
-  cy.get('.ant-message-custom-content > :nth-child(2)').as(invalidUsername)
+  cy.get('.ant-form-item-explain > div').as(invalidUsername)
     .should('be.visible')
     .should('contain.text', invalidUsername);
 });
@@ -379,3 +378,4 @@ Then(/^Error notification "([^"]*)" is shown$/, (message) => {
     .should('be.visible')
     .should('contain.text', message)
 });
+
