@@ -155,6 +155,9 @@ Given(/^User username field that contain only spaces$/, () => {
 
 Given(/^User fills in the username field$/, () => {
   cy.get('#name').type(login);
+  cy.contains('Incorrect Username')
+      .as('Message Incorrect Username')
+      .should('not.be.visible');
 });
 
 Given(/^fills in the email field$/, () => {
@@ -249,7 +252,7 @@ Given(/^fills in the password and confirm password field without characters in u
 });
 
 Then(/^Error notification about not correct password "([^"]*)" is shown$/, (incorrectPassw) => {
-  cy.get('.ant-message-custom-content > :nth-child(2)').as(incorrectPassw)
+  cy.contains(incorrectPassw).as(incorrectPassw)
     .should('be.visible')
     .should('contain.text', incorrectPassw);
 });
@@ -341,23 +344,22 @@ Given(/^fills in the password and confirm password field that contain 7 characte
 
 Given(/^fills in the password and confirm password field that contain 101 characters$/, () => {
   const passw = generator.generate({
-    length: 101,
-    numbers: true,
-    symbols: true,
-    exclude: /['"`]/,
-  });
-  cy.get('#password').type(passw);
-  cy.get('#confirm').type(passw);
-});
-
-Given(/^fills in the password and confirm password field that contain 100 characters$/, () => {
-  const passw = generator.generate({
     length: 100,
     numbers: true,
     exclude: /['"`]/,
   });
-  cy.get('#password').type(passw);
-  cy.get('#confirm').type(passw);
+  cy.get('#password').type(passw + '!');
+  cy.get('#confirm').type(passw + '!');
+});
+
+Given(/^fills in the password and confirm password field that contain 100 characters$/, () => {
+  const passw = generator.generate({
+    length: 99,
+    numbers: true,
+    exclude: /['"`]/,
+  });
+  cy.get('#password').type(passw+ '!');
+  cy.get('#confirm').type(passw+ '!');
 });
 
 When(/^The user press Sign up button$/, () => {

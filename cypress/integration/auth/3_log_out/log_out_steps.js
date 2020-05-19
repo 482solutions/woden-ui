@@ -8,10 +8,13 @@ let password;
 let privateKey;
 let cert;
 
-before('Register new user and login', () => {
+before('Register new user', () => {
     login = generator.generate({});
     email = `${login.toLowerCase()}@gmail.com`;
     password = `${login}12345`;
+});
+
+When(/^Register new user$/, function () {
     cy.visit('/');
     cy.get('.ant-col-offset-2 > a').click();
     cy.get('#name').type(login);
@@ -61,39 +64,22 @@ before('Register new user and login', () => {
         expect(text).to.include('-----BEGIN CERTIFICATE-----')
         expect(text).to.include('-----END CERTIFICATE-----');
     })
-
-
 });
 
-Given(/^User has filled in the field valid username$/, function () {
+Then(/^Login as new user$/, function () {
     cy.get('#name').type(login);
-});
-
-Given(/^filled valid password field$/, function () {
     cy.get('#password').type(password);
-});
-
-Given(/^Pin cert$/, function () {
-    const cert = 'cert.pem';
-    cy.get('input[type=file]')
-        .attachFile(cert)
+    cy.get('input[type=file]').attachFile('cert.pem')
+    cy.wait(1000)
+    cy.get('input[type=file]').attachFile('privateKey.pem');
+    cy.get('.ant-btn').as('Log in btn').click()
     cy.wait(1000)
 });
 
-Given(/^Pin privateKey$/, function () {
-    const privateKey = 'privateKey.pem'
-    cy.get('input[type=file]')
-        .attachFile(privateKey);
+When(/^The user press "([^"]*)" button for exit$/, function (logoutBtn) {
+    cy.contains(logoutBtn).click()
 });
 
-Given(/^User has filled in the field valid email$/, function () {
-    cy.get('#name').type(email);
-});
-
-Given(/^User has filled invalid username (.*) in the field username from list$/, function (invUsername) {
-    cy.get('#name').type(invUsername);
-});
-
-Given(/^filled invalid password (.*) in the field password from list$/, function (invPassword) {
-    cy.get('#password').type(invPassword);
+Then(/^The user is transferred to 'Sign in' page$/, function () {
+    cy.url().should('include', '/login');
 });

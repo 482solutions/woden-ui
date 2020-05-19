@@ -7,19 +7,14 @@ Feature: Uploading file
 
   Rule: user should be registered.
 
-  #  Before('Register new user and sign in', function () {});
+    Background:
+      Given The application is opened
+      And there is no open session
+      When Register new user
+      And Login as new user
+      Then User is signed in
 
-  Scenario: 1 Log out with button
-    Given The user is signed in
-    And the session is open
-    When The user press "Logout" button for exit
-    Then The user is transferred to'Sign in Sign up' page
-    And the session is closed
-
-  Scenario: 2 User can logout, if will close the session
-    Given The user is signed in
-    And the session is open
-    When The user close the session
-    And Open application
-    Then The user is transferred to'Sign in Sign up' page
-    And user not logged in
+    Scenario: 1 Log out
+      Given User is signed in
+      When The user press "Logout" button for exit
+      Then The user is transferred to 'Sign in' page

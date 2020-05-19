@@ -6,84 +6,78 @@ Feature: Sign in Feature
 
   Rule: user should be registered before sign in.
 
-#  Before('Register new user', function () {});
-
     Background:
       Given The application is opened
       When there is no open session
 
-
-#    @positive
-#    Scenario: 1 Sign in function with username
-#      Given User has filled in the field valid username
-#      And filled valid password field
-#      And Pin cert
-#      And Pin privateKey
-#      When the user press Log in button
-#      Then User is signed in
-#
-#    @positive
-#    Scenario: 2 Sign in function with email
-#      Given User has filled in the field valid email
-#      And filled valid password field
-#      And Pin cert
-#      And Pin privateKey
-#      When the user press Log in button
-#      Then User is signed in
-
-    @negative
-    Scenario Outline: 4 Sign in with invalid username and valid password
-      Given User has filled invalid username <username> in the field username from list
+    @positive
+    Scenario: 1 Sign in function with username
+      Given User has filled in the field valid username
       And filled valid password field
       And Pin cert
       And Pin privateKey
       When the user press Log in button
-      Then Error notification is shown
+      Then User is signed in
+
+    @positive
+    Scenario: 2 Sign in function with email
+      Given User has filled in the field valid email
+      And filled valid password field
+      And Pin cert
+      And Pin privateKey
+      When the user press Log in button
+      Then User is signed in
+
+    @negative
+    Scenario Outline: 4 Sign in with invalid username and valid password
+      Given User has filled invalid username <invUsername> in the field username from list
+      And filled valid password field
+      And Pin cert
+      And Pin privateKey
+      When the user press Log in button
+      Then Error notification User not found is shown
       And User is not signed in
       Examples:
-        | username            |
+        | invUsername         |
         | invalidUsernameTest |
-#        | #$8-9&$)#           |
+        | #$8-9&$)#           |
 
-#    @negative
-#    Scenario Outline: 5 Sign in with invalid password and valid username
-#      Given The application is opened by user
-#      And there is no open session
-#      When User has filled in the field valid username
-#      And filled invalid password <password> in the field password from list
-#      And the user press Sign in button
-#      Then Error notification is shown
-#      And User is not signed in
-#      Examples: invalid password
-#        | password                     |
-#        | 1                            |
-#        | asdasfadgasgdgdsgasgdhgad    |
-#        | 1231232413524214135234524124 |
-#
-#    @negative
-#    Scenario Outline: 6 Sign in with invalid password and valid email
-#      Given The application is opened by user
-#      And there is no open session
-#      When User has filled in the field valid email
-#      And filled invalid password <password> in the field password from list
-#      And the user press Sign in button
-#      Then Error notification is shown
-#      And User is not signed in
-#      Examples: invalid Password
-#        | password           |
-#        | qaaqaqqaqaqaqaqa   |
-#        | AAAAAA             |
-#        | ++++++++++++++++++ |
-#
-#    @negative
-#    Scenario: 7 User can not sign in if all fields are empty
-#      Given The application is opened by user
-#      And there is no open session
-#      When The user does not fill in the fields
-#      And The user press Sign in button
-#      Then Error notification is shown
-#      And User is not signed in
+    @negative
+    Scenario Outline: 5 Sign in with invalid password and valid username
+      Given User has filled in the field valid username
+      And Pin cert
+      And Pin privateKey
+      And filled invalid password <invPassword> in the field password from list
+      When the user press Log in button
+      Then Error notification is shown Invalid password supplied
+      And User is not signed in
+      Examples: invalid password
+        | invPassword                  |
+        | 1                            |
+        | asdasfadgasgdgdsgasgdhgad    |
+        | 1231232413524214135234524124 |
 
+    @negative
+    Scenario Outline: 6 Sign in with invalid password and valid email
+      Given User has filled in the field valid email
+      And filled invalid password <password> in the field password from list
+      And Pin cert
+      And Pin privateKey
+      When the user press Log in button
+      Then Error notification is shown Invalid password supplied
+      And User is not signed in
+      Examples: invalid Password
+        | password           |
+        | qaaqaqqaqaqaqaqa   |
+        | AAAAAA             |
+        | ++++++++++++++++++ |
 
-
-
+    @negative
+    Scenario: 7 User can not sign in if all fields are empty
+      Given The user does not fill in the fields
+      And Pin cert
+      And Pin privateKey
+      When the user press Log in button
+      Then Error message Username can not be empty
+      And Error message Password can not be empty
+      And User is not signed in
