@@ -13,8 +13,6 @@ import FileImage from '../../assets/images/file.svg';
 
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
-const { Bearer } = defaultClient.authentications;
-Bearer.apiKey = getTokenForHeader();
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,8 +28,10 @@ class Home extends React.Component {
     this.uploadFile = this.uploadFile.bind(this);
   }
 
-  componentDidMount() {
-    const hash = getRootFolderHash();
+  async componentDidMount(){
+    const { Bearer } = defaultClient.authentications;
+    Bearer.apiKey = await getTokenForHeader();
+    const hash = await getRootFolderHash();
     api.getFolder(
       hash,
       (error, data, response) => {
@@ -54,7 +54,7 @@ class Home extends React.Component {
     );
   }
 
-  uploadFile(file) {
+  async uploadFile(file){
     const parentFolder = this.state.folderHash;
     const { name } = file;
     api.uploadFile(
