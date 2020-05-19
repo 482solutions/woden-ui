@@ -32,6 +32,7 @@
     "import/extensions": "off",
     "prefer-promise-reject-errors": "off",
     "import/no-named-as-default": "off",
+    "no-return-await": "off",
     "space-infix-ops": [
       "error",
       {
