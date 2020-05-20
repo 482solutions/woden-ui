@@ -7,6 +7,6 @@ node_js:
 services:
 - docker
 script:
-- npm run lint:js && git clone https://andrii482:$GithubToken_for_wooden-server-js_repository@github.com/482solutions/woden-server-js.git
+- npm run lint:js && git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
   && docker-compose -f woden-server-js/docker-compose.yml up --build -d && npm i &&
   npm run cypress:run
