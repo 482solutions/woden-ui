@@ -11,6 +11,8 @@ Feature: Log out
       Given The application is opened
       And there is no open session
       When Register new user
+      And The User got private key
+      Then The User got certificate in pem format
       And Login as new user
       Then User is signed in
 
