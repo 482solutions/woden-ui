@@ -1,40 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Button, Form, Input, Modal, Col,
 } from 'antd';
 import { FolderAddTwoTone } from '@ant-design/icons';
 
-class NewFolder extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-      confirmLoading: false,
-      loading: false,
-    };
-    this.showModal = this.showModal.bind(this);
-    this.onFinish = this.onFinish.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-  }
+const NewFolder = ({ onFinish: createFolder }) => {
+  const [form] = Form.useForm();
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const showModal = () => {
+    setVisible(true);
+  };
 
-  showModal() {
-    this.setState({ visible: true });
-  }
+  const onFinish = (e) => {
+    setLoading(true);
+    createFolder(e);
+    form.resetFields();
+    setVisible(false);
+    setLoading(false);
+  };
 
-  onFinish(e) {
-    this.setState({ loading: true });
-    this.props.onFinish(e);
-    this.setState({ loading: false, visible: false });
-  }
-
-  handleCancel() {
-    this.setState({ visible: false });
-  }
-
-  render() {
-    const { visible, loading } = this.state;
-    return (<div>
-      <Button onClick={this.showModal}>
+  const handleCancel = () => {
+    setVisible(false);
+  };
+  return (<div>
+      <Button onClick={showModal}>
         <FolderAddTwoTone/>
         New Folder
       </Button>
@@ -42,24 +32,25 @@ class NewFolder extends Component {
         title="Create Folder"
         className="createFolder"
         visible={visible}
-        onCancel={this.handleCancel}
+        onCancel={handleCancel}
         width={377}
         footer={null}
       >
         <Form
-          onFinish={this.onFinish}
+          onFinish={onFinish}
+          form={form}
           className='flex-direction-column flex-up'
         >
           <Form.Item
             name="newFolder"
             rules={[{ required: true, message: 'Please input name for new folder' }]}
           >
-            <Input className='formItem inputItem' placeholder="Folder Name"/>
+            <Input className='formItem inputItem' id='FolderNameField' placeholder="Folder Name"/>
           </Form.Item>
-          <Form.Item className='formItem buttonItem flex-'>
+          <Form.Item className='formItem buttonItem'>
             <div className='flex-start'>
               <Col span={1} offset={12}>
-                <Button key="back" onClick={this.handleCancel}>
+                <Button key="back" onClick={handleCancel}>
                   Cancel
                 </Button>
               </Col>
@@ -74,7 +65,6 @@ class NewFolder extends Component {
         </Form>
       </Modal>
     </div>);
-  }
-}
+};
 
 export default NewFolder;
