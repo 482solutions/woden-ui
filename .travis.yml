@@ -1,10 +1,12 @@
 language: node_js
 env:
   global:
-  - secure: ngfVcAjomZKTFgL+iLw/R6JIKb1kFzZlSPh+GV+C5KelwQwYk0iL3nheVFHEm327cbWKgTasfPntwAQ28RiAjVSN2RHp+N7pcwOFjZoH4Svy7HKQ4+ptQtiRdIyLPaJ8LJrOKtWRjy0x5u8mZRbCsX8uvYqB9cbHBFBtkrNwOKETS/9JRAmXL1Mc7Exxwh/MmW3UyEQoY0l6c9sbwEbj9E+3rk4UxZIojnCBRJ0GlT7baqozt7qUIzQLlQrlLNt1Q6a8kzetdIrgUQ1arn/LAQcv2XQGHOnjP7ow/nCkq+wIyB2DyrjEW5jzkvqoqqBwz2AxFfn7Ic8iCpR+W6PC34GMdSvELlMGI6vbS1d991f/rSpRP8ndm6gH1y3Y5a/s/xQqKIaFg7hyLCmWNp58ampM7Us1e+fX6NqELTr+wjW5SJt7RMYhpRUxgsgUwouJE4ey+C6OfvEqwE73FVQNQHv6GYadjkwqEoTDG2Kvws8qiYvVUuqV9Uri9dyVeorwWr8z1XX8B1vVkb112hNDKoO6Dhc58EvQLNi0C4VAMQD6o/o+w9O8RFnTaAvBvp9bDIwe04ZcQK2SqHL0sViYg7PvB+yw1vPM6KZevq7j4j6KCg9qZqUp8vO5YQ0pxCTsJK/SMpuOHuUeQYpsDRrfORRKdztPep8TjkCOaTOQ8mU=
+  - secure: h2RjxdDG661MwGPLZdtP+50iIftg2RiiKX+QI9sPVHpiTpUVvaXRHqZNXRY9Kg7eWokYt0nC2+k3Az2i3jajJqFtZ9BEAydi5Ea7psQX5wnKhVl9+3G57meBMzVlMcv/NB15Zid6yINFBkv+ZI8r9+A4o1fBUdT+Cfcv0WUe3UX5C/M2G6hJ1WO+ccfVLWXU5Hu0sPYVU5RNyWbDpcOOVpWp4j39qbcb7URIcC4OABrUmvn7ZSep7oRIJgd2Thv+oGQstV+Qwu8WWnmwoBHlQbTbUcJAAxCqEwXesoY27MXSg2r2U5lm0D5BnGL4jDCDZqrzjYb5w1ORlMqk9yjF1S1bm15f3QriE5rVqKmwcMq18zyuxcS/9E7vAowlavYP4MgzwFvQa+1YZaVmt5xMeqMotHhmt29p8/n1zfMnOBZ9V9j6aT/Ygoo6UC3hNx0SRa9Muplr2sePBJwqNDKa8gbeOtq4qu/FYSoCEx2yzW5K5sSapBEFU2uNl42+VfWYqsm3gEktDBQ4+TdE3VIwqiExNH0y0zEK1gk5/36dNDUHI0v1ALvEjL2mIUVpT5a/AZLkALporwLjNLN59uZHPF2TFIBFShzRgswtyr+7iUrSDu+yx1JRH3maP7mS0jsJJzgB5BmO/XaK0aqP226i/YGHSNIzSJfrPaRlZ+7n3LI=
 node_js:
 - stable
 services:
 - docker
 script:
-- npm run lint:js && git clone https://andrii482:$GithubToken_for_wooden-server-js_repository@github.com/482solutions/woden-server-js.git && docker-compose -f woden-server-js/docker-compose.yml up --build -d && npm i && npm run cypress:run
+- npm run lint:js && git clone https://andrii482:$GithubToken_for_wooden-server-js_repository@github.com/482solutions/woden-server-js.git
+  && docker-compose -f woden-server-js/docker-compose.yml up --build -d && npm i &&
+  npm run cypress:run
