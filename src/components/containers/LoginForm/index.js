@@ -18,6 +18,8 @@ class LoginForm extends Component {
       identity: '',
     };
     this.onFinish = this.onFinish.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
+    this.beforeUpload = this.beforeUpload.bind(this);
   }
 
   toggleLoading() {
@@ -124,7 +126,6 @@ class LoginForm extends Component {
             Log In
           </Button>
         </Form.Item>
-        {/* <Link className='loginFormItem' to={'reset'}>Forgot password</Link> */}
         <Row className='w100'>
           <Col span={10}>Don&apos;t have an account?</Col>
           <Col span={10} offset={2}>
