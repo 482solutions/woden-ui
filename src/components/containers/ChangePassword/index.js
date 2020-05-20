@@ -46,6 +46,7 @@ class ChangePassword extends Component {
         onCancel={this.handleCancel}
         width={377}
         footer={null}
+        id="passwordModal"
       >
         <Form
           onFinish={this.onFinish}

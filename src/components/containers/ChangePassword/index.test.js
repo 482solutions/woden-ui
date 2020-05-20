@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
+import { Jest as jest } from '@jest/environment';
+import { Button } from 'antd';
 import ChangePassword from './index';
 
 let container;
@@ -15,18 +18,15 @@ afterEach(() => {
   container = null;
 });
 
+it('When active link clicked, will push correct filter message', () => {
+  let passedFilterType = '';
+  const handleOnTotalsFilter = (filterType) => {
+    passedFilterType = filterType;
+  };
+  const accounts = {};
+  const wrapper = shallow(<Button onTotalsFilter={handleOnTotalsFilter}/>);
+  const button = wrapper.find('#passwordModal');
 
-it('renders without crashing', () => {
-  const visible [setVisible, ]
-
-  act(() => {
-    ReactDOM.render(<ChangePassword/>, container);
-  });
-  const passwordElement = container.getElementById('passwordElement');
-  const inputs = container.getElementsByTagName('input');
-
-  expect(passwordElement.length).toBe(1);
-  expect(inputs[0].id).toBe('oldPassword');
-  expect(inputs[1].id).toBe('newPassword');
-  expect(inputs[2].id).toBe('confirmPassword');
+  button.simulate('click');
+  expect(passedFilterType).toBe(TotalsFilterType.archived);
 });

@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import Logout from './index';
+import { Logout } from './index';
 
 let container;
 
@@ -17,8 +17,12 @@ afterEach(() => {
 
 it('renders without crashing', () => {
   act(() => {
-    ReactDOM.render(<Logout/>, container);
+    render(
+      <Logout/>,
+      container,
+    );
   });
+
   const logoutElement = container.getElementsByClassName('button');
 
   expect(logoutElement.length).toBe(1);
