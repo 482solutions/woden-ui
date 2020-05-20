@@ -3,18 +3,15 @@ import { connect } from 'react-redux';
 import { message } from 'antd';
 import download from 'downloadjs';
 import Woden from 'woden';
-import { Sidebar, Buttons } from '../../components/containers';
+import { Buttons, Sidebar } from '../../components/containers';
 import { getRootFolderHash, getTokenForHeader } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import FolderImage from '../../assets/images/folder.svg';
 import FileImage from '../../assets/images/file.svg';
 
-
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
-const { Bearer } = defaultClient.authentications;
-Bearer.apiKey = getTokenForHeader();
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,8 +27,10 @@ class Home extends React.Component {
     this.uploadFile = this.uploadFile.bind(this);
   }
 
-  componentDidMount() {
-    const hash = getRootFolderHash();
+  async componentDidMount() {
+    const { Bearer } = defaultClient.authentications;
+    Bearer.apiKey = await getTokenForHeader();
+    const hash = await getRootFolderHash();
     api.getFolder(
       hash,
       (error, data, response) => {
@@ -54,7 +53,7 @@ class Home extends React.Component {
     );
   }
 
-  uploadFile(file) {
+  async uploadFile(file) {
     const parentFolder = this.state.folderHash;
     const { name } = file;
     api.uploadFile(
@@ -147,6 +146,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { entryFolders, entryFiles } = this.props;
     return (
       <div className="container flex-direction-row">
         <div>
@@ -156,7 +156,7 @@ class Home extends React.Component {
           <Buttons newFolder={this.createFolder} uploadFile={this.uploadFile}/>
           <div className="flex-start ff-rw">
             {
-              this.state.entryFolders.map((folder, i) => (
+              entryFolders.map((folder, i) => (
                 <div className="flex-center flex-direction-column m10"
                      key={i} onClick={() => this.openFolder(folder.hash)}>
                   <img src={FolderImage}
@@ -166,7 +166,7 @@ class Home extends React.Component {
               ))
             }
             {
-              this.state.entryFiles.map((files, i) => (
+              entryFiles.map((files, i) => (
                 <div className="flex-center flex-direction-column m10 folderFileSize"
                      key={i} onClick={() => this.downloadFile(files.hash, files.name)}>
                   <img src={FileImage}
@@ -182,9 +182,14 @@ class Home extends React.Component {
   }
 }
 
-export default connect(({ auth }) => ({
+export default connect(({ auth, filesystem }) => ({
   isLoggedIn: auth.isLoggedIn,
   userName: auth.user,
+  folderName: filesystem.folderName,
+  folderHash: filesystem.folderHash,
+  parentHash: filesystem.parentHash,
+  entryFolders: filesystem.entryFolders,
+  entryFiles: filesystem.entryFiles,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,

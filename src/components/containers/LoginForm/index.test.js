@@ -7,7 +7,7 @@ import { Router } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import { login } from '../../../state-management/actions';
 import { LOGIN } from '../../../state-management/types';
-import { LoginForm } from './index';
+import LoginForm from './index';
 
 let container;
 const middlewares = [thunk];
@@ -44,27 +44,9 @@ it('renders without crashing', () => {
     );
   });
   const loginElement = container.getElementsByClassName('ant-form');
+  const inputs = container.getElementsByTagName('input');
 
   expect(loginElement.length).toBe(1);
-});
-
-describe('login', () => {
-  afterEach(() => {
-    fetchMock.restore();
-  });
-
-  it('should login user', () => {
-    const expectedAction = [
-      { type: LOGIN },
-    ];
-    login('testName');
-
-    const store = mockStore({ name: [] });
-
-    return store.dispatch(login.isLoggedIn()).await(() => {
-      expect(store.getActions(login('userName'))).toEqual(expectedAction);
-    });
-
-    expect(login('testName')).toEqual(expectedAction);
-  });
+  expect(inputs[0].id).toBe('name');
+  expect(inputs[1].id).toBe('password');
 });

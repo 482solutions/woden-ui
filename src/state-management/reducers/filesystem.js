@@ -1,5 +1,5 @@
 import {
-  BACK, SET_FOLDER_DATA, FORWARD, GET_FOLDER_DATA,
+  BACK, FORWARD, GET_FOLDER_DATA, SEARCH_FOLDER_FILE, SET_FOLDER_DATA,
 } from '../types';
 
 const initialState = {
@@ -10,10 +10,10 @@ const initialState = {
   entryFiles: [],
 };
 
-const handleBack = (state, dirname) => ({
+const handleBack = () => ({
   // TODO: Реализация для обработки возврата в предыдущую директорию
 });
-const handleForward = (state, dirname) => ({
+const handleForward = () => ({
   // TODO: Реализация для обработки перехода в следующую директорию
 });
 const handleSetFolder = (state, folderData) => (
@@ -33,15 +33,22 @@ const handleGetFolder = (state, folderData) => ({
   entryFolders: folderData.folders,
   entryFiles: folderData.files,
 });
+const handleSearch = (state, resultData) => ({
+  folderName: resultData.name,
+  folderHash: resultData.hash,
+  parentHash: null,
+  entryFolders: resultData.folders,
+  entryFiles: resultData.files,
+});
 const handlers = {
   [BACK]: handleBack,
   [FORWARD]: handleForward,
   [SET_FOLDER_DATA]: handleSetFolder,
   [GET_FOLDER_DATA]: handleGetFolder,
+  [SEARCH_FOLDER_FILE]: handleSearch,
 };
 
 export default (state = initialState, action) => {
-  console.log(action);
   const handler = handlers[action.type];
   return handler ? handler(state, action.payload) : state;
 };

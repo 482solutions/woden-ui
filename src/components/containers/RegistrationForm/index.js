@@ -37,24 +37,16 @@ class RegistrationForm extends Component {
         <Form.Item
           name="name"
           rules={[
-            {
-              required: true,
-              message: 'Username can not be empty',
-              whitespace: true,
-            },
-            // {
-            //   required: true,
-            //   type: 'regexp',
-            //   pattern: /^[a-zA-Z0-9-_.]{2,20}$/g,
-            //   message: 'Incorrect Username',
-            // },
             () => ({
               validator(rule, value) {
-                if (!value || value.match(/^[a-zA-Z0-9-_.]{2,20}$/g) || value.indexOf(' ') === -1) {
+                if (value && value.match(/^[a-zA-Z0-9-_.]{2,20}$/g)
+                  && value.indexOf(' ') === -1) {
                   return Promise.resolve();
                 }
-                // eslint-disable-next-line prefer-promise-reject-errors
-                return Promise.reject('Incorrect Username');
+                if (value && value.trim().length !== 0) {
+                  return Promise.reject('Incorrect username!');
+                }
+                return Promise.reject('Please enter your username!');
               },
             }),
           ]}>
@@ -71,7 +63,7 @@ class RegistrationForm extends Component {
             },
             {
               required: true,
-              message: 'Please input your Email!',
+              message: 'Please enter your email!',
             },
           ]}>
           <Input
@@ -83,14 +75,15 @@ class RegistrationForm extends Component {
           rules={[
             {
               required: true,
-              message: 'Please input password!',
+              message: 'Please enter your password!',
             },
             () => ({
               validator(rule, value) {
-                if (!value || value.match(/(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g)) {
+                if (!value || value.match(
+                  /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
+                )) {
                   return Promise.resolve();
                 }
-                // eslint-disable-next-line prefer-promise-reject-errors
                 return Promise.reject('Incorrect password!');
               },
             }),

@@ -7,7 +7,8 @@
   "extends": [
     "airbnb-base",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -21,6 +22,10 @@
     }
   },
   "rules": {
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
     "space-before-function-paren": [
       "error",
       "never"
@@ -30,6 +35,10 @@
     "class-methods-use-this": 0,
     "import/prefer-default-export": 0,
     "import/extensions": "off",
+    "prefer-promise-reject-errors": "off",
+    "import/no-named-as-default": "off",
+    "no-return-await": "off",
+    "import/no-cycle": "off",
     "space-infix-ops": [
       "error",
       {
@@ -42,7 +51,8 @@
     "react/prop-types": "off"
   },
   "plugins": [
-    "react"
+    "react",
+    "cypress"
   ],
   "settings": {
     "import/resolver": {

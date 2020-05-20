@@ -126,7 +126,7 @@ class LoginForm extends Component {
           </Button>
         </Form.Item>
         <Row className='w100'>
-          <Col span={10}>Don't have an account?</Col>
+          <Col span={10}>Don&apos;t have an account?</Col>
           <Col span={10} offset={2}>
             <Link to={'registration'}>Register now</Link>
           </Col>
@@ -136,4 +136,4 @@ class LoginForm extends Component {
   }
 }
 
-export { LoginForm };
+export default LoginForm;
