@@ -18,6 +18,8 @@ class LoginForm extends Component {
       identity: '',
     };
     this.onFinish = this.onFinish.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
+    this.beforeUpload = this.beforeUpload.bind(this);
   }
 
   toggleLoading() {
