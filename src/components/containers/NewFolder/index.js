@@ -34,7 +34,7 @@ export class NewFolder extends Component {
   render() {
     const { visible, loading } = this.state;
     return (<div>
-      <Button onClick={this.showModal}>
+      <Button onClick={this.showModal} className='newFolder'>
         <FolderAddTwoTone/>
         New Folder
       </Button>

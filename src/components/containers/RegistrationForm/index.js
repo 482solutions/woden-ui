@@ -31,7 +31,7 @@ class RegistrationForm extends Component {
     return (
       <Form
         onFinish={this.onFinish}
-        className='flex-direction-column flex-up'
+        className='flex-direction-column flex-up registrationElement'
       >
         <label className='loginLabel'>Sign up</label>
         <Form.Item
@@ -105,7 +105,6 @@ class RegistrationForm extends Component {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                // eslint-disable-next-line prefer-promise-reject-errors
                 return Promise.reject('The two passwords that you entered do not match!');
               },
             }),
@@ -136,4 +135,4 @@ class RegistrationForm extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }))(RegistrationForm);
+export default RegistrationForm;

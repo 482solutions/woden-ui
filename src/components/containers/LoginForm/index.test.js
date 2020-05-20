@@ -5,8 +5,6 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router';
 import configureMockStore from 'redux-mock-store';
-import { login } from '../../../state-management/actions';
-import { LOGIN } from '../../../state-management/types';
 import LoginForm from './index';
 
 let container;

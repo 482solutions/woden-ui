@@ -13,12 +13,12 @@ class Buttons extends Component {
             <Button className="upload-button">
 					<span role="img">
 					</span>
-              <FileAddTwoTone/> File Upload
+              <FileAddTwoTone/>File Upload
             </Button>
           </Upload>
         </Col>
         <Col>
-          <NewFolder className="newFolder" onFinish={this.props.newFolder}/>
+          <NewFolder onFinish={this.props.newFolder}/>
         </Col>
       </div>
     );

@@ -50,6 +50,7 @@ class ChangePassword extends Component {
         <Form
           onFinish={this.onFinish}
           className='flex-direction-column flex-up'
+          id='passwordElement'
         >
           <label className='upperLabel'>Current password</label>
           <Form.Item
@@ -116,5 +117,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { logout: actions.logout, cleanStorage: actions.cleanStorage })(ChangePassword);
+export default ChangePassword;
