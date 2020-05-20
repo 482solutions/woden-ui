@@ -6,7 +6,7 @@ const initialState = {
   folderName: null,
   folderHash: null,
   parentHash: null,
-  entryFolders: [2],
+  entryFolders: [],
   entryFiles: [],
 };
 

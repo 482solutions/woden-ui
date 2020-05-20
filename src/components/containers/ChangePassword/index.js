@@ -58,7 +58,7 @@ class ChangePassword extends Component {
             name="oldPassword"
             rules={[{ required: true, message: 'Please input your current password!' }]}
           >
-            <Input.Password className='formItem inputItem'/>
+            <Input.Passwgit pull origin masterord className='formItem inputItem'/>
           </Form.Item>
           <label className='upperLabel'>New password</label>
           <Form.Item
