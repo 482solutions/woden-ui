@@ -1,4 +1,4 @@
-.header__logo {
+.headerLogo {
     height: 56px;
 }
 
@@ -6,4 +6,10 @@
     color: #8999ac;
     font-size: 16px;
     line-height: 24px;
+}
+
+.search-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -51,6 +51,15 @@ section {
 .align-self-start {
   align-self: flex-start;
 }
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
 .flex-up {
   display: flex;
   justify-content: center;
@@ -88,7 +97,6 @@ section {
 .transition {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
@@ -134,7 +142,6 @@ section {
 .transition {
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
-    -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
 }
