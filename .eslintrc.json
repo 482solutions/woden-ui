@@ -55,6 +55,12 @@
     "cypress"
   ],
   "settings": {
+        "react": {
+        "createClass": "createReactClass",
+        "pragma": "React",
+        "version": "detect",
+        "flowVersion": "0.53"
+      },
     "import/resolver": {
       "node": {
         "extensions": [
@@ -64,12 +70,6 @@
           ".tsx",
           ".d.ts"
         ]
-      },
-      "react": {
-        "createClass": "createReactClass",
-        "pragma": "React",
-        "version": "detect",
-        "flowVersion": "0.53"
       },
       "propWrapperFunctions": [
         "forbidExtraProps",
