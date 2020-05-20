@@ -5,11 +5,21 @@ import { NewFolder } from '..';
 import './style.css';
 
 class Buttons extends Component {
+  constructor(props) {
+    super(props);
+    this.beforeUpload = this.beforeUpload.bind(this);
+  }
+
+  beforeUpload(file) {
+    this.props.uploadFile(file);
+    return false;
+  }
+
   render() {
     return (
       <div className="home__buttons">
         <Col offset={17}>
-          <Upload name="file" beforeUpload={this.props.uploadFile} showUploadList={false}>
+          <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
             <Button className="upload-button">
 					<span role="img">
 					</span>
