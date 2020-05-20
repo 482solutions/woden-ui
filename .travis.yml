@@ -8,8 +8,6 @@ services:
 - docker
 script:
 - git clone https://andrii482:$GithubToken_for_wooden-server-js_repository@github.com/482solutions/woden-server-js.git
-- cd woden-server-js
-- docker-compose up --build -d
-- cd ..
+- docker-compose -f ./woden-server-js/docker-compose.yml up --build -d
 - npm run lint:js
 - npm i && npm run cypress:run
