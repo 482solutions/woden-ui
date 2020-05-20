@@ -11,26 +11,26 @@ Feature: Registration
     Then Sign Up form is open
 
   @positive
-  Scenario: 1 Username can contain 2 uppercase letters
-    Given User username field that contains 2 uppercase letters
-    And fills in the email field
-    And fills in the password and confirm password field that contain 8 characters
-    And the data is valid
-    When The user press Sign up button
-    Then User is registered
-    And The User got private key
-    And The User got certificate in pem format
-
-  @positive
-  Scenario: 2 Username can contain 2 lowercase letters
-    Given User username field that contains 2 lowercase letters
-    And fills in the email field
-    And fills in the password and confirm password field that contain 8 characters
-    And the data is valid
-    When The user press Sign up button
-    Then User is registered
-    And The User got private key
-    And The User got certificate in pem format
+#  Scenario: 1 Username can contain 2 uppercase letters
+#    Given User username field that contains 2 uppercase letters
+#    And fills in the email field
+#    And fills in the password and confirm password field that contain 8 characters
+#    And the data is valid
+#    When The user press Sign up button
+#    Then User is registered
+#    And The User got private key
+#    And The User got certificate in pem format
+#
+#  @positive
+#  Scenario: 2 Username can contain 2 lowercase letters
+#    Given User username field that contains 2 lowercase letters
+#    And fills in the email field
+#    And fills in the password and confirm password field that contain 8 characters
+#    And the data is valid
+#    When The user press Sign up button
+#    Then User is registered
+#    And The User got private key
+#    And The User got certificate in pem format
 
   @positive
   Scenario: 3 Username can contain 20 lowercase letters
@@ -54,27 +54,27 @@ Feature: Registration
     And The User got private key
     And The User got certificate in pem format
 
-  @positive
-  Scenario: 5 Username can contain 3 uppercase letters
-    Given User username field that contains 3 uppercase letters
-    And fills in the email field
-    And fills in the password and confirm password field that contain 8 characters
-    And the data is valid
-    When The user press Sign up button
-    Then User is registered
-    And The User got private key
-    And The User got certificate in pem format
-
-  @positive
-  Scenario: 6 Username can contain 3 lowercase letters
-    Given User username field that contains 3 lowercase letters
-    And fills in the email field
-    And fills in the password and confirm password field that contain 8 characters
-    And the data is valid
-    When The user press Sign up button
-    Then User is registered
-    And The User got private key
-    And The User got certificate in pem format
+#  @positive
+#  Scenario: 5 Username can contain 3 uppercase letters
+#    Given User username field that contains 3 uppercase letters
+#    And fills in the email field
+#    And fills in the password and confirm password field that contain 8 characters
+#    And the data is valid
+#    When The user press Sign up button
+#    Then User is registered
+#    And The User got private key
+#    And The User got certificate in pem format
+#
+#  @positive
+#  Scenario: 6 Username can contain 3 lowercase letters
+#    Given User username field that contains 3 lowercase letters
+#    And fills in the email field
+#    And fills in the password and confirm password field that contain 8 characters
+#    And the data is valid
+#    When The user press Sign up button
+#    Then User is registered
+#    And The User got private key
+#    And The User got certificate in pem format
 
   @positive
   Scenario: 7 Username can contain 19 uppercase letters

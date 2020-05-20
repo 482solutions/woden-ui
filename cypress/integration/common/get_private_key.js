@@ -1,7 +1,5 @@
 import { Then } from "cypress-cucumber-preprocessor/steps";
 
-let privateKey;
-
 Then(/^The User got private key$/, async () => {
   cy.get('a[download]')
     .then((anchor) => (
@@ -17,7 +15,7 @@ Then(/^The User got private key$/, async () => {
             const reader = new FileReader();
             reader.onload = () => {
               resolve(reader.result);
-              privateKey = cy.writeFile('cypress/fixtures/privateKey.pem', reader.result)
+              cy.writeFile('cypress/fixtures/privateKey.pem', reader.result)
             };
             reader.readAsText(blob);
           }
