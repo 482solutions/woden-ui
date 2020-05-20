@@ -1,10 +1,13 @@
- language: node_js
+language: node_js
+env:
+  global:
+    secure: nbXIRYlQ1CMU23OftoL1dPzqwG4x+uWao0GlFK2EBrsSwGeeQyV63n1c/n8ooqdQBmCmn/HYjrOYclyepyaWX/oB6IJr3snL8O0FqkiPMF+jwgvCFQv9jfy0j/EjdghKHLkBM/645WE22NGFUIlqzrhushiC3XNS9lqTLFNMevqpXNWum2g8OhkVdoyClqk0WxYmfDO/HZchyBOAR4R6pje/fTvNryEl15MiiU6iZSiulAyRyT0QmyvGI8Ylz8qvW16NlQyjkMkuwjgiAAEqgaD7N3z7/6k+aQi9BKeu1P8RweLClVNrDMio5aXdKRVoRownhFq3OCvYBEDnmbK0Zx7nBqonJiwj+NUIghFbsOkGKTwd6GwYNFr8yZq4nHE4fB9etw9E+MI5FRoSEAfBmhtHpGxy1Cvi57+MJj6qWF06x+x/Ac4svzSE4eFoN4LIu/Kd1vvwzNWF6WWb2oY2meN71cFDfzunBgqctjMowlhYH23P78Y83ChDEJdWwnLLtpWOA3fIx7rcS8hRoP3EcuGgAIhmRFkjyN91tK6NGIFx6CSBDd2D0wHoIxn7bL++7J8/ZkNS0xV2EhzMxLt+tlnQq0wzd0f8gPuu9B4/DbRuS7x/ggqC+OdRA7dkWmtTFofko1/4Mbtln91cUlcYsU97ggDhJ8xOvIjlqMDD/8c=
 node_js:
  - "stable"
 services:
   - docker
 script:
-  - git clone https://andrii482:c0c5e002db7d9fc089c5091bdf5a23adff97391e@github.com/482solutions/woden-server-js.git 
+  - git clone https://andrii482:$MY_SECRET_ENV@github.com/482solutions/woden-server-js.git 
   - cd woden-server-js
   - docker-compose up --build -d 
   - cd ..
