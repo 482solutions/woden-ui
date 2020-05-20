@@ -25,4 +25,4 @@ package-lock.json
 /.idea
 /dist
 mochawesome-report
-*~
+
