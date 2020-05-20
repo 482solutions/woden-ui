@@ -1,148 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { message } from 'antd';
-import download from 'downloadjs';
-import Woden from 'woden';
 import { Buttons, Sidebar } from '../../components/containers';
-import { getRootFolderHash, getTokenForHeader } from '../../utils/functions';
+import { getRootFolderHash } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import FolderImage from '../../assets/images/folder.svg';
 import FileImage from '../../assets/images/file.svg';
 
-const api = new Woden.FileSystemApi();
-const defaultClient = Woden.ApiClient.instance;
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      folderName: null,
-      folderHash: null,
-      parentHash: null,
-      entryFolders: [],
-      entryFiles: [],
-    };
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
   }
 
   async componentDidMount() {
-    const { Bearer } = defaultClient.authentications;
-    Bearer.apiKey = await getTokenForHeader();
     const hash = await getRootFolderHash();
-    api.getFolder(
-      hash,
-      (error, data, response) => {
-        if (error) {
-          message.error(response.body.message);
-        } else {
-          const folderData = response.body.folder;
-          folderData.folders = JSON.parse(folderData.folders);
-          folderData.files = JSON.parse(folderData.files);
-          this.props.setFolderData(folderData);
-          this.setState({
-            folderName: folderData.name,
-            folderHash: folderData.hash,
-            parentHash: folderData.parenthash,
-            entryFolders: folderData.folders,
-            entryFiles: folderData.files,
-          });
-        }
-      },
-    );
+    this.props.getFolderData(hash);
   }
 
-  async uploadFile(file) {
-    const parentFolder = this.state.folderHash;
-    const { name } = file;
-    api.uploadFile(
-      name, parentFolder, file,
-      (error, data, response) => {
-        if (error) {
-          message.error(response.body.message);
-        } else if (response.status === 200) {
-          message.success('Folder created successful');
-          const folderData = response.body.folder;
-          folderData.folders = JSON.parse(folderData.folders);
-          folderData.files = JSON.parse(folderData.files);
-          this.props.setFolderData(folderData);
-          this.setState({
-            folderName: folderData.name,
-            folderHash: folderData.hash,
-            parentHash: folderData.parenthash,
-            entryFolders: folderData.folders,
-            entryFiles: folderData.files,
-          });
-        }
-      },
-    );
+  uploadFile(file) {
+    this.props.uploadFile({ name: file.name, parentFolder: this.props.folderHash, file });
     return false;
   }
 
   createFolder(dataRequest) {
-    const { newFolder } = dataRequest;
-    const parentFolder = this.state.folderHash;
-    const body = new Woden.CreateFolder();
-    body.name = newFolder;
-    body.parentFolder = parentFolder;
-    api.createFolder(
-      body,
-      (error, data, response) => {
-        if (error) {
-          message.error(response.body.message);
-        } else if (response.status === 201) {
-          const folderData = response.body.folder;
-          folderData.folders = JSON.parse(folderData.folders);
-          folderData.files = JSON.parse(folderData.files);
-          this.props.setFolderData(folderData);
-          this.setState({
-            folderName: folderData.name,
-            folderHash: folderData.hash,
-            parentHash: folderData.parenthash,
-            entryFolders: folderData.folders,
-            entryFiles: folderData.files,
-          });
-        }
-      },
-    );
+    this.props.createFolder({ name: dataRequest.newFolder, parentFolder: this.props.folderHash });
   }
 
   openFolder(hash) {
-    api.getFolder(
-      hash,
-      (error, data, response) => {
-        if (error) {
-          message.error(response.body.message);
-        } else {
-          const folderData = response.body.folder;
-          folderData.folders = JSON.parse(folderData.folders);
-          folderData.files = JSON.parse(folderData.files);
-          this.props.setFolderData(folderData);
-          this.setState({
-            folderName: folderData.name,
-            folderHash: folderData.hash,
-            parentHash: folderData.parenthash,
-            entryFolders: folderData.folders,
-            entryFiles: folderData.files,
-          });
-        }
-      },
-    );
+    this.props.getFolderData(hash);
   }
 
   downloadFile(hash) {
-    api.downloadFile(
-      hash,
-      (error, data, response) => {
-        if (error) {
-          message.error(response.body.message);
-        } else {
-          const { name, type, file } = response.body;
-          download(file, name, type);
-        }
-      },
-    );
+    this.props.downloadFile(hash);
   }
 
   render() {
@@ -193,7 +85,10 @@ export default connect(({ auth, filesystem }) => ({
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
-  setFolderData: actions.setFolderData,
+  getFolderData: actions.getFolderData,
+  createFolder: actions.createFolder,
+  uploadFile: actions.uploadFile,
+  downloadFile: actions.downloadFile,
 })(
   Home,
 );
