@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Upload, Button } from 'antd';
 import { FileAddTwoTone } from '@ant-design/icons';
 
-class FileUpload extends Component {
+export class FileUpload extends Component {
   constructor(props) {
     super(props);
     this.beforeUpload = this.beforeUpload.bind(this);

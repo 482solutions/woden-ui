@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import forge from 'node-forge';
-import { Button, Col, Form, Input, message, Row } from 'antd';
+import {
+  Button, Col, Form, Input, message, Row,
+} from 'antd';
 import { validationCertificate, validationPrivateKey } from '../../../utils/functions';
-import { FileInMemory } from '../../presentations'
+import { FileInMemory } from '../../presentations';
 import './styles.css';
 
 class LoginForm extends Component {
@@ -12,18 +13,18 @@ class LoginForm extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      certificate: "",
-      privateKey: "",
-      identity: "",
+      certificate: '',
+      privateKey: '',
+      identity: '',
     };
     this.onFinish = this.onFinish.bind(this);
   }
 
   toggleLoading() {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       isLoading: !prevState.isLoading,
-    }))
-  };
+    }));
+  }
 
   onFinish(e) {
     const { certificate, privateKey } = this.state;
@@ -36,16 +37,16 @@ class LoginForm extends Component {
       return;
     }
     const files = {
-      certificate: certificate,
-      privateKey: privateKey
-    }
-    this.props.onFinish(Object.assign(e,files));
+      certificate,
+      privateKey,
+    };
+    this.props.onFinish(Object.assign(e, files));
     this.toggleLoading();
   }
 
-  beforeUpload = (file) => {
+  beforeUpload(file) {
     const reader = new FileReader();
-    reader.onload = async e => {
+    reader.onload = async(e) => {
       if (validationPrivateKey(e.target.result)) {
         this.setState({ privateKey: e.target.result });
         message.success('Private key was provided');
@@ -58,7 +59,7 @@ class LoginForm extends Component {
         const obj = forge.asn1.fromDer(certData.body);
         this.setState({
           certificate: e.target.result,
-          identity: obj.value[0].value[5].value[3].value[0].value[1].value || ""
+          identity: obj.value[0].value[5].value[3].value[0].value[1].value || '',
         });
         message.success('Certificate was provided');
         if (!this.state.privateKey) {
@@ -68,7 +69,7 @@ class LoginForm extends Component {
     };
     reader.readAsText(file);
     return false;
-  };
+  }
 
   render() {
     const { isLoading } = this.state;
@@ -76,6 +77,7 @@ class LoginForm extends Component {
       <Form
         onFinish={this.onFinish}
         className='flex-direction-column flex-up'
+        id='LoginForm'
         layout={this.layout}
       >
         <label className='loginLabel'>Sign In</label>
@@ -84,8 +86,8 @@ class LoginForm extends Component {
           rules={[
             {
               required: true,
-              message: 'Username can not be empty'
-            }
+              message: 'Username can not be empty',
+            },
           ]}>
           <Input
             className='loginFormItem loginInputItem'
@@ -96,8 +98,8 @@ class LoginForm extends Component {
           rules={[
             {
               required: true,
-              message: 'Password can not be empty'
-            }
+              message: 'Password can not be empty',
+            },
           ]}>
           <Input.Password
             className='loginFormItem loginInputItem'
@@ -114,7 +116,7 @@ class LoginForm extends Component {
         </Form.Item>
         <Form.Item>
           <Button
-            style={{"marginTop": "70px"}}
+            style={{ marginTop: '70px' }}
             type='primary'
             htmlType='submit'
             loading={isLoading}
@@ -123,17 +125,15 @@ class LoginForm extends Component {
             Log In
           </Button>
         </Form.Item>
-        {/*<Link className='loginFormItem' to={'reset'}>Forgot password</Link>*/}
         <Row className='w100'>
           <Col span={10}>Don't have an account?</Col>
           <Col span={10} offset={2}>
-            <Link to={"registration"}>Register now</Link>
+            <Link to={'registration'}>Register now</Link>
           </Col>
         </Row>
       </Form>
-    )
+    );
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
-)(LoginForm);
+export { LoginForm };

@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import { FolderAddTwoTone } from '@ant-design/icons';
 
-class NewFolder extends Component {
+export class NewFolder extends Component {
   constructor(props) {
     super(props);
     this.state = {

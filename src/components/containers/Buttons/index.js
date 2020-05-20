@@ -9,7 +9,7 @@ class Buttons extends Component {
     return (
       <div className="home__buttons">
         <Col offset={17}>
-          <Upload name="file" beforeUpload={this.props.uploadFile} showUploadList={false}>
+          <Upload className="fileUpload" name="file" beforeUpload={this.props.uploadFile} showUploadList={false}>
             <Button className="upload-button">
 					<span role="img">
 					</span>
@@ -18,7 +18,7 @@ class Buttons extends Component {
           </Upload>
         </Col>
         <Col>
-          <NewFolder onFinish={this.props.newFolder}/>
+          <NewFolder className="newFolder" onFinish={this.props.newFolder}/>
         </Col>
       </div>
     );

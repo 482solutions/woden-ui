@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import NewFolder from './index';
+import Login from './index';
 
 let container;
 
@@ -17,12 +17,11 @@ afterEach(() => {
 
 it('renders without crashing', () => {
   act(() => {
-    ReactDOM.render(<NewFolder/>, container);
+    ReactDOM.render(<Login/>, container);
   });
+  const loginForm = container.getElementById('LoginForm')[0];
+  const image = container.getElementById('LoginImage')[0];
 
-  const button = container.getElementsByClassName('ant-btn')[0];
-
-  // Не могу проверить наличие модального окна т.к. его нет на странице и надо проверять через redux
-
-  expect(button.textContent).toBe('New Folder');
+  expect(loginForm.length).toBe(1);
+  expect(image.length).toBe(1);
 });

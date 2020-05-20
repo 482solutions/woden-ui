@@ -22,7 +22,7 @@ class Sidebar extends Component {
             onSelect={this.onSelect}
             className="foldersTree"
           >
-            <TreeNode className="treeNode" title="Root" key="0-0">
+            <TreeNode className="treeData" title="Root" key="0-0">
               <TreeNode title="Example-1.1" key="0-0-0-0"/>
               <TreeNode title="Example-1.2" key="0-0-0-1"/>
               <TreeNode title="Example-1.3" key="0-0-0-2"/>

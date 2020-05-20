@@ -25,7 +25,7 @@ class Login extends React.Component {
     return (
       <div className="login flex-direction-column flex-center">
         <div className="loginBox">
-          <div className="loginBlock BGBlue flex-direction-column flex-center">
+          <div className="loginBlock BGBlue flex-direction-column flex-center" id='LoginImage'>
             <img src={logoCol} alt="WodenLogo"/>
             <img src={loginWelcome} alt="Welcome"/>
           </div>
