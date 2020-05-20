@@ -38,6 +38,7 @@
     "prefer-promise-reject-errors": "off",
     "import/no-named-as-default": "off",
     "no-return-await": "off",
+    "import/no-cycle": "off",
     "space-infix-ops": [
       "error",
       {
