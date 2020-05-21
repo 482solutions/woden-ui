@@ -24,7 +24,7 @@ const NewFolder = ({ onFinish: createFolder }) => {
     setVisible(false);
   };
   return (<div>
-      <Button onClick={showModal}>
+      <Button onClick={showModal} className="newFolder">
         <FolderAddTwoTone/>
         New Folder
       </Button>

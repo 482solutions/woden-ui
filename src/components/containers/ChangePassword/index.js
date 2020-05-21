@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
   Button, Form, Input, Modal,
 } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
-import actions from '../../../state-management';
 
 class ChangePassword extends Component {
   constructor(props) {
