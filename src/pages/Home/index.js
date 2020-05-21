@@ -50,7 +50,7 @@ class Home extends React.Component {
             {
               entryFolders.map((folder, i) => (
                 <div className="flex-center flex-direction-column m10"
-                     key={i} onClick={() => this.openFolder(folder.hash)}>
+                     key={i} onDoubleClick={() => this.openFolder(folder.hash)}>
                   <img src={FolderImage}
                        alt={'Folder'}
                        title={`Folder - ${folder.name}`}/>{folder.name}
@@ -60,7 +60,7 @@ class Home extends React.Component {
             {
               entryFiles.map((files, i) => (
                 <div className="flex-center flex-direction-column m10 folderFileSize"
-                     key={i} onClick={() => this.downloadFile(files.hash, files.name)}>
+                     key={i} onDoubleClick={() => this.downloadFile(files.hash, files.name)}>
                   <img src={FileImage}
                        alt={'File'}
                        title={`File - ${files.name}`}/>{files.name}
