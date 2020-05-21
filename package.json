@@ -32,8 +32,11 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@commitlint/cli": "^8.3.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-import": "^1.12.0",
+    "commitlint-config-jira": "^1.4.1",
+    "commitlint-plugin-jira-rules": "^1.4.0",
     "css-loader": "^3.5.2",
     "cypress": "^4.5.0",
     "cypress-cucumber-preprocessor": "^2.3.1",
@@ -91,6 +94,7 @@
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
       "pre-commit": "npm run lint:js",
       "pre-push": "npm run lint:js"
     }
