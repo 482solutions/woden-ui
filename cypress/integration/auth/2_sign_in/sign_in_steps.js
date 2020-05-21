@@ -45,6 +45,7 @@ before('Register new user and login', () => {
 });
 
 Given(/^User has filled in the field valid username$/, () => {
+    cy.wait(2000)
     cy.get('#name').type(login);
 });
 
@@ -61,10 +62,12 @@ Given(/^Pin privateKey$/, () => {
 });
 
 Given(/^User has filled in the field valid email$/, () => {
+    cy.wait(2000)
     cy.get('#name').type(email);
 });
 
 Given(/^User has filled invalid username (.*) in the field username from list$/, (invUsername) => {
+    cy.wait(2000)
     cy.get('#name').type(invUsername);
 });
 

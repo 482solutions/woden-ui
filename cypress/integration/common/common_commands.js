@@ -43,6 +43,7 @@ Then(/^Error notification User not found is shown$/, () => {
 });
 
 Then(/^Error notification is shown Invalid password supplied$/, () => {
+  cy.wait(2000)
   cy.contains('Invalid password supplied').should('be.visible')
 });
 
