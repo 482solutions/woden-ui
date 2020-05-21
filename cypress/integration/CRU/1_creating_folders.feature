@@ -19,7 +19,6 @@ Feature: Creating folders
     And The field name <Name> is filled by user from list of folder name
     And Press Create folder
     Then The folder is created with name <Name>
-#    And The user becomes the owner of this folder
     Examples: Folder's Name
       | Name                 |
       | F                    |
