@@ -1,29 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
+import { Upload, Button } from 'antd';
 import { FileAddTwoTone } from '@ant-design/icons';
-import { Button } from 'antd';
+import { NewFolder } from '..';
+
 import Buttons from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(<Buttons/>, container);
-  });
-  const uploadFile = container.getElementsByClassName('upload-button')[0];
-  const newFolder = container.getElementsByClassName('newFolder');
-
-  expect(uploadFile.textContent).toBe('File Upload');
-  expect(newFolder.length).toBe(1);
+it('Renders components Buttons', () => {
+  const wrapper = shallow(<Buttons/>);
+  expect(wrapper.find('.homeButtons')).to.have.lengthOf(1);
+  expect(wrapper.find('.upload-button')).to.have.lengthOf(1);
+  expect(wrapper.find(Upload)).to.have.lengthOf(1);
+  expect(wrapper.find(Button)).to.have.lengthOf(1);
+  expect(wrapper.find(FileAddTwoTone)).to.have.lengthOf(1);
+  expect(wrapper.find(NewFolder)).to.have.lengthOf(1);
 });

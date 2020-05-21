@@ -22,7 +22,7 @@ class ChangePassword extends Component {
     this.setState({ visible: true });
   }
 
-  async onFinish(e) {
+  onFinish(e) {
     this.setState({ loading: true });
     this.props.onFinish(e);
     this.setState({ loading: false, visible: false });
@@ -56,7 +56,7 @@ class ChangePassword extends Component {
             name="oldPassword"
             rules={[{ required: true, message: 'Please input your current password!' }]}
           >
-            <Input.Passwgit pull origin masterord className='formItem inputItem'/>
+            <Input.Password className='formItem inputItem'/>
           </Form.Item>
           <label className='upperLabel'>New password</label>
           <Form.Item
