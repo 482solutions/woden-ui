@@ -84,7 +84,7 @@ export const uploadFile = (file) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
-        message.success('Folder created successful');
+        message.success('File created successful');
         const folderData = response.body.folder;
         folderData.folders = JSON.parse(folderData.folders);
         folderData.files = JSON.parse(folderData.files);

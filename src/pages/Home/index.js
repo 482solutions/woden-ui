@@ -7,8 +7,7 @@ import './style.css';
 import FolderImage from '../../assets/images/folder.svg';
 import FileImage from '../../assets/images/file.svg';
 
-
-class Home extends React.Component {
+export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.createFolder = this.createFolder.bind(this);
@@ -53,7 +52,7 @@ class Home extends React.Component {
                      key={i} onClick={() => this.openFolder(folder.hash)}>
                   <img src={FolderImage}
                        alt={'Folder'}
-                       title={`Folder - ${folder.name}`}/>{folder.name}
+                       title={`Folder - ${folder.name}`} className="folder"/>{folder.name}
                 </div>
               ))
             }
@@ -63,7 +62,7 @@ class Home extends React.Component {
                      key={i} onClick={() => this.downloadFile(files.hash, files.name)}>
                   <img src={FileImage}
                        alt={'File'}
-                       title={`File - ${files.name}`}/>{files.name}
+                       title={`File - ${files.name}`} className="file"/>{files.name}
                 </div>
               ))
             }
