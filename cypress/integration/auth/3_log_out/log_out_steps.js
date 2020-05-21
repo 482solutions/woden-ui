@@ -14,7 +14,7 @@ before('Register new user', () => {
     password = `${login}12345`;
 });
 
-When(/^Register new user$/, function () {
+When(/^Register new user$/, () => {
     cy.visit('/');
     cy.get('.ant-col-offset-2 > a').click();
     cy.get('#name').type(login);
@@ -27,46 +27,9 @@ When(/^Register new user$/, function () {
     cy.get('.ant-message-custom-content').as('message valid registration')
         .should('be.visible')
         .should('contain.text', 'Registration was successful');
-
-    cy.get('a[download]')
-        .then((anchor) => (
-            new Cypress.Promise((resolve) => {
-                //XHR to get the blob that corresponds to the object URL.
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', anchor.prop('href'), true);
-                xhr.responseType = 'blob';
-                //fileReader to get the string back from the blob.
-                xhr.onload = () => {
-                    if (xhr.status === 200) {
-                        const blob = xhr.response;
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                            resolve(reader.result);
-                            privateKey = cy.writeFile('cypress/fixtures/privateKey.pem', reader.result)
-                        };
-                        reader.readAsText(blob);
-                    }
-                };
-                xhr.send();
-            })
-        ))
-    cy.readFile('cypress/fixtures/privateKey.pem').then((text) => {
-        expect(text).to.include('-----BEGIN PRIVATE KEY-----')
-        expect(text).to.include('-----END PRIVATE KEY-----');
-    })
-
-    cy.wait('@getCert').then((xhr) => {
-        const response = xhr.responseBody
-        cert = cy.writeFile('cypress/fixtures/cert.pem', response.cert)
-    })
-
-    cy.readFile('cypress/fixtures/cert.pem').then((text) => {
-        expect(text).to.include('-----BEGIN CERTIFICATE-----')
-        expect(text).to.include('-----END CERTIFICATE-----');
-    })
 });
 
-Then(/^Login as new user$/, function () {
+Then(/^Login as new user$/, () => {
     cy.get('#name').type(login);
     cy.get('#password').type(password);
     cy.get('input[type=file]').attachFile('cert.pem')
@@ -76,10 +39,10 @@ Then(/^Login as new user$/, function () {
     cy.wait(1000)
 });
 
-When(/^The user press "([^"]*)" button for exit$/, function (logoutBtn) {
+When(/^The user press "([^"]*)" button for exit$/, (logoutBtn) => {
     cy.contains(logoutBtn).click()
 });
 
-Then(/^The user is transferred to 'Sign in' page$/, function () {
+Then(/^The user is transferred to 'Sign in' page$/, () => {
     cy.url().should('include', '/login');
 });
