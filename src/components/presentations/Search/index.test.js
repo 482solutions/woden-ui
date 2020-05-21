@@ -1,25 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
 import Search from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(<Search/>, container);
-  });
-  const find = container.getElementsByClassName('searchElements');
-
-  expect(find.length).toBe(1);
+it('Render without crashing', () => {
+  const wrapper = shallow(<Search/>);
+  expect(wrapper.find('.searchElements')).to.have.lengthOf(1);
 });

@@ -1,25 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import NewFolder from './index';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
+import { Button } from 'antd';
+import newFolder from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(<NewFolder/>, container);
-  });
-  const newFolder = container.getElementsByClassName('newFolder');
-
-  expect(newFolder.length).toBe(1);
+it('Render without crashing', () => {
+  const wrapper = shallow(<newFolder/>);
+  expect(wrapper.find(Button)).to.have.lengthOf(1);
 });

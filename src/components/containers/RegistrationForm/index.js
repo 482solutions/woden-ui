@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   Button, Col, Form, Input, Row,
 } from 'antd';
@@ -36,6 +35,7 @@ class RegistrationForm extends Component {
         <label className='loginLabel'>Sign up</label>
         <Form.Item
           name="name"
+          id="Name"
           rules={[
             () => ({
               validator(rule, value) {
@@ -56,6 +56,7 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name="email"
+          id="Email"
           rules={[
             {
               type: 'email',
@@ -72,6 +73,7 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name='password'
+          id="Password"
           rules={[
             {
               required: true,
@@ -95,6 +97,7 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name='confirm'
+          id="Confirm"
           rules={[
             {
               required: true,

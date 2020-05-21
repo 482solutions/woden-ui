@@ -1,27 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import { Tree } from 'antd';
+import Adapter from 'enzyme-adapter-react-16';
 import Sidebar from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(<Sidebar/>, container);
-  });
-  const title = container.getElementsByClassName('sidebarTitle')[0];
-  const root = container.getElementsByClassName('ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close');
-
-  expect(title.textContent).toBe('All Folders');
-  expect(root.length).toBe(1);
+it('Render without crashing', () => {
+  const wrapper = shallow(<Sidebar/>);
+  expect(wrapper.find('.sidebar')).to.have.lengthOf(1);
+  expect(wrapper.find(Tree)).to.have.lengthOf(1);
 });

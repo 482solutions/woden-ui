@@ -1,29 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
 import { Logout } from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    render(
-      <Logout/>,
-      container,
-    );
-  });
-
-  const logoutElement = container.getElementsByClassName('button');
-
-  expect(logoutElement.length).toBe(1);
+it('Render without crashing', () => {
+  const wrapper = shallow(<Logout/>);
+  expect(wrapper.find('.button')).to.have.lengthOf(1);
 });

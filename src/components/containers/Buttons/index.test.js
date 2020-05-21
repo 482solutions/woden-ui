@@ -22,7 +22,7 @@ it('renders without crashing', () => {
     ReactDOM.render(<Buttons/>, container);
   });
   const uploadFile = container.getElementsByClassName('upload-button')[0];
-  const newFolder = container.getElementsByClassName('newFolder');
+  const newFolder = container.getElementsByClassName('createFolder');
 
   expect(uploadFile.textContent).toBe('File Upload');
   expect(newFolder.length).toBe(1);

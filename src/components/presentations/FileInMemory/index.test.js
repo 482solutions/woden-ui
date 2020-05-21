@@ -1,25 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
 import FileInMemory from './index';
 
-let container;
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
+it('Render without crashing', () => {
+  const wrapper = shallow(<FileInMemory/>);
 
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(<FileInMemory/>, container);
-  });
-  const identity = container.getElementsByClassName('ant-upload ant-upload-btn');
-
-  expect(identity.length).toBe(1);
+  expect(wrapper.find('#LoginFileDrop')).to.have.lengthOf(1);
 });

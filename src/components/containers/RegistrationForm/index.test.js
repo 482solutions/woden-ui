@@ -1,53 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history';
-import { Router } from 'react-router';
-import configureMockStore from 'redux-mock-store';
+import Enzyme, { shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
 import RegistrationForm from './index';
 
-let container;
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-const history = createBrowserHistory();
+Enzyme.configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-window.matchMedia = window.matchMedia || function() {
-  return {
-    matches: false,
-    addListener() {
-    },
-    removeListener() {
-    },
-  };
-};
-
-it('renders without crashing', () => {
-  act(() => {
-    ReactDOM.render(
-      <Router history={history}>
-        <RegistrationForm/>
-      </Router>,
-      container,
-    );
-  });
-
-  const registrationElement = container.getElementsByClassName('registrationElement');
-  const inputs = container.getElementsByTagName('input');
-
-  expect(registrationElement.length).toBe(1);
-  expect(inputs[0].id).toBe('name');
-  expect(inputs[1].id).toBe('email');
-  expect(inputs[2].id).toBe('password');
-  expect(inputs[3].id).toBe('confirm');
+it('Render without crashing', () => {
+  const wrapper = shallow(<RegistrationForm/>);
+  expect(wrapper.find('.registrationElement')).to.have.lengthOf(1);
+  expect(wrapper.find('#Name')).to.have.lengthOf(1);
+  expect(wrapper.find('#Email')).to.have.lengthOf(1);
+  expect(wrapper.find('#Password')).to.have.lengthOf(1);
+  expect(wrapper.find('#Confirm')).to.have.lengthOf(1);
+  expect(wrapper.find('.LoginButtonItem')).to.have.lengthOf(1);
 });
