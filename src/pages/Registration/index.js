@@ -8,7 +8,7 @@ import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
 
 
-class Registration extends React.Component {
+export class Registration extends React.Component {
   constructor(props) {
     super(props);
     this.regRequest = this.regRequest.bind(this);
@@ -36,8 +36,8 @@ class Registration extends React.Component {
       <div className="login flex-direction-column flex-center">
         <div className="loginBox">
           <div className="loginBlock BGBlue flex-direction-column flex-center">
-            <img src={logoCol} alt="WodenLogo"/>
-            <img src={loginWelcome} alt="Welcome"/>
+            <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>
+            <img src={loginWelcome} alt="Welcome" className="Welcome"/>
           </div>
           <div className="loginBlock flex-direction-column flex-center">
             <RegistrationForm onFinish={this.regRequest}/>

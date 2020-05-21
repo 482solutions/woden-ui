@@ -6,7 +6,7 @@ import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
 import { actions } from '../../state-management';
 
-class Login extends React.Component {
+export class Login extends React.Component {
   replace = () => {
     this.props.history.replace('/');
   };
@@ -26,11 +26,11 @@ class Login extends React.Component {
       <div className="login flex-direction-column flex-center">
         <div className="loginBox">
           <div className="loginBlock BGBlue flex-direction-column flex-center" id='LoginImage'>
-            <img src={logoCol} alt="WodenLogo"/>
-            <img src={loginWelcome} alt="Welcome"/>
+            <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>
+            <img src={loginWelcome} alt="Welcome" className="Welcome"/>
           </div>
           <div className="loginBlock flex-direction-column flex-center">
-            <LoginForm onFinish={this.loginRequest}/>
+            <LoginForm onFinish={this.loginRequest} id="LoginForm"/>
           </div>
         </div>
       </div>

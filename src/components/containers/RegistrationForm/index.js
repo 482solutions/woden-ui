@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import './styles.css';
 
-class RegistrationForm extends Component {
+export class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
