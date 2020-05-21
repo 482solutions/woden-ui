@@ -63,7 +63,7 @@
     "build": "webpack --mode production",
     "test": "react-scripts test --all",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --spec \"cypress/integration/auth/**/*,cypress/integration/CRU/1_creating_folders.feature,cypress/integration/CRU/2_open_folders.feature\"",
+    "cypress:run": "cypress run --spec \"cypress/integration/auth/**/*,cypress/integration/CRU/1_creating_folders.feature,cypress/integration/CRU/2_open_folders.feature,cypress/integration/CRU/3_uploading_files.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
     "cypress:report": "cypress run --spec cypress/integration/API/POST_user.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",
     "lint:js": "eslint src/**/*.js",

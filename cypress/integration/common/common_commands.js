@@ -77,3 +77,7 @@ Then(/^The folder is created with name (.*)$/, function (folderName) {
 When(/^Press Create folder$/, function () {
   cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click().wait(2000)
 });
+
+When(/^The user press Upload a new file button$/, () => {
+  cy.contains('File Upload').click().wait(1000)
+});

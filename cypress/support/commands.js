@@ -53,10 +53,10 @@ Cypress.Commands.add('registerUser', () => {
 })
 Cypress.Commands.add('loginAsNewUser', () => {
     cy.visit('/')
-    cy.get('#name').type(login);
-    cy.get('#password').type(password);
+    cy.get('#name').type('evVVzEFxCkMEOpu');login
+    cy.get('#password').type('evVVzEFxCkMEOpu12345');password
     cy.get('input[type=file]').attachFile('cert.pem')
     cy.wait(1000)
     cy.get('input[type=file]').attachFile('privateKey.pem');
-    cy.get('.ant-btn').as('Log in btn').click().wait(4000)
+    cy.get('.ant-btn').as('Log in btn').click().wait(5000)
 })
