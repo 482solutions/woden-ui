@@ -71,7 +71,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "test": "react-scripts test --all",
+    "test": "react-scripts test",
+    "coverage": "npm test -- --coverage --watchAll=false",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --spec \"**/*.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
