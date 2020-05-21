@@ -51,6 +51,7 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
+    "husky": "^4.2.5",
     "mocha": "~2.3.4",
     "mochawesome": "^6.1.0",
     "style-loader": "^1.1.4",
@@ -87,6 +88,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:js",
+      "pre-push": "npm run lint:js"
+    }
   },
   "proxy": "http://localhost:3000"
 }
