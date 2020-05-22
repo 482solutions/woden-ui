@@ -3,7 +3,8 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "src/index.js",
-      "src/serviceWorker.js"
+      "src/serviceWorker.js",
+      "src/state-management/actions"
     ]
   },
   "version": "0.1.0",

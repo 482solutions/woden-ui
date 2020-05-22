@@ -57,8 +57,7 @@ class ChangePassword extends Component {
               name="oldPassword"
               rules={[{ required: true, message: 'Please input your current password!' }]}
             >
-              <Input.Password className="ChangePassword"/>
-              {/* <Input.Password className='formItem inputItem newPassword'/> */}
+               <Input.Password className='formItem inputItem newPassword'/>
             </Form.Item>
             <label className='upperLabel'>New password</label>
             <Form.Item
