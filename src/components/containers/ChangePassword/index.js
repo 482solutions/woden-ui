@@ -39,7 +39,6 @@ class ChangePassword extends Component {
         <Button onClick={this.showModal}>
            <SettingFilled/>
         </Button>
-        <span>dawdawda</span>
         <Modal
           title="Change password"
           visible={visible}

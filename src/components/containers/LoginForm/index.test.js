@@ -7,7 +7,6 @@ import { Button, Form, Input } from 'antd';
 import LoginForm from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
-
 it('Renders "LoginForm" check all components', () => {
   const wrapper = shallow(<LoginForm/>);
   expect(wrapper.find(Button)).to.have.lengthOf(1);
