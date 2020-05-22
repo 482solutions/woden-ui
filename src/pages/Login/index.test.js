@@ -13,3 +13,17 @@ it('Render without crashing', () => {
   expect(wrapper.find('.Welcome')).to.have.lengthOf(1);
   expect(wrapper.find(LoginForm)).to.have.lengthOf(1);
 });
+
+it('Calls functions Login', () => {
+  const wrapper = shallow(<Login
+    replace={() => {
+    }}
+    loginRequest={() => {
+    }}
+    componentDidMount={() => {
+    }}
+  />);
+  wrapper.instance().replace();
+  wrapper.instance().loginRequest();
+  wrapper.instance().componentDidMount();
+});
