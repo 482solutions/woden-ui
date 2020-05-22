@@ -74,6 +74,7 @@ export class RegistrationForm extends Component {
         <Form.Item
           name='password'
           id="Password"
+          className="password"
           rules={[
             {
               required: true,
