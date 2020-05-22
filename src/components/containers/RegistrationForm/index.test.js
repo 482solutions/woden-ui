@@ -79,6 +79,6 @@ it('Please enter your password!', () => {
     </Router>,
   );
 
-  expect(wrapper.find('.loginInputItem').at(11).simulate('change',
+  expect(wrapper.find('.password').at(0).simulate('change',
     { target: { name: 'password', value: '' } }));
 });

@@ -18,9 +18,24 @@ it('Renders "ChangePassword" check all components', () => {
   expect(wrapper.find(Modal)).to.have.lengthOf(1);
   expect(wrapper.find(SettingFilled)).to.have.lengthOf(1);
 });
+
 it('Renders "ChangePassword" check change "visible" state after click on special button', () => {
   const wrapper = shallow(<ChangePassword/>);
   expect(wrapper.state().visible).to.equal(false);
   wrapper.find(Button).at(0).simulate('click');
   expect(wrapper.state().visible).to.equal(true);
+});
+
+it('Renders components Buttons', () => {
+  const wrapper = shallow(<ChangePassword
+    showModal={() => {
+    }}
+    onFinish={() => {
+    }}
+    handleCancel={() => {
+    }}
+  />);
+  wrapper.instance().showModal();
+  wrapper.instance().onFinish();
+  wrapper.instance().handleCancel();
 });

@@ -14,11 +14,14 @@ it('Render without crashing', () => {
   expect(wrapper.find('.logout')).to.have.lengthOf(1);
   expect(wrapper.find('.profile')).to.have.lengthOf(1);
 });
-it('Render without crashing', () => {
-  const wrapper = shallow(<Header isLoggedIn={true}/>);
-  expect(wrapper.find('#HeaderLogo')).to.have.lengthOf(1);
-  expect(wrapper.find('.search-block')).to.have.lengthOf(1);
-  expect(wrapper.find('.changePassword')).to.have.lengthOf(1);
-  expect(wrapper.find('.logout')).to.have.lengthOf(1);
-  expect(wrapper.find('.profile')).to.have.lengthOf(1);
+
+it('Renders components Buttons', () => {
+  const wrapper = shallow(<Header
+    changePassword={() => {
+    }}
+    onSearch={() => {
+    }}
+  />);
+  wrapper.instance().changePassword();
+  wrapper.instance().onSearch();
 });
