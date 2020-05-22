@@ -1,5 +1,11 @@
 {
   "name": "woden-ui",
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "src/index.js",
+      "src/serviceWorker.js"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -70,6 +76,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
+    "startci": "webpack-dev-server --mode none",
     "build": "webpack --mode production",
     "test": "react-scripts test",
     "coverage": "npm test -- --coverage --watchAll=false",

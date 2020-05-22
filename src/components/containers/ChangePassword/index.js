@@ -34,85 +34,88 @@ class ChangePassword extends Component {
 
   render() {
     const { visible, loading } = this.state;
-    return (<div>
-      <Button onClick={this.showModal}>
-        <SettingFilled/>
-      </Button>
-      <Modal
-        title="Change password"
-        visible={visible}
-        onCancel={this.handleCancel}
-        width={377}
-        footer={null}
-        id="passwordModal"
-      >
-        <Form
-          onFinish={this.onFinish}
-          className='flex-direction-column flex-up'
-          id='passwordElement'
+    return (
+      <div>
+        <Button onClick={this.showModal}>
+           <SettingFilled/>
+        </Button>
+        <span>dawdawda</span>
+        <Modal
+          title="Change password"
+          visible={visible}
+          onCancel={this.handleCancel}
+          width={377}
+          footer={null}
+          id="passwordModal"
         >
-          <label className='upperLabel'>Current password</label>
-          <Form.Item
-            name="oldPassword"
-            rules={[{ required: true, message: 'Please input your current password!' }]}
+          <Form
+            onFinish={this.onFinish}
+            className='flex-direction-column flex-up'
+            id='passwordElement'
           >
-            <Input.Password className='formItem inputItem'/>
-          </Form.Item>
-          <label className='upperLabel'>New password</label>
-          <Form.Item
-            name="newPassword"
-            rules={[
-              {
-                required: true,
-                message: 'Please input password!',
-              },
-              () => ({
-                validator(rule, value) {
-                  if (!value || value.match(
-                    /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
-                  )) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject('Incorrect password!');
-                },
-              }),
-            ]}
-          >
-            <Input.Password className='formItem inputItem'/>
-          </Form.Item>
-          <label className='upperLabel'>Confirm password</label>
-          <Form.Item
-            name="confirmPassword"
-            rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
-              ({ getFieldValue }) => ({
-                validator(rule, value) {
-                  if (!value || getFieldValue('newPassword') === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject('The two passwords that you entered do not match!');
-                },
-              }),
-            ]}
-          >
-            <Input.Password className='formItem inputItem'/>
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type='primary'
-              htmlType='submit'
-              loading={loading}
-              className='formItem buttonItem'
+            <label className='upperLabel'>Current password</label>
+            <Form.Item
+              name="oldPassword"
+              rules={[{ required: true, message: 'Please input your current password!' }]}
             >
-              Save Changes
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>);
+              <Input.Password className="ChangePassword"/>
+              {/* <Input.Password className='formItem inputItem newPassword'/> */}
+            </Form.Item>
+            <label className='upperLabel'>New password</label>
+            <Form.Item
+              name="newPassword"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input password!',
+                },
+                () => ({
+                  validator(rule, value) {
+                    if (!value || value.match(
+                      /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
+                    )) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('Incorrect password!');
+                  },
+                }),
+              ]}
+            >
+              <Input.Password className='formItem inputItem'/>
+            </Form.Item>
+            <label className='upperLabel'>Confirm password</label>
+            <Form.Item
+              name="confirmPassword"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue('newPassword') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('The two passwords that you entered do not match!');
+                  },
+                }),
+              ]}
+            >
+              <Input.Password className='formItem inputItem'/>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type='primary'
+                htmlType='submit'
+                loading={loading}
+                className='formItem buttonItem'
+              >
+                Save Changes
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      </div>);
   }
 }
 
