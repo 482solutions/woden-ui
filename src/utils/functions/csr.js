@@ -26,3 +26,5 @@ export const getCSR = (userData) => {
   });
   return { csrPem, privateHex, privateKeyPem };
 };
+
+export default getCSR;

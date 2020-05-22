@@ -15,3 +15,7 @@ it('Render without crashing', () => {
   expect(wrapper.find('#Confirm')).to.have.lengthOf(1);
   expect(wrapper.find('.LoginButtonItem')).to.have.lengthOf(1);
 });
+
+it('Please confirm your password', () => {
+
+});
