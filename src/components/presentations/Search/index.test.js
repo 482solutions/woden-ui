@@ -10,3 +10,11 @@ it('Render without crashing', () => {
   const wrapper = shallow(<Search/>);
   expect(wrapper.find('.searchElements')).to.have.lengthOf(1);
 });
+
+it('Calls functions Search', () => {
+  const wrapper = shallow(<Search
+    searchFile={() => {
+    }}
+  />);
+  wrapper.instance().searchFile();
+});

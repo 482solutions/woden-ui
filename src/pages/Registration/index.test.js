@@ -16,14 +16,8 @@ it('Render components without crashing', () => {
 
 it('Renders components Registration', () => {
   const wrapper = shallow(<Registration
-    replace={() => {
-    }}
     regRequest={() => {
     }}
-    componentDidMount={() => {
-    }}
   />);
-  wrapper.instance().replace();
   wrapper.instance().regRequest();
-  wrapper.instance().componentDidMount();
 });

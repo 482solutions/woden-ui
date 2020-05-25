@@ -7,7 +7,6 @@ import { FileAddTwoTone } from '@ant-design/icons';
 import { NewFolder } from '..';
 import Buttons from './index';
 
-
 Enzyme.configure({ adapter: new Adapter() });
 
 it('Renders components Buttons', () => {
