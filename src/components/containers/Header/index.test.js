@@ -17,9 +17,9 @@ it('Render without crashing', () => {
 
 it('Renders components Buttons', () => {
   const wrapper = shallow(<Header
-    changePassword={() => {
+    changePasswordRequest={() => {
     }}
-    onSearch={() => {
+    search={() => {
     }}
   />);
   wrapper.instance().changePassword();

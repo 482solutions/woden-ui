@@ -19,7 +19,6 @@ export class Header extends Component {
   }
 
   async onSearch(value) {
-    console.log(value);
     await this.props.search(value);
   }
 

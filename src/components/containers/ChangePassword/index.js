@@ -8,9 +8,7 @@ class ChangePassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ModalText: 'Content of the modal',
       visible: false,
-      confirmLoading: false,
       loading: false,
     };
     this.showModal = this.showModal.bind(this);
