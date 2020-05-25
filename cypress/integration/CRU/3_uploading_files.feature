@@ -7,8 +7,9 @@ Feature: Uploading files
 
   Rule: user should be registered
 
-    Background: Create a user before starting the tests
-      Given Login as new user
+    Background:
+      Given Register without UI
+      And Login as new user without UI
 
     Scenario: 1 User can upload txt file
 #    And the user is located in his root folder or in the folder where he has "Editors" rights
@@ -27,10 +28,10 @@ Feature: Uploading files
 #    And The user is the owner of this file
 
 #  TODO will be available after implementing the version function:
-    Scenario: 3 User can not upload two files at the same name
+    Scenario: 3 User can not upload two files with the same name
 #    And the user is located in his root folder or in the  folder where he has "Editors" rights
       When The user press Upload a new file button
-      And Choose two files from PC directory
+      And Choose two files from PC directory with the same name
       Then The user gets error notification "The file with this name already exists"
       And The file is not uploaded
 
@@ -43,3 +44,4 @@ Feature: Uploading files
       Then The txt and pem files are uploaded
 #    And The user is the owner of this file
 
+# TODO почему после каждой загрузки или создания файла cypress чистит авторизоцию?

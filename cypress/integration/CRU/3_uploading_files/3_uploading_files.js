@@ -1,13 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before("Register new user", () => {
-    cy.registerUser();
-});
-
-Given(/^Login as new user$/, () => {
-    cy.loginAsNewUser()
-});
-
 When(/^Choose the needed txt file from its PC directory$/, () => {
     cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
 });
@@ -29,7 +21,7 @@ Then(/^The txt and pem files are uploaded$/, () =>  {
     cy.contains('test.pem').should('be.visible').wait(1000)
 });
 
-When(/^Choose two files from PC directory$/, () =>  {
+When(/^Choose two files from PC directory with the same name$/, () =>  {
     cy.get('input[type=file]').attachFile('cantUpload.txt')
     cy.get('input[type=file]').attachFile('cantUpload.txt')
         .wait(1000);

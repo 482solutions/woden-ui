@@ -2,14 +2,11 @@ import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 const generator = require('generate-password');
 
-let login;
-let email;
-let password;
+let login = generator.generate({});
+let email = `${login.toLowerCase()}@gmail.com`;
+let password = `${login}12345`;
 
-before('Register new user and login', () => {
-    login = generator.generate({});
-    email = `${login.toLowerCase()}@gmail.com`;
-    password = `${login}12345`;
+before('Register new user', () => {
     cy.visit('/');
     cy.get('.ant-col-offset-2 > a').click();
     cy.get('#name').type(login);
@@ -38,8 +35,7 @@ before('Register new user and login', () => {
                 };
                 xhr.send();
             })
-        ))
-    cy.wait('@getCert').then((xhr) => {
+        )).wait('@getCert').then((xhr) => {
         cy.writeFile('cypress/fixtures/cert.pem', xhr.responseBody.cert)
     })
 });

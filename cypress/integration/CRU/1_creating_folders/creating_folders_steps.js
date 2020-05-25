@@ -1,13 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before("Generate user's data and register", function () {
-    cy.registerUser();
-});
-
-Then(/^Login as new user$/, function () {
-    cy.loginAsNewUser()
-});
-
 Then(/^The folder is NOT created$/, function () {
 
 });

@@ -1,24 +1,24 @@
-#@test_case_2.8
-#@viewing_previous_versions
-## ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.8'
-#
-#Feature:  Search of files and folders
-#  As a user (any role), I want to have a search bar so that I can search any file or folder by its name.
-#
-#  Background: Register new user
-#    Given Register new user
-#    And Login as new user
-#    When The user locate on dashboard
-#    And Upload files "test1.txt", "test2.doc"
-#    Then Create folder with name "testFolder"
-#    And Folder should be visible on dashboard
-#
-#  Scenario: 1 Search file
+@test_case_2.8
+@viewing_previous_versions
+# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.8'
+
+Feature:  Search of files and folders
+  As a user (any role), I want to have a search bar so that I can search any file or folder by its name.
+  Rule: user should be registered and has files in folders.
+
+#    Scenario: Create a user before starting the tests
+#      Given Register without UI
+#      And Login as new user without UI
+#      When Create folder testFolder without UI
+#      And Upload files test1.txt, test2.txt to these folders without UI
+#      Then Folder should be visible on dashboard
+
+  Scenario: 1 Search file
 #    Given The user is authorized
-#    And Any page of the application is open
-#    When The user types the name "test1" of a file or folder
-#    And The user presses the search button
-#    Then Search result is file "test1.txt"
+    And Any page of the application is open
+    When The user types the name "test1" of a file or folder
+    And The user presses the search button
+    Then Search result is file "test1.txt"
 #
 #  Scenario: 2 Search file by characters in name
 #    Given The user is authorized

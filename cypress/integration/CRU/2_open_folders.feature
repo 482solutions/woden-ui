@@ -6,8 +6,10 @@ Feature: Open folders
   As a user (any role), I want to open any available folder so that I can upload files there.
 
   Rule: user should be registered.
+
     Background: Create a user before starting the tests
-      Given Login as new user
+      Given Register without UI
+      And Login as new user without UI
 
     Scenario Outline: Create folders before the test
       When The user press Create a new folder button

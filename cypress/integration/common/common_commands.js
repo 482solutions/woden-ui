@@ -12,6 +12,15 @@ When(/^there is no open session$/, () => {
   }
 });
 
+Given("Register without UI", () => {
+  cy.registerUser();
+});
+
+When(/^Login as new user without UI$/, () => {
+  cy.loginAsNewUser()
+});
+
+
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -82,3 +91,4 @@ When(/^Press Create folder$/, function () {
 When(/^The user press Upload a new file button$/, () => {
   cy.contains('File Upload').click().wait(1000)
 });
+
