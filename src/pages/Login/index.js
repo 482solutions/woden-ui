@@ -7,6 +7,18 @@ import './style.css';
 import { actions } from '../../state-management';
 
 export class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loginRequest = this.loginRequest.bind(this);
+    this.replace = this.replace.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.replace();
+    }
+  }
+
   replace() {
     this.props.history.replace('/');
   }
@@ -16,11 +28,6 @@ export class Login extends React.Component {
     this.replace();
   }
 
-  componentDidMount() {
-    if (this.props.isLoggedIn) {
-      this.replace();
-    }
-  }
 
   render() {
     return (

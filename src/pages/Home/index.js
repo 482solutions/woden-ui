@@ -12,6 +12,8 @@ export class Home extends React.Component {
     super(props);
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
+    this.openFolder = this.openFolder.bind(this);
+    this.downloadFile = this.downloadFile.bind(this);
   }
 
   async componentDidMount() {
