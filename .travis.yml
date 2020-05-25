@@ -24,6 +24,6 @@ script:
 - cd woden-server-js && docker-compose up --build -d
 - cd ..
 - npm ci
-- npm startci & sleep 10
+- npm run startci & sleep 10
 - npm run cypress:run
 - npm run coverage
