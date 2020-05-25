@@ -13,7 +13,7 @@ it('Render without crashing', () => {
 
 it('Calls functions Search', () => {
   const wrapper = shallow(<Search
-    searchFile={() => {
+    onSearch={() => {
     }}
   />);
   wrapper.instance().searchFile();
