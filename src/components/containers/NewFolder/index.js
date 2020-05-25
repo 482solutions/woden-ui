@@ -24,47 +24,47 @@ const NewFolder = ({ onFinish: createFolder }) => {
     setVisible(false);
   };
   return (<div>
-      <Button onClick={showModal}>
-        <FolderAddTwoTone/>
-        New Folder
-      </Button>
-      <Modal
-        title="Create Folder"
-        className="createFolder"
-        visible={visible}
-        onCancel={handleCancel}
-        width={377}
-        footer={null}
+    <Button onClick={showModal}>
+      <FolderAddTwoTone/>
+      New Folder
+    </Button>
+    <Modal
+      title="Create Folder"
+      className="createFolder"
+      visible={visible}
+      onCancel={handleCancel}
+      width={377}
+      footer={null}
+    >
+      <Form
+        onFinish={onFinish}
+        form={form}
+        className='flex-direction-column flex-up'
       >
-        <Form
-          onFinish={onFinish}
-          form={form}
-          className='flex-direction-column flex-up'
+        <Form.Item
+          name="newFolder"
+          rules={[{ required: true, message: 'Please input name for new folder' }]}
         >
-          <Form.Item
-            name="newFolder"
-            rules={[{ required: true, message: 'Please input name for new folder' }]}
-          >
-            <Input className='formItem inputItem' id='FolderNameField' placeholder="Folder Name"/>
-          </Form.Item>
-          <Form.Item className='formItem buttonItem'>
-            <div className='flex-start'>
-              <Col span={1} offset={12}>
-                <Button key="back" onClick={handleCancel}>
-                  Cancel
-                </Button>
-              </Col>
-              <Col span={1} offset={5}>
-                <Button htmlType='submit' type="primary" loading={loading}>
-                  Create
-                </Button>
-              </Col>
-            </div>
+          <Input className='formItem inputItem' id='FolderNameField' placeholder="Folder Name"/>
+        </Form.Item>
+        <Form.Item className='formItem buttonItem'>
+          <div className='flex-start'>
+            <Col span={1} offset={12}>
+              <Button key="back" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </Col>
+            <Col span={1} offset={5}>
+              <Button htmlType='submit' type="primary" loading={loading}>
+                Create
+              </Button>
+            </Col>
+          </div>
 
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>);
+        </Form.Item>
+      </Form>
+    </Modal>
+  </div>);
 };
 
 export default NewFolder;

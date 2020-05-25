@@ -4,10 +4,10 @@ import { Button } from 'antd';
 
 import { actions } from '../../../state-management';
 
-const Logout = ({ logout }) => (
+export const Logout = ({ logout }) => (
   <Button
     onClick={() => {
-      logout()
+      logout();
     }}
     className="button"
   >

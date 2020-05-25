@@ -79,6 +79,7 @@ class LoginForm extends Component {
       <Form
         onFinish={this.onFinish}
         className='flex-direction-column flex-up'
+        id='LoginForm'
         layout={this.layout}
       >
         <label className='loginLabel'>Sign In</label>

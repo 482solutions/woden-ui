@@ -14,6 +14,7 @@ class Search extends React.Component {
   render() {
     return (
       <Input.Search
+        className="searchElements"
         placeholder="Input folder or file name for search"
         enterButton="Search"
         size="large"

@@ -7,7 +7,7 @@ import { Search } from '../../presentations';
 import logoRow from '../../../assets/images/logoRow.svg';
 import './style.css';
 
-class Header extends Component {
+export class Header extends Component {
   constructor(props) {
     super(props);
     this.changePassword = this.changePassword.bind(this);
@@ -27,7 +27,7 @@ class Header extends Component {
     return (
       <Row className="holder">
         <Col span={3} className={'headerLogo flex-start'}>
-          <img src={logoRow} alt="Woden logo"/>
+          <img src={logoRow} alt="Woden logo" id="HeaderLogo"/>
         </Col>
         {
           isLoggedIn && (
@@ -35,13 +35,13 @@ class Header extends Component {
               <Col span={10} className='search-block'>
                 <Search onSearch={this.onSearch}/>
               </Col>
-              <Col span={1} offset={3} className="flex-end">
+              <Col span={1} offset={3} className="flex-end changePassword">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
-              <Col span={4} className="flex-end">
+              <Col span={4} className="flex-end logout">
                 <Logout/>
               </Col>
-              <Col span={3}>
+              <Col span={3} className="profile">
                 <Profile/>
               </Col>
             </>

@@ -19,7 +19,6 @@ class Profile extends Component {
     if (token) {
       const { data: userName } = jwt.decode(token);
       if (userName) {
-
         this.setState({ userName });
       }
     }
@@ -29,7 +28,7 @@ class Profile extends Component {
     const { userName } = this.state;
     return (
       <div className="homeProfile">
-        <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>}/>
+        <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>} className="profileImage"/>
         <div className="userName">{userName}</div>
       </div>
     );
