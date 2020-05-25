@@ -21,6 +21,9 @@ it('Renders components Buttons', () => {
 });
 
 it('Renders components Buttons', () => {
-  const wrapper = shallow(<Buttons uploadFile={() => {}}/>);
+  const wrapper = shallow(<Buttons
+    uploadFile={() => {
+    }}
+  />);
   wrapper.instance().beforeUpload();
 });

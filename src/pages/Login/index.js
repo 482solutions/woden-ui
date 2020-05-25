@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LoginForm } from "../../components";
+import { LoginForm } from '../../components';
 import loginWelcome from '../../assets/images/loginWelcome.svg';
 import logoCol from '../../assets/images/logoCol.svg';
 import './style.css';
 import { actions } from '../../state-management';
 
 export class Login extends React.Component {
-  replace = () => {
+  replace() {
     this.props.history.replace('/');
-  };
-  loginRequest = async (loginData) => {
+  }
+
+  async loginRequest(loginData) {
     await this.props.loginRequest(loginData);
     this.replace();
-  };
+  }
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -39,5 +40,4 @@ export class Login extends React.Component {
 }
 
 export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { loginRequest: actions.loginRequest }
-)(Login);
+  { loginRequest: actions.loginRequest })(Login);

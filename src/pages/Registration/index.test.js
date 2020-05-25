@@ -7,9 +7,23 @@ import { RegistrationForm } from '../../components/containers/RegistrationForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it('Render without crashing', () => {
+it('Render components without crashing', () => {
   const wrapper = shallow(<Registration/>);
   expect(wrapper.find('.WodenLogo')).to.have.lengthOf(1);
   expect(wrapper.find('.Welcome')).to.have.lengthOf(1);
   expect(wrapper.find(RegistrationForm)).to.have.lengthOf(1);
+});
+
+it('Renders components Registration', () => {
+  const wrapper = shallow(<Registration
+    replace={() => {
+    }}
+    regRequest={() => {
+    }}
+    componentDidMount={() => {
+    }}
+  />);
+  wrapper.instance().replace();
+  wrapper.instance().regRequest();
+  wrapper.instance().componentDidMount();
 });
