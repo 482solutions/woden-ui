@@ -16,14 +16,8 @@ it('Render without crashing', () => {
 
 it('Calls functions Login', () => {
   const wrapper = shallow(<Login
-    replace={() => {
-    }}
     loginRequest={() => {
     }}
-    componentDidMount={() => {
-    }}
   />);
-  wrapper.instance().replace();
   wrapper.instance().loginRequest();
-  wrapper.instance().componentDidMount();
 });
