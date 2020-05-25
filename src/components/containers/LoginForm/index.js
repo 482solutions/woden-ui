@@ -22,10 +22,6 @@ class LoginForm extends Component {
     this.beforeUpload = this.beforeUpload.bind(this);
   }
 
-  test() {
-    console.log(3);
-  }
-
   toggleLoading() {
     this.setState((prevState) => ({
       isLoading: !prevState.isLoading,

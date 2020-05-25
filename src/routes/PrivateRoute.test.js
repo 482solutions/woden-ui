@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 function setup(customProps) {
   const props = {
+    // eslint-disable-next-line react/display-name
     component: () => <h1>Hyperspace tracker</h1>,
     isLoggedIn: false,
     redirect: '/login',
