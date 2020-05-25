@@ -37,3 +37,14 @@ it('Please enter your name!', () => {
   expect(wrapper.find('.loginInputItem').at(0).simulate('change',
     { target: { name: 'name', value: '' } }));
 });
+
+it('Calls functions Login', () => {
+  const wrapper = shallow(<LoginForm
+    toggleLoading={() => {
+    }}
+    onFinish={() => {
+    }}
+  />);
+  wrapper.instance().toggleLoading();
+  wrapper.instance().onFinish();
+});

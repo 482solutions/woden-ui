@@ -64,6 +64,8 @@ class ChangePassword extends Component {
             <label className='upperLabel'>New password</label>
             <Form.Item
               name="newPassword"
+              className="newPassword"
+              id="NewPassword"
               rules={[
                 {
                   required: true,
