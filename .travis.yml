@@ -21,8 +21,9 @@ cache:
 script:
 - npm run lint:js
 - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-- cd woden-server-js && docker-compose up --build -d 
-- cd .. 
+- cd woden-server-js && docker-compose up --build -d
+- cd ..
 - npm ci
-- npm start & sleep 10 
+- npm startci & sleep 10
 - npm run cypress:run
+- npm run coverage

@@ -7,7 +7,6 @@
 1. Clone this repository
 2. `npm install`
 3. `npm test`
-4. `npm run coverage`
 ## How to run:
 1. Clone this repository
 2. `npm install`
