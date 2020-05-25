@@ -48,8 +48,11 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@commitlint/cli": "^8.3.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-import": "^1.12.0",
+    "commitlint-config-jira": "^1.4.1",
+    "commitlint-plugin-jira-rules": "^1.4.0",
     "css-loader": "^3.5.2",
     "cypress": "^4.5.0",
     "cypress-cucumber-preprocessor": "^2.3.1",
@@ -67,6 +70,7 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
+    "husky": "^4.2.5",
     "mocha": "~2.3.4",
     "mochawesome": "^6.1.0",
     "redux-mock-store": "^1.5.4",
@@ -106,6 +110,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run lint:js",
+      "pre-push": "npm run lint:js"
+    }
   },
   "proxy": "http://localhost:3000"
 }
