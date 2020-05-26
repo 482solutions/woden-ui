@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import { Registration } from './index';
 import { RegistrationForm } from '../../components/containers/RegistrationForm';
-import {Login} from "../Login";
 
 Enzyme.configure({ adapter: new Adapter() });
 
