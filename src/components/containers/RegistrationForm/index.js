@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   Button, Col, Form, Input, Row,
 } from 'antd';
 import './styles.css';
 
-class RegistrationForm extends Component {
+export class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,11 +30,12 @@ class RegistrationForm extends Component {
     return (
       <Form
         onFinish={this.onFinish}
-        className='flex-direction-column flex-up'
+        className='flex-direction-column flex-up registrationElement'
       >
         <label className='loginLabel'>Sign up</label>
         <Form.Item
           name="name"
+          id="Name"
           rules={[
             () => ({
               validator(rule, value) {
@@ -56,6 +56,7 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name="email"
+          id="Email"
           rules={[
             {
               type: 'email',
@@ -72,6 +73,8 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name='password'
+          id="Password"
+          className="password"
           rules={[
             {
               required: true,
@@ -95,6 +98,7 @@ class RegistrationForm extends Component {
         </Form.Item>
         <Form.Item
           name='confirm'
+          id="Confirm"
           rules={[
             {
               required: true,
@@ -105,7 +109,6 @@ class RegistrationForm extends Component {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                // eslint-disable-next-line prefer-promise-reject-errors
                 return Promise.reject('The two passwords that you entered do not match!');
               },
             }),
@@ -136,4 +139,4 @@ class RegistrationForm extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }))(RegistrationForm);
+export default RegistrationForm;

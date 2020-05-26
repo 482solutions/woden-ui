@@ -1,5 +1,9 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
+before(() => {
+    cy.registerUser()
+})
+
 When(/^Choose the needed txt file from its PC directory$/, () => {
     cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
 });
@@ -42,6 +46,6 @@ Then(/^Message "([^"]*)"$/, (messUploadFile) => {
         .should("contain.text", messUploadFile)
 });
 
-When(/^Choose the needed PDF file from its PC directory$/, () =>  {
-    cy.get('input[type=file]').attachFile('test.pdf').wait(1000);
+When(/^Choose the needed PNG file from its PC directory$/, () =>  {
+    cy.get('input[type=file]').attachFile('image.png').wait(1000);
 });

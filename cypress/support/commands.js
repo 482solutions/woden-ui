@@ -4,10 +4,10 @@ import { getCSR } from '../../src/utils/functions'
 const generator = require('generate-password');
 import fs from 'fs';
 
-var chai = require('chai')
-    , chaiHttp = require('chai-http');
-
-chai.use(chaiHttp);
+// var chai = require('chai')
+//     , chaiHttp = require('chai-http');
+//
+// chai.use(chaiHttp);
 
 const basic = 'http://localhost:1823/api/v1/user'
 const headers = {'content-type': 'application/json'}
@@ -46,8 +46,8 @@ Cypress.Commands.add('loginAsNewUser', () => {
                 url: basic + '/auth',
                 headers: headers,
                 body: {
-                    'login': 'YIwxicmLYiiOnTk',
-                    'password': '3da6bcd862396bebb04a6a85bc44a581a9c7c5cdbd8c92314fbc30af259d0dd6',
+                    'login': login,
+                    'password': password,
                     'certificate': certificate,
                     'privateKey': key,
                 },
@@ -60,6 +60,7 @@ Cypress.Commands.add('loginAsNewUser', () => {
             onBeforeLoad(win) {
                 win.localStorage.setItem('token', user.body.token)
                 win.localStorage.setItem('rootFolder', user.body.folder)
+
             },
         }).as('Set user token')
     })
@@ -93,3 +94,7 @@ Cypress.Commands.add('uploadFile',  () => {
     //         expect(result).to.have.status(200)
     //     })
 });
+
+Cypress.Commands.add('userAuth', () => {
+    expect(sha256(login)).to.equal(localStorage.rootFolder)
+})

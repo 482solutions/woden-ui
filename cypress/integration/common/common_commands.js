@@ -92,3 +92,6 @@ When(/^The user press Upload a new file button$/, () => {
   cy.contains('File Upload').click().wait(1000)
 });
 
+Given(/^The user is authorized$/, function () {
+  cy.userAuth()
+});

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-import './style.css'
+import './style.css';
 
-export default ({ accept, beforeUpload, title, description }) => (
+export default ({
+  accept, beforeUpload, title, description,
+}) => (
   <div id="LoginFileDrop">
     <Upload.Dragger
       name="file"

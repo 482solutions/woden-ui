@@ -10,8 +10,7 @@ Feature: Creating folders
   Rule: user should be registered.
 
     Background: Create a user before starting the tests
-      Given Register without UI
-      And Login as new user without UI
+      Given Login as new user without UI
 
     Scenario Outline: 1 New folder in root folder
       Given The user is located in his root folder

@@ -17,13 +17,11 @@ class Buttons extends Component {
 
   render() {
     return (
-      <div className="home__buttons">
+      <div className="homeButtons">
         <Col offset={17}>
           <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
             <Button className="upload-button">
-					<span role="img">
-					</span>
-              <FileAddTwoTone/> File Upload
+              <FileAddTwoTone/>File Upload
             </Button>
           </Upload>
         </Col>
