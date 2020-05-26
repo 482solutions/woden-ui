@@ -15,7 +15,11 @@ it('Render components without crashing', () => {
 });
 
 it('Renders components Registration', () => {
+  const history = {
+    replace: ()=>{}
+  }
   const wrapper = shallow(<Registration
+      history={history}
     regRequest={() => {
     }}
   />);

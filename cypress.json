@@ -1,5 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
+  "defaultCommandTimeout": 12000,
+  "requestTimeout": 10000,
   "projectId": "mxxwps",
   "video": false,
   "viewportWidth": 1280,
