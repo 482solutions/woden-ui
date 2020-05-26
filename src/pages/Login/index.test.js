@@ -22,10 +22,6 @@ it('Calls functions Login', () => {
       history={history}
     loginRequest={() => {
     }}
-    componentDidMount={() => {
-    }}
   />);
-  wrapper.instance().replace();
   wrapper.instance().loginRequest();
-  wrapper.instance().componentDidMount();
 });

@@ -23,10 +23,6 @@ it('Renders components Registration', () => {
       history={history}
     regRequest={() => {
     }}
-    componentDidMount={() => {
-    }}
   />);
-  wrapper.instance().replace();
   wrapper.instance().regRequest();
-  wrapper.instance().componentDidMount();
 });

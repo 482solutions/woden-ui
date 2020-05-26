@@ -1,5 +1,6 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import {
@@ -7,8 +8,19 @@ import {
 } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import ChangePassword from './index';
+import LoginForm from '../LoginForm';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+window.matchMedia = window.matchMedia || function() {
+  return {
+    matches: false,
+    addListener() {
+    },
+    removeListener() {
+    },
+  };
+};
 
 it('Renders "ChangePassword" check all components', () => {
   const wrapper = shallow(<ChangePassword/>);

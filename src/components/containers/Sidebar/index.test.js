@@ -12,3 +12,11 @@ it('Render without crashing', () => {
   expect(wrapper.find('.sidebar')).to.have.lengthOf(1);
   expect(wrapper.find(Tree)).to.have.lengthOf(1);
 });
+
+it('Calls functions Login', () => {
+  const wrapper = shallow(<Sidebar
+    onSelect={() => {
+    }}
+  />);
+  wrapper.instance().onSelect();
+});

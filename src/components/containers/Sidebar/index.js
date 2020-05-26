@@ -6,8 +6,7 @@ import './style.css';
 const { TreeNode } = Tree;
 
 class Sidebar extends Component {
-  onSelect(selectedKeys, info) {
-    console.log('selected', selectedKeys, info);
+  onSelect() {
   }
 
   render() {
