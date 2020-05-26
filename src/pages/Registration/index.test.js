@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import { Registration } from './index';
 import { RegistrationForm } from '../../components/containers/RegistrationForm';
+import {Login} from "../Login";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -15,9 +16,11 @@ it('Render components without crashing', () => {
 });
 
 it('Renders components Registration', () => {
+  const history = {
+    replace: ()=>{}
+  }
   const wrapper = shallow(<Registration
-    replace={() => {
-    }}
+      history={history}
     regRequest={() => {
     }}
     componentDidMount={() => {
