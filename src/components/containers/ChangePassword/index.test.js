@@ -8,7 +8,6 @@ import {
 } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import ChangePassword from './index';
-import LoginForm from '../LoginForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
