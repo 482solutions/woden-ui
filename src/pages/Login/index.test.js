@@ -15,7 +15,11 @@ it('Render without crashing', () => {
 });
 
 it('Calls functions Login', () => {
+  const history = {
+    replace: ()=>{}
+  }
   const wrapper = shallow(<Login
+      history={history}
     loginRequest={() => {
     }}
   />);

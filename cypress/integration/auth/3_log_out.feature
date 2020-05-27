@@ -8,13 +8,8 @@ Feature: Log out
   Rule: user should be registered.
 
     Background:
-      Given The application is opened
-      And there is no open session
-      When Register new user
-      And The User got private key
-      Then The User got certificate in pem format
-      And Login as new user
-      Then User is signed in
+      Given Register without UI
+      And Login as new user without UI
 
     Scenario: 1 Log out
       Given User is signed in

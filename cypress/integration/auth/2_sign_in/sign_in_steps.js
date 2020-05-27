@@ -2,14 +2,11 @@ import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 const generator = require('generate-password');
 
-let login;
-let email;
-let password;
+let login = generator.generate({});
+let email = `${login.toLowerCase()}@gmail.com`;
+let password = `${login}12345`;
 
-before('Register new user and login', () => {
-    login = generator.generate({});
-    email = `${login.toLowerCase()}@gmail.com`;
-    password = `${login}12345`;
+before('Register new user', () => {
     cy.visit('/');
     cy.get('.ant-col-offset-2 > a').click();
     cy.get('#name').type(login);
@@ -38,13 +35,13 @@ before('Register new user and login', () => {
                 };
                 xhr.send();
             })
-        ))
-    cy.wait('@getCert').then((xhr) => {
+        )).wait('@getCert').then((xhr) => {
         cy.writeFile('cypress/fixtures/cert.pem', xhr.responseBody.cert)
     })
 });
 
 Given(/^User has filled in the field valid username$/, () => {
+    cy.wait(2000)
     cy.get('#name').type(login);
 });
 
@@ -61,10 +58,12 @@ Given(/^Pin privateKey$/, () => {
 });
 
 Given(/^User has filled in the field valid email$/, () => {
+    cy.wait(2000)
     cy.get('#name').type(email);
 });
 
 Given(/^User has filled invalid username (.*) in the field username from list$/, (invUsername) => {
+    cy.wait(2000)
     cy.get('#name').type(invUsername);
 });
 

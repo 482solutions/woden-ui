@@ -12,6 +12,15 @@ When(/^there is no open session$/, () => {
   }
 });
 
+Given("Register without UI", () => {
+  cy.registerUser();
+});
+
+When(/^Login as new user without UI$/, () => {
+  cy.loginAsNewUser()
+});
+
+
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -43,6 +52,7 @@ Then(/^Error notification User not found is shown$/, () => {
 });
 
 Then(/^Error notification is shown Invalid password supplied$/, () => {
+  cy.wait(2000)
   cy.contains('Invalid password supplied').should('be.visible')
 });
 
@@ -52,4 +62,36 @@ Then(/^Error message Username can not be empty$/, () => {
 
 Then(/^Error message Password can not be empty$/, () => {
   cy.contains('Password can not be empty').should('be.visible')
+});
+
+Given(/^The user is located in his root folder$/, function () {
+
+});
+
+When(/^The user press Create a new folder button$/, function () {
+  cy.contains('New Folder').click().wait(2000)
+});
+
+When(/^The field name is empty$/, function () {
+  cy.get('#newFolder').should('be.empty')
+});
+
+When(/^The field name (.*) is filled by user from list of folder name$/, function (folderName) {
+  cy.get('#newFolder').type(folderName).wait(1000)
+});
+
+Then(/^The folder is created with name (.*)$/, function (folderName) {
+  cy.contains(folderName).should('be.visible').wait(1000)
+});
+
+When(/^Press Create folder$/, function () {
+  cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click().wait(2000)
+});
+
+When(/^The user press Upload a new file button$/, () => {
+  cy.contains('File Upload').click().wait(1000)
+});
+
+Given(/^The user is authorized$/, function () {
+  cy.userAuth()
 });

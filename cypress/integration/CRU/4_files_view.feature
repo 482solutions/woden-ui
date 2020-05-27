@@ -20,7 +20,7 @@
 #    And the user has access to any available file
 #    When The user double click the file
 #    Then The file is downloaded
-#
+
 ##  (проверить то, что файл содержит те же данные)
 ##  cy.download().should('include', '') - get certificate
 ##
