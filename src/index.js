@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import Favicon from 'react-favicon';
 import jwt from 'jsonwebtoken';
 import 'antd/dist/antd.css';
 import './index.css';
@@ -19,6 +20,7 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
+    <Favicon url="../public/favicon.svg"/>
     <AppRouter/>
   </Provider>,
   document.getElementById('root'),
