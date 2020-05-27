@@ -126,7 +126,9 @@ section {
 .mb20 {
   margin-bottom: 20px;
 }
-
+.p10 {
+  padding: 10px;
+}
 .f36 {
   font-size: 36px;
 }
