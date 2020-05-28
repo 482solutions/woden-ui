@@ -22,24 +22,24 @@ class Buttons extends Component {
     this.props.getFolderData(hash);
   }
 
-  async goBack() {
-    const hash = await getParentHash();
-    this.props.getFolderData(hash);
-  }
+  // async goBack() {
+  //   const hash = await getParentHash();
+  //   this.props.getFolderData(hash);
+  // }
 
   render() {
     return (
       <div className="homeButtons">
         <Col>
-          <div onClick={this.goHome}>
+          <div onClick={this.goHome} className="goHome">
             <HomeOutlined/>
           </div>
         </Col>
         <Col>
-          <LeftOutlined onClick={this.goBack}/>
+          <LeftOutlined onClick={this.goBack} className="goBack"/>
         </Col>
         <Col>
-          <span>{this.props.folderName}</span>
+          <span className="currentFolder">{this.props.folderName}</span>
         </Col>
         <Col offset={16}>
           <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
