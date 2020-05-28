@@ -2,7 +2,7 @@ import Woden from 'woden';
 import download from 'downloadjs';
 import { message } from 'antd';
 import {
-  BACK, FORWARD, SET_FOLDER_DATA, SEARCH_FOLDER_FILE, DOWNLOAD_FILE,
+  BACK, FORWARD, SET_FOLDER_DATA, SEARCH_FOLDER_FILE, DOWNLOAD_FILE, GET_VERSIONS,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
 
@@ -108,6 +108,43 @@ export const downloadFile = (hash) => async(dispatch) => {
         download(file, name, type);
         dispatch({
           type: DOWNLOAD_FILE,
+        });
+      }
+    },
+  );
+};
+export const getVersions = (hash) => async(dispatch) => {
+  Bearer.apiKey = await getTokenForHeader();
+  const fakeResult = [
+    {
+      CID: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY',
+      Time: 1590657618,
+    },
+    {
+      CID: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5',
+      Time: 1590657000,
+    },
+  ];
+  api.versions(
+    hash,
+    (error, data, response) => {
+      if (error) {
+        message.error(response.body.message);
+      } else {
+        // TODO: Раскомментировать до реализации получения версий на стороне backend
+        // const versionList = response.body.versions;
+        // const versions = {
+        //   hash,
+        //   versionList,
+        // };
+        // TODO: Удалить после реализации получения списка версий на стороне backend
+        const versions = {
+          hash,
+          versionList: fakeResult,
+        };
+        dispatch({
+          type: GET_VERSIONS,
+          payload: versions,
         });
       }
     },

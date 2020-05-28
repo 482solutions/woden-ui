@@ -40,8 +40,8 @@ export class Home extends React.Component {
     this.props.downloadFile(hash);
   }
 
-  getVersions() {
-    // this.props.getVersions(hash);
+  getVersions(hash) {
+    this.props.getVersions(hash);
   }
 
   fileMenu(hash) {
@@ -61,6 +61,7 @@ export class Home extends React.Component {
     return (
       <div className="container flex-direction-row">
         <div>
+          <pre>{JSON.stringify(this.props.versions, null, 2)}</pre>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder} uploadFile={this.uploadFile}/>
@@ -118,6 +119,7 @@ export default connect(({ auth, filesystem }) => ({
   parentHash: filesystem.parentHash,
   entryFolders: filesystem.entryFolders,
   entryFiles: filesystem.entryFiles,
+  versions: filesystem.versions,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
@@ -125,6 +127,7 @@ export default connect(({ auth, filesystem }) => ({
   createFolder: actions.createFolder,
   uploadFile: actions.uploadFile,
   downloadFile: actions.downloadFile,
+  getVersions: actions.getVersions,
 })(
   Home,
 );
