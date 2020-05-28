@@ -66,7 +66,8 @@ export class Home extends React.Component {
           <Buttons newFolder={this.createFolder}
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
-                   folderName={this.props.folderName}/>
+                   folderName={this.props.folderName}
+                   parentHash={this.props.parentHash}/>
           <div className="flex-start ff-rw">
             {
               entryFolders.map((folder, i) => (

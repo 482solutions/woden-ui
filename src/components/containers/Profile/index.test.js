@@ -11,11 +11,3 @@ it('Render without crashing', () => {
   expect(wrapper.find('.profileImage')).to.have.lengthOf(1);
   expect(wrapper.find('.userName')).to.have.lengthOf(1);
 });
-
-it('Calls functions Search', () => {
-  const wrapper = shallow(<Profile
-    componentDidMount={() => {
-    }}
-  />);
-  wrapper.instance().componentDidMount();
-});

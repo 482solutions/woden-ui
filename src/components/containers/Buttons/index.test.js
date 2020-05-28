@@ -17,12 +17,18 @@ it('Renders components Buttons', () => {
   expect(wrapper.find(Button)).to.have.lengthOf(1);
   expect(wrapper.find(FileAddTwoTone)).to.have.lengthOf(1);
   expect(wrapper.find(NewFolder)).to.have.lengthOf(1);
+  expect(wrapper.find('.goHome')).to.have.lengthOf(1);
+  expect(wrapper.find('.goBack')).to.have.lengthOf(1);
+  expect(wrapper.find('.currentFolder')).to.have.lengthOf(1);
 });
 
 it('Renders components Buttons', () => {
   const wrapper = shallow(<Buttons
     uploadFile={() => {
     }}
+    goHome={() => {
+    }}
   />);
   wrapper.instance().beforeUpload();
+  wrapper.instance().goHome();
 });
