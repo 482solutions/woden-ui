@@ -3,7 +3,6 @@ import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 const generator = require('generate-password');
 
-// https://www.npmjs.com/package/generate-password
 let login;
 let email;
 let password;
