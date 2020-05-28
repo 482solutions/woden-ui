@@ -10,6 +10,7 @@ class Buttons extends Component {
     super(props);
     this.beforeUpload = this.beforeUpload.bind(this);
     this.goHome = this.goHome.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   beforeUpload(file) {
@@ -22,10 +23,10 @@ class Buttons extends Component {
     this.props.getFolderData(hash);
   }
 
-  // async goBack() {
-  //   const hash = await getParentHash();
-  //   this.props.getFolderData(hash);
-  // }
+  async goBack() {
+    const hash = await getRootFolderHash();
+    this.props.parentHash(hash);
+  }
 
   render() {
     return (
