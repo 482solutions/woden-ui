@@ -3,3 +3,12 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.goHome, .goBack{
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.currentFolder {
+  margin-left: 15px;
+}
