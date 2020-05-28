@@ -22,13 +22,18 @@ it('Renders components Buttons', () => {
   expect(wrapper.find('.currentFolder')).to.have.lengthOf(1);
 });
 
-it('Renders components Buttons', () => {
+it('Check uploadFile method', () => {
   const wrapper = shallow(<Buttons
     uploadFile={() => {
     }}
+  />);
+  wrapper.instance().beforeUpload();
+});
+
+it('Check goHome method', () => {
+  const wrapper = shallow(<Buttons
     goHome={() => {
     }}
   />);
-  wrapper.instance().beforeUpload();
   wrapper.instance().goHome();
 });
