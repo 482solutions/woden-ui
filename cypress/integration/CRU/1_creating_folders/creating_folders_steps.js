@@ -1,8 +1,8 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before(() => {
-    cy.registerUser()
-})
+// before(() => {
+//     cy.registerUser()
+// })
 
 Then(/^The folder is NOT created$/, function () {
 
@@ -42,3 +42,4 @@ Given(/^The user is created folder in root folder with name (.*) from list$/, fu
 Given(/^Open this folder with name (.*)$/, function (createdFolder) {
     cy.contains(createdFolder).dblclick()
 });
+

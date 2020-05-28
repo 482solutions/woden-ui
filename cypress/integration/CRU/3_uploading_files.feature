@@ -2,7 +2,7 @@
 @uploading_folders
 # ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.3'
 
-Feature: Uploading files
+Feature: Uploading filess
   As an editor or owner of the folder, I want to upload a new file so that I can view, update or share it
 
   Rule: user should be registered
@@ -12,6 +12,7 @@ Feature: Uploading files
 
     Scenario: 1 User can upload txt file
 #    And the user is located in his root folder or in the folder where he has "Editors" rights
+
       When The user press Upload a new file button
       And Choose the needed txt file from its PC directory
       Then The txt file is uploaded
