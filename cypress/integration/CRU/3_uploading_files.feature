@@ -1,6 +1,7 @@
 @test_case_2.3
 @uploading_folders
 # ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.3'
+
 Feature: Uploading files
   As an editor or owner of the folder, I want to upload a new file so that I can view, update or share it
 
