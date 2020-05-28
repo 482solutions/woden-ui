@@ -4,9 +4,6 @@ before(() => {
     cy.registerUser()
 })
 
-When(/^Login as new user without UI$/, () => {
-    cy.loginAsNewUser()
-});
 Given(/^Upload file "([^"]*)"$/, function () {
 
 });
