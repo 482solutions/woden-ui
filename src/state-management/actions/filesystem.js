@@ -45,6 +45,10 @@ export const getFolderData = (hash) => async(dispatch) => {
         const folderData = response.body.folder;
         folderData.folders = JSON.parse(folderData.folders);
         folderData.files = JSON.parse(folderData.files);
+        // TODO: Убрать следующую конструкцию после добавления cid на стороне backend
+        for (let i = 0; i < folderData.files.length; i += 1) {
+          folderData.files[i].cid = folderData.files[i].hash;
+        }
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -96,10 +100,10 @@ export const uploadFile = (file) => async(dispatch) => {
     },
   );
 };
-export const downloadFile = (hash) => async(dispatch) => {
+export const downloadFile = (cid) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
-    hash,
+    cid,
     (error, data, response) => {
       if (error) {
         message.error(response.body.message);
@@ -118,11 +122,11 @@ export const getVersions = (hash) => async(dispatch) => {
   const fakeResult = [
     {
       CID: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY',
-      Time: 1590657618,
+      Time: 1590657618000,
     },
     {
       CID: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5',
-      Time: 1590657000,
+      Time: 1590657000000,
     },
   ];
   api.versions(
