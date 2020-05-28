@@ -95,3 +95,11 @@ When(/^The user press Upload a new file button$/, () => {
 Given(/^The user is authorized$/, function () {
   cy.userAuth()
 });
+
+When(/^Choose the needed txt file from its PC directory$/, () => {
+  cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
+});
+
+Then(/^The txt file is uploaded$/, () => {
+  cy.contains('txtFile.txt').should('be.visible').wait(1000)
+});
