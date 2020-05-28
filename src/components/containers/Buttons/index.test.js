@@ -26,8 +26,11 @@ it('Check uploadFile method', () => {
   const wrapper = shallow(<Buttons
     uploadFile={() => {
     }}
+    goHome={() => {
+    }}
   />);
   wrapper.instance().beforeUpload();
+  wrapper.instance().goHome();
 });
 
 it('Check goHome method', () => {
