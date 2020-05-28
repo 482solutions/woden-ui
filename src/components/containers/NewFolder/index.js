@@ -7,7 +7,7 @@ import { FolderAddTwoTone } from '@ant-design/icons';
 const NewFolder = ({ onFinish: createFolder }) => {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [setLoading] = useState(false);
   const showModal = () => {
     setVisible(true);
   };
@@ -55,7 +55,7 @@ const NewFolder = ({ onFinish: createFolder }) => {
               </Button>
             </Col>
             <Col span={1} offset={5}>
-              <Button htmlType='submit' type="primary" loading={loading}>
+              <Button htmlType='submit' type="primary">
                 Create
               </Button>
             </Col>
