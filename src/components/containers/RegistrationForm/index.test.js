@@ -35,7 +35,7 @@ it('Incorrect username!', () => {
     </Router>,
   );
 
-  wrapper.find('.loginInputItem').at(0).simulate('change',
+  wrapper.find('#name').at(0).simulate('change',
     { target: { name: 'name', value: '   1' } });
 });
 
@@ -79,6 +79,6 @@ it('Please enter your password!', () => {
     </Router>,
   );
 
-  expect(wrapper.find('.password').at(0).simulate('change',
+  expect(wrapper.find('.loginInputItem').at(7).simulate('change',
     { target: { name: 'password', value: '' } }));
 });
