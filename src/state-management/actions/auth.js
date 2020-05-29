@@ -104,6 +104,7 @@ export const logout = () => async(dispatch) => {
   api.logout((error, data, response) => {
     message.success(response.body.message);
     localStorage.removeItem('token');
+    localStorage.removeItem('rootFolder');
     dispatch({
       type: LOGOUT,
     });
