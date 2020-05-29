@@ -13,7 +13,6 @@ import FileImage from '../../assets/images/file.svg';
 import More from '../../assets/images/more-vertical.svg';
 import CloseIcon from '../../assets/images/closeIcon.svg';
 import DownloadIcon from '../../assets/images/download.svg';
-import { FileAddTwoTone } from '@ant-design/icons';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -78,7 +77,7 @@ export class Home extends React.Component {
             await this.getVersions(hash, name);
           }}>Versions</span>
         </Menu.Item>
-        <Menu.Item key={`1${hash}`}>
+        <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
           <Upload name="file" beforeUpload={(file) => {
             this.updateFile(file, hash);
             return false;

@@ -120,3 +120,10 @@ it('Open file version Wrapper', () => {
   expect(wrapper.find(`#Time_${versions.versionList[0].CID}`).text()).to.equal(time);
   expect(wrapper.find(`#Download_${versions.versionList[0].CID}`)).to.have.lengthOf(1);
 });
+it('Check all Dropdown and simulate click', () => {
+  const wrapper = shallow(<Home entryFolders={fakeFolders} entryFiles={fakeFiles}
+                                createFolder={() => {}} getFolderData={() => {}}
+                                versions={versions}/>);
+  expect(wrapper.find(Dropdown).at(0).simulate('click')).to.be.ok;
+  expect(wrapper.find(Dropdown).at(1).simulate('click')).to.be.ok;
+});
