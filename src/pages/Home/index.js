@@ -150,10 +150,10 @@ export class Home extends React.Component {
             return (
               <Row key={version.CID} style={{ width: '100%' }}>
                 <span id={`CID_${version.CID}`} style={{ display: 'none' }}>{version.CID}</span>
-                <Col id={`Time_${version.CID}`} span={12} className='versionCode'>{time}</Col>
+                <Col span={12} className='versionCode'><span id={`Time_${version.CID}`}>{time}</span></Col>
                 <Col span={7} offset={2} className='versionAuthor'>{userName}</Col>
-                <Col id={`Download_${version.CID}`} span={3} className='versionDownload'>
-                  <img onClick={() => {
+                <Col span={3} className='versionDownload'>
+                  <img id={`Download_${version.CID}`} onClick={() => {
                     this.downloadFile(version.CID);
                   }} src={DownloadIcon} alt="Download" title='Download this version'/>
                 </Col>
@@ -167,7 +167,6 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem }) => ({
-  isLoggedIn: auth.isLoggedIn,
   userName: auth.user.name,
   folderName: filesystem.folderName,
   folderHash: filesystem.folderHash,

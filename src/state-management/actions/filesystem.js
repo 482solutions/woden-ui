@@ -2,7 +2,7 @@ import Woden from 'woden';
 import download from 'downloadjs';
 import { message } from 'antd';
 import {
-  BACK, FORWARD, SET_FOLDER_DATA, SEARCH_FOLDER_FILE, DOWNLOAD_FILE, GET_VERSIONS,
+  BACK, FORWARD, SET_FOLDER_DATA, SEARCH_FOLDER_FILE, DOWNLOAD_FILE, GET_VERSIONS, LOGOUT,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
 
@@ -41,6 +41,13 @@ export const getFolderData = (hash) => async(dispatch) => {
     (error, data, response) => {
       if (error) {
         message.error(response.body.message);
+      } else
+      if (response.status === 203) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rootFolder');
+        dispatch({
+          type: LOGOUT,
+        });
       } else {
         const folderData = response.body.folder;
         folderData.folders = JSON.parse(folderData.folders);
