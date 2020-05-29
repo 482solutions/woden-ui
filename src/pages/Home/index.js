@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Col, Dropdown, Menu, Row,
+  Button,
+  Col, Dropdown, Menu, Row, Upload,
 } from 'antd';
 import { Buttons } from '../../components/containers';
 import { getRootFolderHash } from '../../utils/functions';
@@ -12,6 +13,7 @@ import FileImage from '../../assets/images/file.svg';
 import More from '../../assets/images/more-vertical.svg';
 import CloseIcon from '../../assets/images/closeIcon.svg';
 import DownloadIcon from '../../assets/images/download.svg';
+import { FileAddTwoTone } from '@ant-design/icons';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -38,6 +40,11 @@ export class Home extends React.Component {
 
   uploadFile(file) {
     this.props.uploadFile({ name: file.name, parentFolder: this.props.folderHash, file });
+    return false;
+  }
+
+  updateFile(file, hash) {
+    this.props.updateFile({ fileHash: hash, file });
     return false;
   }
 
@@ -70,6 +77,14 @@ export class Home extends React.Component {
           <span id={`Versions_${hash}`} onClick={async() => {
             await this.getVersions(hash, name);
           }}>Versions</span>
+        </Menu.Item>
+        <Menu.Item key={`1${hash}`}>
+          <Upload name="file" beforeUpload={(file) => {
+            this.updateFile(file, hash);
+            return false;
+          }} showUploadList={false}>
+              Update File
+          </Upload>
         </Menu.Item>
       </Menu>
     );
@@ -181,6 +196,7 @@ export default connect(({ auth, filesystem }) => ({
   getFolderData: actions.getFolderData,
   createFolder: actions.createFolder,
   uploadFile: actions.uploadFile,
+  updateFile: actions.updateFile,
   downloadFile: actions.downloadFile,
   getVersions: actions.getVersions,
 })(
