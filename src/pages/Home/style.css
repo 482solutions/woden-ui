@@ -7,3 +7,33 @@
   height: 100vh;
 }
 
+.driveItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  height: 180px;
+  width: 200px;
+  padding: 34px 16px 16px 16px;
+}
+
+.driveItem:hover {
+  background: white;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.itemData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-start;
+  padding-top: 20px;
+  padding-left: 16px;
+
+  color: #8998AC;
+  font-size: 14px;
+  font-weight: normal;
+}
+
