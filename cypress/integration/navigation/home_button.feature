@@ -1,17 +1,13 @@
 @test_case_2.4
-@files_view
-# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.4'
+@home_btn
 
-Feature: Files view
-  As a user (any role), I want to view the available file so that I can use it
+Feature: Home button
+  As a user (any role), I want to have a home button, so that I can return to the root folder
 
   Rule: user should be registered.
 
     Background: Create a user before starting the tests
       Given Login as new user without UI
-      And The user press Upload a new file button
-      And Choose the needed txt file from its PC directory
-      Then The txt file is uploaded
 
     Scenario: 1 File view
       Given The user located on root dashboard

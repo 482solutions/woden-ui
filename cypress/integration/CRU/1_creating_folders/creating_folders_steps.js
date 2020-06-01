@@ -42,3 +42,4 @@ Given(/^The user is created folder in root folder with name (.*) from list$/, fu
 Given(/^Open this folder with name (.*)$/, function (createdFolder) {
     cy.contains(createdFolder).dblclick()
 });
+
