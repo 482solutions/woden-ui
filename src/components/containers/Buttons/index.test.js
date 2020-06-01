@@ -17,12 +17,31 @@ it('Renders components Buttons', () => {
   expect(wrapper.find(Button)).to.have.lengthOf(1);
   expect(wrapper.find(FileAddTwoTone)).to.have.lengthOf(1);
   expect(wrapper.find(NewFolder)).to.have.lengthOf(1);
+  expect(wrapper.find('.goHome')).to.have.lengthOf(1);
+  expect(wrapper.find('.goBack')).to.have.lengthOf(1);
+  expect(wrapper.find('.currentFolder')).to.have.lengthOf(1);
 });
 
-it('Renders components Buttons', () => {
+it('Check uploadFile method', () => {
   const wrapper = shallow(<Buttons
     uploadFile={() => {
     }}
   />);
   wrapper.instance().beforeUpload();
+});
+
+it('Check goHome method', () => {
+  const wrapper = shallow(<Buttons
+    goHome={() => {
+    }}
+  />);
+  wrapper.instance().goHome();
+});
+
+it('Check goBack method', () => {
+  const wrapper = shallow(<Buttons
+    goHome={() => {
+    }}
+  />);
+  wrapper.instance().goBack();
 });

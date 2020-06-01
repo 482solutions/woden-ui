@@ -84,6 +84,7 @@ class ChangePassword extends Component {
             <label className='upperLabel'>Confirm password</label>
             <Form.Item
               name="confirmPassword"
+              className="confirmPassword"
               rules={[
                 {
                   required: true,

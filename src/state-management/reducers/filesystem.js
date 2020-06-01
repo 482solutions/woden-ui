@@ -21,7 +21,7 @@ const handleSetFolder = (state, folderData) => (
     ...state,
     folderName: folderData.name,
     folderHash: folderData.hash,
-    parentHash: folderData.parentHash,
+    parentHash: folderData.parenthash,
     entryFolders: folderData.folders,
     entryFiles: folderData.files,
   }
@@ -29,7 +29,7 @@ const handleSetFolder = (state, folderData) => (
 const handleGetFolder = (state, folderData) => ({
   folderName: folderData.name,
   folderHash: folderData.hash,
-  parentHash: folderData.parentHash,
+  parentHash: folderData.parenthash,
   entryFolders: folderData.folders,
   entryFiles: folderData.files,
 });
