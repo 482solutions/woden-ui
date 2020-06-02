@@ -127,3 +127,19 @@ Cypress.Commands.add('createFolder', (name) => {
         return resp
     })
 })
+
+Cypress.Commands.add('createFolder', (name) => {
+    headers.Authorization = 'Bearer ' + user.body.token
+    cy.request({
+        method: 'POST',
+        url: basic + '/folder',
+        headers: headers,
+        body: {
+            'name': name,
+            'parentFolder':  sha256(login)
+        },
+    }).then((resp) => {
+        expect(resp.status).to.eq(201)
+        return resp
+    })
+})
