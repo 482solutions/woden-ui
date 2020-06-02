@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Col, Upload } from 'antd';
+import {
+  Button, Col, Row, Upload,
+} from 'antd';
 import { FileAddTwoTone, HomeOutlined, LeftOutlined } from '@ant-design/icons';
 import { NewFolder } from '..';
 import { getRootFolderHash } from '../../../utils/functions';
@@ -24,35 +26,43 @@ class Buttons extends Component {
   }
 
   async goBack() {
-    const hash = await getRootFolderHash();
-    this.props.parentHash(hash);
+    this.props.getFolderData(this.props.parentHash);
   }
 
   render() {
     return (
-      <div className="homeButtons">
-        <Col>
-          <div onClick={this.goHome} className="goHome">
-            <HomeOutlined/>
-          </div>
+      <Row className="homeButtons">
+        <Col span={1}>
+          {this.props.parentHash !== 'null'
+            ? <div onClick={this.goHome} className="goHome">
+              <HomeOutlined/>
+            </div> : null
+          }
         </Col>
-        <Col>
-          <LeftOutlined onClick={this.goBack} className="goBack"/>
+        <Col span={1}>
+          {this.props.parentHash !== 'null'
+            ? <div onClick={this.goBack} className="goBack">
+              <LeftOutlined/>
+            </div> : null
+          }
         </Col>
-        <Col>
-          <span className="currentFolder">{this.props.folderName}</span>
+        <Col span={2}>
+          {this.props.parentHash !== 'null'
+            ? <span className="currentFolder">{this.props.folderName}</span>
+            : <span className="currentFolder">My Drive</span>
+          }
         </Col>
-        <Col offset={16}>
+        <Col offset={14} span={3}>
           <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
             <Button className="upload-button">
               <FileAddTwoTone/>File Upload
             </Button>
           </Upload>
         </Col>
-        <Col>
+        <Col span={2}>
           <NewFolder onFinish={this.props.newFolder}/>
         </Col>
-      </div>
+      </Row>
     );
   }
 }

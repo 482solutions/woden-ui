@@ -2,13 +2,11 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
+  align-items: center;
 }
 
-.goHome, .goBack{
+.goHome{
   margin-left: 15px;
   cursor: pointer;
 }
 
-.currentFolder {
-  margin-left: 15px;
-}
