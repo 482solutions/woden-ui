@@ -108,7 +108,7 @@ Cypress.Commands.add('userAuth', () => {
 })
 
 Cypress.Commands.add('inRootFolder', () => {
-    cy.get('.currentFolder').should('contain.text', login)
+    cy.get('.currentFolder').should('contain.text', 'My Drive')
 })
 
 Cypress.Commands.add('createFolder', (name) => {
