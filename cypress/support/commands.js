@@ -110,3 +110,19 @@ Cypress.Commands.add('userAuth', () => {
 Cypress.Commands.add('inRootFolder', () => {
     cy.get('.currentFolder').should('contain.text', login)
 })
+
+Cypress.Commands.add('createFolder', (name) => {
+    headers.Authorization = 'Bearer ' + user.body.token
+    cy.request({
+        method: 'POST',
+        url: basic + '/folder',
+        headers: headers,
+        body: {
+            'name': name,
+            'parentFolder':  sha256(login)
+        },
+    }).then((resp) => {
+        expect(resp.status).to.eq(201)
+        return resp
+    })
+})
