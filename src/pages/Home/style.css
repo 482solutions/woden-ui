@@ -29,13 +29,12 @@
 .itemData {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-self: flex-start;
+  justify-content: center;
   padding-top: 20px;
-  padding-left: 16px;
-
   color: #8998AC;
   font-size: 14px;
   font-weight: normal;
 }
+
+
 
