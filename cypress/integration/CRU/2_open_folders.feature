@@ -14,6 +14,7 @@ Feature: Open folders
      Given Create folder with name <Name> from list without UI
       Examples: Folder's Name
         | Name                 |
+        | F                    |
         | Folder-1             |
         | folder2              |
         | FOLDER 3             |
