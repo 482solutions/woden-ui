@@ -35,13 +35,13 @@ export class Header extends Component {
               <Col span={10} className='search-block'>
                 <Search onSearch={this.onSearch}/>
               </Col>
-              <Col span={1} offset={3} className="flex-end changePassword">
+              <Col span={1} offset={2} className="flex-end changePassword">
                 <ChangePassword onFinish={this.changePassword}/>
               </Col>
               <Col span={4} className="flex-end logout">
                 <Logout/>
               </Col>
-              <Col span={3} className="profile">
+              <Col span={4} className="profile">
                 <Profile/>
               </Col>
             </>
