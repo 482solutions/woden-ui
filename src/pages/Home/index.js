@@ -97,7 +97,7 @@ export class Home extends React.Component {
                     <span className="fileTitle" onDoubleClick={() => this.downloadFile(files.hash,
                       files.name)}>{files.name}</span>
                     <div className="contextMenu">
-                      <Dropdown overlay={this.fileMenu(files.hash)} trigger={['click']}>
+                      <Dropdown className="dropdown" overlay={this.fileMenu(files.hash)} trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${files.hash}`}/>
                         </a>

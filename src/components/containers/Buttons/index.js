@@ -52,7 +52,7 @@ class Buttons extends Component {
             : <span className="currentFolder">My Drive</span>
           }
         </Col>
-        <Col offset={13} span={3}>
+        <Col offset={14} span={3}>
           <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
             <Button className="upload-button">
               <FileAddTwoTone/>File Upload
