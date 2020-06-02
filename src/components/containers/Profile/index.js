@@ -28,8 +28,11 @@ class Profile extends Component {
     const { userName } = this.state;
     return (
       <div className="homeProfile">
-        <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>} className="profileImage"/>
-        <div className="userName">{userName}</div>
+        <Avatar style={{ backgroundColor: '#3b7cff' }} icon={<UserOutlined/>}
+                className="profileImage"/>
+        <div className="userName">
+          <div>{userName}</div>
+        </div>
       </div>
     );
   }

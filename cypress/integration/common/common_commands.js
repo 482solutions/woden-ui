@@ -20,7 +20,6 @@ When(/^Login as new user without UI$/, () => {
   cy.loginAsNewUser()
 });
 
-
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -64,27 +63,27 @@ Then(/^Error message Password can not be empty$/, () => {
   cy.contains('Password can not be empty').should('be.visible')
 });
 
-Given(/^The user is located in his root folder$/, function () {
-
+Given(/^The user is located in his root folder$/, () => {
+  cy.inRootFolder()
 });
 
-When(/^The user press Create a new folder button$/, function () {
+When(/^The user press Create a new folder button$/, () => {
   cy.contains('New Folder').click().wait(2000)
 });
 
-When(/^The field name is empty$/, function () {
+When(/^The field name is empty$/,  () => {
   cy.get('#newFolder').should('be.empty')
 });
 
-When(/^The field name (.*) is filled by user from list of folder name$/, function (folderName) {
+When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {
   cy.get('#newFolder').type(folderName).wait(1000)
 });
 
-Then(/^The folder is created with name (.*)$/, function (folderName) {
+Then(/^The folder is created with name (.*)$/, (folderName) => {
   cy.contains(folderName).should('be.visible').wait(1000)
 });
 
-When(/^Press Create folder$/, function () {
+When(/^Press Create folder$/, () => {
   cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click().wait(2000)
 });
 
@@ -92,7 +91,7 @@ When(/^The user press Upload a new file button$/, () => {
   cy.contains('File Upload').click().wait(1000)
 });
 
-Given(/^The user is authorized$/, function () {
+Given(/^The user is authorized$/, () => {
   cy.userAuth()
 });
 
@@ -102,4 +101,15 @@ When(/^Choose the needed txt file from its PC directory$/, () => {
 
 Then(/^The txt file is uploaded$/, () => {
   cy.contains('txtFile.txt').should('be.visible').wait(1000)
+});
+
+Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
+  cy.reload().wait(2000) 
+  cy.get('.folderTitle').should('contain.text', folderName)
+    .as(`Folder ${folderName} on the dashboard`)
+     
+});
+
+When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
+  cy.get('.currentFolder').should('contain.text', userCreatedFolder)
 });
