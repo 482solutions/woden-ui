@@ -29,48 +29,12 @@
 .itemData {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-self: flex-start;
+  justify-content: center;
   padding-top: 20px;
-  padding-left: 16px;
   color: #8998AC;
   font-size: 14px;
   font-weight: normal;
 }
-.fileInfoWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 352px;
-  font-style: normal;
-  padding: 24px;
-  line-height: 40px;
-  font-size: 14px;
-}
-.infoTitle {
-  color: #8999AC;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-.infoColumnTitle {
-  margin-top: 40px;
-  font-weight: 600;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
-  color: #3B7CFF;
-}
-.versionCode {
-  font-weight: normal;
-  color: #333333;
-}
-.versionAuthor {
-  font-weight: 600;
-  color: #AEB8C7;
-}
-.versionDownload {
-  cursor: pointer;
-}
+
+
 

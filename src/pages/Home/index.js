@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Button,
-  Col, Dropdown, Menu, Row, Upload,
-} from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { Buttons } from '../../components/containers';
 import { getRootFolderHash } from '../../utils/functions';
 import { actions } from '../../state-management';
@@ -11,25 +8,14 @@ import './style.css';
 import FolderImage from '../../assets/images/folder.svg';
 import FileImage from '../../assets/images/file.svg';
 import More from '../../assets/images/more-vertical.svg';
-import CloseIcon from '../../assets/images/closeIcon.svg';
-import DownloadIcon from '../../assets/images/download.svg';
 
 export class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fileWrapperVisible: false,
-      wrapperInfo: {
-        fileName: 'null',
-        fileHash: null,
-      },
-    };
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.openFolder = this.openFolder.bind(this);
     this.downloadFile = this.downloadFile.bind(this);
-    this.getVersions = this.getVersions.bind(this);
-    this.closeFileWrapper = this.closeFileWrapper.bind(this);
   }
 
   async componentDidMount() {
@@ -42,11 +28,6 @@ export class Home extends React.Component {
     return false;
   }
 
-  updateFile(file, hash) {
-    this.props.updateFile({ fileHash: hash, file });
-    return false;
-  }
-
   createFolder(dataRequest) {
     this.props.createFolder({ name: dataRequest.newFolder, parentFolder: this.props.folderHash });
   }
@@ -55,45 +36,28 @@ export class Home extends React.Component {
     this.props.getFolderData(hash);
   }
 
-  downloadFile(cid) {
-    this.props.downloadFile(cid);
+  downloadFile(hash) {
+    this.props.downloadFile(hash);
   }
 
-  async getVersions(hash, name) {
-    this.setState({ fileWrapperVisible: true });
-    this.setState({ wrapperInfo: { fileName: name, fileHash: hash } });
-    await this.props.getVersions(hash);
+  getVersions() {
+    // this.props.getVersions(hash);
   }
 
-  closeFileWrapper() {
-    this.setState({ fileWrapperVisible: false });
-  }
-
-  fileMenu(hash, name) {
+  fileMenu(hash) {
     return (
       <Menu>
         <Menu.Item key={`0${hash}`}>
-          <span id={`Versions_${hash}`} onClick={async() => {
-            await this.getVersions(hash, name);
+          <span id={`Versions_${hash}`} onClick={() => {
+            this.getVersions(hash);
           }}>Versions</span>
-        </Menu.Item>
-        <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
-          <Upload name="file" beforeUpload={(file) => {
-            this.updateFile(file, hash);
-            return false;
-          }} showUploadList={false}>
-              Update File
-          </Upload>
         </Menu.Item>
       </Menu>
     );
   }
 
   render() {
-    const { fileWrapperVisible, wrapperInfo } = this.state;
-    const {
-      entryFolders, entryFiles, versions, userName,
-    } = this.props;
+    const { entryFolders, entryFiles } = this.props;
     return (
       <div className="container flex-direction-row">
         <div>
@@ -122,20 +86,20 @@ export class Home extends React.Component {
               ))
             }
             {
-              entryFiles.map((file, i) => (
+              entryFiles.map((files, i) => (
                 <div className="driveItem"
                      key={i}>
                   <img src={FileImage}
-                       onDoubleClick={() => this.downloadFile(file.cid, file.name)}
+                       onDoubleClick={() => this.downloadFile(files.hash, files.name)}
                        alt={'File'}
-                       title={`File - ${file.name}`} className="file"/>
+                       title={`File - ${files.name}`} className="file"/>
                   <div className="itemData">
-                    <span className="fileTitle" onDoubleClick={() => this.downloadFile(file.cid,
-                      file.name)}>{file.name}</span>
+                    <span className="fileTitle" onDoubleClick={() => this.downloadFile(files.hash,
+                      files.name)}>{files.name}</span>
                     <div className="contextMenu">
-                      <Dropdown overlay={this.fileMenu(file.hash, file.name)} trigger={['click']}>
+                      <Dropdown className="dropdown" overlay={this.fileMenu(files.hash)} trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                          <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
+                          <img title="More" alt="More" src={More} id={`Actions_${files.hash}`}/>
                         </a>
                       </Dropdown>
                     </div>
@@ -145,63 +109,26 @@ export class Home extends React.Component {
             }
           </div>
         </div>
-        <div id='VersionWrapper' style={{ display: fileWrapperVisible ? 'flex' : 'none' }}
-             className="fileInfoWrapper">
-          <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
-            <Col className='infoTitle' span={20}>{wrapperInfo.fileName}</Col>
-            <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
-              <img onClick={this.closeFileWrapper} alt='Close' title='Close info' src={CloseIcon}/>
-            </Col>
-          </Row>
-          <Row style={{ width: '100%' }}>
-            <Col span={10} className='infoColumnTitle'>Versions</Col>
-          </Row>
-          {versions.versionList.length ? versions.versionList.map((version) => {
-            const time = new Date(version.Time).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: '2-digit',
-              hour: 'numeric',
-              hour12: false,
-              minute: '2-digit',
-            });
-            return (
-              <Row key={version.CID} style={{ width: '100%' }}>
-                <span id={`CID_${version.CID}`} style={{ display: 'none' }}>{version.CID}</span>
-                <Col span={12} className='versionCode'><span
-                  id={`Time_${version.CID}`}>{time}</span></Col>
-                <Col span={7} offset={2} className='versionAuthor'>{userName}</Col>
-                <Col span={3} className='versionDownload'>
-                  <img id={`Download_${version.CID}`} onClick={() => {
-                    this.downloadFile(version.CID);
-                  }} src={DownloadIcon} alt="Download" title='Download this version'/>
-                </Col>
-              </Row>
-            );
-          }) : null}
-        </div>
       </div>
     );
   }
 }
 
 export default connect(({ auth, filesystem }) => ({
-  userName: auth.user.name,
+  isLoggedIn: auth.isLoggedIn,
+  userName: auth.user,
   folderName: filesystem.folderName,
   folderHash: filesystem.folderHash,
   parentHash: filesystem.parentHash,
   entryFolders: filesystem.entryFolders,
   entryFiles: filesystem.entryFiles,
-  versions: filesystem.versions,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
   getFolderData: actions.getFolderData,
   createFolder: actions.createFolder,
   uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
   downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
 })(
   Home,
 );
