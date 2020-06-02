@@ -4,14 +4,6 @@ before(() => {
     cy.registerUser()
 })
 
-When(/^Choose the needed txt file from its PC directory$/, () => {
-    cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
-});
-
-Then(/^The txt file is uploaded$/, () => {
-    cy.contains('txtFile.txt').should('be.visible').wait(1000)
-});
-
 When(/^Choose the needed test.txt file from PC directory$/, () =>  {
     cy.get('input[type=file]').attachFile('test.txt').wait(1000);
 });
