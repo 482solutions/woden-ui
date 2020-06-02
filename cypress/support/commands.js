@@ -1,4 +1,3 @@
-
 import 'cypress-file-upload';
 import {sha256} from 'js-sha256'
 import {getCSR} from '../../src/utils/functions'
@@ -106,4 +105,24 @@ Cypress.Commands.add('uploadFile',  () => {
 
 Cypress.Commands.add('userAuth', () => {
     expect(sha256(login)).to.equal(localStorage.rootFolder)
+})
+
+Cypress.Commands.add('inRootFolder', () => {
+    cy.get('.currentFolder').should('contain.text', login)
+})
+
+Cypress.Commands.add('createFolder', (name) => {
+    headers.Authorization = 'Bearer ' + user.body.token
+    cy.request({
+        method: 'POST',
+        url: basic + '/folder',
+        headers: headers,
+        body: {
+            'name': name,
+            'parentFolder':  sha256(login)
+        },
+    }).then((resp) => {
+        expect(resp.status).to.eq(201)
+        return resp
+    })
 })

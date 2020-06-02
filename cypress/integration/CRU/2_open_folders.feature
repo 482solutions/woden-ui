@@ -10,15 +10,10 @@ Feature: Open folders
     Background: Create a user before starting the tests
       Given Login as new user without UI
 
-    Scenario Outline: Create folders before the test
-      When The user press Create a new folder button
-      And The field name is empty
-      And The field name <Name> is filled by user from list of folder name
-      And Press Create folder
-      Then The folder is created with name <Name>
+    Scenario Outline: Create folder before the test
+     Given Create folder with name <Name> from list without UI
       Examples: Folder's Name
         | Name                 |
-        | F                    |
         | Folder-1             |
         | folder2              |
         | FOLDER 3             |
@@ -26,20 +21,19 @@ Feature: Open folders
         | Папка                |
         | 資料夾                |
 
-  Scenario Outline: 1 Open folder
+    Scenario Outline: 1 Open folder
 #    And the user has access to any available folder (not root)
-    When The user double click this folder <folder> from list
-#    Then Folder is opened   TODO create the identifier of the user in the folder
-    And User go back to root folder
-    Examples: folder
-      | folder               |
-      | F                    |
-      | Folder-1             |
-      | folder2              |
-      | FOLDER 3             |
-      | Folder12345678901234 |
-      | Папка                |
-      | 資料夾                |
+      When The user double click this folder <folder> from list
+      And Folder is opened <folder>
+      And User go back to root folder
+      Examples: folder
+        | folder               |
+        | Folder-1             |
+        | folder2              |
+        | FOLDER 3             |
+        | Folder12345678901234 |
+        | Папка                |
+        | 資料夾                  |
 
 #  Scenario Outline: 2 Open folder with Enter key
 #    And  the user has access to any available folder (not root)
