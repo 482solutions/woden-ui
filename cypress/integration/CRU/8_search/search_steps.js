@@ -5,7 +5,7 @@ before(() => {
 })
 
 When(/^Create folder testFolder without UI$/, () => {
-    cy.createFolder('testFolder')
+    cy.createFolder('testFolder', 'root')
     cy.reload()
 });
 
