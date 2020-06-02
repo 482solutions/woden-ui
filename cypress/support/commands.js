@@ -108,21 +108,52 @@ Cypress.Commands.add('userAuth', () => {
 })
 
 Cypress.Commands.add('inRootFolder', () => {
-    cy.get('.currentFolder').should('contain.text', login)
+    cy.get('.currentFolder').should('contain.text', 'My Drive')
 })
 
-Cypress.Commands.add('createFolder', (name) => {
+Cypress.Commands.add('createFolder', (name, inFolder) => {
+    let folderHash
     headers.Authorization = 'Bearer ' + user.body.token
-    cy.request({
-        method: 'POST',
-        url: basic + '/folder',
-        headers: headers,
-        body: {
-            'name': name,
-            'parentFolder':  sha256(login)
-        },
-    }).then((resp) => {
-        expect(resp.status).to.eq(201)
-        return resp
-    })
+    if(inFolder === 'root') {
+        cy.request({
+            method: 'POST',
+            url: basic + '/folder',
+            headers: headers,
+            body: {
+                'name': name,
+                'parentFolder':  sha256(login)
+            },
+        }).then((resp) => {
+            expect(resp.status).to.eq(201)
+            return resp
+        })
+    } else {
+        cy.request({
+            method: 'GET',
+            headers: headers,
+            url: `${basic}/search/${inFolder}`
+        }).then((resp) => {
+
+            let countFiles = resp.body.folders.length - 1
+            for (let key in resp.body.folders) {
+                if (inFolder === resp.body.folders[key].name) {
+                    folderHash =  resp.body.folders[countFiles].hash
+                }
+            }
+            cy.log(folderHash)
+        }).as('Get folders hash').then(() => {
+            cy.request({
+                method: 'POST',
+                url: basic + '/folder',
+                headers: headers,
+                body: {
+                    'name': name,
+                    'parentFolder': folderHash
+                },
+            }).then((resp) => {
+                expect(resp.status).to.eq(201)
+                return resp
+            })
+        })
+    }
 })
