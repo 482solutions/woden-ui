@@ -20,7 +20,6 @@ When(/^Login as new user without UI$/, () => {
   cy.loginAsNewUser()
 });
 
-
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
