@@ -10,15 +10,10 @@ Feature: Open folders
     Background: Create a user before starting the tests
       Given Login as new user without UI
 
-    Scenario Outline: Create folders before the test
-      When The user press Create a new folder button
-      And The field name is empty
-      And The field name <Name> is filled by user from list of folder name
-      And Press Create folder
-      Then The folder is created with name <Name>
+    Scenario Outline: Create folder before the test
+     Given Create folder with name <Name> from list without UI
       Examples: Folder's Name
         | Name                 |
-        | F                    |
         | Folder-1             |
         | folder2              |
         | FOLDER 3             |
@@ -33,7 +28,6 @@ Feature: Open folders
       And User go back to root folder
       Examples: folder
         | folder               |
-        | F                    |
         | Folder-1             |
         | folder2              |
         | FOLDER 3             |
