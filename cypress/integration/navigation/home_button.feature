@@ -1,4 +1,3 @@
-@test_case_2.4
 @home_btn
 
 Feature: Home button
@@ -8,9 +7,11 @@ Feature: Home button
 
     Background: Create a user before starting the tests
       Given Login as new user without UI
+      When User is created folder in root folder without UI
 
-    Scenario: 1 File view
-      Given The user located on root dashboard
-#    And the user has access to any available file
-      When The user double click the file "txtFile.txt"
-      Then The file is downloaded
+    Scenario: User can return from folder
+      Given Folder "testFolder" should be visible on dashboard
+      And The user double click this folder "testFolder"
+      And The user is located in his created folder "testFolder"
+      When User click Home button
+      Then The user is located in his root folder

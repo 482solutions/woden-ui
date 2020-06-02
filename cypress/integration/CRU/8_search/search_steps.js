@@ -21,14 +21,6 @@ When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
 });
 
 
-Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
-    cy.reload()
-        .then (() => {
-        cy.contains(folderName).should('be.visible')
-            .as(`Folder ${folderName} on the dashboard`)
-    })
-});
-
 Given(/^Any page of the application is open$/, () => {
 
 });
