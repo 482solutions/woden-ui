@@ -108,7 +108,6 @@ Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
   cy.reload().wait(2000)
   cy.get('.folderTitle').should('contain.text', folderName)
     .as(`Folder ${folderName} on the dashboard`)
-
 });
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
