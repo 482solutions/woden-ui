@@ -10,7 +10,7 @@ Feature: Registration
     When The user press Register now button
     Then Sign Up form is open
 
-  @positive
+#  @positive
 #  Scenario: 1 Username can contain 2 uppercase letters
 #    Given User username field that contains 2 uppercase letters
 #    And fills in the email field

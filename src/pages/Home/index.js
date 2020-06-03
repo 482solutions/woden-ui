@@ -85,7 +85,11 @@ export class Home extends React.Component {
         <div>
         </div>
         <div className="main flex-direction-column w100">
-          <Buttons newFolder={this.createFolder} uploadFile={this.uploadFile}/>
+          <Buttons newFolder={this.createFolder}
+                   uploadFile={this.uploadFile}
+                   getFolderData={this.openFolder}
+                   parentHash={this.props.parentHash}
+                   folderName={this.props.folderName}/>
           <div className="flex-start ff-rw">
             {
               entryFolders.map((folder, i) => (
@@ -115,7 +119,7 @@ export class Home extends React.Component {
                     <span className="fileTitle" onDoubleClick={() => this.downloadFile(file.cid,
                       file.name)}>{file.name}</span>
                     <div className="contextMenu">
-                      <Dropdown overlay={this.fileMenu(file.hash, file.name)} trigger={['click']}>
+                      <Dropdown className="dropdown" overlay={this.fileMenu(file.hash, file.name)} trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
                         </a>
