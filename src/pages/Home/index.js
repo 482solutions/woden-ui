@@ -49,8 +49,8 @@ export class Home extends React.Component {
     this.props.getFolderData(hash);
   }
 
-  downloadFile(cid) {
-    this.props.downloadFile(cid);
+  downloadFile(cid, hash) {
+    this.props.downloadFile(cid, hash);
   }
 
   async getVersions(hash, name) {
@@ -112,14 +112,16 @@ export class Home extends React.Component {
                 <div className="driveItem"
                      key={i}>
                   <img src={FileImage}
-                       onDoubleClick={() => this.downloadFile(file.cid, file.name)}
+                       onDoubleClick={() => this.downloadFile(file.versions[0].cid, file.hash)}
                        alt={'File'}
                        title={`File - ${file.name}`} className="file"/>
                   <div className="itemData">
-                    <span className="fileTitle" onDoubleClick={() => this.downloadFile(file.cid,
-                      file.name)}>{file.name}</span>
+                    <span className="fileTitle"
+                          onDoubleClick={() => this.downloadFile(file.versions[0].cid,
+                            file.hash)}>{file.name}</span>
                     <div className="contextMenu">
-                      <Dropdown className="dropdown" overlay={this.fileMenu(file.hash, file.name)} trigger={['click']}>
+                      <Dropdown className="dropdown" overlay={this.fileMenu(file.hash, file.name)}
+                                trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
                         </a>
@@ -142,8 +144,8 @@ export class Home extends React.Component {
           <Row style={{ width: '100%' }}>
             <Col span={10} className='infoColumnTitle'>Versions</Col>
           </Row>
-          {versions.versionList.length ? versions.versionList.map((version) => {
-            const time = new Date(version.Time).toLocaleString('en-US', {
+          {versions.versionList.length && versions.versionList.map((version) => {
+            const time = new Date(version.time * 1000).toLocaleString('en-US', {
               year: 'numeric',
               month: 'short',
               day: '2-digit',
@@ -152,19 +154,19 @@ export class Home extends React.Component {
               minute: '2-digit',
             });
             return (
-              <Row key={version.CID} style={{ width: '100%' }}>
-                <span id={`CID_${version.CID}`} style={{ display: 'none' }}>{version.CID}</span>
+              <Row key={version.cid} style={{ width: '100%' }}>
+                <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
                 <Col span={12} className='versionCode'><span
-                  id={`Time_${version.CID}`}>{time}</span></Col>
+                  id={`Time_${version.cid}`}>{time}</span></Col>
                 <Col span={7} offset={2} className='versionAuthor'>{userName}</Col>
                 <Col span={3} className='versionDownload'>
-                  <img id={`Download_${version.CID}`} onClick={() => {
-                    this.downloadFile(version.CID);
+                  <img id={`Download_${version.cid}`} onClick={() => {
+                    this.downloadFile(version.cid, wrapperInfo.fileHash);
                   }} src={DownloadIcon} alt="Download" title='Download this version'/>
                 </Col>
               </Row>
             );
-          }) : null}
+          })}
         </div>
       </div>
     );

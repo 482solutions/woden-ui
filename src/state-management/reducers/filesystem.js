@@ -1,5 +1,5 @@
 import {
-  BACK, FORWARD, GET_FOLDER_DATA, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, GET_VERSIONS,
+  GET_FOLDER_DATA, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, GET_VERSIONS,
 } from '../types';
 
 const initialState = {
@@ -14,12 +14,6 @@ const initialState = {
   },
 };
 
-const handleBack = () => ({
-  // TODO: Реализация для обработки возврата в предыдущую директорию
-});
-const handleForward = () => ({
-  // TODO: Реализация для обработки перехода в следующую директорию
-});
 const handleSetFolder = (state, folderData) => ({
   ...state,
   folderName: folderData.name,
@@ -52,8 +46,6 @@ const handleVersions = (state, fileData) => ({
   },
 });
 const handlers = {
-  [BACK]: handleBack,
-  [FORWARD]: handleForward,
   [SET_FOLDER_DATA]: handleSetFolder,
   [GET_FOLDER_DATA]: handleGetFolder,
   [SEARCH_FOLDER_FILE]: handleSearch,
