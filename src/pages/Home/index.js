@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Col, Dropdown, Menu, Row,
+  Button,
+  Col, Dropdown, Menu, Row, Upload,
 } from 'antd';
 import { Buttons } from '../../components/containers';
 import { getRootFolderHash } from '../../utils/functions';
@@ -41,6 +42,11 @@ export class Home extends React.Component {
     return false;
   }
 
+  updateFile(file, hash) {
+    this.props.updateFile({ fileHash: hash, file });
+    return false;
+  }
+
   createFolder(dataRequest) {
     this.props.createFolder({ name: dataRequest.newFolder, parentFolder: this.props.folderHash });
   }
@@ -70,6 +76,14 @@ export class Home extends React.Component {
           <span id={`Versions_${hash}`} onClick={async() => {
             await this.getVersions(hash, name);
           }}>Versions</span>
+        </Menu.Item>
+        <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
+          <Upload name="file" beforeUpload={(file) => {
+            this.updateFile(file, hash);
+            return false;
+          }} showUploadList={false}>
+              Update File
+          </Upload>
         </Menu.Item>
       </Menu>
     );
@@ -187,6 +201,7 @@ export default connect(({ auth, filesystem }) => ({
   getFolderData: actions.getFolderData,
   createFolder: actions.createFolder,
   uploadFile: actions.uploadFile,
+  updateFile: actions.updateFile,
   downloadFile: actions.downloadFile,
   getVersions: actions.getVersions,
 })(

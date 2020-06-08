@@ -94,6 +94,27 @@ export const uploadFile = (file) => async(dispatch) => {
     },
   );
 };
+export const updateFile = (file) => async(dispatch) => {
+  Bearer.apiKey = await getTokenForHeader();
+  const { fileHash, file: fileData } = file;
+  api.updateFile(
+    fileHash, fileData,
+    (error, data, response) => {
+      if (error) {
+        message.error(response.body.message);
+      } else if (response.status === 200) {
+        message.success('File updated successful');
+        const folderData = response.body.folder;
+        folderData.folders = JSON.parse(folderData.folders);
+        folderData.files = JSON.parse(folderData.files);
+        dispatch({
+          type: SET_FOLDER_DATA,
+          payload: folderData,
+        });
+      }
+    },
+  );
+};
 export const downloadFile = (cid, hash) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
