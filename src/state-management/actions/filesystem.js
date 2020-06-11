@@ -103,7 +103,7 @@ export const updateFile = (file) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
-        message.success('File updated successful');
+        message.success('File updated successfully');
         const folderData = response.body.folder;
         folderData.folders = JSON.parse(folderData.folders);
         folderData.files = JSON.parse(folderData.files);
