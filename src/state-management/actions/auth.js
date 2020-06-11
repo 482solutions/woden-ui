@@ -16,7 +16,7 @@ export const login = (userName) => (dispatch) => {
 
 const registration = async(user, dispatch) => {
   message.destroy();
-  message.loading('Registration...');
+  message.loading('Registration...', 0);
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   const body = new Woden.CreateUser();
