@@ -76,11 +76,13 @@ export const createFolder = (folder) => async(dispatch) => {
   );
 };
 export const uploadFile = (file) => async(dispatch) => {
+  message.loading('Uploading file...');
   Bearer.apiKey = await getTokenForHeader();
   const { name, parentFolder, file: fileData } = file;
   api.uploadFile(
     name, parentFolder, fileData,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
