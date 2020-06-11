@@ -27,10 +27,12 @@ export const search = (value) => async(dispatch) => {
   });
 };
 export const getFolderData = (hash) => async(dispatch) => {
+  message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
     hash,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 203) {
