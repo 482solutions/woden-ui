@@ -1,26 +1,12 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-const generator = require('generate-password');
-
-let login;
-let email;
-let password;
-let privateKey;
-let cert;
-
-before('Register new user', () => {
-    login = generator.generate({});
-    email = `${login.toLowerCase()}@gmail.com`;
-    password = `${login}12345`;
-});
-
 When(/^Register new user$/, () => {
     cy.visit('/');
     cy.get('.ant-col-offset-2 > a').click();
-    cy.get('#name').type(login);
-    cy.get('#email').type(email);
-    cy.get('#password').type(password);
-    cy.get('#confirm').type(password);
+    cy.get('#name').type(Cypress.env('login'));
+    cy.get('#email').type(Cypress.env('email'));
+    cy.get('#password').type(Cypress.env('password'));
+    cy.get('#confirm').type(Cypress.env('password'));
     cy.server()
     cy.route('POST', '/api/v1/user').as('getCert')
     cy.get('.ant-btn').as('SignUpNow').click()
@@ -30,8 +16,8 @@ When(/^Register new user$/, () => {
 });
 
 Then(/^Login as new user$/, () => {
-    cy.get('#name').type(login);
-    cy.get('#password').type(password);
+    cy.get('#name').type(Cypress.env('login'));
+    cy.get('#password').type(Cypress.env('password'));
     cy.get('input[type=file]').attachFile('cert.pem')
     cy.wait(1000)
     cy.get('input[type=file]').attachFile('privateKey.pem');
