@@ -99,11 +99,13 @@ export const uploadFile = (file) => async(dispatch) => {
   );
 };
 export const updateFile = (file) => async(dispatch) => {
+  message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { fileHash, file: fileData } = file;
   api.updateFile(
     fileHash, fileData,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
