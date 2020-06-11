@@ -4,11 +4,6 @@ before(() => {
     cy.registerUser()
 })
 
-Given(/^Create folder with name "([^"]*)" in root without UI$/,  (folder) => {
-    cy.createFolderInRoot(folder)
-    cy.reload().wait(2000)
-});
-
 Given(/^Create folder with name "([^"]*)" in Folder_level_1$/, (folder2) => {
     cy.createFolderInFolder(folder2, 'Folder_level_1')
     cy.reload().wait(2000)

@@ -103,11 +103,6 @@ Then(/^The txt file is uploaded$/, () => {
   cy.contains('txtFile.txt').should('be.visible').wait(1000)
 });
 
-Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
-  cy.reload().wait(2000)
-  cy.get('.folderTitle').should('contain.text', folderName)
-      .as(`Folder ${folderName} on the dashboard`)
-});
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
