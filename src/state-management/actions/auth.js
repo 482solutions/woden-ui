@@ -55,8 +55,6 @@ const registration = async(user, dispatch) => {
 export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
 const logIn = async(user, dispatch) => {
-  message.destroy();
-  message.loading('Logging In...');
   const password = (encryptData(user.password));
   const body = new Woden.Login();
   body.login = user.name;
@@ -65,7 +63,6 @@ const logIn = async(user, dispatch) => {
   body.privateKey = user.privateKey;
   api.login(
     body, (error, data, response) => {
-      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
