@@ -86,6 +86,7 @@ export const loginRequest = (user) => async(dispatch) => {
 };
 
 export const changePassword = async(userData) => {
+  message.loading('Changing password...');
   const oldPassword = encryptData(userData.oldPassword);
   const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;
@@ -95,6 +96,7 @@ export const changePassword = async(userData) => {
   body.oldPassword = oldPassword;
   body.newPassword = newPassword;
   api.changeUser(body, (error, data, response) => {
+    message.destroy();
     if (error) {
       message.error(response.body.message);
     } else {
