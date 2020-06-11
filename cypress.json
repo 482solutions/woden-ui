@@ -1,5 +1,16 @@
 {
   "baseUrl": "http://localhost:3000",
+  "env": {
+    "RETRIES": 3,
+    "respStatus": null,
+    "rootFolder": null,
+    "login": null,
+    "password": null,
+    "email": null,
+    "filesInRoot": null,
+    "foldersInRoot": null,
+    "versions": null
+  },
   "defaultCommandTimeout": 12000,
   "requestTimeout": 10000,
   "projectId": "mxxwps",
