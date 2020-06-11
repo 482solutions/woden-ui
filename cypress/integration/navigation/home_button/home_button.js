@@ -1,13 +1,8 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
 before(() => {
-    cy.registerUser()
+    cy.registerUser();
 })
-
-When(/^User is created folder in root folder without UI$/, () => {
-    cy.createFolder('testFolder', 'root')
-    cy.reload()
-});
 
 Given(/^The user double click this folder "([^"]*)"$/,  (folder) => {
     cy.contains(folder).dblclick()

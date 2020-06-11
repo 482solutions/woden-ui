@@ -7,7 +7,7 @@ Feature: Home button
 
     Background: Create a user before starting the tests
       Given Login as new user without UI
-      When User is created folder in root folder without UI
+      When Create folder with name "testFolder" in root without UI
 
     Scenario: User can return from folder
       Given Folder "testFolder" should be visible on dashboard
