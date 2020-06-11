@@ -120,10 +120,12 @@ export const updateFile = (file) => async(dispatch) => {
   );
 };
 export const downloadFile = (cid, hash) => async(dispatch) => {
+  message.loading('Downloading file...');
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
     hash, cid,
     (error, data, response) => {
+      message.success('File downloaded successfully');
       if (error) {
         message.error(response.body.message);
       } else {
