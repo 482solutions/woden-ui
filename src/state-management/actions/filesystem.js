@@ -120,7 +120,7 @@ export const updateFile = (file) => async(dispatch) => {
   );
 };
 export const downloadFile = (cid, hash) => async(dispatch) => {
-  message.loading('Downloading file...');
+  message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
     hash, cid,
