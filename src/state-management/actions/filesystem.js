@@ -129,6 +129,7 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
   api.downloadFile(
     hash, cid,
     (error, data, response) => {
+      message.destroy();
       message.success('File downloaded successfully');
       if (error) {
         message.error(response.body.message);
