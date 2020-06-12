@@ -1,14 +1,14 @@
-#@test_case_2.7
-#@viewing_previous_versions
-## ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.7'
-#
-#Feature:  Viewing previous version
-#  As a user (any role), I want to see any available version so that I can check what was changed.
-#
-#  Rule: user should be registered.
-#
-#    Background: Create a user before starting the tests
-#      Given Login as new user without UI
+@test_case_2.7
+@viewing_previous_versions
+# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.7'
+
+Feature:  Viewing previous version
+  As a user (any role), I want to see any available version so that I can check what was changed.
+
+  Rule: user should be registered.
+
+    Background: Create a user before starting the tests
+      Given Login as new user without UI
 #      And Upload file "test_positive"
 #      Then The user updating file
 #      And Upload new version of file
