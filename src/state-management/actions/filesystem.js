@@ -52,7 +52,7 @@ export const getFolderData = (hash) => async(dispatch) => {
   );
 };
 export const createFolder = (folder) => async(dispatch) => {
-  message.loading('Creating folder...');
+  message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const body = new Woden.CreateFolder();
   body.name = folder.name;
