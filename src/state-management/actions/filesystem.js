@@ -143,7 +143,7 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
   );
 };
 export const getVersions = (hash) => async(dispatch) => {
-  message.loading('Getting file versions...');
+  message.loading('Getting file versions...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.versions(
     hash,
