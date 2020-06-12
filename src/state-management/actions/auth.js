@@ -15,6 +15,7 @@ export const login = (userName) => (dispatch) => {
 };
 
 const registration = async(user, dispatch) => {
+  message.loading('Registration...', 0);
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   const body = new Woden.CreateUser();
@@ -26,6 +27,7 @@ const registration = async(user, dispatch) => {
   try {
     api.createUser(
       body, (error, data, response) => {
+        message.destroy();
         if (error) {
           message.error(response.body.message);
         } else if (response.status === 201) {
