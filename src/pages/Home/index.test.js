@@ -14,12 +14,12 @@ beforeAll(() => {
   versions = {
     versionList: [
       {
-        CID: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY',
-        Time: 1590657618000,
+        cid: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY',
+        time: 1590657618,
       },
       {
-        CID: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5',
-        Time: 1590657000000,
+        cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5',
+        time: 1590657000,
       },
     ],
   };
@@ -42,10 +42,12 @@ beforeAll(() => {
     {
       name: 'file1.txt',
       hash: 'QmVBLeoaAkDsQfYCawFJbvEs2fwUBsCMjpKA8ELdaTC7oC',
+      versions: [{ cid: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY', time: 1590657618000 }],
     },
     {
       name: 'file2.txt',
       hash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM',
+      versions: [{ cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5', time: 1590657000000 }],
     },
   ];
 });
@@ -102,7 +104,7 @@ it('Check createFolder method', () => {
   expect(instance.createFolder(dataRequest)).to.equal(undefined);
 });
 it('Open file version Wrapper', () => {
-  const time = new Date(versions.versionList[0].Time).toLocaleString('en-US', {
+  const time = new Date(versions.versionList[0].time * 1000).toLocaleString('en-US', {
     year: 'numeric',
     month: 'short',
     day: '2-digit',
@@ -116,9 +118,9 @@ it('Open file version Wrapper', () => {
   const instance = wrapper.instance();
   expect(wrapper.find(`#Actions_${fakeFiles[0].hash}`).simulate('click')).to.be.ok;
   expect(instance.getVersions(fakeFiles[0].hash, fakeFiles[0].name)).to.be.ok;
-  expect(wrapper.find(`#CID_${versions.versionList[0].CID}`).text()).to.equal(versions.versionList[0].CID);
-  expect(wrapper.find(`#Time_${versions.versionList[0].CID}`).text()).to.equal(time);
-  expect(wrapper.find(`#Download_${versions.versionList[0].CID}`)).to.have.lengthOf(1);
+  expect(wrapper.find(`#CID_${versions.versionList[0].cid}`).text()).to.equal(versions.versionList[0].cid);
+  expect(wrapper.find(`#Time_${versions.versionList[0].cid}`).text()).to.equal(time);
+  expect(wrapper.find(`#Download_${versions.versionList[0].cid}`)).to.have.lengthOf(1);
 });
 it('Check all Dropdown and simulate click', () => {
   const wrapper = shallow(<Home entryFolders={fakeFolders} entryFiles={fakeFiles}
