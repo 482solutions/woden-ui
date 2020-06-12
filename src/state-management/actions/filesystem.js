@@ -54,7 +54,7 @@ export const getFolderData = (hash) => async(dispatch) => {
   );
 };
 export const createFolder = (folder) => async(dispatch) => {
-  message.loading('Creating folder...');
+  message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const body = new Woden.CreateFolder();
   body.name = folder.name;
@@ -78,7 +78,7 @@ export const createFolder = (folder) => async(dispatch) => {
   );
 };
 export const uploadFile = (file) => async(dispatch) => {
-  message.loading('Uploading file...');
+  message.loading('Uploading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { name, parentFolder, file: fileData } = file;
   api.uploadFile(
@@ -101,11 +101,13 @@ export const uploadFile = (file) => async(dispatch) => {
   );
 };
 export const updateFile = (file) => async(dispatch) => {
+  message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { fileHash, file: fileData } = file;
   api.updateFile(
     fileHash, fileData,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
@@ -141,10 +143,12 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
   );
 };
 export const getVersions = (hash) => async(dispatch) => {
+  message.loading('Getting file versions...');
   Bearer.apiKey = await getTokenForHeader();
   api.versions(
     hash,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else {
