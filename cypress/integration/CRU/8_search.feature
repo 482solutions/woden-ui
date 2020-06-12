@@ -22,41 +22,41 @@ Feature:  Search of files and folders
       And The user presses the search button
       Then Search result is file "test1.txt"
 
-#    Scenario: 2 Search file by part of name
-#      Given The user is authorized
-#      And Any page of the application is open
-#      When The user types the name "test" of a file or folder
-#      And The user presses the search button
-#      Then Search results are files "test1.txt" and "test.pem"
-#      And search result is folder with name "testFolder"
-#
-#    Scenario: 3 Search file by one character
-#      Given The user is authorized
-#      And Any page of the application is open
-#      When The user types the name "1" of a file or folder
-#      And The user presses the search button
-#      Then Search result is file "test1.txt"
+    Scenario: 2 Search file by part of name
+      Given The user is authorized
+      And Any page of the application is open
+      When The user types the name "test" of a file or folder
+      And The user presses the search button
+      Then Search results are files "test1.txt" and "test.pem"
+      And search result is folder with name "testFolder"
 
-#    Scenario: 4 Search file by the format
-#      Given The user is authorized
-#      And Any page of the application is open
-#      When The user types the name "pem" of a file or folder
-#      And The user presses the search button
-#      Then Search result is file "test.pem"
-#
-#    Scenario: 5 Search file by 1 letter
-#      Given The user is authorized
-#      And Any page of the application is open
-#      When The user types the name "t" of a file or folder
-#      And The user presses the search button
-#      Then Search results are files "test1.txt" and "test.pem"
-#      And search result is folder with name "testFolder"
-#
-#    Scenario: 6 Search without characters in field
-#      Given The user is authorized
-#      And Any page of the application is open
-#      When Search field is empty
-#      Then Button Search not active
+    Scenario: 3 Search file by one character
+      Given The user is authorized
+      And Any page of the application is open
+      When The user types the name "1" of a file or folder
+      And The user presses the search button
+      Then Search result is file "test1.txt"
+
+    Scenario: 4 Search file by the format
+      Given The user is authorized
+      And Any page of the application is open
+      When The user types the name "pem" of a file or folder
+      And The user presses the search button
+      Then Search result is file "test.pem"
+
+    Scenario: 5 Search file by 1 letter
+      Given The user is authorized
+      And Any page of the application is open
+      When The user types the name "t" of a file or folder
+      And The user presses the search button
+      Then Search results are files "test1.txt" and "test.pem"
+      And search result is folder with name "testFolder"
+
+    Scenario: 6 Search without characters in field
+      Given The user is authorized
+      And Any page of the application is open
+      When Search field is empty
+      Then Button Search not active
 
     Scenario: 7 Search file by word in the uppercase
       Given The user is authorized

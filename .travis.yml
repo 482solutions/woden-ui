@@ -26,7 +26,7 @@ script:
   - cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
   - cd ..
   - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-  - cd woden-server-js && git checkout tests/WGRND-512 && docker-compose up --build -d
+  - cd woden-server-js && docker-compose up --build -d
   - sleep 60
   - cd ..
   - npm ci
