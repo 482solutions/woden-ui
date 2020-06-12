@@ -15,8 +15,7 @@ export const login = (userName) => (dispatch) => {
 };
 
 const registration = async(user, dispatch) => {
-  message.destroy();
-  message.loading('Registration...');
+  message.loading('Registration...', 0);
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   const body = new Woden.CreateUser();
@@ -56,8 +55,7 @@ const registration = async(user, dispatch) => {
 export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
 const logIn = async(user, dispatch) => {
-  message.destroy();
-  message.loading('Logging In...');
+  message.loading('Logging In...', 0);
   const password = (encryptData(user.password));
   const body = new Woden.Login();
   body.login = user.name;
@@ -86,7 +84,7 @@ export const loginRequest = (user) => async(dispatch) => {
 };
 
 export const changePassword = async(userData) => {
-  message.loading('Changing password...');
+  message.loading('Changing password...', 0);
   const oldPassword = encryptData(userData.oldPassword);
   const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;

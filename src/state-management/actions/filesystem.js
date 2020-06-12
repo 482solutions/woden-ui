@@ -52,7 +52,7 @@ export const getFolderData = (hash) => async(dispatch) => {
   );
 };
 export const createFolder = (folder) => async(dispatch) => {
-  message.loading('Creating folder...');
+  message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const body = new Woden.CreateFolder();
   body.name = folder.name;
@@ -76,7 +76,7 @@ export const createFolder = (folder) => async(dispatch) => {
   );
 };
 export const uploadFile = (file) => async(dispatch) => {
-  message.loading('Uploading file...');
+  message.loading('Uploading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { name, parentFolder, file: fileData } = file;
   api.uploadFile(
