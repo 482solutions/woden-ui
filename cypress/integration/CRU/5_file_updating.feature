@@ -1,19 +1,19 @@
-#@test_case_2.5
-#@files_view
-## ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.5'
-#
-#Feature:  File updating
-#  As an owner or editor, I want to update the file so that the correct version could be used.
-#
-#  Background: Create a user before starting the tests
-#    Given Login as new user without UI
+@test_case_2.5
+@files_view
+# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_2.5'
+
+Feature:  File updating
+  As an owner or editor, I want to update the file so that the correct version could be used.
+
+  Scenario: Create a user before starting the tests
+    Given Login as new user without UI
 #    And The user send "test_positive.txt" without UI
 #
 #    Scenario: 1 File updating
 ##      Given The user has access to the file with owner or editor rights
 #      When The user press the Actions button in "test_positive.txt" file
 #      And The user press the Versions button in "test_positive.txt" file
-#
+
 #      And Choose the new file from his computer
 #  #    внести изменения в сущетвующий файл
 #      And the chosen file has the same name "test_positive"
