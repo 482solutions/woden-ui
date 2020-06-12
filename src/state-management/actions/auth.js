@@ -84,7 +84,7 @@ export const loginRequest = (user) => async(dispatch) => {
 };
 
 export const changePassword = async(userData) => {
-  message.loading('Changing password...');
+  message.loading('Changing password...', 0);
   const oldPassword = encryptData(userData.oldPassword);
   const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;
