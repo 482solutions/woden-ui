@@ -99,11 +99,13 @@ export const uploadFile = (file) => async(dispatch) => {
   );
 };
 export const updateFile = (file) => async(dispatch) => {
+  message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { fileHash, file: fileData } = file;
   api.updateFile(
     fileHash, fileData,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
@@ -120,10 +122,12 @@ export const updateFile = (file) => async(dispatch) => {
   );
 };
 export const downloadFile = (cid, hash) => async(dispatch) => {
+  message.loading('Downloading file...');
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
     hash, cid,
     (error, data, response) => {
+      message.success('File downloaded successfully');
       if (error) {
         message.error(response.body.message);
       } else {
@@ -137,10 +141,12 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
   );
 };
 export const getVersions = (hash) => async(dispatch) => {
+  message.loading('Getting file versions...');
   Bearer.apiKey = await getTokenForHeader();
   api.versions(
     hash,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else {
