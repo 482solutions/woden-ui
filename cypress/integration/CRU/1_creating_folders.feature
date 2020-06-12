@@ -4,8 +4,6 @@
 
 Feature: Creating folders
   As a user (any role), I want to create a new folder so that I can upload files in it.
-  For the folder name, the minimum amount of number is 1
-  and the maximum amount of numbers is 20. All symbols are allowed.
 
   Rule: user should be registered.
 

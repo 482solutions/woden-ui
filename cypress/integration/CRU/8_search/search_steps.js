@@ -35,6 +35,7 @@ When(/^The user presses the search button$/, () => {
 });
 
 Given(/^Upload file to folder with name testFolder$/, () => {
+    cy.wait(2000)
     cy.contains('testFolder').dblclick().wait(3000)
     cy.contains('File Upload').click().wait(1000)
     cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
