@@ -3,9 +3,9 @@ env:
   global:
     - secure: OSNYuwdiEyqev+vwKnAdk4UbgOTk82njqG3uxPQ6v/2y7wgr2g5hgt8CyPbf+uto1ZvYsoAEjLijNBALRGUuOKLDXiLKyRCbB10oSo/QI1G3cT6a+1uU7vaNlpmOzV4Ulx0ICpbxDaNTD/1yXyQj5xwUlO2nb20RzGnh1QuYY/6SLNuF+kae4WaD4nF15xpYbj8oR1cZLVE1la5J78ZXgklnaFWoJMRB0FAJ15tLUlriocicRtT22uKRl1tLMRa31leHwRzd7dNPfS2oe2+HymbkDWq4CLICMaX5GixDVFR/OHu6wbrw9JdQda1acEZCAVoZdut1K9EkuEQoCZZfk+0Sl7yKr+BX4i3DtxAIcKcP5q0bULI5eg79tKfJP0tIggB6eDF0jFnkz/1vN0i3YLTgxqtp7n1VITv6/5RiNmOgXG3X5YcvU3mB7cYLslu/zYwTMaHF6Po/gK/pVLtXq3kDTLzsnmpGfILAO3d1KazR2nvh7YQ/x/UofkEFrzLnk/+ID9qeU5CNjo5l1k9acPOlrwFoDeb3xyJxJ9JEhoE76aBEp4w7fAaVUOyCiiLF3i0rMtIKf+EwEf72Ln0rXHebBJu/pEhChjlu6lymBZgT+kYuyu09nFp7HdJhZvs4P5gFRpa24Vh9nPRWsUR+exG4+InPat3qES0Wdp18dXM=
 node_js:
-- stable
+  - stable
 services:
-- docker
+  - docker
 addons:
   apt:
     packages:
@@ -19,14 +19,14 @@ cache:
     # we also need to cache folder with Cypress binary
     - ~/.cache
 script:
-- npm run lint:js
-- git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
-- cd woden-network && git checkout feature/WGRND-630 && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
-- cd ..
-- git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-- cd woden-server-js && docker-compose up --build -d
-- cd ..
-- npm ci
-- npm run startci & sleep 10
-- npm run cypress:run
-- npm run coverage
+  - npm run lint:js
+  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
+  - cd woden-network && git checkout feature/WGRND-630 && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
+  - cd ..
+  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
+  - cd woden-server-js && docker-compose up --build -d
+  - cd ..
+  - npm ci
+  - npm run startci & sleep 10
+  - npm run cypress:run
+  - npm run coverage
