@@ -27,10 +27,12 @@ export const search = (value) => async(dispatch) => {
   });
 };
 export const getFolderData = (hash) => async(dispatch) => {
+  message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
     hash,
     (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 203) {
@@ -122,7 +124,7 @@ export const updateFile = (file) => async(dispatch) => {
   );
 };
 export const downloadFile = (cid, hash) => async(dispatch) => {
-  message.loading('Downloading file...');
+  message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
     hash, cid,
