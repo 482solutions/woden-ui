@@ -11,7 +11,7 @@ Feature: Open folders
       Given Login as new user without UI
 
     Scenario Outline: Create folder before the test
-     Given Create folder with name <Name> from list without UI
+     Given Create folder with name <Name> in root without UI
       Examples: Folder's Name
         | Name                 |
         | Folder-1             |

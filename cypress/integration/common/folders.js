@@ -10,3 +10,8 @@ Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
     cy.get('.folderTitle').should('contain.text', folderName)
         .as(`Folder ${folderName} on the dashboard`).wait(1000)
 });
+
+Given(/^Create folder with name (.*) in root without UI$/,  (Name) => {
+    cy.createFolderInRoot(Name)
+    cy.reload().wait(2000)
+});

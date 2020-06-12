@@ -1,20 +1,20 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
+import {getLogin, getPassword} from "../../../support/commands";
 
-const generator = require('generate-password');
+before(() => {
+    Cypress.env('login', getLogin())
+    Cypress.env('email', getLogin() + '@gmail.com')
+    Cypress.env('password', getPassword(8, false))
 
-let login = generator.generate({});
-let email = `${login.toLowerCase()}@gmail.com`;
-let password = `${login}12345`;
-
-before('Register new user', () => {
     cy.visit('/');
+    cy.wait(3000)
     cy.get('.ant-col-offset-2 > a').click();
-    cy.get('#name').type(login);
-    cy.get('#email').type(email);
-    cy.get('#password').type(password);
-    cy.get('#confirm').type(password);
+    cy.get('#name').type(Cypress.env('login'));
+    cy.get('#email').type(Cypress.env('email'));
+    cy.get('#password').type(Cypress.env('password'));
+    cy.get('#confirm').type(Cypress.env('password'));
     cy.server()
-    cy.route('POST', '/api/v1/user').as('getCert')
+    cy.route('POST', `/api/v1/user`).as('getCert')
     cy.get('.ant-btn').as('Sign Up Now Btn').click()
     cy.get('a[download]')
         .then((anchor) => (
@@ -38,28 +38,29 @@ before('Register new user', () => {
         )).wait('@getCert').then((xhr) => {
         cy.writeFile('cypress/fixtures/cert.pem', xhr.responseBody.cert)
     })
+    cy.wait(5000)
 });
 
 Given(/^User has filled in the field valid username$/, () => {
     cy.wait(2000)
-    cy.get('#name').type(login);
+    cy.get('#name').type(Cypress.env('login'));
 });
 
 Given(/^filled valid password field$/, () => {
-    cy.get('#password').type(password);
+    cy.get('#password').type(Cypress.env('password'));
 });
 
 Given(/^Pin cert$/, () => {
-    cy.get('input[type=file]').attachFile('cert.pem').wait(1000)
+    cy.get('input[type=file]').attachFile('cert.pem').wait(3000)
 });
 
 Given(/^Pin privateKey$/, () => {
-    cy.get('input[type=file]').attachFile('privateKey.pem');
+    cy.get('input[type=file]').attachFile('privateKey.pem').wait(3000)
 });
 
 Given(/^User has filled in the field valid email$/, () => {
     cy.wait(2000)
-    cy.get('#name').type(email);
+    cy.get('#name').type(Cypress.env('email'));
 });
 
 Given(/^User has filled invalid username (.*) in the field username from list$/, (invUsername) => {

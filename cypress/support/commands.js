@@ -6,14 +6,25 @@ import { sha256 } from 'js-sha256'
 const URL = 'http://localhost:1823/api/v1'
 const headers = {'content-type': 'application/json'}
 
-export function getPassword () {
-    return sha256(generate({
-        length: 8,
-        numbers: true,
-        symbols: true,
-        lowercase: true,
-        uppercase: true,
-    }))
+export function getPassword(length, sha) {
+    if (sha === true) {
+        return sha256(generate({
+            length: length,
+            numbers: true,
+            symbols: true,
+            lowercase: true,
+            uppercase: true,
+        }))
+    }
+    if (sha === false) {
+        return generate({
+            length: length,
+            numbers: true,
+            symbols: false,
+            lowercase: true,
+            uppercase: true,
+        }) + "!!"
+    }
 }
 export function getLogin () {
     return generate({
@@ -39,7 +50,7 @@ export function getHashFromFile (fileName, files) {
 
 Cypress.Commands.add('registerUser', () => {
     Cypress.env('login', getLogin())
-    Cypress.env('password', getPassword())
+    Cypress.env('password', getPassword(8, true))
     Cypress.env('email', getLogin() + '@gmail.com')
 
     let csr = getCSR({username: Cypress.env('login')})
@@ -179,7 +190,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
 })
 
 Cypress.Commands.add('userAuth', () => {
-    expect(Cypress.env('login')).to.equal(localStorage.rootFolder)
+    expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
 })
 
 Cypress.Commands.add('inRootFolder', () => {

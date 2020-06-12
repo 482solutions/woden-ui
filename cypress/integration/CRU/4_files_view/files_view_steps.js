@@ -18,6 +18,7 @@ When(/^The user double click the file "([^"]*)"$/, function (filename) {
 Then(/^The file is downloaded$/, function () {
     cy.wait('@getFile')
         .then(function (xhr) {
+            console.log(xhr.status)
             console.log(xhr.responseBody)
             expect('1234567890\n').to.eq(xhr.responseBody.file)
         })
