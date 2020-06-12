@@ -130,10 +130,10 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
     hash, cid,
     (error, data, response) => {
       message.destroy();
-      message.success('File downloaded successfully');
       if (error) {
         message.error(response.body.message);
       } else {
+        message.success('File downloaded successfully');
         const { name, type, file } = response.body;
         download(file, name, type);
         dispatch({
