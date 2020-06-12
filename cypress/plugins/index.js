@@ -1,9 +1,6 @@
 const cucumber = require('cypress-cucumber-preprocessor').default
-const path = require('path');
-
-// const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 
 module.exports = (on) => {
   on('file:preprocessor', cucumber())
-  // on('task', {downloadFile})
+  require('cypress-plugin-retries/lib/plugin')(on)
 }

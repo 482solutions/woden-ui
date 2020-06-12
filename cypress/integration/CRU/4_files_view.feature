@@ -17,4 +17,5 @@ Feature: Files view
       Given The user located on root dashboard
 #    And the user has access to any available file
       When The user double click the file "txtFile.txt"
-      Then The file is downloaded
+#  TODO:
+#      Then The file is downloaded

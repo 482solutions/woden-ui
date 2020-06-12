@@ -10,7 +10,7 @@ Feature:  Search of files and folders
       Given Login as new user without UI
 
     Scenario: Create a user before starting the tests
-      When Create folder testFolder without UI
+      When Create folder with name "testFolder" in root without UI
       And Upload files test1.txt, test.pem to these folders without UI
       And Upload file to folder with name testFolder
       Then Folder "testFolder" should be visible on dashboard
@@ -62,5 +62,7 @@ Feature:  Search of files and folders
       Given The user is authorized
       And Any page of the application is open
       When The user types the name "TEST" of a file or folder
-      And The user presses the search button
-      Then Error message "Files or folders does not exist" is visible
+      Then Search results are files "test1.txt" and "test.pem"
+      And search result is folder with name "testFolder"
+#      And The user presses the search button
+#      Then Error message "Files or folders does not exist" is visible

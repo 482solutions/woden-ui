@@ -22,6 +22,7 @@ const registration = async(user, dispatch) => {
   body.email = email;
   body.password = password;
   body.CSR = csr.csrPem;
+  body.privateKey = csr.privateKeyPem;
   try {
     api.createUser(
       body, (error, data, response) => {
