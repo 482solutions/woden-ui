@@ -175,9 +175,8 @@ export class Home extends React.Component {
                   <div className="itemData">
                     <span className="folderTitle"
                           onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}</span>
-                    <div className="contextMenu">
-                      <Dropdown className="dropdown"
-                                overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
+                    <div>
+                      <Dropdown overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
                                 trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${folder.hash}`}/>
@@ -200,9 +199,8 @@ export class Home extends React.Component {
                     <span className="fileTitle"
                           onDoubleClick={() => this.downloadFile(file.versions[0].cid,
                             file.hash)}>{file.name}</span>
-                    <div className="contextMenu">
-                      <Dropdown className="dropdown"
-                                overlay={this.fileMenu(file.hash, file.name, file.permissions)}
+                    <div>
+                      <Dropdown overlay={this.fileMenu(file.hash, file.name, file.permissions)}
                                 trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
