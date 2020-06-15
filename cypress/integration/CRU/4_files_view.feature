@@ -10,12 +10,12 @@ Feature: Files view
     Background: Create a user before starting the tests
       Given Login as new user without UI
       And The user press Upload a new file button
-      And Choose the needed txt file from its PC directory
-      Then The txt file is uploaded
+      And Choose the needed "txtFile.txt" file from its PC directory
+      Then The file "txtFile.txt" is uploaded
 
     Scenario: 1 File view
       Given The user located on root dashboard
 #    And the user has access to any available file
       When The user double click the file "txtFile.txt"
 #  TODO:
-#      Then The file is downloaded
+      Then The file is downloaded

@@ -95,9 +95,9 @@ Given(/^The user is authorized$/, () => {
   cy.userAuth()
 });
 
-When(/^Choose the needed txt file from its PC directory$/, () => {
-  cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
-});
+// When(/^Choose the needed txt file from its PC directory$/, () => {
+//   cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
+// });
 
 Then(/^The file is uploaded$/, (file) => {
   cy.contains(file).should('be.visible').wait(1000)
