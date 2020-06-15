@@ -70,7 +70,6 @@ export class Home extends React.Component {
 
   changePermissions(data) {
     this.props.changePermissions(data);
-    console.log(data);
   }
 
   async getVersions(hash, name) {
@@ -130,6 +129,18 @@ export class Home extends React.Component {
     );
   }
 
+  folderMenu(hash, name, permission) {
+    return (
+      <Menu>
+        <Menu.Item key={`2${hash}`} onClick={() => {
+          this.shareModal(hash, name, permission);
+        }}>
+          <span id={`Sh..are_${hash}`}>Share</span>
+        </Menu.Item>
+      </Menu>
+    );
+  }
+
   render() {
     const {
       fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo,
@@ -163,6 +174,15 @@ export class Home extends React.Component {
                   <div className="itemData">
                     <span className="folderTitle"
                           onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}</span>
+                    <div className="contextMenu">
+                      <Dropdown className="dropdown"
+                                overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
+                                trigger={['click']}>
+                        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                          <img title="More" alt="More" src={More} id={`Actions_${folder.hash}`}/>
+                        </a>
+                      </Dropdown>
+                    </div>
                   </div>
                 </div>
               ))
