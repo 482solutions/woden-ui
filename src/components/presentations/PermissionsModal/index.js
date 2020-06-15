@@ -20,7 +20,10 @@ export const PermissionsModal = ({
       title={info.title}
       okText="Save"
       cancelText="Cancel"
-      onCancel={close}
+      onCancel={() => {
+        form.resetFields();
+        close();
+      }}
       onOk={() => {
         form
           .validateFields()
@@ -39,9 +42,10 @@ export const PermissionsModal = ({
         <Form.Item name="username"
                    rules={[{
                      required: true,
+                     type: 'email',
                      message: 'Please input your Username or Email!',
                    }]}>
-          <Input style={{ width: 300, marginBottom: 20 }} placeholder='Username or Email'/>
+          <Input style={{ width: 300 }} placeholder='Username or Email'/>
         </Form.Item>
         <Form.Item name="permissions"
                    rules={[{
@@ -50,7 +54,7 @@ export const PermissionsModal = ({
                    }]}>
           <Select
             placeholder="Access Type"
-            style={{ width: 300 }}
+            style={{ width: 300, marginTop: 20 }}
           >
             {/* {info.permission === 'owner' &&
             <Option value="owner">Transfer ownership</Option>} */}
