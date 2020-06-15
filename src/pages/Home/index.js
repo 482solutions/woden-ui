@@ -70,6 +70,7 @@ export class Home extends React.Component {
 
   changePermissions(data) {
     this.props.changePermissions(data);
+    console.log(data);
   }
 
   async getVersions(hash, name) {
@@ -170,15 +171,15 @@ export class Home extends React.Component {
                        onDoubleClick={() => this.openFolder(folder.hash)}
                        src={FolderImage}
                        alt={'Folder'}
-                       title={`Folder - ${folder.name}`}
-                       className="folder"/>
+                       title={`Folder - ${folder.name}`} className="folder"/>
                   <div className="itemData">
                     <span className="folderTitle"
                           onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}</span>
-                    <div>
-                      <Dropdown overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
+                    <div className="contextMenu">
+                      <Dropdown className="dropdown"
+                                overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
                                 trigger={['click']}>
-                        <a onClick={(e) => e.preventDefault()}>
+                        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${folder.hash}`}/>
                         </a>
                       </Dropdown>
@@ -194,14 +195,16 @@ export class Home extends React.Component {
                   <img src={FileImage}
                        onDoubleClick={() => this.downloadFile(file.versions[0].cid, file.hash)}
                        alt={'File'}
-                       title={`File - ${file.name}`}/>
+                       title={`File - ${file.name}`} className="file"/>
                   <div className="itemData">
-                    <span onDoubleClick={() => this.downloadFile(file.versions[0].cid,
+                    <span className="fileTitle"
+                          onDoubleClick={() => this.downloadFile(file.versions[0].cid,
                             file.hash)}>{file.name}</span>
-                    <div>
-                      <Dropdown overlay={this.fileMenu(file.hash, file.name, file.permissions)}
+                    <div className="contextMenu">
+                      <Dropdown className="dropdown"
+                                overlay={this.fileMenu(file.hash, file.name, file.permissions)}
                                 trigger={['click']}>
-                        <a onClick={(e) => e.preventDefault()}>
+                        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
                         </a>
                       </Dropdown>

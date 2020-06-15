@@ -30,12 +30,27 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding-top: 20px;
-  padding-left: 16px;
   color: #8998AC;
   font-size: 14px;
   font-weight: normal;
 }
+
+.folderTitle{
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileTitle{
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .fileInfoWrapper {
   display: flex;
   flex-direction: column;
