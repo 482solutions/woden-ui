@@ -3,7 +3,7 @@ import { generate } from 'generate-password'
 import { getCSR } from '../../src/utils/functions'
 import { sha256 } from 'js-sha256'
 
-const URL = 'http://192.168.88.83:1823/api/v1'
+const URL = 'http://localhost:1823/api/v1'
 const headers = {'content-type': 'application/json'}
 
 export function getPassword(length, sha) {
@@ -187,39 +187,6 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                 })
         }).as('Update txt file').wait(6000)
     })
-})
-
-Cypress.Commands.add('uploadTxtFile', (fullName, text) => {
-    cy.writeFile(`cypress/fixtures/${fullName}`, text).as('Write text to the file')
-    cy.readFile(`cypress/fixtures/${fullName}`).then((str) => {
-
-        expect(text).to.equal(text)
-
-        let blob = new Blob([str], {type: 'text/plain'})
-        const myHeaders = new Headers();
-        myHeaders.set("Authorization", `Bearer ${user.body.token}`);
-
-        let formData = new FormData()
-        formData.append('name', fullName)
-        formData.append('parentFolder', user.body.folder)
-        formData.append('file', blob)
-
-        fetch(`${basic}/file`, {
-            method: 'POST',
-            headers: myHeaders,
-            body: formData,
-            redirect: 'follow'
-        }).then((response) => {
-            console.log(response.status)
-            return Promise.resolve(response)
-        }).then((response) => {
-            return response.json()
-        }).then((data) => {
-            expect(login).to.equal(data.folder.name)
-            folderData = data
-            console.log(data)
-        })
-    }).as('Send txt').wait(2000)
 })
 
 Cypress.Commands.add('userAuth', () => {
