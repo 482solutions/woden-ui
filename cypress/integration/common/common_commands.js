@@ -99,10 +99,18 @@ When(/^Choose the needed txt file from its PC directory$/, () => {
   cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
 });
 
-Then(/^The txt file is uploaded$/, () => {
-  cy.contains('txtFile.txt').should('be.visible').wait(1000)
+Then(/^The file is uploaded$/, (file) => {
+  cy.contains(file).should('be.visible').wait(1000)
 });
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
 });
+
+// When(/^Choose the needed "([^"]*)" file from PC directory$/,  (file) => {
+//   cy.get('input[type=file]').attachFile(file).wait(1000);
+// });
+
+// Then(/^The file "([^"]*)" is uploaded$/,  (file) => {
+//   cy.contains(file).should('be.visible').wait(1000)
+// });

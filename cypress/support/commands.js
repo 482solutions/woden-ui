@@ -3,7 +3,7 @@ import { generate } from 'generate-password'
 import { getCSR } from '../../src/utils/functions'
 import { sha256 } from 'js-sha256'
 
-const URL = 'http://localhost:1823/api/v1'
+const URL = 'http://192.168.88.83:1823/api/v1'
 const headers = {'content-type': 'application/json'}
 
 export function getPassword(length, sha) {
