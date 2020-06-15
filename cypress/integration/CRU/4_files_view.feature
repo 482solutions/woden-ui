@@ -8,8 +8,9 @@ Feature: Files view
   Rule: user should be registered.
 
     Background: Create a user before starting the tests
-      Given Login as new user without UI
-      And The user press Upload a new file button
+      Given Register without UI
+      And Login as new user without UI
+      When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       Then The file "txtFile.txt" is uploaded
 
@@ -17,5 +18,4 @@ Feature: Files view
       Given The user located on root dashboard
 #    And the user has access to any available file
       When The user double click the file "txtFile.txt"
-#  TODO:
       Then The file is downloaded
