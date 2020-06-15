@@ -60,7 +60,7 @@ it('Renders "Home" check all components', () => {
   expect(wrapper.find(Dropdown)).to.have.lengthOf(fakeFiles.length);
   expect(wrapper.find('img.folder')).to.have.lengthOf(3);
   expect(wrapper.find('img.file')).to.have.lengthOf(2);
-  expect(wrapper.find('#VersionWrapper')).to.have.lengthOf(1);
+  wrapper.setState({ shareModalVisible: true });
 });
 it('Simulate click on Context Menu', () => {
   const wrapper = shallow(<Home entryFolders={fakeFolders} entryFiles={fakeFiles}
