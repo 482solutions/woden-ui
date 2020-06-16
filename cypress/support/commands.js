@@ -3,7 +3,7 @@ import { generate } from 'generate-password'
 import { getCSR } from '../../src/utils/functions'
 import { sha256 } from 'js-sha256'
 
-const URL = 'http://192.168.88.83:1823/api/v1'
+const URL = 'http://localhost:1823/api/v1'
 const headers = {'content-type': 'application/json'}
 
 export function getPassword(length, sha) {
@@ -102,10 +102,11 @@ Cypress.Commands.add('loginAsNewUser', () => {
                     'privateKey': key,
                 },
             }).then((resp) => {
+                console.log(resp)
                 if (expect(200).to.eq(resp.status)) {
                     Cypress.env('token', resp.body.token)
                     Cypress.env('respStatus', resp.status)
-                    Cypress.env('rootFolder', resp.body.folder)
+                    Cypress.env('rootFolder', resp.body.folderName)
                 }
             })
         }).as('Login').visit('/', {
@@ -139,8 +140,8 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
         const result = await resp.json()
         if (expect(200).to.eq(resp.status)) {
             Cypress.env('respStatus', resp.status)
-            Cypress.env('filesInRoot', JSON.parse(result.folder.files))
-            expect(Cypress.env('login')).to.equal(result.folder.name)
+            Cypress.env('filesInRoot', result.folder.files)
+            expect(Cypress.env('login')).to.equal(result.folder.folderName)
         }
     }).as('Send txt')
     cy.wait(5000)
@@ -182,7 +183,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                     return resp.json()
                 })
                 .then((data) => {
-                    expect(Cypress.env('login')).to.equal(data.file.name)
+                    expect(Cypress.env('login')).to.equal(data.file.fileName)
                 })
         }).as('Update txt file').wait(6000)
     })
@@ -213,7 +214,7 @@ Cypress.Commands.add('createFolderInRoot', (name) => {
 })
 
 Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
-    const folders = JSON.parse(Cypress.env('foldersInRoot'))
+    const folders = Cypress.env('foldersInRoot')
     headers.Authorization = `Bearer ${Cypress.env('token')}`
 
     for (let key in folders) {
