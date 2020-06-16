@@ -43,7 +43,6 @@ export const getFolderData = (hash) => async(dispatch) => {
         });
       } else {
         const folderData = response.body.folder;
-        console.log(folderData);
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -95,7 +94,7 @@ export const uploadFile = (file) => async(dispatch) => {
     },
   );
 };
-export const updateFile = (file) => async(dispatch) => {
+export const updateFile = (file) => async() => {
   message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { fileHash, file: fileData } = file;
@@ -107,11 +106,6 @@ export const updateFile = (file) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 200) {
         message.success('File updated successfully');
-        const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
       }
     },
   );
