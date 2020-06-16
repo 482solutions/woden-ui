@@ -33,21 +33,21 @@ class Buttons extends Component {
     return (
       <Row className="homeButtons">
         <Col span={1}>
-          {this.props.parentHash !== 'null'
+          {this.props.parentHash !== 'root'
             ? <div onClick={this.goHome} className="goHome">
               <HomeOutlined/>
             </div> : null
           }
         </Col>
         <Col span={1}>
-          {this.props.parentHash !== 'null'
+          {this.props.parentHash !== 'root'
             ? <div onClick={this.goBack} className="goBack">
               <LeftOutlined/>
             </div> : null
           }
         </Col>
         <Col span={2}>
-          {this.props.parentHash !== 'null'
+          {this.props.parentHash !== 'root'
             ? <span className="currentFolder">{this.props.folderName}</span>
             : <span className="currentFolder">My Drive</span>
           }

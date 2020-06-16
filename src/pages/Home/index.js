@@ -70,7 +70,6 @@ export class Home extends React.Component {
 
   changePermissions(data) {
     this.props.changePermissions(data);
-    console.log(data);
   }
 
   async getVersions(hash, name) {
@@ -106,6 +105,7 @@ export class Home extends React.Component {
   }
 
   fileMenu(hash, name, permission) {
+    console.log('folderHash', this.props.folderHash);
     return (
       <Menu>
         <Menu.Item key={`0${hash}`}>
@@ -147,14 +147,13 @@ export class Home extends React.Component {
       fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo,
     } = this.state;
     const {
-      entryFolders, entryFiles, versions, userName,
+      entryFolders, entryFiles, versions,
     } = this.props;
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
-          {/* <code>{JSON.stringify(this.state, null, 2)}</code> */}
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}
@@ -176,8 +175,9 @@ export class Home extends React.Component {
                     <span className="folderTitle"
                           onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}</span>
                     <div>
-                      <Dropdown overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
-                                trigger={['click']}>
+                      <Dropdown
+                        overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
+                        trigger={['click']}>
                         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                           <img title="More" alt="More" src={More} id={`Actions_${folder.hash}`}/>
                         </a>
@@ -192,12 +192,12 @@ export class Home extends React.Component {
                 <div className="driveItem"
                      key={i}>
                   <img src={FileImage}
-                       onDoubleClick={() => this.downloadFile(file.versions[0].cid, file.hash)}
+                       onDoubleClick={() => this.downloadFile('null', file.hash)}
                        alt={'File'}
                        title={`File - ${file.name}`} className="file"/>
                   <div className="itemData">
                     <span className="fileTitle"
-                          onDoubleClick={() => this.downloadFile(file.versions[0].cid,
+                          onDoubleClick={() => this.downloadFile('null',
                             file.hash)}>{file.name}</span>
                     <div>
                       <Dropdown overlay={this.fileMenu(file.hash, file.name, file.permissions)}
@@ -240,7 +240,7 @@ export class Home extends React.Component {
                   <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
                   <Col span={12} className='versionCode'><span
                     id={`Time_${version.cid}`}>{time}</span></Col>
-                  <Col span={7} offset={2} className='versionAuthor'>{userName}</Col>
+                  <Col span={7} offset={2} className='versionAuthor'>{version.user}</Col>
                   <Col span={3} className='versionDownload'>
                     <img id={`Download_${version.cid}`} onClick={() => {
                       this.downloadFile(version.cid, wrapperInfo.fileHash);
