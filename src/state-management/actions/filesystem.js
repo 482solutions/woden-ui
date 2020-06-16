@@ -43,8 +43,7 @@ export const getFolderData = (hash) => async(dispatch) => {
         });
       } else {
         const folderData = response.body.folder;
-        folderData.folders = JSON.parse(folderData.folders);
-        folderData.files = JSON.parse(folderData.files);
+        console.log(folderData);
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -67,8 +66,6 @@ export const createFolder = (folder) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 201) {
         const folderData = response.body.folder;
-        folderData.folders = JSON.parse(folderData.folders);
-        folderData.files = JSON.parse(folderData.files);
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -90,8 +87,6 @@ export const uploadFile = (file) => async(dispatch) => {
       } else if (response.status === 200) {
         message.success('File created successful');
         const folderData = response.body.folder;
-        folderData.folders = JSON.parse(folderData.folders);
-        folderData.files = JSON.parse(folderData.files);
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -113,8 +108,6 @@ export const updateFile = (file) => async(dispatch) => {
       } else if (response.status === 200) {
         message.success('File updated successfully');
         const folderData = response.body.folder;
-        folderData.folders = JSON.parse(folderData.folders);
-        folderData.files = JSON.parse(folderData.files);
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
@@ -153,7 +146,7 @@ export const getVersions = (hash) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        const versionList = JSON.parse(response.body.message);
+        const versionList = response.body.message;
         // const versionList = JSON.parse(response.body.versions);
         const versions = {
           hash,

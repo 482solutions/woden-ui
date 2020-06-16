@@ -16,24 +16,24 @@ const initialState = {
 
 const handleSetFolder = (state, folderData) => ({
   ...state,
-  folderName: folderData.name,
-  folderHash: folderData.hash,
-  parentHash: folderData.parenthash,
+  folderName: folderData.folderName,
+  folderHash: folderData.folderHash,
+  parentHash: folderData.parentFolderHash,
   entryFolders: folderData.folders,
   entryFiles: folderData.files,
 });
 const handleGetFolder = (state, folderData) => ({
   ...state,
-  folderName: folderData.name,
-  folderHash: folderData.hash,
-  parentHash: folderData.parenthash,
+  folderName: folderData.folderName,
+  folderHash: folderData.folderHash,
+  parentHash: folderData.parentFolderHash,
   entryFolders: folderData.folders,
   entryFiles: folderData.files,
 });
 const handleSearch = (state, resultData) => ({
   ...state,
-  folderName: resultData.name,
-  folderHash: resultData.hash,
+  folderName: resultData.folderName,
+  folderHash: resultData.folderHash,
   parentHash: null,
   entryFolders: resultData.folders,
   entryFiles: resultData.files,
