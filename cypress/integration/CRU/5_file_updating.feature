@@ -7,17 +7,16 @@ Feature:  File updating
 
   Scenario: Create a user before starting the tests
     Given Login as new user without UI
-#    And The user send "test_positive.txt" without UI
-#
-#    Scenario: 1 File updating
-##      Given The user has access to the file with owner or editor rights
-#      When The user press the Actions button in "test_positive.txt" file
-#      And The user press the Versions button in "test_positive.txt" file
+    And The user upload "test.pem" without UI
 
-#      And Choose the new file from his computer
-#  #    внести изменения в сущетвующий файл
-#      And the chosen file has the same name "test_positive"
-#      Then The new version of the file is updated
+  Scenario: 1 File updating
+    Given Login as new user without UI
+    Given Update file "test.pem"
+#      Given The user has access to the file with owner or editor rights
+    When The user press the Actions button in "test.pem" file
+    And The user press the Update button in "test.pem" file
+    And Choose the needed "test.pem" file from its PC directory for update
+    Then The new version of the file "test.pem" is updated
 #      And The last version remains in the system
 #
 #    Scenario: 2 File updating

@@ -139,7 +139,7 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
         const result = await resp.json()
         if (expect(200).to.eq(resp.status)) {
             Cypress.env('respStatus', resp.status)
-            Cypress.env('filesInRoot', result.folder.files)
+            Cypress.env('filesInRoot', JSON.parse(result.folder.files))
             expect(Cypress.env('login')).to.equal(result.folder.name)
         }
     }).as('Send txt')
@@ -147,11 +147,10 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
 })
 
 Cypress.Commands.add('updateTxtFile', (fileName) => {
-    const textAfter = 'Good morning!'
     const textBefore = 'Good night!'
+    const textAfter = 'Good morning!'
 
-    const files = JSON.parse(Cypress.env('filesInRoot'))
-    const hashFile = getHashFromFile(fileName, files)
+    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
 
     cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
         expect(str1).to.equal(textBefore)
