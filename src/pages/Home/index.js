@@ -105,7 +105,7 @@ export class Home extends React.Component {
   }
 
   fileMenu(hash, name, permission) {
-    console.log('folderHash', this.props.folderHash);
+    // console.log('folderHash', this.props.folderHash);
     return (
       <Menu>
         <Menu.Item key={`0${hash}`}>

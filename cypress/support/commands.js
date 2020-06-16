@@ -102,7 +102,6 @@ Cypress.Commands.add('loginAsNewUser', () => {
                     'privateKey': key,
                 },
             }).then((resp) => {
-                console.log(resp)
                 if (expect(200).to.eq(resp.status)) {
                     Cypress.env('token', resp.body.token)
                     Cypress.env('respStatus', resp.status)
@@ -183,7 +182,11 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                     return resp.json()
                 })
                 .then((data) => {
-                    expect(Cypress.env('login')).to.equal(data.file.fileName)
+                    console.log(data)
+                    expect(Cypress.env('login')).to.equal(data.file.ownerId)
+                    expect(fileName).to.equal(data.file.fileName)
+                    // const fileHash = data.file.fileHash
+                    // const versions = data.file.versions[0].cid || [1].cid
                 })
         }).as('Update txt file').wait(6000)
     })
