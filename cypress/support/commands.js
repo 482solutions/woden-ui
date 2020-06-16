@@ -106,7 +106,7 @@ Cypress.Commands.add('loginAsNewUser', () => {
                 if (expect(200).to.eq(resp.status)) {
                     Cypress.env('token', resp.body.token)
                     Cypress.env('respStatus', resp.status)
-                    Cypress.env('rootFolder', resp.body.folderName)
+                    Cypress.env('rootFolder', resp.body.folder)
                 }
             })
         }).as('Login').visit('/', {
