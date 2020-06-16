@@ -38,6 +38,14 @@ it('Check goHome method', () => {
   wrapper.instance().goHome();
 });
 
+it('Check goHome method', () => {
+  const wrapper = shallow(<Buttons
+    goHome={() => {
+    }}
+  />);
+  wrapper.instance().goHome();
+});
+
 it('Check goBack method', () => {
   const wrapper = shallow(<Buttons
     goHome={() => {
