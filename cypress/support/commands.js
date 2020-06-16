@@ -33,13 +33,7 @@ export function getLogin () {
         uppercase: true,
     })
 }
-export function getCidFromFile (fileName, files) {
-    for (let key in files) {
-        if (fileName === files[key].name) {
-            return files[key].versions[0].cid
-        }
-    }
-}
+
 export function getHashFromFile (fileName, files) {
     for (let key in files) {
         if (fileName === files[key].name) {
