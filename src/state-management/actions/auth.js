@@ -55,6 +55,7 @@ const registration = async(user, dispatch) => {
 export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
 const logIn = async(user, dispatch) => {
+  message.destroy();
   message.loading('Logging In...', 0);
   const password = (encryptData(user.password));
   const body = new Woden.Login();

@@ -57,7 +57,7 @@ it('Renders "Home" check all components', () => {
                                 }} versions={versions}/>);
   // expect(wrapper.find(Sidebar)).to.have.lengthOf(1);
   expect(wrapper.find(Buttons)).to.have.lengthOf(1);
-  expect(wrapper.find(Dropdown)).to.have.lengthOf(fakeFiles.length);
+  expect(wrapper.find(Dropdown)).to.have.lengthOf(fakeFiles.length + fakeFolders.length);
   expect(wrapper.find('img.folder')).to.have.lengthOf(3);
   expect(wrapper.find('img.file')).to.have.lengthOf(2);
   wrapper.setState({ shareModalVisible: true });
