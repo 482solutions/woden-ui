@@ -16,11 +16,9 @@
 
 .goBack_inactive {
   color: darkgray;
-  cursor: pointer;
 }
 
 .goHome_inactive {
   color: darkgray;
   margin-left: 15px;
-  cursor: pointer;
 }
