@@ -37,7 +37,7 @@ class Buttons extends Component {
             ? <div onClick={this.goHome} className="goHome">
                 <HomeOutlined/>
               </div> :
-              <div onClick={this.goHome} className="goHome_inactive">
+              <div className="goHome_inactive">
                 <HomeOutlined/>
               </div>
           }
@@ -47,8 +47,8 @@ class Buttons extends Component {
             ? <div onClick={this.goBack} className="goBack">
                 <LeftOutlined/>
               </div> :
-              <div onClick={this.goBack} className="goBack_inactive">
-                <LeftOutlined/>
+              <div className="goBack_inactive">
+                <LeftOutlined disabled={true}/>
               </div>
           }
         </Col>
