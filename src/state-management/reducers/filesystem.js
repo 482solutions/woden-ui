@@ -1,5 +1,5 @@
 import {
-  GET_FOLDER_DATA, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, GET_VERSIONS,
+  GET_FOLDER_DATA, GET_VERSIONS, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, SET_SHARE_DATA,
 } from '../types';
 
 const initialState = {
@@ -8,6 +8,8 @@ const initialState = {
   parentHash: null,
   entryFolders: [],
   entryFiles: [],
+  shareFolders: [],
+  shareFiles: [],
   versions: {
     file: null,
     versionList: [],
@@ -21,6 +23,10 @@ const handleSetFolder = (state, folderData) => ({
   parentHash: folderData.parentFolderHash,
   entryFolders: folderData.folders,
   entryFiles: folderData.files,
+});
+const handleSetShareData = (state, shareData) => ({
+  ...state,
+  ...shareData,
 });
 const handleGetFolder = (state, folderData) => ({
   ...state,
@@ -47,6 +53,7 @@ const handleVersions = (state, fileData) => ({
 });
 const handlers = {
   [SET_FOLDER_DATA]: handleSetFolder,
+  [SET_SHARE_DATA]: handleSetShareData,
   [GET_FOLDER_DATA]: handleGetFolder,
   [SEARCH_FOLDER_FILE]: handleSearch,
   [GET_VERSIONS]: handleVersions,

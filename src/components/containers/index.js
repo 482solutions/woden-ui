@@ -7,4 +7,5 @@ export { default as NewFolder } from './NewFolder';
 export { default as Profile } from './Profile';
 export { default as Sidebar } from './Sidebar';
 export { default as Buttons } from './Buttons';
+export { default as Drive } from './Drive';
 export * from './styles.css';

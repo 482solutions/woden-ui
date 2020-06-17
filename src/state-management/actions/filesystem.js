@@ -7,6 +7,7 @@ import {
   LOGOUT,
   SEARCH_FOLDER_FILE,
   SET_FOLDER_DATA,
+  SET_SHARE_DATA,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
 
@@ -43,10 +44,22 @@ export const getFolderData = (hash) => async(dispatch) => {
         });
       } else {
         const folderData = response.body.folder;
+
         dispatch({
           type: SET_FOLDER_DATA,
           payload: folderData,
         });
+        if ('shareFolders' in folderData && 'shareFiles' in folderData) {
+          const shareData = {
+            shareFolders: folderData.shareFolders,
+            shareFiles: folderData.shareFiles,
+
+          };
+          dispatch({
+            type: SET_SHARE_DATA,
+            payload: shareData,
+          });
+        }
       }
     },
   );
