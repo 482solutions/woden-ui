@@ -31,19 +31,25 @@ class Buttons extends Component {
 
   render() {
     return (
-      <Row className="homeButtons">
+      <Row className="navigation">
         <Col span={1}>
           {this.props.parentHash !== 'root'
             ? <div onClick={this.goHome} className="goHome">
-              <HomeOutlined/>
-            </div> : null
+                <HomeOutlined/>
+              </div> :
+              <div onClick={this.goHome} className="goHome_inactive">
+                <HomeOutlined/>
+              </div>
           }
         </Col>
         <Col span={1}>
           {this.props.parentHash !== 'root'
             ? <div onClick={this.goBack} className="goBack">
-              <LeftOutlined/>
-            </div> : null
+                <LeftOutlined/>
+              </div> :
+              <div onClick={this.goBack} className="goBack_inactive">
+                <LeftOutlined/>
+              </div>
           }
         </Col>
         <Col span={2}>

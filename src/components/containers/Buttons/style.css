@@ -1,4 +1,4 @@
-.homeButtons {
+.navigation {
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -10,3 +10,17 @@
   cursor: pointer;
 }
 
+.goBack {
+  cursor: pointer;
+}
+
+.goBack_inactive {
+  color: darkgray;
+  cursor: pointer;
+}
+
+.goHome_inactive {
+  color: darkgray;
+  margin-left: 15px;
+  cursor: pointer;
+}
