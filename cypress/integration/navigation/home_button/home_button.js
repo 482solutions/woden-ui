@@ -17,3 +17,7 @@ Then(/^The user is located in his created folder "([^"]*)"$/, (folderName) => {
 When(/^User click Home button$/, () => {
     cy.get('.goHome').click().wait(1000)
 });
+
+Then(/^The Home button becomes inactive$/, function () {
+    cy.get('.goHome_inactive').should('be.visible')
+});

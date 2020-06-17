@@ -9,12 +9,14 @@ Feature:  Search of files and folders
     Background: Login
       Given Login as new user without UI
 
+    @positive
     Scenario: Create a user before starting the tests
       When Create folder with name "testFolder" in root without UI
       And Upload files test1.txt, test.pem to these folders without UI
       And Upload file to folder with name testFolder
       Then Folder "testFolder" should be visible on dashboard
 
+    @positive
     Scenario: 1 Search file by full name
       Given The user is authorized
       And Any page of the application is open
@@ -22,6 +24,7 @@ Feature:  Search of files and folders
       And The user presses the search button
       Then Search result is file "test1.txt"
 
+    @positive
     Scenario: 2 Search file by part of name
       Given The user is authorized
       And Any page of the application is open
@@ -30,6 +33,7 @@ Feature:  Search of files and folders
       Then Search results are files "test1.txt" and "test.pem"
       And search result is folder with name "testFolder"
 
+    @positive
     Scenario: 3 Search file by one character
       Given The user is authorized
       And Any page of the application is open
@@ -37,6 +41,7 @@ Feature:  Search of files and folders
       And The user presses the search button
       Then Search result is file "test1.txt"
 
+    @positive
     Scenario: 4 Search file by the format
       Given The user is authorized
       And Any page of the application is open
@@ -44,6 +49,7 @@ Feature:  Search of files and folders
       And The user presses the search button
       Then Search result is file "test.pem"
 
+    @positive
     Scenario: 5 Search file by 1 letter
       Given The user is authorized
       And Any page of the application is open
@@ -52,17 +58,19 @@ Feature:  Search of files and folders
       Then Search results are files "test1.txt" and "test.pem"
       And search result is folder with name "testFolder"
 
+    @negative
     Scenario: 6 Search without characters in field
       Given The user is authorized
       And Any page of the application is open
       When Search field is empty
       Then Button Search not active
 
+    @positive
     Scenario: 7 Search file by word in the uppercase
       Given The user is authorized
       And Any page of the application is open
       When The user types the name "TEST" of a file or folder
       Then Search results are files "test1.txt" and "test.pem"
       And search result is folder with name "testFolder"
-#      And The user presses the search button
-#      Then Error message "Files or folders does not exist" is visible
+#      TODO: And Error message "Files or folders does not exist" is not visible
+

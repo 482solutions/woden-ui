@@ -10,8 +10,6 @@ When(/^Create folder testFolder without UI$/, () => {
 });
 
 When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
-    // cy.uploadFile()
-    // cy.reload()
     cy.contains('File Upload').click().wait(1000)
     cy.get('input[type=file]')
         .attachFile('test1.txt').wait(3000);
@@ -19,7 +17,6 @@ When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
     cy.contains('File Upload').click().wait(1000)
     cy.get('input[type=file]').attachFile('test.pem').wait(1000);
 });
-
 
 Given(/^Any page of the application is open$/, () => {
 
@@ -66,4 +63,8 @@ Then(/^Error message "([^"]*)" is visible$/, () => {
     cy.get('.ant-message-notice-content')
         .should('be.visible')
         .should('contain.text', 'Files or folders does not exist')
+});
+
+Then(/^Error message "([^"]*)" is not visible$/,  () => {
+    cy.get('.ant-message-custom-content').should('not.be.visible')
 });

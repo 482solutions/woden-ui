@@ -10,6 +10,7 @@ Feature:  File updating
     When Login as new user without UI
     Then The user upload "test.pem" without UI
 
+  @positive
   Scenario: 1 File updating
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
@@ -23,6 +24,7 @@ Feature:  File updating
     And The new version of the file "test.pem" is updated
     And The last version remains in the system
 
+  @positive
   Scenario: 2 File updating with other name
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
@@ -37,6 +39,7 @@ Feature:  File updating
     And The last version remains in the system
 
 #  TODO:
+#  @negative
 #  Scenario: Scenario: 3 User can not update txt file to image
 #    Given Spin is visible "Getting data..."
 #    And Update file "test.pem"

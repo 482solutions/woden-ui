@@ -10,7 +10,6 @@ Then(/^The user gets error notification "([^"]*)"$/, (errMessage) => {
         .should('contain.text', errMessage)
 });
 
-Then(/^The file is not uploaded$/, () =>  {
-    //TODO
+Then(/^The file "([^"]*)" is not uploaded$/,  (file) => {
+    cy.contains(file).should('be.visible').wait(1000)
 });
-

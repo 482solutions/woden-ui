@@ -16,7 +16,7 @@ Feature: Back button
       And Spin is visible "Getting data..."
       When The user press the back button
       Then The User is transferred to the root folder
-      And The Home and Back button becomes inactive
+      And The Back button becomes inactive
 
     Scenario: 2 Back button from the n lvl folder
       Given The user opened folder "Folder_level_1" from the root folder

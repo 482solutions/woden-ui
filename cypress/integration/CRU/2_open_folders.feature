@@ -10,8 +10,10 @@ Feature: Open folders
     Background: Create a user before starting the tests
       Given Login as new user without UI
 
+    @positive
     Scenario Outline: Create folder before the test
-     Given Create folder with name <Name> in root without UI
+      Given Spin is visible "Getting data..."
+      Given Create folder with name <Name> in root without UI
       Examples: Folder's Name
         | Name                 |
         | Folder-1             |
@@ -19,11 +21,13 @@ Feature: Open folders
         | FOLDER 3             |
         | Folder12345678901234 |
         | Папка                |
-        | 資料夾                |
+        | 資料夾                  |
 
+    @positive
     Scenario Outline: 1 Open folder
 #    And the user has access to any available folder (not root)
       When The user double click this folder <folder> from list
+      And Spin is visible "Getting data..."
       And Folder is opened <folder>
       And User go back to root folder
       Examples: folder
@@ -34,18 +38,3 @@ Feature: Open folders
         | Folder12345678901234 |
         | Папка                |
         | 資料夾                  |
-
-#  Scenario Outline: 2 Open folder with Enter key
-#    And  the user has access to any available folder (not root)
-#    When The user choice folder <folder> from list and press Enter
-#    Then  Folder is opened
-#    And User go back to root folder
-#    Examples: folder
-#      | folder               |
-#      | F                    |
-#      | Folder-1             |
-#      | folder2              |
-#      | FOLDER 3             |
-#      | Folder12345678901234 |
-#      | Папка                |
-#      | 資料夾                |
