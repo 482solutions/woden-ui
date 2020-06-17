@@ -171,9 +171,10 @@ export class Home extends React.Component {
                        alt={'Folder'}
                        title={`Folder - ${folder.name}`} className="folder"/>
                   <div className="itemData">
-                    <span className="folderTitle"
-                          onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}</span>
-                    <div>
+                      <span className="folderTitle"
+                            onDoubleClick={() => this.openFolder(folder.hash)}>{folder.name}
+                      </span>
+                    <div className="dropdown">
                       <Dropdown
                         overlay={this.folderMenu(folder.hash, folder.name, folder.permissions)}
                         trigger={['click']}>
@@ -257,23 +258,23 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem }) => ({
-  userName: auth.user.name,
-  folderName: filesystem.folderName,
-  folderHash: filesystem.folderHash,
-  parentHash: filesystem.parentHash,
-  entryFolders: filesystem.entryFolders,
-  entryFiles: filesystem.entryFiles,
-  versions: filesystem.versions,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-})(
+    userName: auth.user.name,
+    folderName: filesystem.folderName,
+    folderHash: filesystem.folderHash,
+    parentHash: filesystem.parentHash,
+    entryFolders: filesystem.entryFolders,
+    entryFiles: filesystem.entryFiles,
+    versions: filesystem.versions,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+  })(
   Home,
 );

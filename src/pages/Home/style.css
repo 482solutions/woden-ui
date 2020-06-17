@@ -35,6 +35,8 @@
   color: #8998AC;
   font-size: 14px;
   font-weight: normal;
+  position: relative;
+  text-align: center;
 }
 
 .folderTitle{
@@ -42,6 +44,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .fileTitle{
@@ -49,6 +53,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .fileInfoWrapper {
@@ -92,5 +98,9 @@
   cursor: pointer;
 }
 
+.dropdown {
+  position: absolute;
+  right: 0;
+}
 
 
