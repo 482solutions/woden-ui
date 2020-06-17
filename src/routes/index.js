@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from '../App';
 import {
   Home,
-  // eslint-disable-next-line import/named
   Login,
   NotFound,
-  // eslint-disable-next-line import/named
   Registration,
 } from '../pages';
 

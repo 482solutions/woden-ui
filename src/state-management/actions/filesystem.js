@@ -27,7 +27,7 @@ export const search = (value) => async(dispatch) => {
     }
   });
 };
-export const getFolderData = (hash) => async(dispatch) => {
+export const getFolderData = (hash, mode) => async(dispatch) => {
   message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
@@ -49,10 +49,10 @@ export const getFolderData = (hash) => async(dispatch) => {
           type: SET_FOLDER_DATA,
           payload: folderData,
         });
-        if ('shareFolders' in folderData && 'shareFiles' in folderData) {
+        if ('sharedFolders' in folderData && 'sharedFiles' in folderData) {
           const shareData = {
-            shareFolders: folderData.shareFolders,
-            shareFiles: folderData.shareFiles,
+            shareFolders: folderData.sharedFolders,
+            shareFiles: folderData.sharedFiles,
 
           };
           dispatch({

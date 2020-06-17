@@ -102,8 +102,9 @@ export class Home extends React.Component {
     this.setState({ fileWrapperVisible: false });
   }
 
-  changeMode(mode) {
-    console.log(mode);
+  async changeMode(mode) {
+    const hash = await getRootFolderHash();
+    this.props.getFolderData(hash, mode);
     this.setState({ mode });
   }
 
