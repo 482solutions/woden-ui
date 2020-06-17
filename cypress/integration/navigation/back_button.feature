@@ -13,14 +13,15 @@ Feature: Back button
 
     Scenario: 1 Back button from the 1 lvl folder
       Given The user opened folder "Folder_level_1" from the root folder
+      And Spin is visible "Getting data..."
       When The user press the back button
-      Given Spin is visible "Getting data..."
       Then The User is transferred to the root folder
       And The Home and Back button becomes inactive
 
     Scenario: 2 Back button from the n lvl folder
       Given The user opened folder "Folder_level_1" from the root folder
+      And Spin is visible "Getting data..."
       And The user opened folder "Folder_level_2" in Folder_level_1
+      And Spin is visible "Getting data..."
       When The user press the back button
-      Given Spin is visible "Getting data..."
       Then The User is transferred to the previous folder 1 level back
