@@ -74,3 +74,11 @@ Feature:  Search of files and folders
       And search result is folder with name "testFolder"
 #      TODO: And Error message "Files or folders does not exist" is not visible
 
+    @negative
+    Scenario: 8 Search with spaces in field
+      Given The user is authorized
+      And Any page of the application is open
+      When The user types "    " in search field
+      Then Button Search not active
+
+

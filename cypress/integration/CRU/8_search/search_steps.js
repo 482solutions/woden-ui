@@ -23,7 +23,7 @@ Given(/^Any page of the application is open$/, () => {
 });
 
 When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
-    cy.loginAsNewUser()
+
     cy.get('.ant-input').as('Search string')
         .should('be.visible').type(test1)
 });
@@ -56,7 +56,7 @@ When(/^Search field is empty$/, () => {
 });
 
 Then(/^Button Search not active$/, () => {
-    // TODO
+    cy.get('.ant-input-group-addon').should('not.be.disabled')
 });
 
 Then(/^Error message "([^"]*)" is visible$/, () => {
@@ -67,4 +67,9 @@ Then(/^Error message "([^"]*)" is visible$/, () => {
 
 Then(/^Error message "([^"]*)" is not visible$/,  () => {
     cy.get('.ant-message-custom-content').should('not.be.visible')
+});
+
+When(/^The user types "([^"]*)" in search field$/, (text) => {
+    cy.get('.ant-input').as('Search string')
+        .should('be.visible').type(text)
 });
