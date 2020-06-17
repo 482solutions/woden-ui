@@ -5,17 +5,34 @@
 Feature:  Viewing previous version
   As a user (any role), I want to see a list of versions so that I can track the history of changes.
 
-  Background: Register new user
-    Given Register new user
-#    And Login as new user
-#    When The user locate on dashboard
-#    And Upload file "test_positive"
-#    Then The user updating file
-#    And Upload new version of file
-#
-#  Scenario: 1 Viewing list of versions
-#
+  Background: Create a user before starting the tests
+    Given Register without UI
+    When Login as new user without UI
+    And The user upload "TestUpload.txt" without UI
+    And The user updating file "TestUpload.txt"
+
+  @positive
+  Scenario: 1 Viewing list of versions
 #    Given The user has access to the file with any type of rights
-#    When The user press the "Previous versions" button
-#    Then The user sees the list of available versions and the time, date when the version was created
-#
+    Given Spin is visible "Getting data..."
+    And Versions of "TestUpload.txt" are 2
+    And The user press the Actions button in "TestUpload.txt" file
+    When The user press the Versions button in "TestUpload.txt" file
+    And Spin is visible "Getting file versions..."
+    Then The user sees the list of available versions and the time, date when the version was created
+    And List of versions should contain name of file "TestUpload.txt"
+    And Button Download is visible
+    And Button Close versions is visible
+
+  @positive
+  Scenario: 2 User can close list of versions
+#    Given The user has access to the file with any type of rights
+    Given Spin is visible "Getting data..."
+    And Versions of "TestUpload.txt" are 2
+    And The user press the Actions button in "TestUpload.txt" file
+    When The user press the Versions button in "TestUpload.txt" file
+    And Spin is visible "Getting file versions..."
+    Then The user sees the list of available versions and the time, date when the version was created
+    And Button Close versions is visible
+    Then User click Close list of versions button
+    And The list of versions is not visible in dashboard

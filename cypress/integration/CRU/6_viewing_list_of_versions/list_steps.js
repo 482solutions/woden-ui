@@ -1,30 +1,31 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before(() => {
-    cy.registerUser()
+Then(/^Versions of "([^"]*)" are 2$/, () => {
+    expect(Cypress.env('versions').length).to.eq(2)
+});
+
+Then(/^The user sees the list of available versions and the time, date when the version was created$/,  () => {
+    cy.get('#VersionWrapper').should("be.visible")
+    cy.get(`#Time_${Cypress.env('versions')[0].cid}`).should("be.visible")
+    cy.get(`#Time_${Cypress.env('versions')[1].cid}`).should("be.visible")
+});
+
+Then(/^Button Close versions is visible$/, () => {
+    cy.get('#CloseVersionsWrapper').should("be.visible")
+});
+
+Then(/^User click Close list of versions button$/, () => {
+    cy.get('#CloseVersionsWrapper').click().wait(1000)
+});
+
+Then(/^The list of versions is not visible in dashboard$/, () => {
+    cy.get('#VersionWrapper').should("not.be.visible")
+});
+
+Then(/^List of versions should contain name of file "([^"]*)"$/,  (fileName) =>{
+    cy.get('.ant-col-20').should('contain.text', fileName)
+});
+
+afterEach(() => {
+    cy.writeFile(`cypress/fixtures/TestUpload.txt`, 'Good night!')
 })
-
-Given(/^The user send "([^"]*)" without UI$/, (fullFileName) => {
-    cy.uploadTxtFile(fullFileName, 'Hello, world!')
-    cy.reload()
-});
-
-When(/^Upload new version of file "([^"]*)"$/, (oldFileName) => {
-    cy.uploadTxtFile(oldFileName, 'Good morning!')
-    cy.reload()
-});
-
-When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
-    let hashFile = cy.getHashFromFile(fileName)
-    cy.get(`.Actions_${hashFile}`).click().wait(1000)
-});
-
-When(/^The user press the Versions button in "([^"]*)" file$/, function () {
-    let hashFile = cy.getHashFromFile(fileName2)
-    cy.get(`.Versions_${hashFile}`).click().wait(1000)
-});
-
-Then(/^The popup versions is opened$/, function () {
-    cy.get('.VersionsModal').should('be.visible')
-});
-

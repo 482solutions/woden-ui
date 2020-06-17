@@ -17,6 +17,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -28,6 +29,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -39,6 +41,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -50,6 +53,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -61,6 +65,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -72,6 +77,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -83,6 +89,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -94,6 +101,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -105,6 +113,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -116,6 +125,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
@@ -127,25 +137,28 @@ Feature: Registration
     And fills in the password and confirm password field that contain 8 characters
     And the data is valid
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
 
-  @positive
+  @negative
   Scenario: 12 Username can not contain 2 words with uppercase and lowercase
     Given User username field that contains 2 words with uppercase and lowercase
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then Error notification about not correct name "Incorrect username!" is shown
     And User is not registered
 
-  @positive
+  @negative
   Scenario: 13 Username can not contain 2 words with uppercase and lowercase and space after name
     Given User username field that contains 2 words with uppercase and lowercase and space after name
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then Error notification about not correct name "Incorrect username!" is shown
     And User is not registered
 
@@ -305,7 +318,7 @@ Feature: Registration
     Then User is not registered
     And Notification about empty confirm password field "Please confirm your password!" is shown
 
-  @negative @BAG
+  @negative
   Scenario: 31 Form is not filled, negative case
     Given Sign Up form is open
     When The user press Sign up button
@@ -339,6 +352,7 @@ Feature: Registration
     And fills in the email field
     And fills in the password and confirm password field that contain 100 characters
     When The user press Sign up button
+    And Spin is visible "Registration..."
     Then User is registered
     And The User got private key
     And The User got certificate in pem format

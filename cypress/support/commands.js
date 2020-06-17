@@ -180,7 +180,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                     expect(Cypress.env('login')).to.equal(data.file.ownerId)
                     expect(fileName).to.equal(data.file.fileName)
                     // const fileHash = data.file.fileHash
-                    // const versions = data.file.versions[0].cid || [1].cid
+                    Cypress.env('versions', data.file.versions)
                 })
         }).as('Update txt file').wait(6000)
     })

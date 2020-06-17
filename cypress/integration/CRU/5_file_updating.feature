@@ -11,25 +11,38 @@ Feature:  File updating
     Then The user upload "test.pem" without UI
 
   Scenario: 1 File updating
-    Given Update file "test.pem"
+    Given Spin is visible "Getting data..."
+    And Update file "test.pem"
 #      Given The user has access to the file with owner or editor rights
     When The user press the Actions button in "test.pem" file
     And The user press the Update button in "test.pem" file
     And Choose the needed "test.pem" file from its PC directory for update
+    And Spin is visible "Updating file..."
     Then Message "File updated successfully"
     Then The user press the Actions button in "test.pem" file
     And The new version of the file "test.pem" is updated
     And The last version remains in the system
 
   Scenario: 2 File updating with other name
-    Given Update file "test.pem"
-#      Given The user has access to the file with owner or editor rights
+    Given Spin is visible "Getting data..."
+    And Update file "test.pem"
+#   Given The user has access to the file with owner or editor rights
     When The user press the Actions button in "test.pem" file
     And The user press the Update button in "test.pem" file
-    And Choose the needed "test.pem" for update to file with "txtFile.txt" name
+    And Choose the needed "test.pem" for update to file with "txtFile.pem" name
+    And Spin is visible "Updating file..."
     Then Message "File updated successfully"
     Then The user press the Actions button in "test.pem" file
     And The new version of the file "test.pem" is updated
     And The last version remains in the system
 
-#  TODO Scenario: 3 User can not update txt file to image
+#  TODO:
+#  Scenario: Scenario: 3 User can not update txt file to image
+#    Given Spin is visible "Getting data..."
+#    And Update file "test.pem"
+##   Given The user has access to the file with owner or editor rights
+#    When The user press the Actions button in "test.pem" file
+#    And The user press the Update button in "test.pem" file
+#    And Choose the needed "test.pem" for update to file with "image.png" name
+#    And Spin is visible "Updating file..."
+#    Then Message "You cannot upload a file of a different format"

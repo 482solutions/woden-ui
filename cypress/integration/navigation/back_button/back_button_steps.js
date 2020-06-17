@@ -21,7 +21,7 @@ Then(/^The User is transferred to the root folder$/, () => {
     cy.inRootFolder()
 });
 Then(/^The Home and Back button becomes inactive$/, () => {
-    cy.get('.goBack').should('not.be.visible')
+    cy.get('.goBack').should('be.disabled')
 });
 Given(/^The user opened folder "([^"]*)" in Folder_level_1$/, (createdFol) => {
     cy.contains(createdFol).dblclick().wait(3000)

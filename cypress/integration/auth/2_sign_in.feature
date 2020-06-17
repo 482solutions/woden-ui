@@ -17,6 +17,7 @@ Feature: Sign in Feature
       And Pin cert
       And Pin privateKey
       When the user press Log in button
+      And Spin is visible "Logging In..."
       Then User is signed in
 
     @positive
@@ -26,6 +27,7 @@ Feature: Sign in Feature
       And Pin cert
       And Pin privateKey
       When the user press Log in button
+      And Spin is visible "Logging In..."
       Then User is signed in
 
     @negative
