@@ -56,7 +56,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 352px;
+  width: 510px;
   font-style: normal;
   padding: 24px;
   line-height: 40px;
@@ -86,7 +86,7 @@
 .versionAuthor {
   font-weight: 600;
   color: #AEB8C7;
-  margin-left: 0px;
+  /*margin-left: 0px;*/
 }
 .versionDownload {
   cursor: pointer;

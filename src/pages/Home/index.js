@@ -24,7 +24,7 @@ export class Home extends React.Component {
         hash: null,
         userPermissions: null,
       },
-      mode: 'share',
+      mode: 'drive',
     };
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -40,6 +40,7 @@ export class Home extends React.Component {
   }
 
   async componentDidMount() {
+    this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
   }
@@ -118,7 +119,7 @@ export class Home extends React.Component {
       fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo, mode,
     } = this.state;
     const { versions } = this.props;
-    console.log('Data:', this.props);
+    console.log('Data:', this.props.versions.versionList.length);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -130,8 +131,8 @@ export class Home extends React.Component {
           <Buttons newFolder={this.createFolder}
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
-                   parentHash={this.props[mode].parentHash}
-                   folderName={this.props[mode].folderName}/>
+                   mode={mode}
+                   folderData={this.props[mode]}/>
           <div className="flex-start ff-rw">
 
             <Drive folderData={this.props[mode]}
@@ -153,7 +154,7 @@ export class Home extends React.Component {
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Versions</Col>
             </Row>
-            {versions.versionList.length && versions.versionList.map((version) => {
+            {versions.versionList.length > 0 && versions.versionList.map((version) => {
               const time = new Date(version.time * 1000).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -165,9 +166,9 @@ export class Home extends React.Component {
               return (
                 <Row key={version.cid} style={{ width: '100%' }}>
                   <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
-                  <Col span={12} className='versionCode'><span
+                  <Col span={10} className='versionCode'><span
                     id={`Time_${version.cid}`}>{time}</span></Col>
-                  <Col span={7} offset={2} className='versionAuthor'>{version.user}</Col>
+                  <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
                   <Col span={3} className='versionDownload'>
                     <img id={`Download_${version.cid}`} onClick={() => {
                       this.downloadFile(version.cid, wrapperInfo.fileHash);
@@ -189,10 +190,10 @@ export default connect(({ auth, filesystem }) => ({
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
-  filesystem,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
+  initialFilesystem: actions.initialFilesystem,
   getFolderData: actions.getFolderData,
   createFolder: actions.createFolder,
   uploadFile: actions.uploadFile,

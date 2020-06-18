@@ -44,6 +44,7 @@ const handleGetFolder = (state, folderData, mode) => ({
   },
 });
 const handleSearch = (state, folderData, mode) => ({
+  ...state,
   [mode]: {
     folderName: folderData.folderName,
     folderHash: folderData.folderHash,
@@ -52,12 +53,11 @@ const handleSearch = (state, folderData, mode) => ({
     entryFiles: folderData.files,
   },
 });
-const handleVersions = (state, fileData, mode) => ({
-  [mode]: {
-    versions: {
-      file: fileData.hash,
-      versionList: fileData.versionList,
-    },
+const handleVersions = (state, fileData) => ({
+  ...state,
+  versions: {
+    file: fileData.hash,
+    versionList: fileData.versionList,
   },
 
 });
@@ -71,6 +71,5 @@ const handlers = {
 
 export default (state = initialState, action) => {
   const handler = handlers[action.type];
-  console.log(action);
   return handler ? handler(state, action.payload, action.mode) : state;
 };

@@ -14,17 +14,19 @@ import { getTokenForHeader } from '../../utils/functions';
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
-
+export const initialFilesystem = () => async(dispatch) => {
+  dispatch({
+    type: CLEAN_STORAGE,
+  });
+};
 const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData;
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
-    console.error('TRUE');
     data = Object.assign(data, {
       folders: data.sharedFolders,
       files: data.sharedFiles,
     });
   }
-  console.log(data);
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -153,8 +155,7 @@ export const getVersions = (hash) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        const versionList = response.body.message;
-        // const versionList = JSON.parse(response.body.versions);
+        const versionList = response.body.versions;
         const versions = {
           hash,
           versionList,

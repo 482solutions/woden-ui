@@ -48,7 +48,6 @@ export default class Drive extends Component {
   }
 
   render() {
-    // console.log('Data:', this.props);
     const { entryFolders, entryFiles } = this.props.folderData;
     return (
       <>
