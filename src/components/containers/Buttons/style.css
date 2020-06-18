@@ -10,3 +10,17 @@
   cursor: pointer;
 }
 
+.goBack {
+  cursor: pointer;
+}
+
+.goBack_inactive {
+  color: darkgray;
+  cursor: default;
+}
+
+.goHome_inactive {
+  color: darkgray;
+  margin-left: 15px;
+  cursor: default;
+}

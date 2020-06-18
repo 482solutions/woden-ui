@@ -35,15 +35,21 @@ class Buttons extends Component {
         <Col span={1}>
           {this.props.mode !== 'drive' || this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goHome} className="goHome">
-              <HomeOutlined/>
-            </div> : null
+                <HomeOutlined/>
+              </div>
+            : <div className="goHome_inactive goHome">
+                <HomeOutlined/>
+              </div>
           }
         </Col>
          <Col span={1}>
           {this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goBack} className="goBack">
-              <LeftOutlined/>
-            </div> : null
+                <LeftOutlined/>
+              </div>
+            : <div className="goBack_inactive goBack">
+                <LeftOutlined disabled={true}/>
+              </div>
           }
          </Col>
         <Col span={2}>
