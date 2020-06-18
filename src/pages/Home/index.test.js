@@ -54,8 +54,8 @@ beforeAll(() => {
   fackeDrive = {
     entryFolders: [],
     entryFiles: [],
-    parentHash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM',
-  };
+    parentHash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM'
+  }
 });
 it('Check createFolder method', () => {
   const dataRequest = {
@@ -77,8 +77,8 @@ it('Open file version Wrapper', () => {
     minute: '2-digit',
   });
   const wrapper = shallow(<Home entryFolders={fakeFolders} entryFiles={fakeFiles}
-                                createFolder={() => {}} getFolderData={() => {}}
-                                versions={versions}/>);
+                                 createFolder={() => {}} getFolderData={() => {}}
+                                 versions={versions}/>);
   const instance = wrapper.instance();
   expect(instance.getVersions(fakeFiles[0].hash, fakeFiles[0].name)).to.be.ok;
   expect(wrapper.find(`#CID_${versions.versionList[0].cid}`).text()).to.equal(versions.versionList[0].cid);
