@@ -2,6 +2,7 @@ import Woden from 'woden';
 import download from 'downloadjs';
 import { message } from 'antd';
 import {
+  CLEAN_STORAGE,
   DOWNLOAD_FILE,
   GET_VERSIONS,
   LOGOUT,
@@ -9,7 +10,6 @@ import {
   SET_FOLDER_DATA,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
-import { login } from './auth';
 
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -18,11 +18,13 @@ const { Bearer } = defaultClient.authentications;
 const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData;
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
+    console.error('TRUE');
     data = Object.assign(data, {
-      entryFolders: data.sharedFolders,
-      entryFiles: data.sharedFiles,
+      folders: data.sharedFolders,
+      files: data.sharedFiles,
     });
   }
+  console.log(data);
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -57,6 +59,9 @@ export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
         localStorage.removeItem('rootFolder');
         dispatch({
           type: LOGOUT,
+        });
+        dispatch({
+          type: CLEAN_STORAGE,
         });
       } else {
         const folderData = response.body.folder;
