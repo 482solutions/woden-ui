@@ -48,13 +48,12 @@ export default class Drive extends Component {
   }
 
   render() {
-    const {
-      files, folders,
-    } = this.props;
+    // console.log('Data:', this.props);
+    const { entryFolders, entryFiles } = this.props.folderData;
     return (
       <>
         {
-          folders.map((folder, i) => (
+          entryFolders.map((folder, i) => (
             <div className="driveItem"
                  key={i}>
               <img width={80}
@@ -81,7 +80,7 @@ export default class Drive extends Component {
           ))
         }
         {
-          files.map((file, i) => (
+          entryFiles.map((file, i) => (
             <div className="driveItem"
                  key={i}>
               <img src={FileImage}

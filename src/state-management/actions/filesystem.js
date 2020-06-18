@@ -7,13 +7,29 @@ import {
   LOGOUT,
   SEARCH_FOLDER_FILE,
   SET_FOLDER_DATA,
-  SET_SHARE_DATA,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
+import { login } from './auth';
 
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
+
+const updateFolderData = (folderData, mode) => (dispatch) => {
+  let data = folderData;
+  if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
+    data = Object.assign(data, {
+      entryFolders: data.sharedFolders,
+      entryFiles: data.sharedFiles,
+    });
+  }
+  dispatch({
+    type: SET_FOLDER_DATA,
+    payload: data,
+    mode,
+  });
+};
+
 export const search = (value) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   api.search(value, (error, data, response) => {
@@ -27,7 +43,7 @@ export const search = (value) => async(dispatch) => {
     }
   });
 };
-export const getFolderData = (hash, mode) => async(dispatch) => {
+export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
   message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
@@ -44,22 +60,7 @@ export const getFolderData = (hash, mode) => async(dispatch) => {
         });
       } else {
         const folderData = response.body.folder;
-
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
-        if ('sharedFolders' in folderData && 'sharedFiles' in folderData) {
-          const shareData = {
-            shareFolders: folderData.sharedFolders,
-            shareFiles: folderData.sharedFiles,
-
-          };
-          dispatch({
-            type: SET_SHARE_DATA,
-            payload: shareData,
-          });
-        }
+        dispatch(updateFolderData(folderData, mode));
       }
     },
   );
@@ -78,10 +79,7 @@ export const createFolder = (folder) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 201) {
         const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
+        dispatch(updateFolderData(folderData, 'drive'));
       }
     },
   );
@@ -99,10 +97,7 @@ export const uploadFile = (file) => async(dispatch) => {
       } else if (response.status === 200) {
         message.success('File created successful');
         const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
+        dispatch(updateFolderData(folderData, 'drive'));
       }
     },
   );

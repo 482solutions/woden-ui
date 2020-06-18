@@ -24,7 +24,7 @@ export class Home extends React.Component {
         hash: null,
         userPermissions: null,
       },
-      mode: 'myDrive',
+      mode: 'share',
     };
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -41,15 +41,15 @@ export class Home extends React.Component {
 
   async componentDidMount() {
     const hash = await getRootFolderHash();
-    this.props.getFolderData(hash);
+    this.props.getFolderData(hash, this.state.mode);
   }
 
   openFolder(hash) {
-    this.props.getFolderData(hash);
+    this.props.getFolderData(hash, this.state.mode);
   }
 
   uploadFile(file) {
-    this.props.uploadFile({ name: file.name, parentFolder: this.props.folderHash, file });
+    this.props.uploadFile({ name: file.name, parentFolder: this.props.drive.folderHash, file });
     return false;
   }
 
@@ -59,7 +59,10 @@ export class Home extends React.Component {
   }
 
   createFolder(dataRequest) {
-    this.props.createFolder({ name: dataRequest.newFolder, parentFolder: this.props.folderHash });
+    this.props.createFolder({
+      name: dataRequest.newFolder,
+      parentFolder: this.props.drive.folderHash,
+    });
   }
 
   downloadFile(cid, hash) {
@@ -103,19 +106,19 @@ export class Home extends React.Component {
   }
 
   async changeMode(mode) {
-    const hash = await getRootFolderHash();
-    this.props.getFolderData(hash, mode);
-    this.setState({ mode });
+    if (mode !== this.state.mode) {
+      const hash = await getRootFolderHash();
+      this.props.getFolderData(hash, mode);
+      this.setState({ mode });
+    }
   }
 
   render() {
     const {
-      fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo,
-      mode,
+      fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo, mode,
     } = this.state;
-    const {
-      versions, entryFiles, entryFolders, shareFolders, shareFiles,
-    } = this.props;
+    const { versions } = this.props;
+    console.log('Data:', this.props);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -127,11 +130,12 @@ export class Home extends React.Component {
           <Buttons newFolder={this.createFolder}
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
-                   parentHash={this.props.parentHash}
-                   folderName={this.props.folderName}/>
+                   parentHash={this.props[mode].parentHash}
+                   folderName={this.props[mode].folderName}/>
           <div className="flex-start ff-rw">
 
-            <Drive files={mode === 'myDrive' ? entryFiles : shareFiles } folders={mode === 'myDrive' ? entryFolders : shareFolders} updateFile={this.updateFile} shareModal={this.shareModal}
+            <Drive folderData={this.props[mode]}
+                   updateFile={this.updateFile} shareModal={this.shareModal}
                    openFolder={this.openFolder} getVersions={this.getVersions}
                    downloadFile={this.downloadFile}/>
           </div>
@@ -182,14 +186,10 @@ export class Home extends React.Component {
 
 export default connect(({ auth, filesystem }) => ({
   userName: auth.user.name,
-  folderName: filesystem.folderName,
-  folderHash: filesystem.folderHash,
-  parentHash: filesystem.parentHash,
-  entryFolders: filesystem.entryFolders,
-  entryFiles: filesystem.entryFiles,
-  shareFolders: filesystem.shareFolders,
-  shareFiles: filesystem.shareFiles,
   versions: filesystem.versions,
+  drive: filesystem.drive,
+  share: filesystem.share,
+  filesystem,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
