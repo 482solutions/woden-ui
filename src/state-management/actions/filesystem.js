@@ -2,6 +2,7 @@ import Woden from 'woden';
 import download from 'downloadjs';
 import { message } from 'antd';
 import {
+  CLEAN_STORAGE,
   DOWNLOAD_FILE,
   GET_VERSIONS,
   LOGOUT,
@@ -13,6 +14,26 @@ import { getTokenForHeader } from '../../utils/functions';
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
+export const initialFilesystem = () => async(dispatch) => {
+  dispatch({
+    type: CLEAN_STORAGE,
+  });
+};
+const updateFolderData = (folderData, mode) => (dispatch) => {
+  let data = folderData;
+  if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
+    data = Object.assign(data, {
+      folders: data.sharedFolders,
+      files: data.sharedFiles,
+    });
+  }
+  dispatch({
+    type: SET_FOLDER_DATA,
+    payload: data,
+    mode,
+  });
+};
+
 export const search = (value) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   api.search(value, (error, data, response) => {
@@ -26,7 +47,7 @@ export const search = (value) => async(dispatch) => {
     }
   });
 };
-export const getFolderData = (hash) => async(dispatch) => {
+export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
   message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
@@ -41,12 +62,12 @@ export const getFolderData = (hash) => async(dispatch) => {
         dispatch({
           type: LOGOUT,
         });
+        dispatch({
+          type: CLEAN_STORAGE,
+        });
       } else {
         const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
+        dispatch(updateFolderData(folderData, mode));
       }
     },
   );
@@ -65,10 +86,7 @@ export const createFolder = (folder) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 201) {
         const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
+        dispatch(updateFolderData(folderData, 'drive'));
       }
     },
   );
@@ -86,10 +104,7 @@ export const uploadFile = (file) => async(dispatch) => {
       } else if (response.status === 200) {
         message.success('File created successful');
         const folderData = response.body.folder;
-        dispatch({
-          type: SET_FOLDER_DATA,
-          payload: folderData,
-        });
+        dispatch(updateFolderData(folderData, 'drive'));
       }
     },
   );
@@ -140,8 +155,7 @@ export const getVersions = (hash) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        const versionList = response.body.message;
-        // const versionList = JSON.parse(response.body.versions);
+        const versionList = response.body.versions;
         const versions = {
           hash,
           versionList,

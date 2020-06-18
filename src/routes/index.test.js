@@ -7,7 +7,6 @@ import AppRouter from './index';
 import PrivateRouter from './PrivateRoute';
 import App from '../App';
 
-
 Enzyme.configure({ adapter: new Adapter() });
 it('Renders "Routes"', () => {
   const wrapper = shallow(<AppRouter/>);

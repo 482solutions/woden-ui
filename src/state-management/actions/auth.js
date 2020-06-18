@@ -1,7 +1,9 @@
 import { message } from 'antd';
 import Woden from 'woden';
 import download from 'downloadjs';
-import { LOGIN, LOGOUT, REGISTRATION } from '../types';
+import {
+  CLEAN_STORAGE, LOGIN, LOGOUT, REGISTRATION,
+} from '../types';
 import { encryptData, getTokenForHeader } from '../../utils/functions';
 
 const api = new Woden.UserApi();
@@ -115,6 +117,9 @@ export const logout = () => async(dispatch) => {
     localStorage.removeItem('rootFolder');
     dispatch({
       type: LOGOUT,
+    });
+    dispatch({
+      type: CLEAN_STORAGE,
     });
   });
 };

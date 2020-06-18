@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Tree } from 'antd';
-import { DownOutlined, TeamOutlined } from '@ant-design/icons';
+import FolderIcon from '../../../assets/images/folderIcon.svg';
+import ShareFolders from '../../../assets/images/shareFolders.svg';
+
 import './style.css';
 
-const { TreeNode } = Tree;
-
 class Sidebar extends Component {
-  onSelect() {
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -14,20 +14,8 @@ class Sidebar extends Component {
       <div className="sidebar">
         <h2 className="sidebarTitle">All Folders</h2>
         <div className="folders content">
-          <Tree
-            showLine
-            switcherIcon={<DownOutlined/>}
-            defaultExpandedKeys={['0-0-0']}
-            onSelect={this.onSelect}
-            className="foldersTree"
-          >
-            <TreeNode className="treeData" title="Root" key="0-0">
-              <TreeNode title="Example-1.1" key="0-0-0-0"/>
-              <TreeNode title="Example-1.2" key="0-0-0-1"/>
-              <TreeNode title="Example-1.3" key="0-0-0-2"/>
-            </TreeNode>
-          </Tree>
-          <div className="shared"><TeamOutlined/>Shared with me</div>
+          <span onClick={() => this.props.changeMode('drive')} className="sideBarMode myDrive"><img src={FolderIcon} alt="My Drive" title="My Drive"/>MyDrive</span>
+          <span onClick={() => this.props.changeMode('share')} className="sideBarMode shared"><img src={ShareFolders} alt="Share" title="Share"/>Shared with me</span>
         </div>
       </div>
     );

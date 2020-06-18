@@ -1,6 +1,6 @@
 .sidebar {
-  width: 230px;
-  padding-left: 50px;
+  width: 312px;
+  padding: 0 16px;
 }
 
 .sidebarTitle {
@@ -8,21 +8,26 @@
   line-height: 24px;
   color: #8998ac;
   letter-spacing: 0.44px;
-  padding: 25px 0px;
+  padding: 25px 0;
 }
 
 .content {
-  border: 1px solid #e5e5e5;
+  border: 2px solid #E5E5E5;
   border-left: none;
   border-right: none;
-  padding: 15px 0px;
+  padding: 15px 0;
 }
-
-.foldersTree {
-  color: #8998AC;
+.folders img {
+  margin-right: 10px;
+}
+.sideBarMode {
+  display: flex;
+  font-size: 14px;
+  color: #8998ac;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .shared {
-  margin-top: 15px;
-  color: #8998AC;
+  margin-top: 25px;
 }
