@@ -65,13 +65,13 @@ Feature:  Search of files and folders
       When Search field is empty
       Then Button Search not active
 
-    @positive
-    Scenario: 7 Search file by word in the uppercase
-      Given The user is authorized
-      And Any page of the application is open
-      When The user types the name "TEST" of a file or folder
-      Then Search results are files "test1.txt" and "test.pem"
-      And search result is folder with name "testFolder"
+#    @positive
+#    Scenario: 7 Search file by word in the uppercase
+#      Given The user is authorized
+#      And Any page of the application is open
+#      When The user types the name "TEST" of a file or folder
+#      Then Search results are files "test1.txt" and "test.pem"
+#      And search result is folder with name "testFolder"
 #      TODO: And Error message "Files or folders does not exist" is not visible
 
     @negative

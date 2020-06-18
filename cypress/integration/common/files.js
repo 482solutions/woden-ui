@@ -29,7 +29,7 @@ When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {
 });
 
 When(/^Choose the needed "([^"]*)" file from its PC directory$/, (file) => {
-    cy.get(`input[type=file]`).attachFile(file).wait(1000);
+    cy.get(`input[type=file]`).attachFile(file);
 });
 
 Then(/^Message "([^"]*)"$/, (messUploadFile) => {

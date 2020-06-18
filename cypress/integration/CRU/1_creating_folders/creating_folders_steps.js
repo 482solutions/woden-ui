@@ -41,6 +41,5 @@ Given(/^The user is created folder in root folder with name (.*) from list$/, (n
 
 Given(/^Open this folder with name (.*)$/, (createdFolder) => {
     cy.contains(createdFolder).dblclick()
-    cy.wait(3000)
 });
 

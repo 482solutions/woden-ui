@@ -14,6 +14,7 @@ Given(/^The user opened folder "([^"]*)" from the root folder$/, (createdFolder)
 });
 
 When(/^The user press the back button$/, () => {
+    cy.wait(3000)
     cy.get('.goBack').click().wait(3000)
 });
 
@@ -26,7 +27,7 @@ Then(/^The Back button becomes inactive$/, () => {
 });
 
 Given(/^The user opened folder "([^"]*)" in Folder_level_1$/, (createdFol) => {
-    cy.contains(createdFol).dblclick().wait(3000)
+    cy.contains(createdFol).dblclick()
 });
 
 Then(/^The User is transferred to the previous folder 1 level back$/, () => {

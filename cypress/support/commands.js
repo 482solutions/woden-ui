@@ -109,7 +109,6 @@ Cypress.Commands.add('loginAsNewUser', () => {
             },
         }).as('Set user token')
     })
-    cy.wait(2000)
 })
 
 Cypress.Commands.add('uploadFile', (fullFileName) => {

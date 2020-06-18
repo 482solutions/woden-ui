@@ -105,7 +105,7 @@ Feature: Registration
     Then User is registered
     And The User got private key
     And The User got certificate in pem format
-#
+
   @positive
   Scenario: 9 Username can contain only numbers
     Given User username field that contains 9 numbers
@@ -148,7 +148,6 @@ Feature: Registration
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-    And Spin is visible "Registration..."
     Then Error notification about not correct name "Incorrect username!" is shown
     And User is not registered
 
@@ -158,7 +157,6 @@ Feature: Registration
     And fills in the email field
     And fills in the password and confirm password field that contain 8 characters
     When The user press Sign up button
-    And Spin is visible "Registration..."
     Then Error notification about not correct name "Incorrect username!" is shown
     And User is not registered
 
@@ -260,7 +258,7 @@ Feature: Registration
     When The user press Sign up button
     Then User is not registered
     And Error notification about not correct password "Incorrect password!" is shown
-#
+
   @negative @password
   Scenario: 25 Password should contain upper and lower case characters
     Given User fills in the username field
@@ -288,7 +286,7 @@ Feature: Registration
     Then User is not registered
     And Notification about empty username "Please enter your username!" is shown
 
-  @negative @one_field_empty @BAG
+  @negative @one_field_empty
   Scenario: 28 User can not register without email
     Given User fills in the username field
 #    And field email is empty
@@ -297,7 +295,7 @@ Feature: Registration
     Then User is not registered
     And Notification about empty email field "Please enter your email!" is shown
 
-  @negative @one_field_empty @BAG
+  @negative @one_field_empty
   Scenario: 29 User can not register without password
     Given User fills in the username field
     And fills in the email field

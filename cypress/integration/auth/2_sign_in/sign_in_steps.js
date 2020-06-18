@@ -16,6 +16,7 @@ before(() => {
     cy.server()
     cy.route('POST', `/api/v1/user`).as('getCert')
     cy.get('.ant-btn').as('Sign Up Now Btn').click()
+    cy.wait(2000)
     cy.get('a[download]')
         .then((anchor) => (
             new Cypress.Promise((resolve) => {
