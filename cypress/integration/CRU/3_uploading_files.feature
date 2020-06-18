@@ -56,10 +56,11 @@ Feature: Uploading files
       When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."
+      And Message "File created successful"
       And The user press Upload a new file button
       And Choose the needed "txtFile.pem" file from its PC directory
       And Spin is visible "Uploading file..."
+      And Message "File created successful"
       Then The file "txtFile.txt" is uploaded
-      # TODO Cannot read property 'folderName' of undefined:
-#      And The file "txtFile.pem" is uploaded
+      And The file "txtFile.pem" is uploaded
 #    And The user is the owner of this file

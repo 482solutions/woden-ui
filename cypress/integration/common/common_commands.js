@@ -88,7 +88,7 @@ When(/^Press Create folder$/, () => {
 });
 
 When(/^The user press Upload a new file button$/, () => {
-  cy.contains('File Upload').click().wait(1000)
+  cy.contains('File Upload').click().wait(2000)
 });
 
 Given(/^The user is authorized$/, () => {
