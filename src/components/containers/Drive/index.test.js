@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 let fakeFolders = [];
 let fakeFiles = [];
 let versions = {};
+const fakeParentHash = '567f7d6dc9d1d2ee6f4a3dd53118eda2317e17b437953c2aba665816b69ec753';
 beforeAll(() => {
   versions = {
     versionList: [
@@ -51,28 +52,28 @@ beforeAll(() => {
   ];
 });
 it('Render without crashing', () => {
-  const wrapper = shallow(<Drive folders={fakeFolders} files={fakeFiles}/>);
+  const wrapper = shallow(<Drive folderData={{ entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash }}/>);
   expect(wrapper.find(Dropdown)).to.have.lengthOf(fakeFiles.length + fakeFolders.length);
   expect(wrapper.find('img.folder')).to.have.lengthOf(3);
   expect(wrapper.find('img.file')).to.have.lengthOf(2);
 });
 it('Simulate click on Context Menu', () => {
-  const wrapper = shallow(<Drive folders={fakeFolders} files={fakeFiles}/>);
+  const wrapper = shallow(<Drive folderData={{ entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash }}/>);
   expect(wrapper.find(`#Actions_${fakeFiles[0].hash}`).simulate('click')).to.be.ok;
   expect(wrapper.find(`#Actions_${fakeFiles[1].hash}`).simulate('click')).to.be.ok;
 });
 it('Simulate double click on Files for download', () => {
-  const wrapper = shallow(<Drive folders={fakeFolders} files={fakeFiles}
-                                downloadFile={() => {}}
-                                versions={versions}/>);
+  const wrapper = shallow(<Drive folderData={{ entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash }}
+                                 downloadFile={() => {}}
+                                 versions={versions}/>);
   expect(wrapper.find('.file').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.file').at(1).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.fileTitle').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.fileTitle').at(1).simulate('doubleclick')).to.be.ok;
 });
 it('Simulate double click on Folders for open', () => {
-  const wrapper = shallow(<Drive folders={fakeFolders} files={fakeFiles}
-                                getFolderData={() => {}} openFolder={() => {}}/>);
+  const wrapper = shallow(<Drive folderData={{ entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash }}
+                                 getFolderData={() => {}} openFolder={() => {}}/>);
   expect(wrapper.find('.folder').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folder').at(1).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folderTitle').at(0).simulate('doubleclick')).to.be.ok;
@@ -80,9 +81,9 @@ it('Simulate double click on Folders for open', () => {
 });
 
 it('Check all Dropdown and simulate click', () => {
-  const wrapper = shallow(<Drive folders={fakeFolders} files={fakeFiles}
-                                createFolder={() => {}} getFolderData={() => {}}
-                                versions={versions}/>);
+  const wrapper = shallow(<Drive folderData={{ entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash }}
+                                 createFolder={() => {}} getFolderData={() => {}}
+                                 versions={versions}/>);
   expect(wrapper.find(Dropdown).at(0).simulate('click')).to.be.ok;
   expect(wrapper.find(Dropdown).at(1).simulate('click')).to.be.ok;
 });
