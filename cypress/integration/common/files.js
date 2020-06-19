@@ -9,7 +9,7 @@ Given(/^Choose the needed "([^"]*)" file from its PC directory for update$/, (f)
 });
 
 Then(/^The file "([^"]*)" is uploaded$/, (file) => {
-    cy.contains(file).should('be.visible').wait(1000)
+    cy.contains(file).should('be.visible')
 });
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
@@ -34,8 +34,11 @@ When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {
 });
 
 When(/^Choose the needed "([^"]*)" file from its PC directory$/, (file) => {
+    cy.server()
+    cy.route('POST', '/api/v1/file').as('uploadFile')
     cy.get(`input[type=file]`).attachFile(file);
 });
+
 Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
     cy.wait('@getFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')

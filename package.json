@@ -94,7 +94,7 @@
     "test": "react-scripts test",
     "coverage": "npm test -- --coverage --watchAll=false",
     "cypress:open": "cypress open",
-    "cy:run": "cypress run --browser chrome --spec \"cypress/integration/CRU/1_creating_folders.feature\"",
+    "cy:run": "cypress run --browser chrome --spec \"cypress/integration/CRU/*.feature\"",
     "cypress:run": "cypress run --browser chrome --spec \"cypress/integration/*/*.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
     "cypress:report": "cypress run --spec cypress/integration/API/POST_user.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",

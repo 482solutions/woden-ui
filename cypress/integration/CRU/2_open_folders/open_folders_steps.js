@@ -11,3 +11,13 @@ When(/^The user double click this folder (.*) from list$/, (createdFolder) => {
 Given(/^User go back to root folder$/, () => {
     cy.get('.goHome').click()
 });
+
+Given(/^Create folder with name (.*) in root without UI$/,  (folder) => {
+    cy.wait('@getRootFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.createFolderInRoot(folder)
+        cy.server()
+        cy.route('GET', '/api/v1/folder/*').as('getFolder')
+        cy.reload()
+    })
+});

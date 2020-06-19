@@ -64,7 +64,10 @@ Then(/^Error message Password can not be empty$/, () => {
 });
 
 Given(/^The user is located in his root folder$/, () => {
-  cy.inRootFolder()
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.inRootFolder()
+  })
 });
 
 When(/^The user press Create a new folder button$/, () => {
