@@ -12,7 +12,7 @@ Given(/^User go back to root folder$/, () => {
     cy.get('.goHome').click()
 });
 
-Given(/^Create folder with name (.*) in root without UI$/,  (folder) => {
+Given(/^Create folder with name from list (.*) in root without UI$/,  (folder) => {
     cy.wait('@getRootFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.createFolderInRoot(folder)

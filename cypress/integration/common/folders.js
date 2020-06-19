@@ -11,9 +11,6 @@ Given(/^Create folder with name "([^"]*)" in root without UI$/,  (folder) => {
 });
 
 Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getFolder')
-    cy.reload()
     cy.wait('@getFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.folderTitle').should('contain.text', folderName)

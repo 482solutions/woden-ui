@@ -7,15 +7,15 @@ Feature: Home button
 
     Background: Create a user before starting the tests
       Given Login as new user without UI
-      When Create folder with name "testFolder" in root without UI
 
     Scenario: User can return from folder
+      And Create folder with name "FolderFolder" in root without UI
       Given Spin is visible "Getting data..."
-      And Folder "testFolder" should be visible on dashboard
-      And The user double click this folder "testFolder"
+      And Folder "FolderFolder" should be visible on dashboard
+      And The user double click this folder "FolderFolder"
       Given Spin is visible "Getting data..."
-      And The user is located in his created folder "testFolder"
+      And The user is located in his created folder "FolderFolder"
       When User click Home button
       Given Spin is visible "Getting data..."
-      Then The user is located in his root folder
+      Then The user is located in root folder
       And The Home button becomes inactive

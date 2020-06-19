@@ -13,7 +13,7 @@ Feature: Open folders
     @positive
     Scenario Outline: Create folder before the test
       Given Spin is visible "Getting data..."
-      Given Create folder with name <Name> in root without UI
+      Given Create folder with name from list <Name> in root without UI
       Examples: Folder's Name
         | Name                 |
         | Folder-1             |
