@@ -7,13 +7,14 @@ Feature:  Viewing previous version
 
   Background: Create a user before starting the tests
     Given Register without UI
-    When Login as new user without UI
+    And Login as new user without UI
     And The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The user updating file "TestUpload.txt"
+    And Versions of "TestUpload.txt" are 2
 
   @positive
   Scenario: Viewing first version of the file
-    Given Spin is visible "Getting data..."
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Versions button in "TestUpload.txt" file
     And Spin is visible "Getting file versions..."
@@ -24,7 +25,6 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: Viewing second version of the file
-    Given Spin is visible "Getting data..."
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Versions button in "TestUpload.txt" file
     And Spin is visible "Getting file versions..."

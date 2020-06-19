@@ -60,11 +60,6 @@ Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
     cy.route('GET', '/api/v1/versions/*').as('getVersions')
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Versions_${hashFile}`).click()
-
-    // cy.wait('@getVersions').then((xhr) => {
-    //     Cypress.env('versions', xhr.responseBody.versions)
-    //     expect(xhr.responseBody).to.not.have.property('stack')
-    // })
 });
 
 Then(/^Button Download is visible$/, () => {

@@ -16,7 +16,11 @@ Given(/^Update file "([^"]*)"$/, (fileName) => {
 });
 
 Then(/^The last version remains in the system$/, () => {
-    cy.get(`#Time_${Cypress.env('versions')[1].cid}`).should("be.visible")
+    cy.wait('@getVersions').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        Cypress.env('versions', xhr.responseBody.versions)
+        cy.get(`#Time_${Cypress.env('versions')[1].cid}`).should("be.visible")
+    })
 });
 
 Then(/^The sidebar "([^"]*)" is visible$/,  (element) => {
