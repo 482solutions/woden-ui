@@ -4,7 +4,7 @@ import {getHashFromFile} from "../../support/commands";
 Given(/^Choose the needed "([^"]*)" file from its PC directory for update$/, (f) => {
     const hashFile = getHashFromFile(f, Cypress.env('filesInRoot'))
     cy.server()
-    cy.route('PUT', '/api/v1/file').as('getVersions')
+    cy.route('PUT', '/api/v1/file').as('updateFile')
     cy.get(`#Update_${hashFile} input[type=file]`).attachFile(f);
 });
 
@@ -14,6 +14,8 @@ Then(/^The file "([^"]*)" is uploaded$/, (file) => {
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
     cy.uploadFile(fullFileName)
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.reload()
 });
 
@@ -31,23 +33,32 @@ When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {
 When(/^Choose the needed "([^"]*)" file from its PC directory$/, (file) => {
     cy.get(`input[type=file]`).attachFile(file);
 });
-
-Then(/^Message "([^"]*)"$/, (messUploadFile) => {
-    cy.get('.ant-message-custom-content').as(messUploadFile)
-        .should('be.visible')
-        .should("contain.text", messUploadFile)
+Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
+    cy.wait('@getFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+    })
+    cy.wait('@updateFile').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.get('.ant-message-custom-content').as(messUploadFile)
+            .should('be.visible')
+            .should("contain.text", messUploadFile)
+    })
 });
 
 Then(/^The user updating file "([^"]*)"$/, (fileName) => {
-    cy.server()
-    cy.route('PUT', '/api/v1/file').as('getVersions')
     cy.updateTxtFile(fileName).wait(2000)
-    cy.reload()
 });
 
 Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
+    cy.server()
+    cy.route('GET', '/api/v1/versions/*').as('getVersions')
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Versions_${hashFile}`).click()
+
+    cy.wait('@getVersions').then((xhr) => {
+        Cypress.env('versions', xhr.responseBody.versions)
+        expect(xhr.responseBody).to.not.have.property('stack')
+    })
 });
 
 Then(/^Button Download is visible$/, () => {
