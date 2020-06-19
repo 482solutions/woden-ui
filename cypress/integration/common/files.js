@@ -13,10 +13,13 @@ Then(/^The file "([^"]*)" is uploaded$/, (file) => {
 });
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
-    cy.uploadFile(fullFileName)
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getFolder')
-    cy.reload()
+    cy.wait('@getRootFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.uploadFile(fullFileName)
+        cy.server()
+        cy.route('GET', '/api/v1/folder/*').as('getFolder')
+        cy.reload()
+    })
 });
 
 When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
@@ -46,7 +49,10 @@ Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
 });
 
 Then(/^The user updating file "([^"]*)"$/, (fileName) => {
-    cy.updateTxtFile(fileName).wait(2000)
+    cy.wait('@getFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.updateTxtFile(fileName).as('UpdateTxtFile')
+    })
 });
 
 Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
@@ -55,10 +61,10 @@ Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Versions_${hashFile}`).click()
 
-    cy.wait('@getVersions').then((xhr) => {
-        Cypress.env('versions', xhr.responseBody.versions)
-        expect(xhr.responseBody).to.not.have.property('stack')
-    })
+    // cy.wait('@getVersions').then((xhr) => {
+    //     Cypress.env('versions', xhr.responseBody.versions)
+    //     expect(xhr.responseBody).to.not.have.property('stack')
+    // })
 });
 
 Then(/^Button Download is visible$/, () => {
