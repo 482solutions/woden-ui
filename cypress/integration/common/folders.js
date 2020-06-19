@@ -1,17 +1,22 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^Create folder with name "([^"]*)" in root without UI$/,  (folder) => {
-    cy.createFolderInRoot(folder)
-    cy.reload().wait(2000)
+    cy.wait('@getRootFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.createFolderInRoot(folder)
+        cy.server()
+        cy.route('GET', '/api/v1/folder/*').as('getFolder')
+        cy.reload()
+    })
 });
 
 Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
-    cy.reload().wait(2000)
-    cy.get('.folderTitle').should('contain.text', folderName)
-        .as(`Folder ${folderName} on the dashboard`).wait(1000)
-});
-
-Given(/^Create folder with name (.*) in root without UI$/,  (Name) => {
-    cy.createFolderInRoot(Name)
-    cy.reload().wait(2000)
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
+    cy.reload()
+    cy.wait('@getFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.get('.folderTitle').should('contain.text', folderName)
+            .as(`Folder ${folderName} on the dashboard`).wait(1000)
+    })
 });

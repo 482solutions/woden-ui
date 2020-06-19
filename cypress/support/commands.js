@@ -181,7 +181,6 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                     return resp.json()
                 })
                 .then((data) => {
-                    console.log(data)
                     expect(Cypress.env('login')).to.equal(data.file.ownerId)
                     expect(fileName).to.equal(data.file.fileName)
                     // const fileHash = data.file.fileHash
