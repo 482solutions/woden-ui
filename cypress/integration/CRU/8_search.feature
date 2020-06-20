@@ -12,9 +12,9 @@ Feature:  Search of files and folders
     @positive
     Scenario: Create a user before starting the tests
       When Create folder with name "testFolder" in root without UI
+      And Folder "testFolder" should be visible on dashboard
       And Upload files test1.txt, test.pem to these folders without UI
       And Upload file to folder with name testFolder
-      Then Folder "testFolder" should be visible on dashboard
 
     @positive
     Scenario: 1 Search file by full name

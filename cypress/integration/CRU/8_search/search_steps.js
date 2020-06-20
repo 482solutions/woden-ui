@@ -10,8 +10,8 @@ When(/^Create folder testFolder without UI$/, () => {
 });
 
 When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
-    cy.wait('@getFolder').then((xhr) => {
-        expect(xhr.responseBody).to.not.have.property('stack')
+    // cy.wait('@getFolder').then((xhr) => {
+    //     expect(xhr.responseBody).to.not.have.property('stack')
         cy.contains('File Upload').click().wait(1000)
 
         cy.server()
@@ -22,7 +22,7 @@ When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
             cy.contains('File Upload').click().wait(1000)
             cy.get('input[type=file]').attachFile('test.pem').wait(1000);
         })
-    })
+    // })
 });
 
 Given(/^Any page of the application is open$/, () => {

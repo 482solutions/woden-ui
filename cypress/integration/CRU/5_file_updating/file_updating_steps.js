@@ -18,9 +18,8 @@ Given(/^Update file "([^"]*)"$/, (fileName) => {
 Then(/^The last version remains in the system$/, () => {
     cy.wait('@getVersions').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        Cypress.env('versions', xhr.responseBody.versions)
-        cy.wait(2000)
-        cy.get(`#Time_${Cypress.env('versions')[1].cid}`).should("be.visible")
+        const version = Cypress.env('versions', xhr.responseBody.versions)
+        cy.get(`#Time_${version[1].cid}`).should("be.visible")
     })
 });
 
