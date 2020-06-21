@@ -1,25 +1,20 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before(() => {
-    cy.registerUser()
-})
-
-Given(/^The user located on root dashboard$/, function () {
+Given(/^The user located on root dashboard$/, () => {
     cy.userAuth()
 });
 
-When(/^The user double click the file "([^"]*)"$/, function (filename) {
+When(/^The user double click the file "([^"]*)"$/, (filename) => {
     cy.wait(2000)
     cy.server()
-    cy.route('GET', '/api/v1/file/*').as('getFile')
+    cy.route('GET', '/api/v1/file/*/*').as('getFile')
     cy.contains(filename).dblclick()
 });
 
-Then(/^The file is downloaded$/, function () {
-    cy.wait('@getFile')
-        .then(function (xhr) {
-            console.log(xhr.status)
-            console.log(xhr.responseBody)
-            expect('1234567890\n').to.eq(xhr.responseBody.file)
-        })
+Then(/^The file is downloaded$/, () => {
+    cy.wait('@getFile').then((xhr) => {
+        console.log(xhr.status)
+        console.log(xhr.responseBody)
+        expect('1234567890').to.eq(xhr.responseBody.file)
+    })
 });

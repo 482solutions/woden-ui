@@ -3,9 +3,9 @@ import {
   Button, Col, Row, Upload,
 } from 'antd';
 import { FileAddTwoTone, HomeOutlined, LeftOutlined } from '@ant-design/icons';
-import { NewFolder } from '..';
 import { getRootFolderHash } from '../../../utils/functions';
 import './style.css';
+import { NewFolder } from '..';
 
 class Buttons extends Component {
   constructor(props) {
@@ -26,42 +26,51 @@ class Buttons extends Component {
   }
 
   async goBack() {
-    this.props.getFolderData(this.props.parentHash);
+    this.props.getFolderData(this.props.folderData.parentHash);
   }
 
   render() {
     return (
-      <Row className="homeButtons">
+      <Row className='homeButtons'>
         <Col span={1}>
-          {this.props.parentHash !== 'null'
+          {this.props.mode !== 'drive' || this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goHome} className="goHome">
-              <HomeOutlined/>
-            </div> : null
+                <HomeOutlined/>
+              </div> :
+              <div className="goHome_inactive goHome">
+                <HomeOutlined/>
+              </div>
           }
         </Col>
-        <Col span={1}>
-          {this.props.parentHash !== 'null'
+         <Col span={1}>
+          {this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goBack} className="goBack">
-              <LeftOutlined/>
-            </div> : null
+                <LeftOutlined/>
+              </div> :
+              <div className="goBack_inactive goBack">
+                <LeftOutlined disabled={true}/>
+              </div>
           }
-        </Col>
+         </Col>
         <Col span={2}>
-          {this.props.parentHash !== 'null'
-            ? <span className="currentFolder">{this.props.folderName}</span>
+          {this.props.mode === 'drive' && this.props.folderData.parentHash !== 'root'
+            ? <span className="currentFolder">{this.props.folderData.folderName}</span>
             : <span className="currentFolder">My Drive</span>
           }
         </Col>
-        <Col offset={14} span={3}>
-          <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
-            <Button className="upload-button">
-              <FileAddTwoTone/>File Upload
-            </Button>
-          </Upload>
-        </Col>
-        <Col span={2}>
+        {
+          this.props.mode === 'drive' && <Col offset={14} span={3}>
+            <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
+              <Button className="upload-button">
+                <FileAddTwoTone/>File Upload
+              </Button>
+            </Upload>
+          </Col>}
+        {
+          this.props.mode === 'drive' && <Col span={2}>
           <NewFolder onFinish={this.props.newFolder}/>
-        </Col>
+          </Col>
+        }
       </Row>
     );
   }

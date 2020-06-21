@@ -4,7 +4,6 @@ import { Redirect, Route } from 'react-router';
 import Adapter from 'enzyme-adapter-react-16';
 import { PrivateRoute } from './PrivateRoute';
 
-
 Enzyme.configure({ adapter: new Adapter() });
 
 function setup(customProps) {

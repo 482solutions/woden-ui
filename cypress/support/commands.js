@@ -1,7 +1,7 @@
 import 'cypress-file-upload';
-import { generate } from 'generate-password'
-import { getCSR } from '../../src/utils/functions'
-import { sha256 } from 'js-sha256'
+import {generate} from 'generate-password'
+import {getCSR} from '../../src/utils/functions'
+import {sha256} from 'js-sha256'
 
 const URL = 'http://localhost:1823/api/v1'
 const headers = {'content-type': 'application/json'}
@@ -26,21 +26,16 @@ export function getPassword(length, sha) {
         }) + "!!"
     }
 }
-export function getLogin () {
+
+export function getLogin() {
     return generate({
         length: 12,
         lowercase: true,
         uppercase: true,
     })
 }
-export function getCidFromFile (fileName, files) {
-    for (let key in files) {
-        if (fileName === files[key].name) {
-            return files[key].versions[0].cid
-        }
-    }
-}
-export function getHashFromFile (fileName, files) {
+
+export function getHashFromFile(fileName, files) {
     for (let key in files) {
         if (fileName === files[key].name) {
             return files[key].hash
@@ -108,19 +103,24 @@ Cypress.Commands.add('loginAsNewUser', () => {
                     Cypress.env('rootFolder', resp.body.folder)
                 }
             })
-        }).as('Login').visit('/', {
-            onBeforeLoad(win) {
-                win.localStorage.setItem('token', Cypress.env('token'))
-                win.localStorage.setItem('rootFolder', Cypress.env('rootFolder'))
-            },
-        }).as('Set user token')
+        }).as('Login')
+
+        cy.server()
+        cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+            .visit('/', {
+                onBeforeLoad(win) {
+                    win.localStorage.setItem('token', Cypress.env('token'))
+                    win.localStorage.setItem('rootFolder', Cypress.env('rootFolder'))
+                },
+            }).as('Set user token')
     })
-    cy.wait(2000)
 })
 
 Cypress.Commands.add('uploadFile', (fullFileName) => {
+    cy.server()
+    cy.route('POST', '/api/v1/file').as('uploadFile')
     cy.readFile(`cypress/fixtures/${fullFileName}`).then(async (str) => {
-        let blob = new Blob([str], { type: 'text/plain' })
+        let blob = new Blob([str], {type: 'text/plain'})
 
         let formData = new FormData()
         formData.append('name', fullFileName)
@@ -138,20 +138,18 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
         })
         const result = await resp.json()
         if (expect(200).to.eq(resp.status)) {
-            Cypress.env('respStatus', resp.status)
+            Cypress.env('respStatus', result.status)
             Cypress.env('filesInRoot', result.folder.files)
-            expect(Cypress.env('login')).to.equal(result.folder.name)
+            expect(Cypress.env('login')).to.equal(result.folder.folderName)
         }
-    }).as('Send txt')
-    cy.wait(5000)
+    })
 })
 
 Cypress.Commands.add('updateTxtFile', (fileName) => {
-    const textAfter = 'Good morning!'
     const textBefore = 'Good night!'
+    const textAfter = 'Good morning!'
 
-    const files = JSON.parse(Cypress.env('filesInRoot'))
-    const hashFile = getHashFromFile(fileName, files)
+    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
 
     cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
         expect(str1).to.equal(textBefore)
@@ -161,7 +159,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
 
             expect(str2).to.equal(textAfter)
 
-            let blob = new Blob([str2], { type: 'text/plain' })
+            let blob = new Blob([str2], {type: 'text/plain'})
 
             const myHeaders = new Headers({
                 'Authorization': `Bearer ${Cypress.env('token')}`
@@ -183,7 +181,10 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
                     return resp.json()
                 })
                 .then((data) => {
-                    expect(Cypress.env('login')).to.equal(data.file.name)
+                    expect(Cypress.env('login')).to.equal(data.file.ownerId)
+                    expect(fileName).to.equal(data.file.fileName)
+                    // const fileHash = data.file.fileHash
+                    Cypress.env('versions', data.file.versions)
                 })
         }).as('Update txt file').wait(6000)
     })
@@ -208,13 +209,13 @@ Cypress.Commands.add('createFolderInRoot', (name) => {
             'parentFolder': Cypress.env('rootFolder')
         },
     }).then((resp) => {
-        Cypress.env('foldersInRoot',resp.body.folder.folders)
+        Cypress.env('foldersInRoot', resp.body.folder.folders)
         expect(resp.status).to.eq(201)
     })
 })
 
 Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
-    const folders = JSON.parse(Cypress.env('foldersInRoot'))
+    const folders = Cypress.env('foldersInRoot')
     headers.Authorization = `Bearer ${Cypress.env('token')}`
 
     for (let key in folders) {

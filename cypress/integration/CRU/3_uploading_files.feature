@@ -7,37 +7,60 @@ Feature: Uploading files
   Rule: user should be registered
 
     Background:
+      Given Register without UI
       And Login as new user without UI
 
+    @positive
     Scenario: 1 User can upload txt file
-#    And the user is located in his root folder or in the folder where he has "Editors" rights
+      Given Spin is visible "Getting data..."
+      And The user is located in his root folder
+#        or in the folder where he has "Editors" rights
       When The user press Upload a new file button
-      And Choose the needed txt file from its PC directory
-      Then The txt file is uploaded
-      And Message "File created successful"
+      And Choose the needed "txtFile.txt" file from its PC directory
+      And Spin is visible "Uploading file..."
+      Then Message "File created successful"
+      And The file "txtFile.txt" is uploaded
 #    And The user is the owner of this file
 
+    @positive
     Scenario: 2 User can upload PNG file
-#    And the user is located in his root folder or in the folder where he has "Editors" rights
+      Given Spin is visible "Getting data..."
+      And The user is located in his root folder
+#      or in the folder where he has "Editors" rights
       When The user press Upload a new file button
-      And Choose the needed PNG file from its PC directory
-      Then The txt file is uploaded
-      And Message "File created successful"
+      And Choose the needed "image.png" file from its PC directory
+      And Spin is visible "Uploading file..."
+      Then Message "File created successful"
+      And The file "image.png" is uploaded
 #    And The user is the owner of this file
 
-#  TODO will be available after implementing the version function:
-#    Scenario: 3 User can not upload two files with the same name
-##    And the user is located in his root folder or in the  folder where he has "Editors" rights
+    @negative
+    #  TODO:
+#    Scenario: 3 cannot upload one file twice
+#      Given Spin is visible "Getting data..."
+#      And The user is located in his root folder
+##    or in the  folder where he has "Editors" rights
 #      When The user press Upload a new file button
-#      And Choose two files from PC directory with the same name
+#      And Choose the needed "txtFile.txt" file from its PC directory
+#      And Spin is visible "Uploading file..."
+#      And Message "File created successful"
+#      And Choose the needed "txtFile.txt" file from its PC directory
 #      Then The user gets error notification "The file with this name already exists"
-#      And The file is not uploaded
+#      And The file "txtFile.txt" is not uploaded
 
-    Scenario: 4 User can upload 2 files with name "test" and different extension
-#    And the user is located in his root folder or in the folder where he has "Editors" rights
+    @positive
+    Scenario: 4 User can upload 2 files with the same name and different extension
+      Given Spin is visible "Getting data..."
+      And The user is located in his root folder
+#    or in the folder where he has "Editors" rights
       When The user press Upload a new file button
-      And Choose the needed test.txt file from PC directory
+      And Choose the needed "txtFile.txt" file from its PC directory
+      And Spin is visible "Uploading file..."
+      Then Message "File created successful"
       And The user press Upload a new file button
-      And Choose the needed test.pem file from PC directory
-      Then The txt and pem files are uploaded
+      And Choose the needed "txtFile.pem" file from its PC directory
+      And Spin is visible "Uploading file..."
+      And Message "File created successful"
+      Then The file "txtFile.txt" is uploaded
+      And The file "txtFile.pem" is uploaded
 #    And The user is the owner of this file

@@ -10,35 +10,44 @@ When(/^Create folder testFolder without UI$/, () => {
 });
 
 When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
-    // cy.uploadFile()
-    // cy.reload()
-    cy.contains('File Upload').click().wait(1000)
-    cy.get('input[type=file]')
-        .attachFile('test1.txt').wait(3000);
-    cy.loginAsNewUser()
-    cy.contains('File Upload').click().wait(1000)
-    cy.get('input[type=file]').attachFile('test.pem').wait(1000);
-});
+    // cy.wait('@getFolder').then((xhr) => {
+    //     expect(xhr.responseBody).to.not.have.property('stack')
+        cy.contains('File Upload').click().wait(1000)
 
+        cy.server()
+        cy.route('POST', '/api/v1/file').as('uploadFile')
+        cy.get('input[type=file]').attachFile('test1.txt');
+
+        cy.wait('@uploadFile').then((xhr) => {
+            cy.contains('File Upload').click().wait(1000)
+            cy.get('input[type=file]').attachFile('test.pem').wait(1000);
+        })
+    // })
+});
 
 Given(/^Any page of the application is open$/, () => {
 
 });
 
 When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
-    cy.loginAsNewUser()
     cy.get('.ant-input').as('Search string')
         .should('be.visible').type(test1)
 });
+
 When(/^The user presses the search button$/, () => {
     cy.contains('Search').should('be.visible').click().wait(1000)
 });
 
 Given(/^Upload file to folder with name testFolder$/, () => {
-    cy.wait(2000)
-    cy.contains('testFolder').dblclick().wait(3000)
-    cy.contains('File Upload').click().wait(1000)
-    cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
+    cy.wait('@uploadFile').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.contains('testFolder').dblclick()
+        cy.wait('@getFolder').then((xhr) => {
+            expect(xhr.responseBody).to.not.have.property('stack')
+            cy.contains('File Upload').click().wait(1000)
+            cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
+        })
+    })
 });
 
 Then(/^Search result is file "([^"]*)"$/, (resultSearch) => {
@@ -59,11 +68,20 @@ When(/^Search field is empty$/, () => {
 });
 
 Then(/^Button Search not active$/, () => {
-    // TODO
+    cy.get('.ant-input-group-addon').should('not.be.disabled')
 });
 
 Then(/^Error message "([^"]*)" is visible$/, () => {
     cy.get('.ant-message-notice-content')
         .should('be.visible')
         .should('contain.text', 'Files or folders does not exist')
+});
+
+Then(/^Error message "([^"]*)" is not visible$/,  () => {
+    cy.get('.ant-message-custom-content').should('not.be.visible')
+});
+
+When(/^The user types "([^"]*)" in search field$/, (text) => {
+    cy.get('.ant-input').as('Search string')
+        .should('be.visible').type(text)
 });

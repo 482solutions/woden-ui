@@ -19,7 +19,9 @@ export class Header extends Component {
   }
 
   async onSearch(value) {
-    await this.props.search(value);
+    if(value.trim().length !== 0){
+      await this.props.search(value);
+    }
   }
 
   render() {
@@ -53,12 +55,12 @@ export class Header extends Component {
 }
 
 export default connect(({ auth, filesystem }) => ({
-  isLoggedIn: auth.isLoggedIn,
-  entryFolders: filesystem.entryFolders,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  search: actions.search,
-})(
+    isLoggedIn: auth.isLoggedIn,
+    entryFolders: filesystem.entryFolders,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    search: actions.search,
+  })(
   Header,
 );

@@ -4,7 +4,7 @@ before(() => {
     cy.registerUser();
 })
 
-Given(/^The user double click this folder "([^"]*)"$/,  (folder) => {
+Given(/^The user double click this folder "([^"]*)"$/, (folder) => {
     cy.contains(folder).dblclick()
 });
 
@@ -16,4 +16,15 @@ Then(/^The user is located in his created folder "([^"]*)"$/, (folderName) => {
 
 When(/^User click Home button$/, () => {
     cy.get('.goHome').click().wait(1000)
+});
+
+Then(/^The Home button becomes inactive$/,  () => {
+    cy.get('.goHome_inactive').should('be.visible')
+});
+
+Then(/^The user is located in root folder$/,  () => {
+    cy.wait('@getFolder').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.inRootFolder()
+    })
 });

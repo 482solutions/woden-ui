@@ -1,7 +1,9 @@
 import { message } from 'antd';
 import Woden from 'woden';
 import download from 'downloadjs';
-import { LOGIN, LOGOUT, REGISTRATION } from '../types';
+import {
+  CLEAN_STORAGE, LOGIN, LOGOUT, REGISTRATION,
+} from '../types';
 import { encryptData, getTokenForHeader } from '../../utils/functions';
 
 const api = new Woden.UserApi();
@@ -15,6 +17,7 @@ export const login = (userName) => (dispatch) => {
 };
 
 const registration = async(user, dispatch) => {
+  message.loading('Registration...', 0);
   const password = (encryptData(user.password));
   const { email, name, csr } = user;
   const body = new Woden.CreateUser();
@@ -26,6 +29,7 @@ const registration = async(user, dispatch) => {
   try {
     api.createUser(
       body, (error, data, response) => {
+        message.destroy();
         if (error) {
           message.error(response.body.message);
         } else if (response.status === 201) {
@@ -53,6 +57,8 @@ const registration = async(user, dispatch) => {
 export const regRequest = (user) => async(dispatch) => registration(user, dispatch);
 
 const logIn = async(user, dispatch) => {
+  message.destroy();
+  message.loading('Logging In...', 0);
   const password = (encryptData(user.password));
   const body = new Woden.Login();
   body.login = user.name;
@@ -61,6 +67,7 @@ const logIn = async(user, dispatch) => {
   body.privateKey = user.privateKey;
   api.login(
     body, (error, data, response) => {
+      message.destroy();
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200 && response.body.token) {
@@ -80,6 +87,7 @@ export const loginRequest = (user) => async(dispatch) => {
 };
 
 export const changePassword = async(userData) => {
+  message.loading('Changing password...', 0);
   const oldPassword = encryptData(userData.oldPassword);
   const newPassword = encryptData(userData.newPassword);
   const { Bearer } = defaultClient.authentications;
@@ -89,6 +97,7 @@ export const changePassword = async(userData) => {
   body.oldPassword = oldPassword;
   body.newPassword = newPassword;
   api.changeUser(body, (error, data, response) => {
+    message.destroy();
     if (error) {
       message.error(response.body.message);
     } else {
@@ -105,8 +114,12 @@ export const logout = () => async(dispatch) => {
   api.logout((error, data, response) => {
     message.success(response.body.message);
     localStorage.removeItem('token');
+    localStorage.removeItem('rootFolder');
     dispatch({
       type: LOGOUT,
+    });
+    dispatch({
+      type: CLEAN_STORAGE,
     });
   });
 };

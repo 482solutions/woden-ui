@@ -8,14 +8,24 @@ Feature: Files view
   Rule: user should be registered.
 
     Background: Create a user before starting the tests
-      Given Login as new user without UI
-      And The user press Upload a new file button
-      And Choose the needed txt file from its PC directory
-      Then The txt file is uploaded
+      Given Register without UI
+      When Login as new user without UI
+      And The user upload "txtFile.pem" without UI
 
+    @positive
     Scenario: 1 File view
-      Given The user located on root dashboard
+      Given Spin is visible "Getting data..."
+      And The user located on root dashboard
 #    And the user has access to any available file
-      When The user double click the file "txtFile.txt"
-#  TODO:
-#      Then The file is downloaded
+      When The user double click the file "txtFile.pem"
+      And Spin is visible "Downloading file..."
+      Then The file is downloaded
+
+    @positive
+    Scenario: 1 File view in versions
+      Given Spin is visible "Getting data..."
+      And The user located on root dashboard
+#    And the user has access to any available file
+      When The user double click the file "txtFile.pem"
+      And Spin is visible "Downloading file..."
+      Then The file is downloaded

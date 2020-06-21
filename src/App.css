@@ -151,3 +151,6 @@ section {
   max-width: 120px;
   overflow: hidden;
 }
+.closeButton {
+  cursor: pointer;
+}

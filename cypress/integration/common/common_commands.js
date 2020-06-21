@@ -64,7 +64,10 @@ Then(/^Error message Password can not be empty$/, () => {
 });
 
 Given(/^The user is located in his root folder$/, () => {
-  cy.inRootFolder()
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.inRootFolder()
+  })
 });
 
 When(/^The user press Create a new folder button$/, () => {
@@ -88,21 +91,16 @@ When(/^Press Create folder$/, () => {
 });
 
 When(/^The user press Upload a new file button$/, () => {
-  cy.contains('File Upload').click().wait(1000)
+  cy.contains('File Upload').click().wait(2000)
 });
 
 Given(/^The user is authorized$/, () => {
   cy.userAuth()
 });
 
-When(/^Choose the needed txt file from its PC directory$/, () => {
-  cy.get('input[type=file]').attachFile('txtFile.txt').wait(1000);
+Then(/^The file is uploaded$/, (file) => {
+  cy.contains(file).should('be.visible').wait(1000)
 });
-
-Then(/^The txt file is uploaded$/, () => {
-  cy.contains('txtFile.txt').should('be.visible').wait(1000)
-});
-
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)

@@ -11,7 +11,9 @@ Feature: Log out
       Given Register without UI
       And Login as new user without UI
 
+    @positive
     Scenario: 1 Log out
-      Given User is signed in
+      Given Spin is visible "Getting data..."
+      And User is signed in
       When The user press "Logout" button for exit
       Then The user is transferred to 'Sign in' page
