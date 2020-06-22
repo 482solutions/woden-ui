@@ -59,6 +59,10 @@ export const PermissionsModal = ({
             {/* {info.permission === 'owner' &&
             <Option value="owner">Transfer ownership</Option>} */}
             {true && <Option value="owner">Transfer ownership</Option>}
+            {/* {true && <Option value="write">Writer</Option>} */}
+            {/* {true && <Opt
+
+            +-ion value="read">Reader</Option>} */}
           </Select>
         </Form.Item>
       </Form>
