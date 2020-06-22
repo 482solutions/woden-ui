@@ -97,6 +97,8 @@ Cypress.Commands.add('loginAsNewUser', () => {
                     'privateKey': key,
                 },
             }).then((resp) => {
+                console.log(resp.body)
+                expect(resp.body).to.not.have.property('stack')
                 if (expect(200).to.eq(resp.status)) {
                     Cypress.env('token', resp.body.token)
                     Cypress.env('respStatus', resp.status)

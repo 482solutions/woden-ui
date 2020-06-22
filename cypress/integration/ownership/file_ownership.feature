@@ -11,47 +11,47 @@ Feature: Transfer file ownership
     @positive
     Scenario: Transfer file ownership in root folder
       Given The user 1 is the owner of the file
-      And The user press the Actions button in "TestUpload.txt" file
+      When The user press the Actions button in "TestUpload.txt" file
       And The user press the Share button in "TestUpload.txt" file
       And Enter User 2 email
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
-      Then Login as new user 2 without UI
-#      And User 2 became Owner of this file
-#      And User 1 has Editors rights to this file
+      And Spin is visible "Changing permissions..."
+      Then Message about transfer ownership "Permissions updated successfully"
+      And Login as new user 2 without UI
+      And User 2 became Owner of "TestUpload.txt" file
+      And User 1 has Editors rights to "TestUpload.txt" file
 
 #    @negative
 #    Scenario: User can not transfer file ownership to the user with incorrect email
 #      Given The user 1 is the owner of the file
-#      When The user 1 press "Ellipsis" button
-#      And Press "Share" button
+#      When The user press the Actions button in "TestUpload.txt" file
+#      And The user press the Share button in "TestUpload.txt" file
 #      And Choose the "Transfer ownership" option from pop-up window
-#      And Enter "invalidEmail"
-#      Then Error message "User does not exist"
+#      And Enter "invalidemail@gmail.com"
+#      And Press "Confirm"
+#      Then Error message "User for sharing not found."
 #
 #    @negative
-#    Scenario: User can not transfer file ownership  to the user if he already has them
+#    Scenario: User can not transfer file ownership to the user if he already has them
 #      Given The user 1 is the owner of the file
-#      When The user 1 press "Ellipsis" button
-#      And Press "Share" button
-#      And Choose the "Transfer ownership" option from pop-up window
+#      When The user press the Actions button in "TestUpload.txt" file
+#      And The user press the Share button in "TestUpload.txt" file
 #      And Enter email user 1
-#      And The user 1 press "Ellipsis" button
-#      And Press "Share" button
 #      And Choose the "Transfer ownership" option from pop-up window
-#      And Enter email user 1
+#      And Press "Confirm"
 #      Then Warning message "This user is the owner of this file"
 #
 #    @negative
 #    Scenario: User can not transfer file ownership to some users
-#      Given Register the user 2
-#      And The user 1 is the owner of the file
-#      When The user 1 press "Ellipsis" button
-#      And Press "Share" button
+#      Given The user 1 is the owner of the file
+#      And Register without UI user3
+#      When The user press the Actions button in "TestUpload.txt" file
+#      And The user press the Share button in "TestUpload.txt" file
+#      And Enter email user2 and user3 in field "email"
 #      And Choose the "Transfer ownership" option from pop-up window
-#      And Enter email user2  and user3  in field "email"
-#      Then Warning message  "The only one user can own a file"
-#
+#      Then Notification below the field "The only one user can own a file"
+
 #    @negative
 #    Scenario:  User can not transfer file ownership if field "email" is empty
 #      And The user 1 is the owner of the file

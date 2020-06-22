@@ -18,7 +18,7 @@ Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
         cy.uploadFile(fullFileName)
         cy.server()
         cy.route('GET', '/api/v1/folder/*').as('getFolder')
-        cy.reload()
+        // cy.reload()
     })
 });
 
