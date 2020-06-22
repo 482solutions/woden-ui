@@ -28,6 +28,12 @@ When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
     cy.get(`#Actions_${hashFile}`).click().wait(1000)
 });
 
+Given(/^The user press the Share button in "([^"]*)" file$/,  (fileName) => {
+    cy.wait(3000)
+    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
+    cy.get(`#Share_${hashFile}`).click().wait(1000)
+});
+
 When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {
     const hashFile = getHashFromFile(fileName2, Cypress.env('filesInRoot'))
     cy.get(`#Update_${hashFile}`).click().wait(1000)

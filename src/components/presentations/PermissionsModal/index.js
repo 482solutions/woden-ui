@@ -18,7 +18,7 @@ export const PermissionsModal = ({
     <Modal
       visible={visible}
       title={info.title}
-      okText="Save"
+      okText="Confirm"
       cancelText="Cancel"
       onCancel={() => {
         form.resetFields();
