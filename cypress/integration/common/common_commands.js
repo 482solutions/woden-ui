@@ -17,7 +17,39 @@ Given("Register without UI", () => {
 });
 
 When(/^Login as new user without UI$/, () => {
-  cy.loginAsNewUser()
+  cy.wait(2000)
+  cy.readFile('cypress/fixtures/cert.pem').then((certificate) => {
+    cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
+      cy.request({
+        method: 'POST',
+        url: `http://localhost:1823/api/v1/user/auth`,
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: {
+          'login': Cypress.env('login'),
+          'password': Cypress.env('password'),
+          'certificate': certificate,
+          'privateKey': key,
+        },
+      }).then((resp) => {
+        expect(resp.body).to.not.have.property('stack')
+        if (expect(200).to.eq(resp.status)) {
+          Cypress.env('token', resp.body.token)
+          Cypress.env('respStatus', resp.status)
+          Cypress.env('rootFolder', resp.body.folder)
+        }
+      })
+    }).as('Login')
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+      .visit('/', {
+        onBeforeLoad(win) {
+          win.localStorage.setItem('token', Cypress.env('token'))
+          win.localStorage.setItem('rootFolder', Cypress.env('rootFolder'))
+        },
+      }).as('Set user token')
+  })
 });
 
 When(/^The user press Register now button$/, () => {
@@ -74,7 +106,7 @@ When(/^The user press Create a new folder button$/, () => {
   cy.contains('New Folder').click().wait(2000)
 });
 
-When(/^The field name is empty$/,  () => {
+When(/^The field name is empty$/, () => {
   cy.get('#newFolder').should('be.empty')
 });
 

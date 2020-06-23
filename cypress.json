@@ -2,6 +2,7 @@
   "baseUrl": "http://localhost:3000",
   "env": {
     "RETRIES": 0,
+    "backendURL": "http://localhost:1823/api/v1",
     "respStatus": null,
     "rootFolder": null,
     "login": null,
@@ -11,13 +12,11 @@
     "foldersInRoot": null,
     "versions": null,
     "token": null,
-
     "login_2": null,
     "password_2": null,
     "email_2": null,
     "rootFolder_2": null,
     "token_2": null,
-
     "login_3": null,
     "password_3": null,
     "email_3": null,
