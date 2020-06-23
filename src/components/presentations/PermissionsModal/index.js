@@ -46,7 +46,7 @@ export const PermissionsModal = ({
                    rules={[
                      {
                        type: 'email',
-                       message: 'Please enter a valid email',
+                       message: 'Please enter a valid Email!',
                      },
                      {
                        required: true,
