@@ -42,6 +42,14 @@ export function getHashFromFile(fileName, files) {
   }
 }
 
+export function getHashFromFolder(folderName, arrFolders) {
+  for (let key in arrFolders) {
+    if (folderName === arrFolders[key].name) {
+      return arrFolders[key].hash
+    }
+  }
+}
+
 Cypress.Commands.add('registerUser', () => {
   Cypress.env('login', getLogin())
   Cypress.env('password', getPassword(8, true))

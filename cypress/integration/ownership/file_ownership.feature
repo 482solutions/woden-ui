@@ -20,6 +20,7 @@ Feature: Transfer file ownership
       Then Message about transfer ownership "Permissions updated successfully"
       And Login as new user 2 without UI
       And User 2 became Owner of "TestUpload.txt" file
+      And Login as new user without UI
       And User 1 has Editors rights to "TestUpload.txt" file
 
     @negative
@@ -40,9 +41,7 @@ Feature: Transfer file ownership
       And Enter email user 1
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
-     #  TODO: add message
       Then Warning message "This user is the owner of this file"
-      #Folder for share already include this file
 
     @negative
     Scenario: 4 User can not transfer file ownership to some users
