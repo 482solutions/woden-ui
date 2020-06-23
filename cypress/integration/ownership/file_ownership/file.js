@@ -142,11 +142,11 @@ Then(/^User 1 has Editors rights to "([^"]*)" file$/, (fileName) => {
         })
     })
 });
-Given(/^Enter "([^"]*)"$/,  (invalidEmail) => {
+Given(/^Enter "([^"]*)"$/, (invalidEmail) => {
     cy.get('#form_in_modal_username').should('be.visible').type(invalidEmail)
 });
 
-Then(/^Error message "([^"]*)"$/,  (message) => {
+Then(/^Error message "([^"]*)"$/, (message) => {
     cy.wait('@ownership').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-custom-content').as(message)
@@ -207,11 +207,24 @@ Given(/^Register without UI user3$/, () => {
     }).as('Register user3')
 });
 
-When(/^Enter email user2 and user3 in field "([^"]*)"$/,  () => {
+When(/^Enter email user2 and user3 in field "([^"]*)"$/, () => {
     cy.get('#form_in_modal_username').should('be.visible')
-        .type(`${Cypress.env('email_2')}, ${Cypress.env('email_3')}` )
+        .type(`${Cypress.env('email_2')}, ${Cypress.env('email_3')}`)
 });
 
-Then(/^Notification below the field "([^"]*)"$/,  (notification) => {
+Then(/^Notification below the field "([^"]*)"$/, (text) => {
+    cy.get('.ant-form-item-explain').should('contain.text', text)
+});
 
+When(/^Field email is empty$/, () => {
+    cy.get('#form_in_modal_username').should('be.empty')
+});
+
+When(/^Enter spaces in field email$/, () => {
+    cy.get('#form_in_modal_username').should('be.visible')
+        .type('       ')
+});
+When(/^Enter username of user2 in field email$/,  () => {
+    cy.get('#form_in_modal_username').should('be.visible')
+        .type(Cypress.env('login_2'))
 });
