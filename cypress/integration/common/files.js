@@ -18,12 +18,12 @@ Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
         cy.uploadFile(fullFileName)
         cy.server()
         cy.route('GET', '/api/v1/folder/*').as('getFolder')
-        // cy.reload()
+        cy.reload()
     })
 });
 
 When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
-    cy.wait(3000)
+    cy.wait(1000)
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Actions_${hashFile}`).click().wait(1000)
 });

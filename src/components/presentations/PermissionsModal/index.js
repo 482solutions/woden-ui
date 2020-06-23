@@ -18,6 +18,9 @@ export const PermissionsModal = ({
     <Modal
       visible={visible}
       title={info.title}
+      style={{  padding: '16px' }}
+      bodyStyle={{padding: '16px' }}
+      width={364}
       okText="Confirm"
       cancelText="Cancel"
       onCancel={() => {
@@ -43,9 +46,9 @@ export const PermissionsModal = ({
                    rules={[{
                      required: true,
                      type: 'email',
-                     message: 'Please input your Username or Email!',
+                     message: 'Please input user\'s Email!',
                    }]}>
-          <Input style={{ width: 300 }} placeholder='Username or Email'/>
+          <Input style={{ width: 300 }} placeholder="User's Email"/>
         </Form.Item>
         <Form.Item name="permissions"
                    rules={[{
