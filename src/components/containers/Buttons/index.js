@@ -74,13 +74,13 @@ class Buttons extends Component {
           this.props.mode === 'drive' ? <Col offset={1} span={3}>
             <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
               <Button className="upload-button">
-                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
+                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
               </Button>
             </Upload>
           </Col> : <Col offset={1} span={3}>
             <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
               <Button className="upload-button">
-                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
+                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
               </Button>
             </Upload>
           </Col>

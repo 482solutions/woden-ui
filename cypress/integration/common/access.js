@@ -1,12 +1,6 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 import {getHashFromFile} from "../../support/commands";
 
-Then(/^The user press the Shared with me button $/, () => {
-  cy.server()
-  cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-  cy.get('.shared').should('be.visible').click()
-});
-
 When(/^Enter User 3 email$/, () => {
   cy.get('#form_in_modal_username').should('be.visible')
     .type(Cypress.env('email_3'))
@@ -67,6 +61,6 @@ Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
   })
 });
 
-Then(/^"([^"]*)" option from pop-up window is not visible$/, function () {
+Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
