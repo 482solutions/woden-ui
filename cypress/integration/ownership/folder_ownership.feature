@@ -21,7 +21,9 @@ Feature: Transfer folder ownership
       And Login as new user 2 without UI
       And User 2 became Owner of "testFolder" folder
       And Login as new user without UI
-      And User 1 has Editors rights to "testFolder" folder
+      And The user press the Shared with me button 
+      And Spin is visible "Getting data..."
+      And User has Editors rights to "testFolder" folder
 
     @negative
     Scenario: 2 User can not transfer folder ownership to the user with incorrect email
