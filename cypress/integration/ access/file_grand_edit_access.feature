@@ -12,10 +12,10 @@ Feature: Grant edit access for a file
     And Register without UI user2
     And Login as new user without UI
     And The user upload "TestUpload.txt" without UI
+    And The user 1 is the owner of the file
 
   @positive
   Scenario: 1 Edit access by owner
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter User 2 email
@@ -32,7 +32,6 @@ Feature: Grant edit access for a file
 
   @positive
   Scenario: 2 Edit access by editor
-    Given The user 1 is the owner of the file
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter User 2 email
@@ -60,7 +59,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 3 User can not grand access for a file to the user with incorrect email
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter "invalidemail@gmail.com"
@@ -70,7 +68,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 4 User can not grand access for a file to the user if he already has them
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter User 2 email
@@ -88,7 +85,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 5 Owner can not grand access for a file to himself
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter email user 1
@@ -97,7 +93,6 @@ Feature: Grant edit access for a file
     Then Warning message "This user is the editor of this file"
 
   Scenario: 6 Editor can not grand access for a file to himself
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter User 2 email
@@ -118,7 +113,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 7 Owner can not grand access for a file to some users
-    Given The user 1 is the owner of the file
     And Register without UI user3
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -128,7 +122,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 8 Owner can not grand access for a file if field "email" is empty
-    Given The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Field email is empty
@@ -138,7 +131,6 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 9 Owner can not grand access for a file if field "email" contain spaces
-    And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter spaces in field email
@@ -147,16 +139,14 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 10 Owner can not grand access for a file if field "email" contain username
-    And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter User 2 name
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
   @negative
   Scenario: 11 Editor can can not to transfer ownership for a file
-    Given The user 1 is the owner of the file
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Enter User 2 email
