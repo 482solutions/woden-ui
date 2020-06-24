@@ -6,11 +6,12 @@ Feature:  Search of files and folders
   As a user (any role), I want to have a search bar so that I can search any file or folder by its name.
   Rule: user should be registered and has files in folders.
 
-    Background: Login
+    Background:
       Given Login as new user without UI
 
     @positive
     Scenario: Create a user before starting the tests
+      Given The user is authorized
       When Create folder with name "testFolder" in root without UI
       And Folder "testFolder" should be visible on dashboard
       And Upload files test1.txt, test.pem to these folders without UI

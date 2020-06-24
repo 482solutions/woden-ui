@@ -125,7 +125,7 @@ export class Home extends React.Component {
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
-          {/*<Sidebar changeMode={this.changeMode}/>*/}
+          <Sidebar changeMode={this.changeMode}/>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}

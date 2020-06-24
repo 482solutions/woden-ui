@@ -7,9 +7,9 @@ class Search extends React.Component {
     this.searchFile = this.searchFile.bind(this);
   }
 
-   async searchFile(value) {
-    if(value.trim().length !== 0) {
-     await this.props.onSearch(value);
+  async searchFile(value) {
+    if (value.trim().length !== 0) {
+      await this.props.onSearch(value);
     }
   }
 

@@ -23,9 +23,15 @@ Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
 });
 
 When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
-    cy.wait(3000)
+    cy.wait(1000)
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Actions_${hashFile}`).click().wait(1000)
+});
+
+Given(/^The user press the Share button in "([^"]*)" file$/,  (fileName) => {
+    cy.wait(1000)
+    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
+    cy.get(`#Share_${hashFile}`).click().wait(1000)
 });
 
 When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {

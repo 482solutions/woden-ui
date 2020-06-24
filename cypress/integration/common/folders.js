@@ -1,4 +1,4 @@
-import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
+import {Given, Then} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^Create folder with name "([^"]*)" in root without UI$/,  (folder) => {
     cy.wait('@getRootFolder').then((xhr) => {

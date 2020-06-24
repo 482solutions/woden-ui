@@ -21,7 +21,7 @@ export const changePermissions = (permissionData) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        message.success(response.body.message);
+        message.success('Permissions updated successfully');
         dispatch({
           type: CHANGE_PERMISSION,
         });
