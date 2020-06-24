@@ -137,3 +137,7 @@ Then(/^The file is uploaded$/, (file) => {
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
 });
+
+Given(/^Back to My Drive from folder$/,  () => {
+  cy.get('.goBack').click().wait(3000)
+});

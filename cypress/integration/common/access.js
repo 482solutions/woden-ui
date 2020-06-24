@@ -65,6 +65,30 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 
-Given(/^Upload file "([^"]*)" to testFolder$/,  () => {
-  cy.updateTxtFile(file)
+Given(/^Upload file "([^"]*)" to testFolder$/,  (fileName) => {
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.contains('testFolder').dblclick()
+
+    cy.wait('@getRootFolder').then((xhr) => {
+      expect(xhr.responseBody).to.not.have.property('stack')
+      console.log('I\'m in testFolder')
+
+      cy.server()
+      cy.route('POST', '/api/v1/file').as('uploadFile')
+      cy.contains('File Upload').click().wait(1000)
+
+      cy.get(`input[type=file]`).attachFile('TestUpload.txt')
+      cy.get('.ant-message-custom-content').as('spin').should('be.visible')
+      cy.wait('@uploadFile').then((xhr) => {
+        expect(xhr.responseBody).to.not.have.property('stack')
+        cy.get('.ant-message-notice-content').should('be.visible')
+        cy.contains('TestUpload.txt').should('be.visible')
+      })
+    })
+  })
+});
+When(/^Enter User 2 name$/,  () => {
+  cy.get('#form_in_modal_username').should('be.visible')
+    .type(Cypress.env('login'))
 });
