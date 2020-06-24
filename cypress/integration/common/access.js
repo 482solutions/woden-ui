@@ -67,6 +67,10 @@ Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
   })
 });
 
-Then(/^"([^"]*)" option from pop-up window is not visible$/, function () {
+Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
+});
+
+Given(/^Upload file "([^"]*)" to testFolder$/,  () => {
+  cy.updateTxtFile(file)
 });
