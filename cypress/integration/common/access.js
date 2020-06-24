@@ -1,12 +1,6 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 import {getHashFromFile} from "../../support/commands";
 
-Then(/^The user press the Shared with me button $/, () => {
-  cy.server()
-  cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-  cy.get('.shared').should('be.visible').click()
-});
-
 When(/^Enter User 3 email$/, () => {
   cy.get('#form_in_modal_username').should('be.visible')
     .type(Cypress.env('email_3'))

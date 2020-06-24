@@ -24,20 +24,29 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
     cy.contains(folder).dblclick()
 
     cy.wait('@getRootFolder').then((xhr) => {
-      //TODO: buttons upload file
-      cy.contains('File Upload').click().wait(1000)
+      expect(xhr.responseBody).to.not.have.property('stack')
+      console.log('Im in testFolder')
       cy.server()
       cy.route('POST', '/api/v1/file').as('uploadFile')
+      cy.contains('File Upload').click().wait(1000)
 
-      cy.get(`input[type=file]`).attachFile('TestUpload.txt');
-      cy.get('.ant-message-notice-content').should('be.visible')
-
+      cy.get(`input[type=file]`).attachFile('TestUpload.txt')
+      cy.get('.ant-message-custom-content').as('spin').should('be.visible')
       cy.wait('@uploadFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        cy.get('.ant-message-custom-content').as('spin')
-          .should('be.visible')
+        cy.get('.ant-message-notice-content').should('be.visible')
         cy.contains('TestUpload.txt').should('be.visible')
       })
     })
+  })
+});
+
+//TODO: or And Press "Shared with me"
+Then(/^The user press the Shared with me button $/,  () => {
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.get('.shared').should('be.visible').click()
   })
 });
