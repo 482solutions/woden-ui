@@ -50,7 +50,7 @@ export const PermissionsModal = ({
                      },
                      {
                        required: true,
-                       message: 'Please enter user\'s Email!',
+                       message: 'Please enter the email of the user to whom you want to transfer rights',
                      }
                    ]}>
           <Input style={{width: 300}} placeholder="User's Email"/>

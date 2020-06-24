@@ -61,7 +61,7 @@ Feature: Transfer file ownership
       And Field email is empty
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
-      Then Notification below the field "Please enter user's Email!"
+      Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
 
     @negative
     Scenario: 6 User can not transfer file ownership if field "email" contain spaces
