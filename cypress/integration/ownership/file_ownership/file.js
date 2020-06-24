@@ -1,14 +1,6 @@
 import {Given, Then} from 'cypress-cucumber-preprocessor/steps';
 import {getHashFromFile} from "../../../support/commands";
 
-
-Given(/^The user 1 is the owner of the file$/, () => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    expect(xhr.responseBody.folder.ownerId).to.equal(Cypress.env('login'))
-  })
-});
-
 Then(/^User 2 became Owner of "([^"]*)" file$/, (file) => {
   cy.wait('@getRootFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
