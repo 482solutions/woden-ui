@@ -26,8 +26,7 @@ Feature: Grant edit access for a file
     And Login as new user 2 without UI
     And The user press the Shared with me button 
     And Spin is visible "Getting data..."
-    And User 2 became Editor of "TestUpload.txt" file
-
+    And User has Editors rights to "TestUpload.txt" file
     And Login as new user without UI
     And The user 1 is the owner of the file
 
@@ -44,7 +43,7 @@ Feature: Grant edit access for a file
     When Login as new user 2 without UI
     And The user press the Shared with me button 
     And Spin is visible "Getting data..."
-    And User 2 became Editor of "TestUpload.txt" file
+    And User has Editors rights to "TestUpload.txt" file
 
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -56,4 +55,120 @@ Feature: Grant edit access for a file
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user press the Shared with me button 
-    Then User 3 became Editor of "TestUpload.txt" file
+    And Spin is visible "Getting data..."
+    Then User has Editors rights to "TestUpload.txt" file
+
+  @negative
+  Scenario: 3 User can not grand access for a file to the user with incorrect email
+    Given The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter "invalidemail@gmail.com"
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    Then Error message "User for sharing not found"
+
+  @negative
+  Scenario: 4 User can not grand access for a file to the user if he already has them
+    Given The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter User 2 email
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    And Message about transfer ownership "Permissions updated successfully"
+
+    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter User 2 email
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    Then Warning message "This user is the editor of this file"
+
+  @negative
+  Scenario: 5 Owner can not grand access for a file to himself
+    Given The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter email user 1
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    Then Warning message "This user is the editor of this file"
+
+  Scenario: 6 Editor can not grand access for a file to himself
+    Given The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter User 2 email
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    Then Message about transfer ownership "Permissions updated successfully"
+
+    And Login as new user 2 without UI
+    And The user press the Shared with me button 
+    And Spin is visible "Getting data..."
+    And User has Editors rights to "TestUpload.txt" file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    Then Warning message "This user is the editor of this file"
+
+  @negative
+  Scenario: 7 Owner can not grand access for a file to some users
+    Given The user 1 is the owner of the file
+    And Register without UI user3
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter email user2 and user3 in field "email"
+    And Choose the "View and Update" option from pop-up window
+    Then Notification below the field "Please enter a valid Email!"
+
+  @negative
+  Scenario: 8 Owner can not grand access for a file if field "email" is empty
+    Given The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Field email is empty
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+
+  @negative
+  Scenario: 9 Owner can not grand access for a file if field "email" contain spaces
+    And The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter spaces in field email
+    And Choose the "View and Update" option from pop-up window
+    Then Notification below the field "Please enter a valid Email!"
+
+  @negative
+  Scenario: 10 Owner can not grand access for a file if field "email" contain username
+    And The user 1 is the owner of the file
+    When The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter User 2 email
+    And Choose the "View and Update" option from pop-up window
+    Then Notification below the field "Please enter a valid Email!"
+
+  @negative
+  Scenario: 11 Editor can can not to transfer ownership for a file
+    Given The user 1 is the owner of the file
+    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the Share button in "TestUpload.txt" file
+    And Enter User 2 email
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    And Message about transfer ownership "Permissions updated successfully"
+    When Login as new user 2 without UI
+    And The user press the Shared with me button 
+    And Spin is visible "Getting data..."
+    Then "Transfer ownership" option from pop-up window is not visible
+
+
+
+

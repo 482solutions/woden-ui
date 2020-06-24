@@ -1,27 +1,18 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 import {getHashFromFile} from "../../support/commands";
 
-Then(/^The user press the Shared with me button $/,  () => {
+Then(/^The user press the Shared with me button $/, () => {
   cy.server()
   cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
   cy.get('.shared').should('be.visible').click()
 });
 
-Then(/^User 2 became Editor of "([^"]*)" file$/,  (file) => {
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    console.log(xhr.responseBody)
-    expect(1).to.equal(xhr.responseBody.folder.sharedFiles)
-    cy.contains(file).should('be.visible')
-  })
-});
-
-When(/^Enter User 3 email$/,  () => {
+When(/^Enter User 3 email$/, () => {
   cy.get('#form_in_modal_username').should('be.visible')
     .type(Cypress.env('email_3'))
 });
 
-When(/^Login as new user 3 without UI$/,  () => {
+When(/^Login as new user 3 without UI$/, () => {
   cy.wait(4000)
   cy.readFile('cypress/fixtures/cert_3.pem').then((certificate) => {
     cy.readFile('cypress/fixtures/privateKey_3.pem').then((key) => {
@@ -54,7 +45,8 @@ When(/^Login as new user 3 without UI$/,  () => {
       }).as('Set user3 token')
   })
 });
-Then(/^User 3 became Editor of "([^"]*)" file$/, (fileName) => {
+
+Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
   cy.wait('@getRootFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
 
@@ -73,4 +65,8 @@ Then(/^User 3 became Editor of "([^"]*)" file$/, (fileName) => {
         .should("contain.text", 'File updated successfully')
     })
   })
+});
+
+Then(/^"([^"]*)" option from pop-up window is not visible$/, function () {
+  cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
