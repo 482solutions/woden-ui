@@ -9,6 +9,8 @@ const initialState = {
     parentHash: null,
     entryFolders: [],
     entryFiles: [],
+    foldersInfo: [],
+    filesInfo:[],
   },
   share: {
     folderName: null,
@@ -16,6 +18,8 @@ const initialState = {
     parentHash: null,
     entryFolders: [],
     entryFiles: [],
+    foldersInfo: [],
+    filesInfo: [],
   },
   versions: {
     file: null,
@@ -31,6 +35,8 @@ const handleSetFolder = (state, folderData, mode) => ({
     parentHash: folderData.parentFolderHash,
     entryFolders: folderData.folders,
     entryFiles: folderData.files,
+    foldersInfo: folderData.folderInfo,
+    filesInfo: folderData.filesInfo,
   },
 });
 const handleGetFolder = (state, folderData, mode) => ({

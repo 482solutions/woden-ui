@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   Button, Form, Input, Modal,
 } from 'antd';
-import { SettingFilled } from '@ant-design/icons';
+import settingsIcon from '../../../assets/images/settingsIcon.svg';
+import './style.css';
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -34,9 +35,9 @@ class ChangePassword extends Component {
     const { visible, loading } = this.state;
     return (
       <div>
-        <Button onClick={this.showModal}>
-           <SettingFilled/>
-        </Button>
+        <div >
+           <img className="settingsIcon" id="SettingsIcon"  onClick={this.showModal} src={settingsIcon} alt="settings"/>
+        </div>
         <Modal
           title="Change password"
           visible={visible}

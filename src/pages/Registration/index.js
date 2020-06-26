@@ -35,11 +35,11 @@ export class Registration extends React.Component {
     return (
       <div className="login flex-direction-column flex-center">
         <div className="loginBox">
-          <div className="loginBlock BGBlue flex-direction-column flex-center">
-            <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>
+          <div className="loginBlock BGBlue">
             <img src={loginWelcome} alt="Welcome" className="Welcome"/>
           </div>
-          <div className="loginBlock flex-direction-column flex-center">
+          <div className="loginBlock inputBlock">
+            <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>
             <RegistrationForm onFinish={this.regRequest}/>
           </div>
         </div>

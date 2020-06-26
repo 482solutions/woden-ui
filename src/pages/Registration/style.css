@@ -14,9 +14,25 @@
     height: 100%;
     width: 50%;
 }
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.WodenLogo {
+    margin-top: 65px;
+    margin-bottom: 25px;
+}
+
 .BGBlue {
     background-color: #8BADF0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .loginLabel {
     font-family: Roboto;
     font-style: normal;

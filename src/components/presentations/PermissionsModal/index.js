@@ -67,6 +67,8 @@ export const PermissionsModal = ({
             {/* {info.permission === 'owner' &&
             <Option value="owner">Transfer ownership</Option>} */}
             {true && <Option value="owner">Transfer ownership</Option>}
+            {true && <Option value="read">View Only</Option>}
+            {true && <Option value="write">View and Update</Option>}
             {/* {true && <Option value="write">Writer</Option>} */}
             {/* {true && <Opt
 
