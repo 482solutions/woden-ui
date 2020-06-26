@@ -10,7 +10,7 @@ import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
 import FileImage from '../../../assets/images/file.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
-import fileImageIMG from '../../../assets/images/fileImages/fileImageIMG.svg';
+import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
 import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
@@ -64,6 +64,7 @@ export default class Drive extends Component {
   }
 
   detectImage(file) {
+    console.log("File:",file);
     if(file.fileType === 'application/pdf') {
       return fileImagePDF
     } else if(file.fileType === 'image/jpeg') {
@@ -72,8 +73,8 @@ export default class Drive extends Component {
       return fileImagePSD
     } else if(file.fileType === 'image/svg+xml') {
       return fileImageSVG
-    } else if(file.fileType === '') {
-      return fileImageIMG
+    } else if(file.fileType === 'image/png') {
+      return fileImagePNG
     } else if(file.fileType === 'audio/basic') {
       return fileImageAU
     } else if(file.fileType === 'application/ai') {
