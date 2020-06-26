@@ -115,7 +115,14 @@ When(/^The field name (.*) is filled by user from list of folder name$/, (folder
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-  cy.contains(folderName).should('be.visible').wait(1000)
+  //TODO
+  cy.server()
+  cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+  cy.reload()
+    cy.wait('@getRootFolder').then((xhr) => {
+      cy.contains(folderName).should('be.visible')
+    })
+
 });
 
 When(/^Press Create folder$/, () => {
