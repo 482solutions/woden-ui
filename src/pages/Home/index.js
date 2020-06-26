@@ -214,7 +214,7 @@ export class Home extends React.Component {
             <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
               <Col className='infoTitle' span={20}>{accessListInfo.fileName}</Col>
 
-              <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
+              <Col id='CloseAccessList' className='closeButton' span={3} offset={1}>
                 <img onClick={this.closeAccessList} alt='Close' title='Close info'
                      src={CloseIcon}/>
               </Col>
@@ -222,16 +222,19 @@ export class Home extends React.Component {
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Permissions</Col>
             </Row>
+            <Row>
+              <Col span={10} className="ownerName">{}</Col>
+            </Row>
             {
-              permissions.accessList.length > 0 &&  permissions.accessList.map(() => {
-                return (
-                  <Row key={permissions.permissions} style={{ width: '100%' }}>
-                    <Col>
-                      <span className='accessUser'>{}</span>
-                    </Col>
-                  </Row>
-                );
-              })
+              // permissions.accessList.length > 0 &&  permissions.accessList.map(() => {
+              //   return (
+              //     <Row key={permissions.permissions} style={{ width: '100%' }}>
+              //       <Col>
+              //         <span className='accessUser'>{}</span>
+              //       </Col>
+              //     </Row>
+              //   );
+              // })
             }
           </div>
         }
@@ -245,6 +248,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
+  // permissions: permissions.permissions,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
