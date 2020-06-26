@@ -8,13 +8,13 @@ import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
 import FileImage from '../../../assets/images/file.svg';
-import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
-import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
-import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
-import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
 import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
+import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
+import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
+import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
+import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 
 export default class Drive extends Component {
   constructor(props) {

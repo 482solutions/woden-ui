@@ -245,7 +245,6 @@ export default connect(({ auth, filesystem, permissions }) => ({
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
-  mode: filesystem.mode,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
