@@ -199,3 +199,8 @@ Given(/^The user 1 is the owner of the file$/, () => {
     expect(xhr.responseBody.folder.ownerId).to.equal(Cypress.env('login'))
   })
 });
+
+When(/^Enter User 2 username$/,  () => {
+  cy.get('#form_in_modal_username').should('be.visible')
+    .type(Cypress.env('login_2'))
+});

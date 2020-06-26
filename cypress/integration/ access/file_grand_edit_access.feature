@@ -150,7 +150,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter User 2 username
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
