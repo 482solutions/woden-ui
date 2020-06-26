@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles.css';
 import { Link } from 'react-router-dom';
 import forge from 'node-forge';
 import {
@@ -6,7 +7,6 @@ import {
 } from 'antd';
 import { validationCertificate, validationPrivateKey } from '../../../utils/functions';
 import { FileInMemory } from '../../presentations';
-import './styles.css';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class LoginForm extends Component {
         id='LoginForm'
         layout={this.layout}
       >
-        <label className='loginLabel'>Sign In</label>
+        <label className='loginLabel'>Sign in</label>
         <Form.Item
           name="name"
           rules={[
@@ -122,15 +122,15 @@ class LoginForm extends Component {
             type='primary'
             htmlType='submit'
             loading={isLoading}
-            className='loginFormItem LoginButtonItem'
+            className="loginFormItem LoginButtonItem loginButton"
           >
             Log In
           </Button>
         </Form.Item>
-        <Row className='w100'>
-          <Col span={10}>Don&apos;t have an account?</Col>
+        <Row className='w100 authButtons'>
+          <Col span={12}>Don&apos;t have an account?</Col>
           <Col span={10} offset={2}>
-            <Link to={'registration'}>Register now</Link>
+            <Link to={'registration'} className="registerNow">Register now</Link>
           </Col>
         </Row>
       </Form>

@@ -7,6 +7,7 @@ import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
 import DownloadIcon from '../../assets/images/download.svg';
+import emptyHere from '../../assets/images/emptyHere.svg';
 import { PermissionsModal } from '../../components/presentations';
 
 export class Home extends React.Component {

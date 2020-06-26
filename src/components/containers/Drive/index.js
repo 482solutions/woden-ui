@@ -3,7 +3,18 @@ import './style.css';
 import { Dropdown, Menu, Upload } from 'antd';
 import FolderImage from '../../../assets/images/folder.svg';
 import More from '../../../assets/images/more-vertical.svg';
+import Share from '../../../assets/images/Share.svg';
+import accessListIcon from '../../../assets/images/accessListIcon.svg';
+import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
+import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
 import FileImage from '../../../assets/images/file.svg';
+import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
+import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
+import fileImageIMG from '../../../assets/images/fileImages/fileImageIMG.svg';
+import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
+import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
+import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
+import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 
 export default class Drive extends Component {
   constructor(props) {
@@ -16,14 +27,14 @@ export default class Drive extends Component {
         <Menu.Item key={`0${hash}`}>
           <span id={`Versions_${hash}`} onClick={async() => {
             await this.props.getVersions(hash, name);
-          }}>Versions</span>
+          }}><img className="dropdownIcon" src={fileVersionsIcon} alt=""/>Versions</span>
         </Menu.Item>
         <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
           <Upload name="file" beforeUpload={(file) => {
             this.props.updateFile(file, hash);
             return false;
           }} showUploadList={false}>
-            Update File
+            <img className="dropdownIcon" src={updateFileIcon} alt=""/>Update File
           </Upload>
         </Menu.Item>
         <Menu.Item key={`2${hash}`} onClick={() => {
@@ -45,6 +56,26 @@ export default class Drive extends Component {
         </Menu.Item>
       </Menu>
     );
+  }
+
+  detectImage(file) {
+    if(file.fileType === 'application/pdf') {
+      return fileImagePDF
+    } else if(file.fileType === 'image/jpeg') {
+      return fileImageJPG
+    } else if(file.fileType === 'image/vnd.adobe.photoshop') {
+      return fileImagePSD
+    } else if(file.fileType === 'image/svg+xml') {
+      return fileImageSVG
+    } else if(file.fileType === '') {
+      return fileImageIMG
+    } else if(file.fileType === 'audio/basic') {
+      return fileImageAU
+    } else if(file.fileType === 'application/ai') {
+      return fileImageAI
+    } else {
+      return FileImage
+    }
   }
 
   render() {
@@ -82,7 +113,7 @@ export default class Drive extends Component {
           entryFiles.map((file, i) => (
             <div className="driveItem"
                  key={i}>
-              <img src={FileImage}
+              <img src={this.detectImage(filesInfo[i])}
                    onDoubleClick={() => this.props.downloadFile('null', file.hash)}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
@@ -103,7 +134,6 @@ export default class Drive extends Component {
           ))
         }
       </>
-
     );
   }
 }

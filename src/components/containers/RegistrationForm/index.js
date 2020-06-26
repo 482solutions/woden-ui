@@ -69,7 +69,7 @@ export class RegistrationForm extends Component {
           ]}>
           <Input
             className='loginFormItem loginInputItem'
-            placeholder='Email'/>
+            placeholder='Email Address'/>
         </Form.Item>
         <Form.Item
           name='password'
@@ -131,7 +131,7 @@ export class RegistrationForm extends Component {
         <Row className='loginFormItem w100'>
           <Col style={{ color: '#9EA0A5' }} span={10}>Have an account?</Col>
           <Col span={10} offset={2}>
-            <Link to={'login'}>Sign In</Link>
+            <Link to={'login'} className="loginLink">Sign In</Link>
           </Col>
         </Row>
       </Form>

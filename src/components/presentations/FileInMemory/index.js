@@ -8,6 +8,7 @@ export default ({
 }) => (
   <div id="LoginFileDrop">
     <Upload.Dragger
+      className="dragger"
       name="file"
       multiple={true}
       accept={accept}

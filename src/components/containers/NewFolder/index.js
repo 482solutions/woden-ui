@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {
   Button, Form, Input, Modal, Col,
 } from 'antd';
-import { FolderAddTwoTone } from '@ant-design/icons';
+import newFolderIcon from '../../../assets/images/newFolderIcon.svg'
+
 
 const NewFolder = ({ onFinish: createFolder }) => {
   const [form] = Form.useForm();
@@ -24,9 +25,8 @@ const NewFolder = ({ onFinish: createFolder }) => {
     setVisible(false);
   };
   return (<div>
-    <Button onClick={showModal}>
-      <FolderAddTwoTone/>
-      New Folder
+    <Button onClick={showModal} className="newFolder-button">
+      <img className="buttonIcon newFolderIcon" src={newFolderIcon} alt=""/>New Folder
     </Button>
     <Modal
       title="Create Folder"
@@ -60,7 +60,6 @@ const NewFolder = ({ onFinish: createFolder }) => {
               </Button>
             </Col>
           </div>
-
         </Form.Item>
       </Form>
     </Modal>
