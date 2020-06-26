@@ -8,13 +8,13 @@ import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
 import FileImage from '../../../assets/images/file.svg';
-import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
-import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
-import fileImageIMG from '../../../assets/images/fileImages/fileImageIMG.svg';
-import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
+import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
+import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
+import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
+import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
 
 export default class Drive extends Component {
   constructor(props) {
@@ -64,22 +64,30 @@ export default class Drive extends Component {
   }
 
   detectImage(file) {
-    if(file.fileType === 'application/pdf') {
-      return fileImagePDF
-    } else if(file.fileType === 'image/jpeg') {
-      return fileImageJPG
-    } else if(file.fileType === 'image/vnd.adobe.photoshop') {
-      return fileImagePSD
-    } else if(file.fileType === 'image/svg+xml') {
-      return fileImageSVG
-    } else if(file.fileType === '') {
-      return fileImageIMG
-    } else if(file.fileType === 'audio/basic') {
-      return fileImageAU
-    } else if(file.fileType === 'application/ai') {
-      return fileImageAI
-    } else {
-      return FileImage
+    switch(file.fileType) {
+      case 'application/pdf':
+        return fileImagePDF
+        break
+      case 'image/jpeg':
+        return fileImageJPG
+        break
+      case 'image/vnd.adobe.photoshop':
+        return fileImagePSD
+        break
+      case 'image/svg+xml':
+        return fileImageSVG
+        break
+      case 'audio/basic':
+        return fileImageAU
+        break
+      case 'application/ai':
+        return fileImageAI
+        break
+      case 'image/png' :
+        return fileImagePNG
+        break
+      default:
+        return FileImage;
     }
   }
 
