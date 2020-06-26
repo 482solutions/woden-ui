@@ -58,7 +58,9 @@ class Buttons extends Component {
           {
             this.props.folderData.parentHash !== 'root'
             ? <span className="currentFolder">{this.props.folderData.folderName}</span>
-            : <span className="currentFolder">{this.props.mode ==='drive' ? 'My Drive': this.props.mode === 'share'? 'Shared with me' : null}</span>
+            : <span className="currentFolder">{this.props.mode ==='drive' ?
+              'My Drive' : this.props.mode === 'share' ?
+                'Shared with me' : null}</span>
           }
         </Col>
         {
