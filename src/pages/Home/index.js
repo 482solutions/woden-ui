@@ -15,6 +15,11 @@ export class Home extends React.Component {
     super(props);
     this.state = {
       fileWrapperVisible: false,
+      accessListVisible: false,
+      accessListInfo: {
+        fileName: 'null',
+        fileHash: null,
+      },
       wrapperInfo: {
         fileName: 'null',
         fileHash: null,
@@ -38,6 +43,8 @@ export class Home extends React.Component {
     this.shareModal = this.shareModal.bind(this);
     this.changePermissions = this.changePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
+    this.viewAccessList = this.viewAccessList.bind(this);
+    this.closeAccessList = this.closeAccessList.bind(this);
   }
 
   async componentDidMount() {
@@ -81,6 +88,12 @@ export class Home extends React.Component {
     await this.props.getVersions(hash);
   }
 
+   viewAccessList(name, hash, permission) {
+    this.setState({accessListVisible: true});
+    this.setState({ accessListInfo: { fileName: name, fileHash: hash } });
+    this.props.viewAccessList(permission)
+  }
+
   shareModal(hash, name, permission) {
     this.setState({ shareModalVisible: true });
     this.setState({
@@ -107,6 +120,10 @@ export class Home extends React.Component {
     this.setState({ fileWrapperVisible: false });
   }
 
+  closeAccessList() {
+    this.setState({ accessListVisible: false });
+  }
+
   async changeMode(mode) {
     if (mode !== this.state.mode) {
       const hash = await getRootFolderHash();
@@ -117,10 +134,10 @@ export class Home extends React.Component {
 
   render() {
     const {
-      fileWrapperVisible, wrapperInfo, shareModalVisible, shareModalInfo, mode,
+      fileWrapperVisible, accessListVisible, wrapperInfo, accessListInfo, shareModalVisible,
+      shareModalInfo, mode,
     } = this.state;
-    const { versions } = this.props;
-    console.log('Data:', this.props.versions.versionList.length);
+    const { versions, permissions } = this.props;
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -133,14 +150,23 @@ export class Home extends React.Component {
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
                    mode={mode}
-                   folderData={this.props[mode]}/>
-          <div className="flex-start ff-rw">
-
-            <Drive folderData={this.props[mode]}
-                   updateFile={this.updateFile} shareModal={this.shareModal}
-                   openFolder={this.openFolder} getVersions={this.getVersions}
-                   downloadFile={this.downloadFile}/>
-          </div>
+                   folderData={this.props[mode]}
+                   />
+          {
+            this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0 ?
+              <div className="emptyHere">
+                <img src={emptyHere} alt=""/>
+              </div> :
+              <div className="flex-start ff-rw">
+                <Drive folderData={this.props[mode]}
+                       updateFile={this.updateFile}
+                       shareModal={this.shareModal}
+                       openFolder={this.openFolder}
+                       getVersions={this.getVersions}
+                       downloadFile={this.downloadFile}
+                       accessList={this.viewAccessList}/>
+              </div>
+          }
         </div>
         {
           fileWrapperVisible && <div id='VersionWrapper'
@@ -155,7 +181,8 @@ export class Home extends React.Component {
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Versions</Col>
             </Row>
-            {versions.versionList.length > 0 && versions.versionList.map((version) => {
+            {
+              versions.versionList.length > 0 && versions.versionList.map((version) => {
               const time = new Date(version.time * 1000).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -177,20 +204,48 @@ export class Home extends React.Component {
                   </Col>
                 </Row>
               );
-            })}
+            })
+            }
           </div>
         }
+        {
+          accessListVisible && <div id='AccessList'
+                                     className="accessListWrapper">
+            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
+              <Col className='infoTitle' span={20}>{accessListInfo.fileName}</Col>
 
+              <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
+                <img onClick={this.closeAccessList} alt='Close' title='Close info'
+                     src={CloseIcon}/>
+              </Col>
+            </Row>
+            <Row style={{ width: '100%' }}>
+              <Col span={10} className='infoColumnTitle'>Permissions</Col>
+            </Row>
+            {
+              permissions.accessList.length > 0 &&  permissions.accessList.map(() => {
+                return (
+                  <Row key={permissions.permissions} style={{ width: '100%' }}>
+                    <Col>
+                      <span className='accessUser'>{}</span>
+                    </Col>
+                  </Row>
+                );
+              })
+            }
+          </div>
+        }
       </div>
     );
   }
 }
 
-export default connect(({ auth, filesystem }) => ({
+export default connect(({ auth, filesystem, permissions }) => ({
   userName: auth.user.name,
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
+  permissions: permissions.permissions,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,

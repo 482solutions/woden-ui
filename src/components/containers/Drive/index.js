@@ -40,7 +40,12 @@ export default class Drive extends Component {
         <Menu.Item key={`2${hash}`} onClick={() => {
           this.props.shareModal(hash, name, permission);
         }}>
-          <span id={`Share_${hash}`}>Share</span>
+          <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
+        </Menu.Item>
+        <Menu.Item key={`3${hash}`} onClick={() => {
+          this.props.accessList(name, hash, permission);
+        }}>
+          <span id={`Share_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -52,7 +57,7 @@ export default class Drive extends Component {
         <Menu.Item key={`0${hash}`} onClick={() => {
           this.props.shareModal(hash, name, permission);
         }}>
-          <span id={`Share_${hash}`}>Share</span>
+          <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
         </Menu.Item>
       </Menu>
     );
@@ -79,7 +84,7 @@ export default class Drive extends Component {
   }
 
   render() {
-    const { entryFolders, entryFiles } = this.props.folderData;
+    const { entryFolders, entryFiles, filesInfo } = this.props.folderData;
     return (
       <>
         {
