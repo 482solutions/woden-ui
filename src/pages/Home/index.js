@@ -236,7 +236,8 @@ export class Home extends React.Component {
         {
           accessListVisible && <div id='AccessList' className="accessListWrapper">
             <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
-              <Col className='infoTitle' span={20}>{permissionData.title}</Col>
+              <Col className='infoTitle' title={permissionData.title}
+                   span={20}>{permissionData.title}</Col>
               <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
                 <img onClick={this.closeAccessList} alt='Close' title='Close info'
                      src={CloseIcon}/>
@@ -253,15 +254,15 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.readUsers.map((user) => {
+                permissionData.writeUsers.map((user) => {
                   return (
-                    <Row  key={user} className='sharedUser editor'>
+                    <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
-                        {permissionData.readUsers}
+                        {permissionData.writeUsers}
                       </Col>
                       <Col className="permissionIcons">
                         <Col className="sharedUserAccess">
-                          <img src={viewerIcon} alt=""/>
+                          <img src={editorIcon} title="View and update" alt=""/>
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
@@ -273,15 +274,15 @@ export class Home extends React.Component {
                 })
               }
               {
-                permissionData.writeUsers.map((user) => {
+                permissionData.readUsers.map((user) => {
                   return (
-                    <Row  key={user} className='sharedUser editor'>
+                    <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
-                        {permissionData.writeUsers}
+                        {permissionData.readUsers}
                       </Col>
                       <Col className="permissionIcons">
                         <Col className="sharedUserAccess">
-                          <img src={editorIcon} alt=""/>
+                          <img src={viewerIcon} title="View only" alt=""/>
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
