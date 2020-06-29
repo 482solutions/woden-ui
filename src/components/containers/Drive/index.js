@@ -42,10 +42,10 @@ export default class Drive extends Component {
         }}>
           <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
         </Menu.Item>
-        <Menu.Item key={`3${hash}`} onClick={() => {
-          this.props.accessList(name, hash, permission);
-        }}>
-          <span id={`Share_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+        <Menu.Item key={`3${hash}`}>
+          <span onClick={async() => {
+            await this.props.viewAccessList(hash, 'file');
+          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -58,6 +58,11 @@ export default class Drive extends Component {
           this.props.shareModal(hash, name, permission);
         }}>
           <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
+        </Menu.Item>
+        <Menu.Item key={`1${hash}`}>
+          <span onClick={async() => {
+            await this.props.viewAccessList(hash, 'folder');
+          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
