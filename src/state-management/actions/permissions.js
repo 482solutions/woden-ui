@@ -7,10 +7,6 @@ const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
-export const viewAccessList = () => {
-
-}
-
 export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
@@ -26,6 +22,11 @@ export const changePermissions = (permissionData) => async(dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Permissions updated successfully');
+        // const accessList = response.body.permissions;
+        // const permissions = {
+        //   permissionData,
+        //   accessList,
+        // }
         dispatch({
           type: CHANGE_PERMISSION,
         });
