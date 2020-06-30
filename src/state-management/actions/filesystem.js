@@ -20,13 +20,14 @@ export const initialFilesystem = () => async(dispatch) => {
   });
 };
 const updateFolderData = (folderData, mode) => (dispatch) => {
-  let data = folderData;
+  let data = folderData.folder;
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
     data = Object.assign(data, {
       folders: data.sharedFolders,
       files: data.sharedFiles,
     });
   }
+  data = Object.assign(data, {folderInfo:folderData.folders, filesInfo: folderData.files})
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -66,7 +67,7 @@ export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
           type: CLEAN_STORAGE,
         });
       } else {
-        const folderData = response.body.folder;
+        const folderData = response.body;
         dispatch(updateFolderData(folderData, mode));
       }
     },

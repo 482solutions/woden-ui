@@ -18,11 +18,15 @@
     background-color: #8BADF0;
 }
 .loginLabel {
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 24px !important;
     line-height: 28px;
     letter-spacing: -0.06px;
     color: #646464;
+}
+
+.LoginButtonItem {
+    border-radius: 4px;
+    background: #3B7CFF;
 }
