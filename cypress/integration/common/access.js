@@ -64,3 +64,22 @@ Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
+
+//TODO: or And Press "Shared with me"
+Then(/^The user press the Shared with me button$/,  () => {
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.get('.shared').should('be.visible').click()
+  })
+});
+
+Then(/^The user open Shared with me$/,  () => {
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.server()
+    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.get('.shared').should('be.visible').click()
+  })
+});
