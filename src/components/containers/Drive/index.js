@@ -122,6 +122,7 @@ export default class Drive extends Component {
             </div>
           ))
         }
+
         {
           entryFiles.map((file, i) => (
             <div className="driveItem"
