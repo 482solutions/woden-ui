@@ -34,7 +34,10 @@ export const revokePermissions = (permissionData) => async (dispatch) => {
   message.loading('Revoking access...', 0);
 
   const body = new Woden.RevokePermissions();
-  body.email = permissionData.email;
+  console.log("Data:", permissionData);
+  body.email = 'permissionData.username';
+  body.hash = 'permissionData.hash';
+  body.permission = 'permissionData.permissions';
   api.revokePermissions(body,
     (error, data, response) => {
       message.destroy();

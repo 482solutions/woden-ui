@@ -48,7 +48,7 @@ export class Home extends React.Component {
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
     this.changePermissions = this.changePermissions.bind(this);
-    this.revokeAccess = this.revokeAccess.bind(this);
+    this.revokePermissions = this.revokePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
     this.closeAccessList = this.closeAccessList.bind(this);
@@ -89,7 +89,7 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
-  revokeAccess(data) {
+  revokePermissions(data) {
     this.props.revokePermissions(data);
   }
 
@@ -255,6 +255,7 @@ export class Home extends React.Component {
             <Col>
               {
                 permissionData.writeUsers.map((user) => {
+
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
@@ -266,7 +267,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={this.revokeAccess}/>
+                               onClick={this.revokePermissions(this.state.hash, 'write', user)}/>
                         </Col>
                       </Col>
                     </Row>
@@ -276,6 +277,7 @@ export class Home extends React.Component {
               {
                 permissionData.readUsers.map((user) => {
                   return (
+                    !permissionData.writeUsers.includes(user) &&
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
                         {permissionData.readUsers}
@@ -286,7 +288,9 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={this.revokeAccess}/>
+                               onClick={() => {
+                                 this.revokePermissions(this.state.hash, 'read', user)
+                               }}/>
                         </Col>
                       </Col>
                     </Row>
