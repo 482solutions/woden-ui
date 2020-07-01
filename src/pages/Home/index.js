@@ -89,8 +89,8 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
-  revokePermissions(data) {
-    this.props.revokePermissions(data);
+  revokePermissions(user) {
+    this.props.revokePermissions(user);
   }
 
   async getVersions(hash, name) {
@@ -109,7 +109,6 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log("INFO:", info);
     this.setState({
       permissionData: {
         title: info[type + 'Name'], hash: info[type + 'Hash'],
@@ -266,7 +265,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={this.revokePermissions(user)}/>
+                               onClick={()=>{this.revokePermissions(user)}}/>
                         </Col>
                       </Col>
                     </Row>
@@ -275,7 +274,6 @@ export class Home extends React.Component {
               }
               {
                 permissionData.readUsers.map((user, i) => {
-                  console.log('проеряем user ', user);
                   return (
                     !permissionData.writeUsers.includes(user) &&
                     <Row key={user} className='sharedUser editor'>
@@ -288,9 +286,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={() => {
-                                 this.revokePermissions(user)
-                               }}/>
+                               onClick={()=>{this.revokePermissions(user)}}/>
                         </Col>
                       </Col>
                     </Row>
@@ -305,7 +301,7 @@ export class Home extends React.Component {
   }
 }
 
-export default connect(({ auth, filesystem, permissions }) => ({
+export default connect(({ auth, filesystem }) => ({
     userName: auth.user.name,
     versions: filesystem.versions,
     drive: filesystem.drive,
