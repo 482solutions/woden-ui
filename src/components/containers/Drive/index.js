@@ -63,30 +63,24 @@ export default class Drive extends Component {
     );
   }
 
+  fileType
   detectImage(file) {
     console.log(file);
     switch(file.fileType) {
       case 'application/pdf':
-        return fileImagePDF
-        break
+        return fileImagePDF;
       case 'image/jpeg':
-        return fileImageJPG
-        break
+        return fileImageJPG;
       case 'image/vnd.adobe.photoshop':
-        return fileImagePSD
-        break
+        return fileImagePSD;
       case 'image/svg+xml':
-        return fileImageSVG
-        break
+        return fileImageSVG;
       case 'audio/basic':
-        return fileImageAU
-        break
+        return fileImageAU;
       case 'application/ai':
-        return fileImageAI
-        break
+        return fileImageAI;
       case 'image/png' :
-        return fileImagePNG
-        break
+        return fileImagePNG;
       default:
         return fileImage;
     }
