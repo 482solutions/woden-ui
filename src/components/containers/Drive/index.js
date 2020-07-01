@@ -8,13 +8,13 @@ import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
 import FileImage from '../../../assets/images/file.svg';
-import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
-import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
-import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
-import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
 import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
+import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
+import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
+import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
+import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 
 export default class Drive extends Component {
   constructor(props) {
@@ -64,31 +64,27 @@ export default class Drive extends Component {
   }
 
   detectImage(file) {
+    let image
     switch(file.fileType) {
       case 'application/pdf':
-        return fileImagePDF
-        break
+        image = fileImagePDF;
+        break;
       case 'image/jpeg':
-        return fileImageJPG
-        break
+        return fileImageJPG;
       case 'image/vnd.adobe.photoshop':
-        return fileImagePSD
-        break
+        return fileImagePSD;
       case 'image/svg+xml':
-        return fileImageSVG
-        break
+        return fileImageSVG;
       case 'audio/basic':
-        return fileImageAU
-        break
+        return fileImageAU;
       case 'application/ai':
-        return fileImageAI
-        break
+        return fileImageAI;
       case 'image/png' :
-        return fileImagePNG
-        break
+        return fileImagePNG;
       default:
         return FileImage;
     }
+    return image
   }
 
   render() {

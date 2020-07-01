@@ -35,18 +35,10 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
       cy.wait('@uploadFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
+        cy.reload()
         cy.contains('TestUpload.txt').should('be.visible')
       })
     })
   })
 });
 
-//TODO: or And Press "Shared with me"
-Then(/^The user press the Shared with me button $/,  () => {
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-    cy.get('.shared').should('be.visible').click()
-  })
-});

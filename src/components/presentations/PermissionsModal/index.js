@@ -65,7 +65,7 @@ export const PermissionsModal = ({
             style={{width: 300, marginTop: 20}}
           >
             {/* {info.permission === 'owner' &&
-            <Option value="owner">Transfer ownership</Option>} */}
+            <Option value="owner">Transfer permissions</Option>} */}
             {true && <Option value="owner">Transfer ownership</Option>}
             {true && <Option value="read">View Only</Option>}
             {true && <Option value="write">View and Update</Option>}

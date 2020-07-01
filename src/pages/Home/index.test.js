@@ -61,7 +61,7 @@ it('Check createFolder method', () => {
   const dataRequest = {
     newFolder: 'Test1',
   };
-  const wrapper = shallow(<Home drive={fackeDrive}
+  const wrapper = shallow(<Home drive={fakeFolders}
                                 createFolder={() => {}} getFolderData={() => {}}
                                 versions={versions}/>);
   const instance = wrapper.instance();
@@ -88,7 +88,7 @@ it('Open file version Wrapper', () => {
 it('Renders "Home" check all components', () => {
   const wrapper = shallow(<Home getFolderData={() => {
   }} versions={versions}/>);
-  // expect(wrapper.find(Sidebar)).to.have.lengthOf(1);
+  expect(wrapper.find(Sidebar)).to.have.lengthOf(1);
   expect(wrapper.find(Buttons)).to.have.lengthOf(1);
   wrapper.setState({ shareModalVisible: true });
 });

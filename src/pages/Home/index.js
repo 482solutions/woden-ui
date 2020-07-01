@@ -223,7 +223,7 @@ export class Home extends React.Component {
               <Col span={10} className='infoColumnTitle'>Permissions</Col>
             </Row>
             {
-              permissions.accessList.length > 0 &&  permissions.accessList.map(() => {
+              versions.versionList.length > 0 && versions.versionList.map((version) => {
                 return (
                   <Row key={permissions.permissions} style={{ width: '100%' }}>
                     <Col>
@@ -245,7 +245,6 @@ export default connect(({ auth, filesystem, permissions }) => ({
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
-  mode: filesystem.mode,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,
