@@ -13,7 +13,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Enter User 2 email
+      And Enter "User2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       And Spin is visible "Changing permissions..."
@@ -24,7 +24,7 @@ Feature: Transfer folder ownership
       And The user open Shared with me
       And Spin is visible "Getting data..."
       And The folder "testFolder" is visible
-      And User has Editors rights to "testFolder" folder
+      And User has Editors rights to "testFolder" "folder"
 
     @negative
     Scenario: 2 User can not transfer folder ownership to the user with incorrect email
@@ -32,7 +32,7 @@ Feature: Transfer folder ownership
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
       And Choose the "Transfer ownership" option from pop-up window
-      And Enter "invalidemail@gmail.com"
+      And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
       And Press "Confirm"
       Then Error message "User for sharing not found"
 
@@ -41,7 +41,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Enter email user 1
+      And Enter "User1" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       Then Warning message "This user is the owner of this file"
@@ -52,7 +52,7 @@ Feature: Transfer folder ownership
       And Register without UI user3
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Enter email user2 and user3 in field "email"
+      And Enter "User2 and User3" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
@@ -61,7 +61,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Field email is empty
+      And Enter "nothing" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
@@ -71,7 +71,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Enter spaces in field email
+      And Enter "spaces" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
@@ -80,6 +80,6 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
       And The user press the Share button in "testFolder" folder
-      And Enter username of user2 in field email
+      And Enter "UsernameUser2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"

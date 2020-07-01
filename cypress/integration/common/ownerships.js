@@ -1,9 +1,41 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 import {getHashFromFolder} from "../../support/commands";
 
-Given(/^Enter User 2 email$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type(Cypress.env('email_2'))
+Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
+  switch (userEmail) {
+    case 'User1':
+      userEmail = Cypress.env('email');
+      break;
+    case 'User2':
+      userEmail = Cypress.env('email_2');
+      break;
+    case 'User3':
+      userEmail = Cypress.env('email_3');
+      break;
+    case 'spaces':
+      userEmail = '      ';
+      break;
+    case 'UsernameUser':
+      userEmail = Cypress.env('login');
+      break;
+    case 'UsernameUser2':
+      userEmail = Cypress.env('login_2');
+      break;
+    case 'UsernameUser3':
+      userEmail = Cypress.env('login_3');
+      break;
+    case 'nothing':
+      userEmail = '';
+      break;
+    case 'User2 and User3':
+      userEmail = `${Cypress.env('email_2')}, ${Cypress.env('email_3')}`;
+      break;
+  }
+  cy.get(field).should('be.visible').type(userEmail)
+});
+
+Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
+  cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 
 Given(/^Choose the "([^"]*)" option from pop-up window$/, (option) => {
@@ -26,32 +58,8 @@ Then(/^Message about transfer ownership "([^"]*)"$/, (text) => {
   })
 });
 
-When(/^Enter spaces in field email$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type('       ')
-});
-
-When(/^Enter username of user2 in field email$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type(Cypress.env('login_2'))
-});
-
 Then(/^Notification below the field "([^"]*)"$/, (text) => {
   cy.get('.ant-form-item-explain').should('contain.text', text)
-});
-
-When(/^Field email is empty$/, () => {
-  cy.get('#form_in_modal_username').should('be.empty')
-});
-
-When(/^Enter email user2 and user3 in field "([^"]*)"$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type(`${Cypress.env('email_2')}, ${Cypress.env('email_3')}`)
-});
-
-When(/^Enter email user 1$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type(Cypress.env('email'))
 });
 
 Then(/^Warning message "([^"]*)"$/, (message) => {
@@ -61,10 +69,6 @@ Then(/^Warning message "([^"]*)"$/, (message) => {
       .should('be.visible')
       .should("contain.text", message)
   })
-});
-
-Given(/^Enter "([^"]*)"$/, (invalidEmail) => {
-  cy.get('#form_in_modal_username').should('be.visible').type(invalidEmail)
 });
 
 Then(/^Error message "([^"]*)"$/, (message) => {
@@ -77,7 +81,7 @@ Then(/^Error message "([^"]*)"$/, (message) => {
 });
 
 Given(/^The user 1 is the owner of the file$/, () => {
-  cy.wait('@getFolder').then((xhr) => {
+  cy.wait('@uploadFile').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     expect(xhr.responseBody.folder.ownerId).to.equal(Cypress.env('login'))
   })

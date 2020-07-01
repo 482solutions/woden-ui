@@ -4,7 +4,7 @@ import {getHashFromFile} from "../../../support/commands";
 Given(/^Update file "([^"]*)"$/, (fileName) => {
     const textBefore = 'Good night!'
     const textAfter = 'Good morning!'
-    cy.wait('@getFolder').then((xhr) => {
+    cy.wait('@uploadFile').then((xhr) => {
         cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
             expect(str1).to.equal(textBefore)
 

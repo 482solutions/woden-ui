@@ -1,43 +1,8 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile, getHashFromFolder} from "../../support/commands";
-
-When(/^Enter User 3 email$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
-    .type(Cypress.env('email_3'))
-});
-
-Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.reload()
-    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
-    cy.get(`#Actions_${hashFile}`).click().wait(1000)
-    cy.get(`#Update_${hashFile}`).click().wait(1000)
-    cy.server()
-    cy.route('PUT', '/api/v1/file').as('updateFile')
-    cy.get(`#Update_${hashFile} input[type=file]`).attachFile(fileName);
-    cy.get('.ant-message-notice-content').should('be.visible')
-
-    cy.wait('@updateFile').then((xhr) => {
-      expect(xhr.responseBody).to.not.have.property('stack')
-      cy.get('.ant-message-custom-content').as('File updated successfully')
-        .should('be.visible')
-        .should("contain.text", 'File updated successfully')
-    })
-  })
-});
+import {getHashFromFolder} from "../../support/commands";
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
-});
-
-Then(/^The user press the Shared with me button$/,  () => {
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-    cy.get('.shared').should('be.visible').click()
-  })
 });
 
 Then(/^The user open Shared with me$/,  () => {
@@ -86,23 +51,4 @@ Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
   })
 });
 
-Then(/^User 1 has Editors rights to "([^"]*)" folder$/, () => {
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-
-    cy.contains('File Upload').click().wait(1000)
-    cy.server()
-    cy.route('POST', '/api/v1/file').as('uploadFile')
-
-    cy.get(`input[type=file]`).attachFile('TestUpload.txt');
-    cy.get('.ant-message-notice-content').should('be.visible')
-
-    cy.wait('@uploadFile').then((xhr) => {
-      expect(xhr.responseBody).to.not.have.property('stack')
-      cy.get('.ant-message-custom-content').as('spin')
-        .should('be.visible')
-      cy.contains('TestUpload.txt').should('be.visible')
-    })
-  })
-});
 

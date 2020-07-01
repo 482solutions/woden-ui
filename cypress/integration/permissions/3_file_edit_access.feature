@@ -18,7 +18,7 @@ Feature: Grant edit access for a file
   Scenario: 1 Edit access by owner
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -26,7 +26,7 @@ Feature: Grant edit access for a file
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And User has Editors rights to "TestUpload.txt" file
+    And User has Editors rights to "TestUpload.txt" "file"
     And Login as new user without UI
     And The user 1 is the owner of the file
 
@@ -34,7 +34,7 @@ Feature: Grant edit access for a file
   Scenario: 2 Edit access by editor
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -42,26 +42,26 @@ Feature: Grant edit access for a file
     When Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And User has Editors rights to "TestUpload.txt" file
+    And User has Editors rights to "TestUpload.txt" "file"
 
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Choose the "View and Update" option from pop-up window
     And Register without UI user3
-    And Enter User 3 email
+    And Enter "User3" email to field "#form_in_modal_username"
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    Then User has Editors rights to "TestUpload.txt" file
+    Then User has Editors rights to "TestUpload.txt" "file"
 
   @negative
   Scenario: 3 User can not grand access for a file to the user with incorrect email
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter "invalidemail@gmail.com"
+    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Error message "User for sharing not found"
@@ -70,7 +70,7 @@ Feature: Grant edit access for a file
   Scenario: 4 User can not grand access for a file to the user if he already has them
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -78,7 +78,7 @@ Feature: Grant edit access for a file
 
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the editor of this file"
@@ -87,7 +87,7 @@ Feature: Grant edit access for a file
   Scenario: 5 Owner can not grand access for a file to himself
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter email user 1
+    And Enter "User1" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the editor of this file"
@@ -95,7 +95,7 @@ Feature: Grant edit access for a file
   Scenario: 6 Editor can not grand access for a file to himself
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -104,7 +104,7 @@ Feature: Grant edit access for a file
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And User has Editors rights to "TestUpload.txt" file
+    And User has Editors rights to "TestUpload.txt" "file"
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
     And Choose the "View and Update" option from pop-up window
@@ -116,7 +116,7 @@ Feature: Grant edit access for a file
     And Register without UI user3
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter email user2 and user3 in field "email"
+    And Enter "User2 and User3" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -124,7 +124,7 @@ Feature: Grant edit access for a file
   Scenario: 8 Owner can not grand access for a file if field "email" is empty
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Field email is empty
+    And Enter "nothing" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
@@ -133,7 +133,7 @@ Feature: Grant edit access for a file
   Scenario: 9 Owner can not grand access for a file if field "email" contain spaces
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter spaces in field email
+    And Enter "spaces" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -141,7 +141,7 @@ Feature: Grant edit access for a file
   Scenario: 10 Owner can not grand access for a file if field "email" contain username
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 name
+    And Enter "UsernameUser2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -149,7 +149,7 @@ Feature: Grant edit access for a file
   Scenario: 11 Editor can can not to transfer ownership for a file
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
-    And Enter User 2 email
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."

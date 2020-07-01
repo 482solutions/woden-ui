@@ -55,7 +55,7 @@ Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
 });
 
 Then(/^The user updating file "([^"]*)"$/, (fileName) => {
-    cy.wait('@getFolder').then((xhr) => {
+    cy.wait('@uploadFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.updateTxtFile(fileName).as('UpdateTxtFile')
     })
