@@ -7,7 +7,7 @@ import Share from '../../../assets/images/Share.svg';
 import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
-import FileImage from '../../../assets/images/file.svg';
+import fileImage from '../../../assets/images/fileImages/fileImage.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
 import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
@@ -87,7 +87,7 @@ export default class Drive extends Component {
         return fileImagePNG
         break
       default:
-        return FileImage;
+        return fileImage;
     }
   }
 
