@@ -88,8 +88,8 @@ export class Home extends React.Component {
     await this.props.getVersions(hash);
   }
 
-   viewAccessList(name, hash, permission) {
-    this.setState({accessListVisible: true});
+  viewAccessList(name, hash, permission) {
+    this.setState({ accessListVisible: true });
     this.setState({ accessListInfo: { fileName: name, fileHash: hash } });
     this.props.viewAccessList(permission)
   }
@@ -151,21 +151,20 @@ export class Home extends React.Component {
                    getFolderData={this.openFolder}
                    mode={mode}
                    folderData={this.props[mode]}
-                   />
+          />
           {
             this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0 ?
               <div className="emptyHere">
                 <img src={emptyHere} alt=""/>
               </div> :
-              <div className="flex-start ff-rw">
-                <Drive folderData={this.props[mode]}
-                       updateFile={this.updateFile}
-                       shareModal={this.shareModal}
-                       openFolder={this.openFolder}
-                       getVersions={this.getVersions}
-                       downloadFile={this.downloadFile}
-                       accessList={this.viewAccessList}/>
-              </div>
+              <Drive className="flex-start ff-rw"
+                     folderData={this.props[mode]}
+                     updateFile={this.updateFile}
+                     shareModal={this.shareModal}
+                     openFolder={this.openFolder}
+                     getVersions={this.getVersions}
+                     downloadFile={this.downloadFile}
+                     accessList={this.viewAccessList}/>
           }
         </div>
         {
@@ -183,34 +182,34 @@ export class Home extends React.Component {
             </Row>
             {
               versions.versionList.length > 0 && versions.versionList.map((version) => {
-              const time = new Date(version.time * 1000).toLocaleString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: '2-digit',
-                hour: 'numeric',
-                hour12: false,
-                minute: '2-digit',
-              });
-              return (
-                <Row key={version.cid} style={{ width: '100%' }}>
-                  <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
-                  <Col span={10} className='versionCode'><span
-                    id={`Time_${version.cid}`}>{time}</span></Col>
-                  <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
-                  <Col span={3} className='versionDownload'>
-                    <img id={`Download_${version.cid}`} onClick={() => {
-                      this.downloadFile(version.cid, wrapperInfo.fileHash);
-                    }} src={DownloadIcon} alt="Download" title='Download this version'/>
-                  </Col>
-                </Row>
-              );
-            })
+                const time = new Date(version.time * 1000).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: '2-digit',
+                  hour: 'numeric',
+                  hour12: false,
+                  minute: '2-digit',
+                });
+                return (
+                  <Row key={version.cid} style={{ width: '100%' }}>
+                    <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
+                    <Col span={10} className='versionCode'><span
+                      id={`Time_${version.cid}`}>{time}</span></Col>
+                    <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
+                    <Col span={3} className='versionDownload'>
+                      <img id={`Download_${version.cid}`} onClick={() => {
+                        this.downloadFile(version.cid, wrapperInfo.fileHash);
+                      }} src={DownloadIcon} alt="Download" title='Download this version'/>
+                    </Col>
+                  </Row>
+                );
+              })
             }
           </div>
         }
         {
           accessListVisible && <div id='AccessList'
-                                     className="accessListWrapper">
+                                    className="accessListWrapper">
             <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
               <Col className='infoTitle' span={20}>{accessListInfo.fileName}</Col>
 
@@ -223,7 +222,7 @@ export class Home extends React.Component {
               <Col span={10} className='infoColumnTitle'>Permissions</Col>
             </Row>
             {
-              permissions.accessList.length > 0 &&  permissions.accessList.map(() => {
+              permissions.accessList.length > 0 && permissions.accessList.map(() => {
                 return (
                   <Row key={permissions.permissions} style={{ width: '100%' }}>
                     <Col>
@@ -241,21 +240,21 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem, permissions }) => ({
-  userName: auth.user.name,
-  versions: filesystem.versions,
-  drive: filesystem.drive,
-  share: filesystem.share,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  initialFilesystem: actions.initialFilesystem,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-})(
+    userName: auth.user.name,
+    versions: filesystem.versions,
+    drive: filesystem.drive,
+    share: filesystem.share,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    initialFilesystem: actions.initialFilesystem,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+  })(
   Home,
 );
