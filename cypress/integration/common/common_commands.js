@@ -79,7 +79,7 @@ When(/^The field name (.*) is filled by user from list of folder name$/, (folder
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-  //TODO
+  //TODO delete cy.reload()
   cy.server()
   cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
   cy.reload()

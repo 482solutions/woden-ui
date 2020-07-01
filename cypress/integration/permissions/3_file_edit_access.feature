@@ -24,7 +24,7 @@ Feature: Grant edit access for a file
     And Spin is visible "Changing permissions..."
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
-    And The user press the Shared with me button 
+    And The user open Shared with me
     And Spin is visible "Getting data..."
     And User has Editors rights to "TestUpload.txt" file
     And Login as new user without UI
@@ -40,7 +40,7 @@ Feature: Grant edit access for a file
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When Login as new user 2 without UI
-    And The user press the Shared with me button 
+    And The user open Shared with me
     And Spin is visible "Getting data..."
     And User has Editors rights to "TestUpload.txt" file
 
@@ -53,7 +53,7 @@ Feature: Grant edit access for a file
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
-    And The user press the Shared with me button 
+    And The user open Shared with me
     And Spin is visible "Getting data..."
     Then User has Editors rights to "TestUpload.txt" file
 
@@ -102,7 +102,7 @@ Feature: Grant edit access for a file
     Then Message about transfer ownership "Permissions updated successfully"
 
     And Login as new user 2 without UI
-    And The user press the Shared with me button 
+    And The user open Shared with me
     And Spin is visible "Getting data..."
     And User has Editors rights to "TestUpload.txt" file
     When The user press the Actions button in "TestUpload.txt" file
@@ -155,10 +155,6 @@ Feature: Grant edit access for a file
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When Login as new user 2 without UI
-    And The user press the Shared with me button 
+    And The user open Shared with me
     And Spin is visible "Getting data..."
     Then "Transfer ownership" option from pop-up window is not visible
-
-
-
-

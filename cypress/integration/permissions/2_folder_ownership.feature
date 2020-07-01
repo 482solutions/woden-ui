@@ -83,5 +83,3 @@ Feature: Transfer folder ownership
       And Enter username of user2 in field email
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
-
-

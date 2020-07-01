@@ -35,6 +35,7 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
       cy.wait('@uploadFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
+        //TODO: delete cy.reload()
         cy.reload()
         cy.contains('TestUpload.txt').should('be.visible')
       })

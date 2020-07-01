@@ -17,7 +17,7 @@ Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.uploadFile(fullFileName)
         cy.server()
-        cy.route('GET', '/api/v1/folder/*').as('getFolder')
+        cy.route('GET', '/api/v1/folder/*').as('uploadFile')
         cy.reload()
     })
 });
@@ -46,14 +46,11 @@ When(/^Choose the needed "([^"]*)" file from its PC directory$/, (file) => {
 });
 
 Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
-    cy.wait('@getFolder').then((xhr) => {
-        expect(xhr.responseBody).to.not.have.property('stack')
-    })
+    cy.get('.ant-message-custom-content').as(messUploadFile)
+        .should('be.visible')
+        .should("contain.text", messUploadFile)
     cy.wait('@updateFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        cy.get('.ant-message-custom-content').as(messUploadFile)
-            .should('be.visible')
-            .should("contain.text", messUploadFile)
     })
 });
 
@@ -81,4 +78,15 @@ Then(/^The file "([^"]*)" is visible$/, (file) => {
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
     cy.contains(file).should('not.be.visible')
+});
+
+Given(/^The user has access to file "([^"]*)"$/, (filename) => {
+    cy.wait('@uploadFile').then((xhr) => {
+        expect(200).to.equal(xhr.status)
+        for (let key in xhr.responseBody.files) {
+            if (filename === xhr.responseBody.files[key].fileName) {
+                expect(Cypress.env('login')).to.equal(xhr.responseBody.files[key].ownerId)
+            }
+        }
+    })
 });
