@@ -8,7 +8,7 @@ Feature: Transfer folder ownership
       And Login as new user without UI
       And Create folder with name "testFolder" in root without UI
 
-    @positive
+    @positive @BAG
     Scenario: 1 Transfer folder ownership in root folder
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
@@ -21,7 +21,10 @@ Feature: Transfer folder ownership
       And Login as new user 2 without UI
       And User 2 became Owner of "testFolder" folder
       And Login as new user without UI
-      And User 1 has Editors rights to "testFolder" folder
+      And The user open Shared with me
+      And Spin is visible "Getting data..."
+      And The folder "testFolder" is visible
+      And User has Editors rights to "testFolder" folder
 
     @negative
     Scenario: 2 User can not transfer folder ownership to the user with incorrect email
@@ -33,7 +36,7 @@ Feature: Transfer folder ownership
       And Press "Confirm"
       Then Error message "User for sharing not found"
 
-    @negative @BAG
+    @negative
     Scenario: 3 User can not transfer folder ownership to the user if he already has them
       Given The user 1 is the owner of the folder "testFolder"
       When The user press the Actions button in "testFolder" folder
@@ -80,5 +83,3 @@ Feature: Transfer folder ownership
       And Enter username of user2 in field email
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
-
-
