@@ -21,6 +21,7 @@ export const initialFilesystem = () => async(dispatch) => {
 };
 const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData.folder;
+  console.log("FolderData:",folderData);
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
     data = Object.assign(data, {
       folders: data.sharedFolders,
@@ -86,7 +87,7 @@ export const createFolder = (folder) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 201) {
-        const folderData = response.body.folder;
+        const folderData = response.body;
         dispatch(updateFolderData(folderData, 'drive'));
       }
     },
@@ -104,7 +105,7 @@ export const uploadFile = (file) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 200) {
         message.success('File created successful');
-        const folderData = response.body.folder;
+        const folderData = response.body;
         dispatch(updateFolderData(folderData, 'drive'));
       }
     },
@@ -135,13 +136,16 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
       message.destroy();
       if (error) {
         message.error(response.body.message);
+
       } else {
+        console.log(response);
         message.success('File downloaded successfully');
-        const { name, type, file } = response.body;
-        download(file, name, type);
+        // const { file } = response.body;
+        download(response.body, 'avatar.pdf', response.headers['content-type']);
         dispatch({
           type: DOWNLOAD_FILE,
         });
+        console.log(response);
       }
     },
   );

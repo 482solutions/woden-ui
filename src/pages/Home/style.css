@@ -96,4 +96,31 @@
   right: 0;
 }
 
+.owner {
+  color: #AEB8C7;
+  font-weight: 600;
+}
+
+.ownerName {
+  color: #333333;
+  display: block;
+  padding-bottom: 10px;
+}
+
+.sharedUser {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  color: #333333;
+}
+
+.permissionIcons {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
+
+.revokeAccess {
+  cursor: pointer;
+}
 
