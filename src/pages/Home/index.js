@@ -254,12 +254,11 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.writeUsers.map((user) => {
-
+                permissionData.writeUsers.map((user, i) => {
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
-                        {permissionData.writeUsers}
+                        {permissionData.writeUsers[i]}
                       </Col>
                       <Col className="permissionIcons">
                         <Col className="sharedUserAccess">
@@ -275,12 +274,13 @@ export class Home extends React.Component {
                 })
               }
               {
-                permissionData.readUsers.map((user) => {
+                permissionData.readUsers.map((user, i) => {
+                  console.log('проеряем user ', user);
                   return (
                     !permissionData.writeUsers.includes(user) &&
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
-                        {permissionData.readUsers}
+                        {permissionData.readUsers[i]}
                       </Col>
                       <Col className="permissionIcons">
                         <Col className="sharedUserAccess">
