@@ -64,15 +64,9 @@ export const PermissionsModal = ({
             placeholder="Access Type"
             style={{width: 300, marginTop: 20}}
           >
-            {/* {info.permission === 'owner' &&
-            <Option value="owner">Transfer permissions</Option>} */}
             {true && <Option value="owner">Transfer ownership</Option>}
             {true && <Option value="read">View Only</Option>}
             {true && <Option value="write">View and Update</Option>}
-            {/* {true && <Option value="write">Writer</Option>} */}
-            {/* {true && <Opt
-
-            +-ion value="read">Reader</Option>} */}
           </Select>
         </Form.Item>
       </Form>

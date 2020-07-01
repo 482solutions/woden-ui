@@ -38,6 +38,7 @@ beforeAll(() => {
       hash: '70c7a1db1045dcdabfadda004b7fc343639da127c02c1968e131021a93a035d1',
     },
   ];
+
   fakeFiles = [
     {
       name: 'file1.txt',
@@ -50,9 +51,18 @@ beforeAll(() => {
       versions: [{ cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5', time: 1590657000000 }],
     },
   ];
+
+  fakeFilesInfo = [
+    {
+      fileHash: "5fea8c5881389a25ed9e50460905e0fab7a49a62719db337639c2de670166c71",
+      fileName: "WebStorm Reference Card.pdf",
+      fileType: "application/pdf",
+    },
+
+  ];
 });
 it('Render without crashing', () => {
-  const wrapper = shallow(<Drive folderData={{entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash}}/>);
+  const wrapper = shallow(<Drive folderData={{entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash, filesInfo: fakeFilesInfo}}/>);
   expect(wrapper.find(Dropdown)).to.have.lengthOf(fakeFiles.length + fakeFolders.length);
   expect(wrapper.find('img.folder')).to.have.lengthOf(3);
   expect(wrapper.find('img.file')).to.have.lengthOf(2);
