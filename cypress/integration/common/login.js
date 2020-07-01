@@ -43,7 +43,9 @@ Then(/^Login as new user 2 without UI$/, () => {
       cy.request({
         method: 'POST',
         url: `${Cypress.env('backendURL')}/user/auth`,
-        headers: headers,
+        headers: {
+          'content-type': 'application/json'
+        },
         body: {
           'login': Cypress.env('login_2'),
           'password': Cypress.env('password_2'),

@@ -11,10 +11,10 @@ Given(/^Choose the "([^"]*)" option from pop-up window$/, (option) => {
   cy.contains(option).click(1000)
 });
 
-Given(/^Press "([^"]*)"$/, (confirm) => {
+Given(/^Press "([^"]*)"$/, (button) => {
   cy.server()
   cy.route('PUT', '/api/v1/permissions').as('permissions')
-  cy.contains(confirm).click()
+  cy.contains(button).click()
 });
 
 Then(/^Message about transfer ownership "([^"]*)"$/, (text) => {
@@ -85,4 +85,8 @@ Given(/^The user 1 is the owner of the file$/, () => {
 When(/^Enter User 2 username$/,  () => {
   cy.get('#form_in_modal_username').should('be.visible')
     .type(Cypress.env('login_2'))
+});
+
+Then(/^The folder "([^"]*)" is visible$/,  () => {
+  cy.contains('testFolder').should('be.visible')
 });

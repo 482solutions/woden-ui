@@ -29,8 +29,8 @@
   "requestTimeout": 10000,
   "projectId": "mxxwps",
   "video": false,
-  "viewportWidth": 1280,
-  "viewportHeight": 800,
+  "viewportWidth": 1920,
+  "viewportHeight": 1080,
   "reporter": "mochawesome",
   "reporterOptions": {
     "reportDir": "mochawesome-report",

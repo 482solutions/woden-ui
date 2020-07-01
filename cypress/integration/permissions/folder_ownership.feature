@@ -21,8 +21,9 @@ Feature: Transfer folder ownership
       And Login as new user 2 without UI
       And User 2 became Owner of "testFolder" folder
       And Login as new user without UI
-      And Press "Shared with me"
+      And The user open Shared with me
       And Spin is visible "Getting data..."
+      And The folder "testFolder" is visible
       And User has Editors rights to "testFolder" folder
 
     @negative

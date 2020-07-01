@@ -9,7 +9,7 @@ When(/^Enter User 3 email$/, () => {
 Then(/^User has Editors rights to "([^"]*)" file$/, (fileName) => {
   cy.wait('@getRootFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-
+    cy.reload()
     const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
     cy.get(`#Actions_${hashFile}`).click().wait(1000)
     cy.get(`#Update_${hashFile}`).click().wait(1000)

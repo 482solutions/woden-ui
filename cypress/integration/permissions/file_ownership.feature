@@ -21,7 +21,8 @@ Feature: Transfer file ownership
       And Login as new user 2 without UI
       And User 2 became Owner of "TestUpload.txt" file
       And Login as new user without UI
-      And The user open Shared with me
+       And The user open Shared with me
+      And Spin is visible "Getting data..."
       And User has Editors rights to "TestUpload.txt" file
 
     @negative
