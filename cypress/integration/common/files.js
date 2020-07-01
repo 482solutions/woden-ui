@@ -75,3 +75,10 @@ Then(/^Button Download is visible$/, () => {
     cy.get(`#Download_${Cypress.env('versions')[0].cid}`).should("be.visible")
     cy.get(`#Download_${Cypress.env('versions')[1].cid}`).should("be.visible")
 });
+
+Then(/^The file "([^"]*)" is visible$/, (file) => {
+    cy.contains(file).should('be.visible')
+});
+Then(/^The file "([^"]*)" is not visible$/, (file) => {
+    cy.contains(file).should('not.be.visible')
+});

@@ -1,4 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
+import {getHashFromFolder} from "../../support/commands";
 
 Given(/^Enter User 2 email$/, () => {
   cy.get('#form_in_modal_username').should('be.visible')
@@ -89,4 +90,42 @@ When(/^Enter User 2 username$/,  () => {
 
 Then(/^The folder "([^"]*)" is visible$/,  () => {
   cy.contains('testFolder').should('be.visible')
+});
+
+Then(/^Folder "([^"]*)" is visible$/,  (folder) => {
+  cy.contains(folder).should('be.visible')
+});
+Then(/^The user opens the shared folder "([^"]*)"$/, (folder) => {
+  cy.contains(folder).dblclick()
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
+});
+
+Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
+  cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    Cypress.env('foldersInRoot', xhr.responseBody.folder.folders)
+    expect(xhr.responseBody.folder.ownerId).to.equal(Cypress.env('login'))
+  })
+});
+
+When(/^The user press the Actions button in "([^"]*)" folder$/, (folder) => {
+  cy.wait(1000)
+  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
+  cy.get(`#Actions_${hashFolder}`).click().wait(1000)
+});
+
+When(/^The user press the Share button in "([^"]*)" folder$/, (folder) => {
+  cy.wait(1000)
+  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
+  cy.get(`#Share_${hashFolder}`).click().wait(1000)
+});
+
+Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
+  cy.wait('@getRootFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    expect(1).to.equal(xhr.responseBody.folder.folders.length)
+    cy.contains(folder).should('be.visible')
+  })
 });
