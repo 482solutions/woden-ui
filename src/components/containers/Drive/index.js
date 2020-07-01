@@ -24,10 +24,10 @@ export default class Drive extends Component {
   fileMenu(hash, name, permission) {
     return (
       <Menu>
-        <Menu.Item key={`0${hash}`}>
-          <span id={`Versions_${hash}`} onClick={async() => {
-            await this.props.getVersions(hash, name);
-          }}><img className="dropdownIcon" src={fileVersionsIcon} alt=""/>Versions</span>
+        <Menu.Item key={`0${hash}`} onClick={async() => {
+          await this.props.getVersions(hash, name);
+        }}>
+          <span id={`Versions_${hash}`}><img className="dropdownIcon" src={fileVersionsIcon} alt=""/>Versions</span>
         </Menu.Item>
         <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
           <Upload name="file" beforeUpload={(file) => {
@@ -42,10 +42,10 @@ export default class Drive extends Component {
         }}>
           <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
         </Menu.Item>
-        <Menu.Item key={`3${hash}`}>
-          <span onClick={async() => {
-            await this.props.viewAccessList(hash, 'file');
-          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+        <Menu.Item key={`3${hash}`} onClick={async() => {
+          await this.props.viewAccessList(hash, 'file');
+        }}>
+          <span><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -59,10 +59,10 @@ export default class Drive extends Component {
         }}>
           <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
         </Menu.Item>
-        <Menu.Item key={`1${hash}`}>
-          <span onClick={async() => {
-            await this.props.viewAccessList(hash, 'folder');
-          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+        <Menu.Item key={`1${hash}`} onClick={async() => {
+          await this.props.viewAccessList(hash, 'folder');
+        }}>
+          <span><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );

@@ -266,7 +266,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={this.revokePermissions(this.state.hash, 'write', user)}/>
+                               onClick={this.revokePermissions(user)}/>
                         </Col>
                       </Col>
                     </Row>
@@ -289,7 +289,7 @@ export class Home extends React.Component {
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
                                onClick={() => {
-                                 this.revokePermissions(this.state.hash, 'read', user)
+                                 this.revokePermissions(user)
                                }}/>
                         </Col>
                       </Col>
