@@ -9,10 +9,10 @@ Feature: Creating folders
 
     Background: Create a user before starting the tests
       Given Login as new user without UI
+      And Spin is visible "Getting data..."
 
     @positive
     Scenario Outline: 1 New folder in root folder
-      Given Spin is visible "Getting data..."
       And The user is located in his root folder
       When The user press Create a new folder button
       And The field name is empty
@@ -32,7 +32,6 @@ Feature: Creating folders
 
     @positive
     Scenario Outline: 2 Create new folder in user folder
-      Given Spin is visible "Getting data..."
       And The user is created folder in root folder with name <Name> from list
       And Open this folder with name <Name>
       And Spin is visible "Getting data..."
@@ -54,7 +53,6 @@ Feature: Creating folders
 
     @negative
     Scenario: 3 User can not create folder without name
-      Given Spin is visible "Getting data..."
       And The user is located in his root folder
       When The user press Create a new folder button
       And The field name is empty
@@ -64,7 +62,6 @@ Feature: Creating folders
 
     @negative
     Scenario Outline: 4 User can not create folder with name more than 20 characters 
-      Given Spin is visible "Getting data..."
       And The user is located in his root folder
       When The user press Create a new folder button
       And The field name is empty
@@ -80,7 +77,6 @@ Feature: Creating folders
 
     @negative
     Scenario: 5 User can not create folder with spaces in name
-      Given Spin is visible "Getting data..."
       And The user is located in his root folder
       When The user press Create a new folder button
       And The field name is empty

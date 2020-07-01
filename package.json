@@ -59,7 +59,7 @@
     "commitlint-config-jira": "^1.4.1",
     "commitlint-plugin-jira-rules": "^1.4.0",
     "css-loader": "^3.5.2",
-    "cypress": "4.8.0",
+    "cypress": "4.9.0",
     "cypress-cucumber-preprocessor": "^2.3.1",
     "cypress-file-upload": "^4.0.6",
     "cypress-plugin-retries": "^1.5.2",

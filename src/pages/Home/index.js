@@ -8,6 +8,9 @@ import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
 import DownloadIcon from '../../assets/images/download.svg';
 import emptyHere from '../../assets/images/emptyHere.svg';
+import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
+import editorIcon from '../../assets/images/editorIcon.svg';
+import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
 
 export class Home extends React.Component {
@@ -16,9 +19,12 @@ export class Home extends React.Component {
     this.state = {
       fileWrapperVisible: false,
       accessListVisible: false,
-      accessListInfo: {
-        fileName: 'null',
-        fileHash: null,
+      permissionData: {
+        title: 'null',
+        hash: null,
+        ownerId: 'null',
+        readUsers: [],
+        writeUsers: [],
       },
       wrapperInfo: {
         fileName: 'null',
@@ -42,6 +48,7 @@ export class Home extends React.Component {
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
     this.changePermissions = this.changePermissions.bind(this);
+    this.revokePermissions = this.revokePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
     this.closeAccessList = this.closeAccessList.bind(this);
@@ -82,16 +89,34 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
+  revokePermissions(data) {
+    this.props.revokePermissions(data);
+  }
+
   async getVersions(hash, name) {
     this.setState({ fileWrapperVisible: true });
     this.setState({ wrapperInfo: { fileName: name, fileHash: hash } });
     await this.props.getVersions(hash);
   }
 
-  viewAccessList(name, hash, permission) {
+  async viewAccessList(hash, type) {
     this.setState({ accessListVisible: true });
-    this.setState({ accessListInfo: { fileName: name, fileHash: hash } });
-    this.props.viewAccessList(permission)
+    const infoArray = (type === 'file' ? this.props[this.state.mode].filesInfo : this.props[this.state.mode].foldersInfo);
+    let info = {};
+    for (let i = 0; i < infoArray.length; i++) {
+      if (infoArray[i][type + 'Hash'] === hash) {
+        info = infoArray[i];
+        break;
+      }
+    }
+    console.log("INFO:", info);
+    this.setState({
+      permissionData: {
+        title: info[type + 'Name'], hash: info[type + 'Hash'],
+        ownerId: info.ownerId, readUsers: info.readUsers,
+        writeUsers: info.writeUsers
+      }
+    });
   }
 
   shareModal(hash, name, permission) {
@@ -134,10 +159,10 @@ export class Home extends React.Component {
 
   render() {
     const {
-      fileWrapperVisible, accessListVisible, wrapperInfo, accessListInfo, shareModalVisible,
+      fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
       shareModalInfo, mode,
     } = this.state;
-    const { versions, permissions } = this.props;
+    const { versions } = this.props;
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -157,14 +182,15 @@ export class Home extends React.Component {
               <div className="emptyHere">
                 <img src={emptyHere} alt=""/>
               </div> :
-              <Drive className="flex-start ff-rw"
-                     folderData={this.props[mode]}
-                     updateFile={this.updateFile}
-                     shareModal={this.shareModal}
-                     openFolder={this.openFolder}
-                     getVersions={this.getVersions}
-                     downloadFile={this.downloadFile}
-                     accessList={this.viewAccessList}/>
+              <div className="flex-start ff-rw">
+                <Drive folderData={this.props[mode]}
+                       updateFile={this.updateFile}
+                       shareModal={this.shareModal}
+                       openFolder={this.openFolder}
+                       getVersions={this.getVersions}
+                       downloadFile={this.downloadFile}
+                       viewAccessList={this.viewAccessList}/>
+              </div>
           }
         </div>
         {
@@ -208,11 +234,10 @@ export class Home extends React.Component {
           </div>
         }
         {
-          accessListVisible && <div id='AccessList'
-                                    className="accessListWrapper">
+          accessListVisible && <div id='AccessList' className="accessListWrapper">
             <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
-              <Col className='infoTitle' span={20}>{accessListInfo.fileName}</Col>
-
+              <Col className='infoTitle' title={permissionData.title}
+                   span={20}>{permissionData.title}</Col>
               <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
                 <img onClick={this.closeAccessList} alt='Close' title='Close info'
                      src={CloseIcon}/>
@@ -221,17 +246,58 @@ export class Home extends React.Component {
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Permissions</Col>
             </Row>
-            {
-              permissions.accessList.length > 0 && permissions.accessList.map(() => {
-                return (
-                  <Row key={permissions.permissions} style={{ width: '100%' }}>
-                    <Col>
-                      <span className='accessUser'>{}</span>
-                    </Col>
-                  </Row>
-                );
-              })
-            }
+            <Row style={{ width: '100%' }}>
+              <Col>
+                <span className="ownerName"><span
+                  className='owner'>Owner: </span>{permissionData.ownerId}</span>
+              </Col>
+            </Row>
+            <Col>
+              {
+                permissionData.writeUsers.map((user, i) => {
+                  return (
+                    <Row key={user} className='sharedUser editor'>
+                      <Col className="sharedUserName">
+                        {permissionData.writeUsers[i]}
+                      </Col>
+                      <Col className="permissionIcons">
+                        <Col className="sharedUserAccess">
+                          <img src={editorIcon} title="View and update" alt=""/>
+                        </Col>
+                        <Col className="revokeAccess">
+                          <img src={revokeAccessIcon} alt="Revoke access"
+                               onClick={this.revokePermissions(this.state.hash, 'write', user)}/>
+                        </Col>
+                      </Col>
+                    </Row>
+                  );
+                })
+              }
+              {
+                permissionData.readUsers.map((user, i) => {
+                  console.log('проеряем user ', user);
+                  return (
+                    !permissionData.writeUsers.includes(user) &&
+                    <Row key={user} className='sharedUser editor'>
+                      <Col className="sharedUserName">
+                        {permissionData.readUsers[i]}
+                      </Col>
+                      <Col className="permissionIcons">
+                        <Col className="sharedUserAccess">
+                          <img src={viewerIcon} title="View only" alt=""/>
+                        </Col>
+                        <Col className="revokeAccess">
+                          <img src={revokeAccessIcon} alt="Revoke access"
+                               onClick={() => {
+                                 this.revokePermissions(this.state.hash, 'read', user)
+                               }}/>
+                        </Col>
+                      </Col>
+                    </Row>
+                  );
+                })
+              }
+            </Col>
           </div>
         }
       </div>
@@ -255,6 +321,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
     downloadFile: actions.downloadFile,
     getVersions: actions.getVersions,
     changePermissions: actions.changePermissions,
+    revokePermissions: actions.revokePermissions,
   })(
   Home,
 );
