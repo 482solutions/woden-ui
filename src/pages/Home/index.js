@@ -82,7 +82,6 @@ export class Home extends React.Component {
   }
 
   downloadFile(name, cid, hash) {
-    console.log(name);
     this.props.downloadFile(name, cid, hash);
   }
 
