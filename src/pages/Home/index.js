@@ -91,7 +91,6 @@ export class Home extends React.Component {
   }
 
   revokePermissions(data) {
-    console.log(data);
     this.props.revokePermissions(data);
   }
 
