@@ -116,6 +116,7 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
       Cypress.env('respStatus', result.status)
       Cypress.env('filesInRoot', result.folder.files)
       expect(Cypress.env('login')).to.equal(result.folder.folderName)
+      expect(Cypress.env('login')).to.equal(result.folder.ownerId)
     }
   })
 })

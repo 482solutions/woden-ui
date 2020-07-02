@@ -16,16 +16,8 @@ Feature: Files view
     Scenario: 1 File view
       Given Spin is visible "Getting data..."
       And The user located on root dashboard
-#    And the user has access to any available file
+      And The user has access to file "txtFile.pem"
       When The user double click the file "txtFile.pem"
       And Spin is visible "Downloading file..."
-      Then The file is downloaded
+      Then The file "txtFile.pem" is downloaded and contain text "This file is ok!"
 
-    @positive
-    Scenario: 1 File view in versions
-      Given Spin is visible "Getting data..."
-      And The user located on root dashboard
-#    And the user has access to any available file
-      When The user double click the file "txtFile.pem"
-      And Spin is visible "Downloading file..."
-      Then The file is downloaded

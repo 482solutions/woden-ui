@@ -69,6 +69,7 @@ export default class Drive extends Component {
   }
 
   detectImage(file) {
+    console.log(file);
     switch(file.fileType) {
       case 'application/pdf':
         return fileImagePDF;
@@ -122,6 +123,7 @@ export default class Drive extends Component {
             </div>
           ))
         }
+
         {
           entryFiles.map((file, i) => (
             <div className="driveItem"
