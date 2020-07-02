@@ -127,7 +127,7 @@ export const updateFile = (file) => async() => {
     },
   );
 };
-export const downloadFile = (cid, hash) => async(dispatch) => {
+export const downloadFile = (name, cid, hash) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
@@ -135,17 +135,17 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
     (error, data, response) => {
       message.destroy();
       if (error) {
-        message.error(response.body.message);
 
+        message.error(response.body);
       } else {
-        console.log(response);
         message.success('File downloaded successfully');
-        // const { file } = response.body;
-        download(response.body, 'avatar.pdf', response.headers['content-type']);
+        const name = name;
+        const type = response.headers['content-type'];
+        const file = response.text;
+        download(file, name, type,);
         dispatch({
           type: DOWNLOAD_FILE,
         });
-        console.log(response);
       }
     },
   );
