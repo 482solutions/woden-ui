@@ -90,8 +90,9 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
-  revokePermissions(data, hash) {
-    this.props.revokePermissions(data, hash);
+  revokePermissions(data) {
+    console.log(data);
+    this.props.revokePermissions(data);
   }
 
   async getVersions(hash, name) {
@@ -255,11 +256,7 @@ export class Home extends React.Component {
             <Col>
               {
                 permissionData.writeUsers.map((data, user, i) => {
-                  const onFinish = async (values) => {
-                    const data = Object.assign(values, {hash: info.hash});
-                    revokePermissions(data);
-                    close();
-                  };
+
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
@@ -271,7 +268,11 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions(data)}}/>
+                               onClick={()=>{this.revokePermissions({
+                                 user: permissionData.writeUsers[i],
+                                 hash: permissionData.hash,
+                                 permission: 'unwrite'
+                               })}}/>
                         </Col>
                       </Col>
                     </Row>
@@ -292,7 +293,11 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions(user)}}/>
+                               onClick={()=>{this.revokePermissions({
+                                 user: permissionData.readUsers[i],
+                                 hash: permissionData.hash,
+                                 permission: 'unread'
+                               })}}/>
                         </Col>
                       </Col>
                     </Row>

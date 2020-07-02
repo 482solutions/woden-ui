@@ -12,7 +12,6 @@ export const changePermissions = (permissionData) => async (dispatch) => {
   message.loading('Changing permissions...', 0);
 
   const body = new Woden.ChangePermissions();
-  console.log("Data1:", permissionData);
   body.email = permissionData.username;
   body.hash = permissionData.hash;
   body.permission = permissionData.permissions;
@@ -35,16 +34,13 @@ export const revokePermissions = (permissionData) => async (dispatch) => {
   message.loading('Revoking access...', 0);
 
   const body = new Woden.RevokePermissions();
-  console.log("Data2: ", permissionData);
-  body.email = permissionData.username;
+  body.email = permissionData.user;
   body.hash = permissionData.hash;
-  body.permission = permissionData.permissions;
+  body.permission = permissionData.permission;
   api.revokePermissions(body,
     (error, data, response) => {
       message.destroy();
       if (error) {
-        console.log(permissionData);
-        console.log("Response:", response);
         message.error(response.body.message);
       } else {
         message.success('Access revoked successfully');
