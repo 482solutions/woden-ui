@@ -21,15 +21,15 @@ cache:
 script:
   - npm run fix:js
   - npm run lint:js
-  - sudo docker system prune -a -f
-  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
-  - cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
-  - cd ..
-  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-  - cd woden-server-js && docker-compose up --build -d
-  - sleep 60
-  - cd ..
-  - npm ci
-  - npm run startci & sleep 10
-  - npm run cypress:run
-  - npm run coverage
+#  - sudo docker system prune -a -f
+#  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
+#  - cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
+#  - cd ..
+#  - git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
+#  - cd woden-server-js && docker-compose up --build -d
+#  - sleep 60
+#  - cd ..
+#  - npm ci
+#  - npm run startci & sleep 10
+#  - npm run cypress:run
+#  - npm run coverage
