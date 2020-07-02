@@ -2,12 +2,13 @@ import Woden from 'woden';
 import { message } from 'antd';
 import { CHANGE_PERMISSION, REVOKE_PERMISSIONS } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
+import { updateFolderData } from './filesystem'
 
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
-export const changePermissions = (permissionData) => async (dispatch) => {
+export const changePermissions = (permissionData, folderData) => async (dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
 
@@ -25,6 +26,7 @@ export const changePermissions = (permissionData) => async (dispatch) => {
         dispatch({
           type: CHANGE_PERMISSION,
         });
+        dispatch(updateFolderData(folderData, 'drive'));
       }
     });
 };

@@ -19,7 +19,8 @@ export const initialFilesystem = () => async(dispatch) => {
     type: CLEAN_STORAGE,
   });
 };
-const updateFolderData = (folderData, mode) => (dispatch) => {
+
+export const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData.folder;
   console.log("FolderData:",folderData);
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
