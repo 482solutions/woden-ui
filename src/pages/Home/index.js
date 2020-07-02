@@ -89,8 +89,8 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
-  revokePermissions(user) {
-    this.props.revokePermissions(user);
+  revokePermissions(data) {
+    this.props.revokePermissions(data);
   }
 
   async getVersions(hash, name) {
@@ -253,7 +253,7 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.writeUsers.map((user, i) => {
+                permissionData.writeUsers.map((data, user, i) => {
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
@@ -265,7 +265,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions(user)}}/>
+                               onClick={()=>{this.revokePermissions(permissionData)}}/>
                         </Col>
                       </Col>
                     </Row>
