@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 let fakeFolders = [];
 let fakeFiles = [];
 let versions = {};
-let fackeDrive = {};
+let fakeDrive = {};
 beforeAll(() => {
   versions = {
     versionList: [
@@ -51,7 +51,7 @@ beforeAll(() => {
       versions: [{ cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5', time: 1590657000000 }],
     },
   ];
-  fackeDrive = {
+  fakeDrive = {
     entryFolders: [],
     entryFiles: [],
     parentHash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM'

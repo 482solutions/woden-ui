@@ -21,7 +21,9 @@ Feature: Transfer file ownership
       And Login as new user 2 without UI
       And User 2 became Owner of "TestUpload.txt" file
       And Login as new user without UI
-      And User 1 has Editors rights to "TestUpload.txt" file
+      And The user open Shared with me
+      And Spin is visible "Getting data..."
+      And User has Editors rights to "TestUpload.txt" file
 
     @negative
     Scenario: 2 User can not transfer file ownership to the user with incorrect email
@@ -33,7 +35,7 @@ Feature: Transfer file ownership
       And Press "Confirm"
       Then Error message "User for sharing not found"
 
-    @negative @BAG
+    @negative
     Scenario: 3 User can not transfer file ownership to the user if he already has them
       Given The user 1 is the owner of the file
       When The user press the Actions button in "TestUpload.txt" file
@@ -80,5 +82,3 @@ Feature: Transfer file ownership
       And Enter username of user2 in field email
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
-
-
