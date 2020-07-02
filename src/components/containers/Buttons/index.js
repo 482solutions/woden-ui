@@ -54,7 +54,7 @@ class Buttons extends Component {
               </div>
           }
          </Col>
-        <Col span={2}>
+        <Col span={3}>
           {
             this.props.folderData.parentHash !== 'root'
             ? <span className="currentFolder">{this.props.folderData.folderName}</span>
@@ -65,10 +65,10 @@ class Buttons extends Component {
         </Col>
         {
           this.props.mode === 'drive' ?
-          <Col span={2} offset={14}>
+          <Col span={2} offset={13}>
             <NewFolder onFinish={this.props.newFolder}/>
           </Col> :
-            <Col span={2} offset={14}>
+            <Col span={2} offset={13}>
               <NewFolder onFinish={this.props.newFolder}/>
             </Col>
         }
