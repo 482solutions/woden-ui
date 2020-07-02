@@ -12,6 +12,7 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
+import { revokePermissions } from '../../state-management/actions';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -89,8 +90,8 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
-  revokePermissions(data) {
-    this.props.revokePermissions(data);
+  revokePermissions(data, hash) {
+    this.props.revokePermissions(data, hash);
   }
 
   async getVersions(hash, name) {
@@ -254,6 +255,11 @@ export class Home extends React.Component {
             <Col>
               {
                 permissionData.writeUsers.map((data, user, i) => {
+                  const onFinish = async (values) => {
+                    const data = Object.assign(values, {hash: info.hash});
+                    revokePermissions(data);
+                    close();
+                  };
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
@@ -265,7 +271,7 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions(permissionData)}}/>
+                               onClick={()=>{this.revokePermissions(data)}}/>
                         </Col>
                       </Col>
                     </Row>
