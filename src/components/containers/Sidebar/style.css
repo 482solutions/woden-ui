@@ -33,9 +33,10 @@
   margin-left: 25px;
 }
 
-.directoryTree {
+.folderWrapper {
+  display: flex;
 }
 
-.directoryTree:hover {
-  background: transparent;
+.folderImage {
+  max-height: 25px;
 }
