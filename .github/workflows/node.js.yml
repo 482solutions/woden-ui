@@ -33,7 +33,5 @@ jobs:
     - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
     - run: cd woden-server-js && docker-compose up --build -d
     - run: cd ..
-    - run: npm ci
-    - run: npm run startci
     - run: npm run cypress:run
     - run: npm run coverage
