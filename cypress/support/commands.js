@@ -206,6 +206,7 @@ Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
         },
       }).then((resp) => {
         expect(resp.status).to.eq(201)
+        Cypress.env('foldersInRoot', resp.body.folder.folders)
       })
     }
   }

@@ -14,6 +14,18 @@ Then(/^The user open Shared with me$/,  () => {
   })
 });
 
+Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
+  switch (visible) {
+    case 'is not visible':
+      visible = 'not.be.visible';
+      break;
+    case 'is visible':
+      visible = 'be.visible';
+      break;
+  }
+  cy.contains(btn).should(visible)
+});
+
 Then(/^User 2 became Owner of "([^"]*)" file$/, (file) => {
   cy.wait('@getRootFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')

@@ -33,10 +33,11 @@ Then(/^User has Editors rights to "([^"]*)" "([^"]*)"$/, (fileName, obj) => {
           expect(xhr.responseBody).to.not.have.property('stack')
           cy.get('.ant-message-custom-content').as('spin')
             .should('be.visible')
+          //TODO: delete reload
+          cy.reload()
           cy.contains('TestUpload.txt').should('be.visible')
         })
         break;
     }
   })
 });
-

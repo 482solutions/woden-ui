@@ -81,8 +81,8 @@ export class Home extends React.Component {
     });
   }
 
-  downloadFile(cid, hash) {
-    this.props.downloadFile(cid, hash);
+  downloadFile(name, cid, hash) {
+    this.props.downloadFile(name, cid, hash);
   }
 
   changePermissions(data) {

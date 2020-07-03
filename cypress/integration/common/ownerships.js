@@ -4,34 +4,36 @@ import {getHashFromFolder} from "../../support/commands";
 Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
   switch (userEmail) {
     case 'User1':
-      userEmail = Cypress.env('email');
+      cy.get(field).should('be.visible').type(Cypress.env('email'));
       break;
     case 'User2':
-      userEmail = Cypress.env('email_2');
+      cy.get(field).should('be.visible').type(Cypress.env('email_2'));
       break;
     case 'User3':
-      userEmail = Cypress.env('email_3');
+      cy.get(field).should('be.visible').type(Cypress.env('email_3'));
       break;
     case 'spaces':
-      userEmail = '      ';
+      cy.get(field).should('be.visible').type( '      ');
       break;
     case 'UsernameUser':
-      userEmail = Cypress.env('login');
+      cy.get(field).should('be.visible').type(Cypress.env('login'));
       break;
     case 'UsernameUser2':
-      userEmail = Cypress.env('login_2');
+      cy.get(field).should('be.visible').type(Cypress.env('login_2'));
       break;
     case 'UsernameUser3':
-      userEmail = Cypress.env('login_3');
+      cy.get(field).should('be.visible').type(Cypress.env('login_3'));
       break;
     case 'nothing':
-      userEmail = '';
+        cy.get(field).should('be.visible')
       break;
     case 'User2 and User3':
-      userEmail = `${Cypress.env('email_2')}, ${Cypress.env('email_3')}`;
+      cy.get(field).should('be.visible').type(`${Cypress.env('email_2')}, ${Cypress.env('email_3')}`);
+      break;
+    case 'invalidemail@gmail.com':
+      cy.get(field).should('be.visible').type('invalidemail@gmail.com')
       break;
   }
-  cy.get(field).should('be.visible').type(userEmail)
 });
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
@@ -99,9 +101,6 @@ Then(/^The folder "([^"]*)" is visible$/,  () => {
 Then(/^Folder "([^"]*)" is visible$/,  (folder) => {
   cy.contains(folder).should('be.visible')
 });
-Then(/^The user opens the shared folder "([^"]*)"$/, (folder) => {
+Then(/^The user opens folder "([^"]*)"$/, (folder) => {
   cy.contains(folder).dblclick()
-  cy.wait('@getRootFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-  })
 });
