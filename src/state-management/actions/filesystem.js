@@ -22,7 +22,6 @@ export const initialFilesystem = () => async(dispatch) => {
 
 export const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData.folder;
-  console.log("FolderData:",folderData);
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
     data = Object.assign(data, {
       folders: data.sharedFolders,
@@ -143,14 +142,14 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        console.log(response);
         message.success('File downloaded successfully');
-        // const { file } = response.body;
-        download(response.body, 'avatar.pdf', response.headers['content-type']);
+        const name = name;
+        const type = response.headers['content-type'];
+        const file = response.text;
+        download(file, name, type,);
         dispatch({
           type: DOWNLOAD_FILE,
         });
-        console.log(response);
       }
     },
   );

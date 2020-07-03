@@ -10,7 +10,7 @@ const initialState = {
     entryFolders: [],
     entryFiles: [],
     foldersInfo: [],
-    filesInfo:[],
+    filesInfo: [],
   },
   share: {
     folderName: null,

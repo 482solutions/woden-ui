@@ -14,14 +14,14 @@ When(/^The user press Download button on (\d+) version$/, (version) => {
     cy.wait(3000)
     cy.server()
     cy.route('GET', '/api/v1/file/*/*').as('getFile')
-    console.log(Cypress.env('versions'))
     cy.get(`#Download_${Cypress.env('versions')[version].cid}`).click()
 });
 
 Then(/^Version (\d+) should contain text "([^"]*)"$/, (version, text) => {
     cy.wait('@getFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        expect(text).to.eq(xhr.responseBody.file)
+        console.log(xhr.responseBody)
+        expect(text).to.eq(xhr.responseBody)
     })
 });
 

@@ -27,7 +27,7 @@ When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
 });
 
 When(/^The user presses the search button$/, () => {
-  cy.contains('Search').should('be.visible').click().wait(1000)
+  cy.get('.ant-input-suffix').should('be.visible').click().wait(1000)
 });
 
 Given(/^Upload file to folder with name testFolder$/, () => {

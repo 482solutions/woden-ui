@@ -1,8 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-Given(/^The user located on root dashboard$/, () => {
-    cy.userAuth()
-});
 
 When(/^The user double click the file "([^"]*)"$/, (filename) => {
     cy.wait(2000)
@@ -11,10 +8,11 @@ When(/^The user double click the file "([^"]*)"$/, (filename) => {
     cy.contains(filename).dblclick()
 });
 
-Then(/^The file is downloaded$/, () => {
+Then(/^The file "([^"]*)" is downloaded and contain text "([^"]*)"$/, (file, text) => {
     cy.wait('@getFile').then((xhr) => {
-        console.log(xhr.status)
-        console.log(xhr.responseBody)
-        expect('1234567890').to.eq(xhr.responseBody.file)
+        expect(200).to.equal(xhr.status)
+        expect('This file is ok!\n').to.equal(xhr.responseBody)
     })
 });
+
+

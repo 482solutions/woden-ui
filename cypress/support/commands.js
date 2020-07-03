@@ -116,6 +116,7 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
       Cypress.env('respStatus', result.status)
       Cypress.env('filesInRoot', result.folder.files)
       expect(Cypress.env('login')).to.equal(result.folder.folderName)
+      expect(Cypress.env('login')).to.equal(result.folder.ownerId)
     }
   })
 })
@@ -132,7 +133,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
     cy.writeFile(`cypress/fixtures/${fileName}`, textAfter).as('Write text to the file')
     cy.readFile(`cypress/fixtures/${fileName}`).then((str2) => {
 
-      expect(str2).to.equal(textAfter)
+      expect(str2).to.include(textAfter)
 
       let blob = new Blob([str2], {type: 'text/plain'})
 
@@ -205,6 +206,7 @@ Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
         },
       }).then((resp) => {
         expect(resp.status).to.eq(201)
+        Cypress.env('foldersInRoot', resp.body.folder.folders)
       })
     }
   }
