@@ -174,3 +174,18 @@ export const getVersions = (hash) => async(dispatch) => {
     },
   );
 };
+export const getFoldersTree = () => async(dispatch) => {
+  message.loading('Getting tree...', 0);
+  Bearer.apiKey = await getTokenForHeader();
+
+  api.tree(
+    (error, data, response) => {
+      message.destroy();
+      if(error){
+        message.error(response.body.message);
+      } else {
+
+      }
+    }
+  )
+}
