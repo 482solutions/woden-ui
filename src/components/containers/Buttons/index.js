@@ -54,7 +54,7 @@ class Buttons extends Component {
               </div>
           }
          </Col>
-        <Col span={2}>
+        <Col span={3}>
           {
             this.props.folderData.parentHash !== 'root'
             ? <span className="currentFolder">{this.props.folderData.folderName}</span>
@@ -65,27 +65,28 @@ class Buttons extends Component {
         </Col>
         {
           this.props.mode === 'drive' ?
-          <Col span={2} offset={14}>
+          <Col span={2} offset={13}>
             <NewFolder onFinish={this.props.newFolder}/>
-          </Col> :
-            <Col span={2} offset={14}>
+          </Col> : this.props.folderData.parentHash !== 'root' ?
+            <Col span={2} offset={13}>
               <NewFolder onFinish={this.props.newFolder}/>
-            </Col>
+            </Col> : null
         }
         {
           this.props.mode === 'drive' ? <Col offset={1} span={3}>
             <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
               <Button className="upload-button">
-                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
+                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
               </Button>
             </Upload>
-          </Col> : <Col offset={1} span={3}>
-            <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
-              <Button className="upload-button">
-                <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
-              </Button>
-            </Upload>
-          </Col>
+          </Col> : this.props.folderData.parentHash !== 'root' ?
+            <Col offset={1} span={3}>
+              <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
+                <Button className="upload-button">
+                  <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
+                </Button>
+              </Upload>
+            </Col> : null
         }
       </Row>
     );
