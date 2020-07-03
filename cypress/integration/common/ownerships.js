@@ -94,13 +94,13 @@ When(/^Enter User 2 username$/,  () => {
     .type(Cypress.env('login_2'))
 });
 
-Then(/^The folder "([^"]*)" is visible$/,  () => {
-  cy.contains('testFolder').should('be.visible')
-});
-
-Then(/^Folder "([^"]*)" is visible$/,  (folder) => {
+Then(/^The folder "([^"]*)" is visible$/,  (folder) => {
   cy.contains(folder).should('be.visible')
 });
+
 Then(/^The user opens folder "([^"]*)"$/, (folder) => {
-  cy.contains(folder).dblclick()
+  cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.contains(folder).dblclick()
+  })
 });

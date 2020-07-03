@@ -2,7 +2,7 @@ import {Then} from "cypress-cucumber-preprocessor/steps";
 import {getHashFromFile} from "../../support/commands";
 
 Then(/^User has Editors rights to "([^"]*)" "([^"]*)"$/, (fileName, obj) => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     switch (obj) {
       case 'file':

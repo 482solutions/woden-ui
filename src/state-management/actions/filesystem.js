@@ -21,7 +21,6 @@ export const initialFilesystem = () => async(dispatch) => {
 };
 const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData.folder;
-  console.log("FolderData:",folderData);
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
     data = Object.assign(data, {
       folders: data.sharedFolders,

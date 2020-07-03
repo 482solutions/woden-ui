@@ -28,13 +28,6 @@ Then(/^The sidebar "([^"]*)" is visible$/,  (element) => {
     cy.get(`#${element}`).should("be.visible")
 });
 
-When(/^Choose the needed "([^"]*)" for update to file with "([^"]*)" name$/, (uploadedFile, newFile) => {
-    const hashFile = getHashFromFile(uploadedFile, Cypress.env('filesInRoot'))
-    cy.server()
-    cy.route('PUT', '/api/v1/file').as('updateFile')
-    cy.get(`#Update_${hashFile} input[type=file]`).attachFile(newFile);
-});
-
 afterEach(() => {
     cy.writeFile(`cypress/fixtures/test.pem`, 'Good night!')
 })

@@ -13,7 +13,7 @@ Then(/^The file "([^"]*)" is uploaded$/, (file) => {
 });
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
-    cy.wait('@getRootFolder').then((xhr) => {
+    cy.wait('@getFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.uploadFile(fullFileName)
         cy.server()
@@ -54,12 +54,6 @@ Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
     })
 });
 
-Then(/^The user updating file "([^"]*)"$/, (fileName) => {
-    cy.wait('@uploadFile').then((xhr) => {
-        expect(xhr.responseBody).to.not.have.property('stack')
-        cy.updateTxtFile(fileName).as('UpdateTxtFile')
-    })
-});
 
 Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
     cy.server()

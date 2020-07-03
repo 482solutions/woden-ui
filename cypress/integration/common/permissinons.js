@@ -6,28 +6,20 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
 });
 
 Then(/^The user open Shared with me$/,  () => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.get('.shared').should('be.visible').click()
   })
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
-  switch (visible) {
-    case 'is not visible':
-      visible = 'not.be.visible';
-      break;
-    case 'is visible':
-      visible = 'be.visible';
-      break;
-  }
   cy.contains(btn).should(visible)
 });
 
 Then(/^User 2 became Owner of "([^"]*)" file$/, (file) => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     console.log(xhr.responseBody)
     expect(1).to.equal(xhr.responseBody.folder.files.length)
@@ -56,7 +48,7 @@ When(/^The user press the Share button in "([^"]*)" folder$/, (folder) => {
 });
 
 Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     expect(1).to.equal(xhr.responseBody.folder.folders.length)
     cy.contains(folder).should('be.visible')

@@ -1,8 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-Given(/^The user located on root dashboard$/, () => {
-    cy.userAuth()
-});
 
 When(/^The user double click the file "([^"]*)"$/, (filename) => {
     cy.wait(2000)

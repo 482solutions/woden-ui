@@ -1,7 +1,7 @@
 import {Given, Then} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^Create folder with name "([^"]*)" in root without UI$/, (folder) => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.createFolderInRoot(folder)
     cy.server()
@@ -19,13 +19,12 @@ Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
 });
 
 Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.contains(folder).dblclick()
 
-    cy.wait('@getRootFolder').then((xhr) => {
+    cy.wait('@getFolder').then((xhr) => {
       expect(xhr.responseBody).to.not.have.property('stack')
-      console.log('Im in testFolder')
       cy.server()
       cy.route('POST', '/api/v1/file').as('uploadFile')
       cy.contains('File Upload').click().wait(1000)
@@ -36,7 +35,7 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
         //TODO: delete cy.reload()
-        cy.reload()
+        // cy.reload()
         cy.contains('TestUpload.txt').should('be.visible')
       })
     })
