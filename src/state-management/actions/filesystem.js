@@ -135,11 +135,9 @@ export const downloadFile = (name, cid, hash) => async(dispatch) => {
     (error, data, response) => {
       message.destroy();
       if (error) {
-        console.log(response.header['x-content-type-options']);
-        console.log(response.headers['content-type']);
+
         message.error(response.body);
       } else {
-        console.log(response);
         message.success('File downloaded successfully');
         const name = name;
         const type = response.headers['content-type'];
@@ -148,7 +146,6 @@ export const downloadFile = (name, cid, hash) => async(dispatch) => {
         dispatch({
           type: DOWNLOAD_FILE,
         });
-        console.log(response);
       }
     },
   );

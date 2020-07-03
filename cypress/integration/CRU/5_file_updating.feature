@@ -10,11 +10,10 @@ Feature:  File updating
     When Login as new user without UI
     Then The user upload "test.pem" without UI
 
-#  @positive
+  @positive
   Scenario: 1 File updating
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
-#      Given The user has access to the file with owner or editor rights
     When The user press the Actions button in "test.pem" file
     And The user press the Update button in "test.pem" file
     And Choose the needed "test.pem" file from its PC directory for update
@@ -29,7 +28,6 @@ Feature:  File updating
   Scenario: 2 File updating with other name
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
-#   Given The user has access to the file with owner or editor rights
     When The user press the Actions button in "test.pem" file
     And The user press the Update button in "test.pem" file
     And Choose the needed "test.pem" for update to file with "txtFile.pem" name
@@ -40,12 +38,11 @@ Feature:  File updating
     And The sidebar "VersionWrapper" is visible
     And The last version remains in the system
 
-#  TODO:
+##  TODO:
 #  @negative
 #  Scenario: Scenario: 3 User can not update txt file to image
 #    Given Spin is visible "Getting data..."
 #    And Update file "test.pem"
-##   Given The user has access to the file with owner or editor rights
 #    When The user press the Actions button in "test.pem" file
 #    And The user press the Update button in "test.pem" file
 #    And Choose the needed "test.pem" for update to file with "image.png" name

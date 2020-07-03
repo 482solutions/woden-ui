@@ -16,42 +16,6 @@ Given("Register without UI", () => {
   cy.registerUser();
 });
 
-When(/^Login as new user without UI$/, () => {
-  cy.wait(2000)
-  cy.readFile('cypress/fixtures/cert.pem').then((certificate) => {
-    cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
-      cy.request({
-        method: 'POST',
-        url: `http://localhost:1823/api/v1/user/auth`,
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: {
-          'login': Cypress.env('login'),
-          'password': Cypress.env('password'),
-          'certificate': certificate,
-          'privateKey': key,
-        },
-      }).then((resp) => {
-        expect(resp.body).to.not.have.property('stack')
-        if (expect(200).to.eq(resp.status)) {
-          Cypress.env('token', resp.body.token)
-          Cypress.env('respStatus', resp.status)
-          Cypress.env('rootFolder', resp.body.folder)
-        }
-      })
-    }).as('Login')
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-      .visit('/', {
-        onBeforeLoad(win) {
-          win.localStorage.setItem('token', Cypress.env('token'))
-          win.localStorage.setItem('rootFolder', Cypress.env('rootFolder'))
-        },
-      }).as('Set user token')
-  })
-});
-
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -115,7 +79,14 @@ When(/^The field name (.*) is filled by user from list of folder name$/, (folder
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-  cy.contains(folderName).should('be.visible').wait(1000)
+  //TODO delete cy.reload()
+  cy.server()
+  cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+  cy.reload()
+    cy.wait('@getRootFolder').then((xhr) => {
+      cy.contains(folderName).should('be.visible')
+    })
+
 });
 
 When(/^Press Create folder$/, () => {
@@ -136,4 +107,8 @@ Then(/^The file is uploaded$/, (file) => {
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
+});
+
+Given(/^Back to My Drive from folder$/,  () => {
+  cy.get('.goBack').click().wait(3000)
 });
