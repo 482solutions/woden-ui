@@ -67,7 +67,10 @@ class Buttons extends Component {
           this.props.mode === 'drive' ?
           <Col span={2} offset={13}>
             <NewFolder onFinish={this.props.newFolder}/>
-          </Col> : null
+          </Col> : this.props.folderData.parentHash !== 'root' ?
+            <Col span={2} offset={13}>
+              <NewFolder onFinish={this.props.newFolder}/>
+            </Col> : null
         }
         {
           this.props.mode === 'drive' ? <Col offset={1} span={3}>
@@ -76,7 +79,14 @@ class Buttons extends Component {
                 <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
               </Button>
             </Upload>
-          </Col> : null
+          </Col> : this.props.folderData.parentHash !== 'root' ?
+            <Col offset={1} span={3}>
+              <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
+                <Button className="upload-button">
+                  <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>Upload File
+                </Button>
+              </Upload>
+            </Col> : null
         }
       </Row>
     );
