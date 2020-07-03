@@ -187,14 +187,17 @@ export const getFoldersTree = () => async(dispatch) => {
     (error, data, response) => {
       message.destroy();
       if(error){
+        console.log('fail');
         message.error(response.body.message);
       } else {
-        const title = response.body.folder.folderName;
-        const key = response.body.folder.folderHash;
-        const children = response.body.folder.folders;
-        console.log(title, key, children);
+        console.log('success', response);
+        const oldData = JSON.stringify(response.body.response);
+        const tree = [];
+        tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(/folders/g, 'children'));
+        console.log("TREE:",tree)
         dispatch({
           type: GET_FOLDERS_TREE,
+          payload: tree
         });
       }
     }

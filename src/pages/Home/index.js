@@ -163,10 +163,8 @@ export class Home extends React.Component {
     }
   }
 
-  getFoldersTree(title, key, children) {
-    console.log(title, key, children);
-    this.setState({ foldersTreeData: title, key, children });
-    console.log(title, key, children);
+  getFoldersTree() {
+    this.props.getFoldersTree()
   }
 
   render() {
@@ -181,7 +179,8 @@ export class Home extends React.Component {
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
           <Sidebar changeMode={this.changeMode}
-                   getFoldersTree={this.getFoldersTree}/>
+                   getFoldersTree={this.getFoldersTree}
+          tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}
@@ -329,6 +328,7 @@ export default connect(({ auth, filesystem }) => ({
     versions: filesystem.versions,
     drive: filesystem.drive,
     share: filesystem.share,
+  tree: filesystem.tree,
   }),
   {
     changePasswordRequest: actions.changePasswordRequest,

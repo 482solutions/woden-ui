@@ -29,5 +29,13 @@
 }
 
 .shared {
-  margin-top: 25px;
+  margin-top: 20px;
+  margin-left: 25px;
+}
+
+.directoryTree {
+}
+
+.directoryTree:hover {
+  background: transparent;
 }
