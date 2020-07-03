@@ -7,7 +7,7 @@ import Share from '../../../assets/images/Share.svg';
 import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
-import fileImage from '../../../assets/images/fileImages/fileImage.svg';
+import fileImageDefault from '../../../assets/images/fileImages/fileImageDefault.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
 import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
@@ -84,9 +84,11 @@ export default class Drive extends Component {
       case 'application/ai':
         return fileImageAI;
       case 'image/png' :
-        return fileImagePNG;
+        return fileImagePNG
+      case 'text/plain' :
+        return fileImageDefault;
       default:
-        return fileImage;
+        return fileImageDefault;
     }
   }
 
@@ -127,12 +129,12 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(filesInfo[i])}
-                   onDoubleClick={() => this.props.downloadFile('null', file.hash)}
+                   onDoubleClick={() => this.props.downloadFile(file.name, 'null', file.hash)}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
                     <span className="fileTitle"
-                          onDoubleClick={() => this.props.downloadFile('null',
+                          onDoubleClick={() => this.props.downloadFile(file.name, 'null',
                             file.hash)}>{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name, file.permissions)}

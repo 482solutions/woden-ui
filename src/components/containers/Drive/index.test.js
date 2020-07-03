@@ -91,6 +91,7 @@ it('Simulate double click on Files for download', () => {
   const wrapper = shallow(<Drive folderData={{entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash, filesInfo: fakeFilesInfo}}
                                 downloadFile={() => {}}
                                 versions={versions}/>);
+
   expect(wrapper.find('.file').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.file').at(1).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.fileTitle').at(0).simulate('doubleclick')).to.be.ok;
@@ -107,8 +108,8 @@ it('Simulate double click on Folders for open', () => {
 
 it('Check all Dropdown and simulate click', () => {
   const wrapper = shallow(<Drive folderData={{entryFolders: fakeFolders, entryFiles: fakeFiles, parentHash: fakeParentHash, filesInfo: fakeFilesInfo}}
-                                createFolder={() => {}} getFolderData={() => {}}
-                                versions={versions}/>);
+                                 createFolder={() => {}} getFolderData={() => {}}
+                                 versions={versions}/>);
   expect(wrapper.find(Dropdown).at(0).simulate('click')).to.be.ok;
   expect(wrapper.find(Dropdown).at(1).simulate('click')).to.be.ok;
 });
