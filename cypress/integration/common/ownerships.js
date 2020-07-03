@@ -98,6 +98,11 @@ Then(/^The folder "([^"]*)" is visible$/,  (folder) => {
   cy.contains(folder).should('be.visible')
 });
 
+Then(/^The folder "([^"]*)" is not visible$/,  (folder) => {
+  cy.contains(folder).should('not.be.visible')
+});
+
+
 Then(/^The user opens folder "([^"]*)"$/, (folder) => {
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
