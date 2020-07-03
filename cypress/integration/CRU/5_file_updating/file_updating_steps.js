@@ -4,15 +4,16 @@ import {getHashFromFile} from "../../../support/commands";
 Given(/^Update file "([^"]*)"$/, (fileName) => {
     const textBefore = 'Good night!'
     const textAfter = 'Good morning!'
+    cy.wait('@getFolder').then((xhr) => {
+        cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
+            expect(str1).to.equal(textBefore)
 
-    cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
-        expect(str1).to.equal(textBefore)
-
-        cy.writeFile(`cypress/fixtures/${fileName}`, textAfter).as('Write text to the file')
-        cy.readFile(`cypress/fixtures/${fileName}`).then((str2) => {
-            expect(str2).to.equal(textAfter)
-        })
-    });
+            cy.writeFile(`cypress/fixtures/${fileName}`, textAfter).as('Write text to the file')
+            cy.readFile(`cypress/fixtures/${fileName}`).then((str2) => {
+                expect(str2).to.equal(textAfter)
+            })
+        });
+    })
 });
 
 Then(/^The last version remains in the system$/, () => {
