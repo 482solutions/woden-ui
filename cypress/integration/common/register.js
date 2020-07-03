@@ -71,8 +71,8 @@ Given(/^Register without UI user3$/, () => {
     }).then((resp) => {
       if (expect(201).to.eq(resp.status)) {
         Cypress.env('respStatus', resp.status)
-        cy.writeFile('cypress/fixtures/cert_3.pem.pem', resp.body.cert).then(() => {
-          cy.readFile('cypress/fixtures/cert_3.pem.pem').then((text) => {
+        cy.writeFile('cypress/fixtures/cert_3.pem', resp.body.cert).then(() => {
+          cy.readFile('cypress/fixtures/cert_3.pem').then((text) => {
             expect(text).to.include('-----BEGIN CERTIFICATE-----')
             expect(text).to.include('-----END CERTIFICATE-----')
           })

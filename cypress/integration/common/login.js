@@ -26,7 +26,7 @@ When(/^Login as new user without UI$/, (user) => {
       })
     }).as('Login')
     cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
       .visit('/', {
         onBeforeLoad(win) {
           win.localStorage.setItem('token', Cypress.env('token'))
@@ -62,7 +62,7 @@ Then(/^Login as new user 2 without UI$/, () => {
     }).as('Login as user 2')
 
     cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
       .visit('/', {
         onBeforeLoad(win) {
           win.localStorage.setItem('token', Cypress.env('token_2'))
@@ -96,7 +96,7 @@ When(/^Login as new user 3 without UI$/, () => {
     }).as('Login as user 3')
 
     cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+    cy.route('GET', '/api/v1/folder/*').as('getFolder')
       .visit('/', {
         onBeforeLoad(win) {
           win.localStorage.setItem('token', Cypress.env('token_3'))

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './style.css';
 import { Dropdown, Menu, Upload } from 'antd';
-import FolderImage from '../../../assets/images/folder.svg';
+import folderImage from '../../../assets/images/folderImage.svg';
 import More from '../../../assets/images/more-vertical.svg';
 import Share from '../../../assets/images/Share.svg';
 import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
-import fileImage from '../../../assets/images/fileImages/fileImage.svg';
+import fileImageDefault from '../../../assets/images/fileImages/fileImageDefault.svg';
 import fileImageAI from '../../../assets/images/fileImages/fileImageAI.svg';
 import fileImageAU from '../../../assets/images/fileImages/fileImageAU.svg';
 import fileImagePNG from '../../../assets/images/fileImages/fileImagePNG.svg';
@@ -84,9 +84,11 @@ export default class Drive extends Component {
       case 'application/ai':
         return fileImageAI;
       case 'image/png' :
-        return fileImagePNG;
+        return fileImagePNG
+      case 'text/plain' :
+        return fileImageDefault;
       default:
-        return fileImage;
+        return fileImageDefault;
     }
   }
 
@@ -100,7 +102,7 @@ export default class Drive extends Component {
                  key={i}>
               <img width={80}
                    onDoubleClick={() => this.props.openFolder(folder.hash)}
-                   src={FolderImage}
+                   src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>
               <div className="itemData">

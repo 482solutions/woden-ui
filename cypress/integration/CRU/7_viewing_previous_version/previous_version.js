@@ -14,7 +14,6 @@ When(/^The user press Download button on (\d+) version$/, (version) => {
     cy.wait(3000)
     cy.server()
     cy.route('GET', '/api/v1/file/*/*').as('getFile')
-    console.log(Cypress.env('versions'))
     cy.get(`#Download_${Cypress.env('versions')[version].cid}`).click()
 });
 

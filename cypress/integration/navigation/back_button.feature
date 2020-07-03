@@ -9,7 +9,7 @@ Feature: Back button
     Scenario: 0 Create a user before starting the tests
       Given Spin is visible "Getting data..."
       And Create folder with name "Folder_level_1" in root without UI
-      And Create folder with name "Folder_level_2" in Folder_level_1
+      And Create folder with name "Folder_level_2" in "Folder_level_1"
 
     Scenario: 1 Back button from the 1 lvl folder
       Given The user opened folder "Folder_level_1" from the root folder

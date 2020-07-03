@@ -37,6 +37,11 @@ export class Home extends React.Component {
         hash: null,
         userPermissions: null,
       },
+      foldersTreeData: {
+        title: 'null',
+        key: 'null',
+        children: null,
+      },
       mode: 'drive',
     };
     this.createFolder = this.createFolder.bind(this);
@@ -53,6 +58,7 @@ export class Home extends React.Component {
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
     this.closeAccessList = this.closeAccessList.bind(this);
+    this.getFoldersTree = this.getFoldersTree.bind(this);
   }
 
   async componentDidMount() {
@@ -83,7 +89,6 @@ export class Home extends React.Component {
   }
 
   downloadFile(name, cid, hash) {
-    console.log(name);
     this.props.downloadFile(name, cid, hash);
   }
 
@@ -158,6 +163,10 @@ export class Home extends React.Component {
     }
   }
 
+  getFoldersTree() {
+    this.props.getFoldersTree()
+  }
+
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
@@ -169,7 +178,9 @@ export class Home extends React.Component {
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
-          <Sidebar changeMode={this.changeMode}/>
+          <Sidebar changeMode={this.changeMode}
+                   getFoldersTree={this.getFoldersTree}
+          tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}
@@ -317,6 +328,7 @@ export default connect(({ auth, filesystem }) => ({
     versions: filesystem.versions,
     drive: filesystem.drive,
     share: filesystem.share,
+  tree: filesystem.tree,
   }),
   {
     changePasswordRequest: actions.changePasswordRequest,
@@ -329,6 +341,7 @@ export default connect(({ auth, filesystem }) => ({
     getVersions: actions.getVersions,
     changePermissions: actions.changePermissions,
     revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
   })(
   Home,
 );

@@ -60,7 +60,7 @@ Then(/^Error message Password can not be empty$/, () => {
 });
 
 Given(/^The user is located in his root folder$/, () => {
-  cy.wait('@getRootFolder').then((xhr) => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.inRootFolder()
   })
@@ -81,9 +81,9 @@ When(/^The field name (.*) is filled by user from list of folder name$/, (folder
 Then(/^The folder is created with name (.*)$/, (folderName) => {
   //TODO delete cy.reload()
   cy.server()
-  cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
+  cy.route('GET', '/api/v1/folder/*').as('getFolder')
   cy.reload()
-    cy.wait('@getRootFolder').then((xhr) => {
+    cy.wait('@getFolder').then((xhr) => {
       cy.contains(folderName).should('be.visible')
     })
 
@@ -111,4 +111,8 @@ When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
 
 Given(/^Back to My Drive from folder$/,  () => {
   cy.get('.goBack').click().wait(3000)
+});
+
+Given(/^The user located on root dashboard$/, () => {
+  cy.userAuth()
 });
