@@ -1,5 +1,5 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFolder} from "../../support/commands";
+import {getHashFromFile, getHashFromFolder} from "../../support/commands";
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
@@ -56,3 +56,59 @@ Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
 });
 
 
+When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" "([^"]*)" to "([^"]*)"$/,
+  (fromUser, permission, object, name, toUser) => {
+    const headers = {
+      'content-type': 'application/json'
+    }
+
+    switch (fromUser) {
+      case 'User1':
+        headers.Authorization = `Bearer ${Cypress.env('token')}`;
+        break;
+      case 'User2':
+        headers.Authorization = `Bearer ${Cypress.env('token_2')}`;
+        break;
+      case 'User3':
+        headers.Authorization = `Bearer ${Cypress.env('token_3')}`;
+        break;
+    } switch (toUser) {
+      case 'User1':
+        toUser = Cypress.env('email');
+        break;
+      case 'User2':
+        toUser = Cypress.env('email_2');
+        break;
+      case 'User3':
+        toUser = Cypress.env('email_3');
+        break;
+    } switch (permission) {
+      case 'edit':
+        permission = 'write';
+        break;
+      case 'view':
+        permission = 'read';
+        break;
+    } switch (object) {
+      case 'file':
+        object = getHashFromFile(name, Cypress.env('filesInRoot'));
+        break;
+      case 'folder':
+        object = getHashFromFolder(name, Cypress.env('foldersInRoot'));
+        break;
+    }
+    cy.request({
+      method: 'PUT',
+      url: `${Cypress.env('backendURL')}/permissions`,
+      headers: headers,
+      body: {
+        'email': toUser,
+        'hash': object,
+        'permission': permission
+      },
+      failOnStatusCode: false
+    }).then((resp) => {
+      Cypress.env('respStatus', resp.status)
+      Cypress.env('respBody', resp.body)
+    })
+  });

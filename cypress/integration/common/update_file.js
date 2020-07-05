@@ -1,4 +1,4 @@
-import {Then, When} from "cypress-cucumber-preprocessor/steps";
+import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 import {getHashFromFile} from "../../support/commands";
 
 Then(/^The user updating file "([^"]*)"$/, (fileName) => {
