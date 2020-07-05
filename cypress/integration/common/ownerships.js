@@ -109,3 +109,13 @@ Then(/^The user opens folder "([^"]*)"$/, (folder) => {
     cy.contains(folder).dblclick()
   })
 });
+Then(/^User has View rights to "([^"]*)" file that contain "([^"]*)"$/, (file, text) => {
+  cy.server()
+  cy.route('GET', '/api/v1/file/*/*').as('getFile')
+  cy.contains(file).dblclick()
+  cy.get('.ant-message-notice-content').should('be.visible')
+  cy.wait('@getFile').then((xhr) => {
+    expect(200).to.equal(xhr.status)
+    expect(text).to.equal(xhr.responseBody)
+  })
+});
