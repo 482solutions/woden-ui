@@ -55,6 +55,18 @@ Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
   })
 });
 
+When(/^The user press the Access list button in "([^"]*)" folder$/, (folder) => {
+  cy.wait(1000)
+  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
+  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
+});
+
+When(/^The user press the Access list button in "([^"]*)" file$/, (file) => {
+  cy.wait(1000)
+  const hashFolder = getHashFromFile(file, Cypress.env('filesInRoot'))
+  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
+});
+
 
 When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" "([^"]*)" to "([^"]*)"$/,
   (fromUser, permission, object, name, toUser) => {
