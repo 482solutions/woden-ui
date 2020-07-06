@@ -55,8 +55,8 @@ Given(/^Press "([^"]*)"$/, (button) => {
 Then(/^Message about transfer ownership "([^"]*)"$/, (text) => {
   cy.wait('@permissions').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    console.log(xhr)
     cy.get('.ant-message-notice-content').should('contain.text', text)
+    cy.reload()
   })
 });
 
