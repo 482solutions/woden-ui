@@ -3,7 +3,7 @@
 
 name: Node.js CI
 
-on: push
+on: [push]
 #  push:
 #    branches: [ master ]
 #  pull_request:
@@ -33,16 +33,26 @@ jobs:
       - run: sleep 60
       - run: cd ..
       - run: npm run startci & sleep 10
-      #    - run: npm run cypress:run
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
+#      - run: npm run cypress:run
       - name: Cypress run
-      - uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
         with:
           record: true
           parallel: true
           browser: chrome
-      env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          env:
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - run: npm run coverage
+
+#  cypress-run:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Cypress run
+#      - uses: cypress-io/github-action@v2
+#        with:
+#          record: true
+#          parallel: true
+#          browser: chrome
+#      env:
+#        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
