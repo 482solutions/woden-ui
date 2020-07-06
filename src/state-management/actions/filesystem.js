@@ -60,7 +60,6 @@ export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 203) {
-        console.log(data);
         localStorage.removeItem('token');
         localStorage.removeItem('rootFolder');
         dispatch({

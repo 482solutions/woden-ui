@@ -13,8 +13,6 @@ export const PermissionsModal = ({
     const data = Object.assign(values, {hash: info.hash});
     changePermissions(data);
     close();
-    console.log('values: ',values);
-    console.log('data: ', data);
   };
   return (
     <Modal
