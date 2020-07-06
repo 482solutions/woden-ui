@@ -3,12 +3,11 @@
 
 name: Node.js CI
 
-on: [push]
+on: push
 #  push:
 #    branches: [ master ]
 #  pull_request:
 #    branches: [ master ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,12 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cypress run
-        - uses: actions/checkout@v1
-        - uses: cypress-io/github-action@v2
-          with:
-            record: true
-            parallel: true
-            browser: chrome
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      - uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          browser: chrome
+      env:
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - run: npm run coverage
