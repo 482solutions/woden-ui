@@ -15,6 +15,7 @@ import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
+import fileImageTXT from '../../../assets/images/fileImages/fileImageTXT.svg';
 
 export default class Drive extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ export default class Drive extends Component {
         <Menu.Item key={`3${hash}`} onClick={async() => {
           await this.props.viewAccessList(hash, 'file');
         }}>
-          <span><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -86,7 +87,7 @@ export default class Drive extends Component {
       case 'image/png' :
         return fileImagePNG
       case 'text/plain' :
-        return fileImageDefault;
+        return fileImageTXT;
       default:
         return fileImageDefault;
     }
