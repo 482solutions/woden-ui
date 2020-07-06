@@ -13,6 +13,8 @@ export const PermissionsModal = ({
     const data = Object.assign(values, {hash: info.hash});
     changePermissions(data);
     close();
+    console.log('values: ',values);
+    console.log('data: ', data);
   };
   return (
     <Modal
@@ -60,14 +62,16 @@ export const PermissionsModal = ({
                      required: true,
                      message: 'Please select permission!',
                    }]}>
-          <Select
-            placeholder="Access Type"
-            style={{width: 300, marginTop: 20}}
-          >
-            {true && <Option value="owner">Transfer ownership</Option>}
-            {true && <Option value="read">View Only</Option>}
-            {true && <Option value="write">View and Update</Option>}
-          </Select>
+          {
+            <Select
+              placeholder="Access Type"
+              style={{width: 300, marginTop: 20}}
+            >
+              {true && <Option value="owner">Transfer ownership</Option>}
+              {true && <Option value="read">View Only</Option>}
+              {true && <Option value="write">View and Update</Option>}
+            </Select>
+          }
         </Form.Item>
       </Form>
     </Modal>

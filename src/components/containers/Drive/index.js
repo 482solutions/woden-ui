@@ -22,31 +22,41 @@ export default class Drive extends Component {
     super(props);
   }
 
-  fileMenu(hash, name, permission) {
+
+
+  fileMenu(hash, name, permission, ) {
+    console.log(permission);
     return (
       <Menu>
-        <Menu.Item key={`0${hash}`} onClick={async() => {
+        <Menu.Item key={`0${hash}`} onClick={async () => {
           await this.props.getVersions(hash, name);
         }}>
-          <span id={`Versions_${hash}`}><img className="dropdownIcon" src={fileVersionsIcon} alt=""/>Versions</span>
+          <span id={`Versions_${hash}`}><img className="dropdownIcon" src={fileVersionsIcon}
+                                             alt=""/>Versions</span>
         </Menu.Item>
-        <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
-          <Upload name="file" beforeUpload={(file) => {
-            this.props.updateFile(file, hash);
-            return false;
-          }} showUploadList={false}>
-            <img className="dropdownIcon" src={updateFileIcon} alt=""/>Update File
-          </Upload>
-        </Menu.Item>
-        <Menu.Item key={`2${hash}`} onClick={() => {
-          this.props.shareModal(hash, name, permission);
-        }}>
-          <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
-        </Menu.Item>
-        <Menu.Item key={`3${hash}`} onClick={async() => {
+        {
+          <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
+            <Upload name="file" beforeUpload={(file) => {
+              this.props.updateFile(file, hash);
+              return false;
+            }} showUploadList={false}>
+              <img className="dropdownIcon" src={updateFileIcon} alt=""/>Update File
+            </Upload>
+          </Menu.Item>
+        }
+        {
+          <Menu.Item key={`2${hash}`} onClick={() => {
+            this.props.shareModal(hash, name, permission);
+          }}>
+            <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share}
+                                            alt=""/>Share</span>
+          </Menu.Item>
+        }
+        <Menu.Item key={`3${hash}`} onClick={async () => {
           await this.props.viewAccessList(hash, 'file');
         }}>
-          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon}
+                                                alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -60,7 +70,7 @@ export default class Drive extends Component {
         }}>
           <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share} alt=""/>Share</span>
         </Menu.Item>
-        <Menu.Item key={`1${hash}`} onClick={async() => {
+        <Menu.Item key={`1${hash}`} onClick={async () => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
           <span><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
@@ -70,8 +80,9 @@ export default class Drive extends Component {
   }
 
   fileType
+
   detectImage(file) {
-    switch(file.fileType) {
+    switch (file.fileType) {
       case 'application/pdf':
         return fileImagePDF;
       case 'image/jpeg':

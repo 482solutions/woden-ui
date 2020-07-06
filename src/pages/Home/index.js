@@ -269,8 +269,8 @@ export class Home extends React.Component {
               {
                 permissionData.writeUsers.map((user, i) => {
                   return (
-                    <Row key={user} className='sharedUser viewer'>
-                      <Col className="sharedUserName">
+                    <Row key={user} className='sharedUser editor'>
+                      <Col className="sharedUserName editor">
                         {permissionData.writeUsers[i]}
                       </Col>
                       <Col className="permissionIcons">
@@ -296,8 +296,8 @@ export class Home extends React.Component {
                 permissionData.readUsers.map((user, i) => {
                   return (
                     !permissionData.writeUsers.includes(user) &&
-                    <Row key={user} className='sharedUser editor'>
-                      <Col className="sharedUserName">
+                    <Row key={user} className='sharedUser viewer'>
+                      <Col className="sharedUserName viewer">
                         {permissionData.readUsers[i]}
                       </Col>
                       <Col className="permissionIcons">
@@ -305,7 +305,7 @@ export class Home extends React.Component {
                           <img src={viewerIcon} title="View only" alt=""/>
                         </Col>
                         {
-                          !permissionData.readUsers.includes(user) &&
+                          permissionData.writeUsers.includes(user) &&
                           <Col className="revokeAccess">
                             <img src={revokeAccessIcon} alt="Revoke access"
                                  onClick={() => {
