@@ -12,6 +12,7 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
+import { revokePermissions } from '../../state-management/actions';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -36,6 +37,11 @@ export class Home extends React.Component {
         hash: null,
         userPermissions: null,
       },
+      foldersTreeData: {
+        title: 'null',
+        key: 'null',
+        children: null,
+      },
       mode: 'drive',
     };
     this.createFolder = this.createFolder.bind(this);
@@ -52,6 +58,7 @@ export class Home extends React.Component {
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
     this.closeAccessList = this.closeAccessList.bind(this);
+    this.getFoldersTree = this.getFoldersTree.bind(this);
   }
 
   async componentDidMount() {
@@ -109,7 +116,6 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log("INFO:", info);
     this.setState({
       permissionData: {
         title: info[type + 'Name'], hash: info[type + 'Hash'],
@@ -157,6 +163,10 @@ export class Home extends React.Component {
     }
   }
 
+  getFoldersTree() {
+    this.props.getFoldersTree()
+  }
+
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
@@ -168,7 +178,9 @@ export class Home extends React.Component {
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
-          <Sidebar changeMode={this.changeMode}/>
+          <Sidebar changeMode={this.changeMode}
+                   getFoldersTree={this.getFoldersTree}
+          tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}
@@ -254,7 +266,8 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.writeUsers.map((user, i) => {
+                permissionData.writeUsers.map((data, user, i) => {
+
                   return (
                     <Row key={user} className='sharedUser editor'>
                       <Col className="sharedUserName">
@@ -266,7 +279,11 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={this.revokePermissions(this.state.hash, 'write', user)}/>
+                               onClick={()=>{this.revokePermissions({
+                                 user: permissionData.writeUsers[i],
+                                 hash: permissionData.hash,
+                                 permission: 'unwrite'
+                               })}}/>
                         </Col>
                       </Col>
                     </Row>
@@ -275,7 +292,6 @@ export class Home extends React.Component {
               }
               {
                 permissionData.readUsers.map((user, i) => {
-                  console.log('проеряем user ', user);
                   return (
                     !permissionData.writeUsers.includes(user) &&
                     <Row key={user} className='sharedUser editor'>
@@ -288,9 +304,11 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={() => {
-                                 this.revokePermissions(this.state.hash, 'read', user)
-                               }}/>
+                               onClick={()=>{this.revokePermissions({
+                                 user: permissionData.readUsers[i],
+                                 hash: permissionData.hash,
+                                 permission: 'unread'
+                               })}}/>
                         </Col>
                       </Col>
                     </Row>
@@ -305,11 +323,12 @@ export class Home extends React.Component {
   }
 }
 
-export default connect(({ auth, filesystem, permissions }) => ({
+export default connect(({ auth, filesystem }) => ({
     userName: auth.user.name,
     versions: filesystem.versions,
     drive: filesystem.drive,
     share: filesystem.share,
+  tree: filesystem.tree,
   }),
   {
     changePasswordRequest: actions.changePasswordRequest,
@@ -322,6 +341,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
     getVersions: actions.getVersions,
     changePermissions: actions.changePermissions,
     revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
   })(
   Home,
 );

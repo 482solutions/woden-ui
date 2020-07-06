@@ -1,0 +1,8 @@
+.folderTree {
+  padding-bottom: 10px;
+}
+
+.folderImage, .folderImageSelected {
+  max-height: 20px;
+  margin-bottom: 5px;
+}

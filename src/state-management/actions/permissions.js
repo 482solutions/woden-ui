@@ -2,6 +2,7 @@ import Woden from 'woden';
 import { message } from 'antd';
 import { CHANGE_PERMISSION, REVOKE_PERMISSIONS } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
+import {getFolderData} from './filesystem';
 
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -22,6 +23,7 @@ export const changePermissions = (permissionData) => async (dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Permissions updated successfully');
+        
         dispatch({
           type: CHANGE_PERMISSION,
         });
@@ -34,10 +36,9 @@ export const revokePermissions = (permissionData) => async (dispatch) => {
   message.loading('Revoking access...', 0);
 
   const body = new Woden.RevokePermissions();
-  console.log("Data:", permissionData);
-  body.email = 'permissionData.username';
-  body.hash = 'permissionData.hash';
-  body.permission = 'permissionData.permissions';
+  body.email = permissionData.user;
+  body.hash = permissionData.hash;
+  body.permission = permissionData.permission;
   api.revokePermissions(body,
     (error, data, response) => {
       message.destroy();

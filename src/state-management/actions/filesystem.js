@@ -3,7 +3,7 @@ import download from 'downloadjs';
 import { message } from 'antd';
 import {
   CLEAN_STORAGE,
-  DOWNLOAD_FILE,
+  DOWNLOAD_FILE, GET_FOLDERS_TREE,
   GET_VERSIONS,
   LOGOUT,
   SEARCH_FOLDER_FILE,
@@ -19,7 +19,8 @@ export const initialFilesystem = () => async(dispatch) => {
     type: CLEAN_STORAGE,
   });
 };
-const updateFolderData = (folderData, mode) => (dispatch) => {
+
+export const updateFolderData = (folderData, mode) => (dispatch) => {
   let data = folderData.folder;
   if ('sharedFolders' in data && 'sharedFiles' in data && mode === 'share') {
     data = Object.assign(data, {
@@ -48,6 +49,7 @@ export const search = (value) => async(dispatch) => {
     }
   });
 };
+
 export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
   message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
@@ -73,6 +75,7 @@ export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
     },
   );
 };
+
 export const createFolder = (folder) => async(dispatch) => {
   message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
@@ -92,6 +95,7 @@ export const createFolder = (folder) => async(dispatch) => {
     },
   );
 };
+
 export const uploadFile = (file) => async(dispatch) => {
   message.loading('Uploading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
@@ -110,6 +114,7 @@ export const uploadFile = (file) => async(dispatch) => {
     },
   );
 };
+
 export const updateFile = (file) => async() => {
   message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
@@ -126,7 +131,8 @@ export const updateFile = (file) => async() => {
     },
   );
 };
-export const downloadFile = (name, cid, hash) => async(dispatch) => {
+
+export const downloadFile = (cid, hash) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
@@ -134,8 +140,7 @@ export const downloadFile = (name, cid, hash) => async(dispatch) => {
     (error, data, response) => {
       message.destroy();
       if (error) {
-
-        message.error(response.body);
+        message.error(response.body.message);
       } else {
         message.success('File downloaded successfully');
         const name = name;
@@ -149,6 +154,7 @@ export const downloadFile = (name, cid, hash) => async(dispatch) => {
     },
   );
 };
+
 export const getVersions = (hash) => async(dispatch) => {
   message.loading('Getting file versions...', 0);
   Bearer.apiKey = await getTokenForHeader();
@@ -172,3 +178,27 @@ export const getVersions = (hash) => async(dispatch) => {
     },
   );
 };
+
+export const getFoldersTree = () => async(dispatch) => {
+  message.loading('Getting folders tree...', 0);
+  Bearer.apiKey = await getTokenForHeader();
+  api.tree(
+    (error, data, response) => {
+      message.destroy();
+      if(error){
+        console.log('fail');
+        message.error(response.body.message);
+      } else {
+        console.log('success', response);
+        const oldData = JSON.stringify(response.body.response);
+        const tree = [];
+        tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(/folders/g, 'children'));
+        console.log("TREE:",tree)
+        dispatch({
+          type: GET_FOLDERS_TREE,
+          payload: tree
+        });
+      }
+    }
+  )
+}
