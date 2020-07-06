@@ -97,7 +97,7 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 3 User can not grand access for a file to the user with incorrect email
-      And The user upload "TestUpload.txt" without UI
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
