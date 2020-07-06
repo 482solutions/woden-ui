@@ -294,7 +294,7 @@ export class Home extends React.Component {
                 permissionData.readUsers.map((user, i) => {
                   return (
                     !permissionData.writeUsers.includes(user) &&
-                    <Row key={user} className='sharedUser editor'>
+                    <Row key={user} className='sharedUser viewer'>
                       <Col className="sharedUserName">
                         {permissionData.readUsers[i]}
                       </Col>
