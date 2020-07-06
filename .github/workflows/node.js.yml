@@ -3,41 +3,45 @@
 
 name: Node.js CI
 
-on:
-  push:
+on: [push]
+#  push:
 #    branches: [ master ]
-  pull_request:
+#  pull_request:
 #    branches: [ master ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: npm run fix:js
-    - run: npm run lint:js
-    - run: sudo docker system prune -a -f
-    - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
-    - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
-    - run: cd ..
-    - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-    - run: cd woden-server-js && docker-compose up --build -d
-    - run: sleep 60
-    - run: cd ..
-    - run: npm i
-    - run: npm run startci & sleep 10
-    - run: npm run cypress:run
-    - run: npm run coverage
-    
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run fix:js
+      - run: npm run lint:js
+      - run: sudo docker system prune -a -f
+      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
+      - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
+      - run: cd ..
+      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
+      - run: cd woden-server-js && docker-compose up --build -d
+      - run: sleep 60
+      - run: cd ..
+      - run: npm i
+      - run: npm run startci & sleep 10
+      #    - run: npm run cypress:run
+      - steps:
+        - name: Cypress run
+          uses: cypress-io/github-action@v1
+          with:
+            record: true
+            parallel: true
+          env:
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      - run: npm run coverage
 
