@@ -60,16 +60,16 @@ export default class Drive extends Component {
   }
 
   folderMenu(hash, name, permission, user) {
-    console.log('permission', permission)
+    console.log(permission)
     return (
       <Menu>
         {(permission.writeUsers.includes(user) || permission.ownerId === user) &&
-          <Menu.Item key={`0${hash}`} onClick={() => {
-            this.props.shareModal(hash, name, permission);
-          }}>
+        <Menu.Item key={`0${hash}`} onClick={() => {
+          this.props.shareModal(hash, name, permission);
+        }}>
             <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share}
                                             alt=""/>Share</span>
-          </Menu.Item>
+        </Menu.Item>
         }
         <Menu.Item key={`1${hash}`} onClick={async () => {
           await this.props.viewAccessList(hash, 'folder');
