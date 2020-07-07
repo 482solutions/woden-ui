@@ -9,7 +9,7 @@ on: [push, pull_request]
 #    branches: [ master ]
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
+      - run: npm сi
       - run: npm run fix:js
       - run: npm run lint:js
       - run: sudo docker system prune -a -f
