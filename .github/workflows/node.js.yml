@@ -30,15 +30,17 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: sleep 20
       - run: cd ..
-      - run: npm ci
-      - run: npm run startci & sleep 10
+#      - run: npm ci
+#      - run: npm run startci & sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
         uses: cypress-io/github-action@v2
 #        run: npm run cypress:run --record --parallel --browser chrome
         with:
-#          start: npm run startci & sleep 10
+          install: false
+          start: npm run startci & sleep 10
           wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
           record: true
           parallel: true
           browser: chrome
