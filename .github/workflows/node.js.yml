@@ -31,21 +31,22 @@ jobs:
       - run: sleep 20
       - run: cd ..
       - run: npm ci
-#      - run: npm run startci & sleep 10
+      - name: build front and Cypress run
+        run: npm run startci & sleep 10 & npm run cypress:run --record --parallel --browser chrome
 #      - run: npm run cypress:run
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v2
 #        run: npm run cypress:run --record --parallel --browser chrome
-        with:
-          install: false
-          start: npm run startci & sleep 10
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
-          record: true
-          parallel: true
-          group: 'Actions'
-          browser: chrome
-          spec: "cypress/integration/*/*.feature"
+#        with:
+#          install: false
+#          start: npm run startci & sleep 10
+#          wait-on: 'http://localhost:3000'
+#          wait-on-timeout: 120
+#          record: true
+#          parallel: true
+#          group: 'Actions'
+#          browser: chrome
+#          spec: "cypress/integration/*/*.feature"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
