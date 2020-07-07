@@ -28,18 +28,21 @@ jobs:
       - run: cd ..
       - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
       - run: cd woden-server-js && docker-compose up --build -d
-      - run: sleep 60
+      - run: sleep 20
       - run: cd ..
-#      - run: npm run startci & sleep 10
+      - name: Run frontend
+        run: npm run startci && sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          record: true
-          parallel: true
-          browser: chrome
-          start: npm run startci & sleep 10
-          wait-on: 'http://localhost:3000'
+#        uses: cypress-io/github-action@v2
+        run: npm run cypress:run --record --parallel --browser chrome
+#        with:
+#          start: npm ci && npm run startci && sleep 10
+#          wait-on: 'http://localhost:3000'
+#          record: true
+#          parallel: true
+#          browser: chrome
+
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
