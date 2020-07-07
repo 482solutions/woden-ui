@@ -33,8 +33,7 @@ jobs:
 #      - run: npm run startci & sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
-#        uses: cypress-io/github-action@v2
-        run: npm run cypress:run
+        uses: cypress-io/github-action@v2
         with:
           record: true
           parallel: true
