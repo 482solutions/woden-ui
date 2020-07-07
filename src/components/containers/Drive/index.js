@@ -60,11 +60,10 @@ export default class Drive extends Component {
   }
 
   folderMenu(hash, name, permission, user) {
-    console.log(permission);
-    console.log(user);
+    console.log('permission', permission)
     return (
       <Menu>
-        {
+        {(permission.writeUsers.includes(user) || permission.ownerId === user) &&
           <Menu.Item key={`0${hash}`} onClick={() => {
             this.props.shareModal(hash, name, permission);
           }}>
@@ -107,7 +106,7 @@ export default class Drive extends Component {
   }
 
   render() {
-    const { entryFolders, entryFiles, filesInfo } = this.props.folderData;
+    const { entryFolders, entryFiles, filesInfo, foldersInfo } = this.props.folderData;
     const username = this.props.username;
     return (
       <>
@@ -127,7 +126,7 @@ export default class Drive extends Component {
                     </span>
                 <div>
                   <Dropdown
-                    overlay={this.folderMenu(folder.hash, folder.name, filesInfo[i])}
+                    overlay={this.folderMenu(folder.hash, folder.name, foldersInfo[i], username)}
                     trigger={['click']}>
                     <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                       <img title="More" alt="More" src={More} id={`Actions_${folder.hash}`}/>
@@ -153,7 +152,7 @@ export default class Drive extends Component {
                           onDoubleClick={() => this.props.downloadFile(file.name, file.fileHash,
                             'null')}>{file.name}</span>
                 <div>
-                  <Dropdown overlay={this.fileMenu(file.hash, file.name, filesInfo[i], username)}
+                  <Dropdown overlay={this.fileMenu(file.hash, file.name, filesInfo[i])}
                             trigger={['click']}>
                     <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                       <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>

@@ -93,7 +93,6 @@ export class Home extends React.Component {
 
   changePermissions(data) {
     this.props.changePermissions(data);
-    console.log(data);
   }
 
   revokePermissions(data) {
@@ -196,13 +195,13 @@ export class Home extends React.Component {
               </div> :
               <div className="flex-start ff-rw">
                 <Drive folderData={this.props[mode]}
+                       username={this.props.userName}
                        updateFile={this.updateFile}
                        shareModal={this.shareModal}
                        openFolder={this.openFolder}
                        getVersions={this.getVersions}
                        downloadFile={this.downloadFile}
-                       viewAccessList={this.viewAccessList}
-                       username={this.props.userName}/>
+                       viewAccessList={this.viewAccessList}/>
               </div>
           }
         </div>
