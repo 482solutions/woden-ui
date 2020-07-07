@@ -95,7 +95,7 @@
     "coverage": "npm test -- --coverage --watchAll=false",
     "cypress:open": "cypress open",
     "cy:run": "cypress run --spec \"cypress/integration/navigation/*.feature\"",
-    "cypress:run": "cypress run --browser chrome --spec \"cypress/integration/permissions/*.feature\"",
+    "cypress:run": "cypress run --browser chrome --spec \"cypress/integration/*/*.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
     "cypress:report": "cypress run --spec cypress/integration/API/POST_user.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",
     "lint:js": "eslint src/**/*.js",
