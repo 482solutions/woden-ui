@@ -9,7 +9,7 @@ on: [push, pull_request]
 #    branches: [ master ]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
@@ -43,6 +43,7 @@ jobs:
           wait-on-timeout: 120
           record: true
           parallel: true
+          group: 'Actions'
           browser: chrome
           spec: "cypress/integration/*/*.feature"
         env:
