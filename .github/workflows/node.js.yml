@@ -30,18 +30,17 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: sleep 20
       - run: cd ..
-      - run: npm run start && sleep 10
+#      - run: npm ci && npm run startci && sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
-#        uses: cypress-io/github-action@v2
-        run: npm run cypress:run --record --parallel --browser chrome
-#        with:
-#          start: npm ci && npm run startci && sleep 10
-#          wait-on: 'http://localhost:3000'
-#          record: true
-#          parallel: true
-#          browser: chrome
-
+        uses: cypress-io/github-action@v2
+#        run: npm run cypress:run --record --parallel --browser chrome
+        with:
+          start: npm ci && npm run startci && sleep 10
+          wait-on: 'http://localhost:3000'
+          record: true
+          parallel: true
+          browser: chrome
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
