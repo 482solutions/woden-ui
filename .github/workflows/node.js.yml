@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm i
       - run: npm run fix:js
       - run: npm run lint:js
       - run: sudo docker system prune -a -f
@@ -30,7 +30,7 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: sleep 20
       - run: cd ..
-#      - run: npm ci
+      - run: npm ci
 #      - run: npm run startci & sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
