@@ -30,8 +30,7 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: sleep 20
       - run: cd ..
-      - name: Run frontend
-        run: npm run startci && sleep 10
+      - run: npm run start && sleep 10
 #      - run: npm run cypress:run
       - name: Cypress run
 #        uses: cypress-io/github-action@v2
