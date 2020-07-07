@@ -36,11 +36,12 @@ jobs:
         uses: cypress-io/github-action@v2
 #        run: npm run cypress:run --record --parallel --browser chrome
         with:
-          start: npm ci && npm run startci && sleep 10
+          start: npm run startci & sleep 10
           wait-on: 'http://localhost:3000'
           record: true
           parallel: true
           browser: chrome
+          spec: "cypress/integration/*/*.feature"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
