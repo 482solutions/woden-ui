@@ -21,7 +21,7 @@ export default class Drive extends Component {
     super(props);
   }
 
-  fileMenu(hash, name, permission, user) {
+  fileMenu(hash, name, filesData, user) {
     return (
       <Menu>
         <Menu.Item key={`0${hash}`} onClick={async () => {
@@ -31,7 +31,7 @@ export default class Drive extends Component {
                                              alt=""/>Versions</span>
         </Menu.Item>
         {
-          (permission.writeUsers.includes(user) || permission.ownerId === user) &&
+          (filesData.writeUsers.includes(user) || filesData.ownerId === user) &&
           <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
             <Upload name="file" beforeUpload={(file) => {
               this.props.updateFile(file, hash);
@@ -42,9 +42,9 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         {
-          (permission.writeUsers.includes(user) || permission.ownerId === user) &&
+          (filesData.writeUsers.includes(user) || filesData.ownerId === user) &&
           <Menu.Item key={`2${hash}`} onClick={() => {
-            this.props.shareModal(hash, name, permission);
+            this.props.shareModal(hash, name, filesData);
           }}>
             <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share}
                                             alt=""/>Share</span>
@@ -59,13 +59,12 @@ export default class Drive extends Component {
     );
   }
 
-  folderMenu(hash, name, permission, user) {
-    console.log(permission)
+  folderMenu(hash, name, folderData, user) {
     return (
       <Menu>
-        {(permission.writeUsers.includes(user) || permission.ownerId === user) &&
+        {(folderData.writeUsers.includes(user) || folderData.ownerId === user) &&
         <Menu.Item key={`0${hash}`} onClick={() => {
-          this.props.shareModal(hash, name, permission);
+          this.props.shareModal(hash, name, folderData);
         }}>
             <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share}
                                             alt=""/>Share</span>

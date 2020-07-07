@@ -47,9 +47,7 @@ const registration = async(user, dispatch) => {
       },
     );
     // eslint-disable-next-line no-console
-    console.log('CSR:', csr.csrPem);
     // eslint-disable-next-line no-console
-    console.log('PrivateKey:', csr.privateKeyPem);
   } catch (e) {
     message.error(e.message, 3);
   }
