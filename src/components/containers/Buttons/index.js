@@ -8,7 +8,6 @@ import { NewFolder } from '..';
 import goHome from '../../../assets/images/goHome.svg';
 import goBack from '../../../assets/images/goBack.svg';
 import fileUploadIcon from '../../../assets/images/fileUploadIcon.svg';
-import { Drive } from '../Drive/index';
 
 class Buttons extends Component {
   constructor(props) {
