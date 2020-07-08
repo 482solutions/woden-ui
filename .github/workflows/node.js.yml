@@ -35,7 +35,7 @@ jobs:
           wait-on-timeout: 120
           record: true
           parallel: true
-          browser: chrome
+#          browser: chrome
           group: 'Actions'
           spec: "cypress/integration/*/*.feature"
         env:
