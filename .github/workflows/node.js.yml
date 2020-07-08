@@ -28,7 +28,7 @@ jobs:
       - run: cd ..
       - run: npm run start -d & sleep 40
       - name: Cypress run
-        run: npm cypress:run
+        run: npm run cypress:run
 #         uses: cypress-io/github-action@v2
 #         with:
 #           wait-on-timeout: 80
