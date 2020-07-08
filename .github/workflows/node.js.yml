@@ -31,8 +31,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          wait-on-timeout: 80
           wait-on: 'http://localhost:3000'
-#           wait-on-timeout: 120
           record: true
           parallel: true
 #          browser: chrome
