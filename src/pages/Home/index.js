@@ -12,7 +12,6 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
-import { revokePermissions } from '../../state-management/actions';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -180,7 +179,7 @@ export class Home extends React.Component {
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
-          tree={this.props.tree}/>
+                   tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
           <Buttons newFolder={this.createFolder}
@@ -196,6 +195,7 @@ export class Home extends React.Component {
               </div> :
               <div className="flex-start ff-rw">
                 <Drive folderData={this.props[mode]}
+                       username={this.props.userName}
                        updateFile={this.updateFile}
                        shareModal={this.shareModal}
                        openFolder={this.openFolder}
@@ -279,11 +279,13 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions({
-                                 user: permissionData.writeUsers[i],
-                                 hash: permissionData.hash,
-                                 permission: 'unwrite'
-                               })}}/>
+                               onClick={() => {
+                                 this.revokePermissions({
+                                   user: permissionData.writeUsers[i],
+                                   hash: permissionData.hash,
+                                   permission: 'unwrite'
+                                 })
+                               }}/>
                         </Col>
                       </Col>
                     </Row>
@@ -304,11 +306,13 @@ export class Home extends React.Component {
                         </Col>
                         <Col className="revokeAccess">
                           <img src={revokeAccessIcon} alt="Revoke access"
-                               onClick={()=>{this.revokePermissions({
-                                 user: permissionData.readUsers[i],
-                                 hash: permissionData.hash,
-                                 permission: 'unread'
-                               })}}/>
+                               onClick={() => {
+                                 this.revokePermissions({
+                                   user: permissionData.readUsers[i],
+                                   hash: permissionData.hash,
+                                   permission: 'unread'
+                                 })
+                               }}/>
                         </Col>
                       </Col>
                     </Row>
@@ -328,7 +332,7 @@ export default connect(({ auth, filesystem }) => ({
     versions: filesystem.versions,
     drive: filesystem.drive,
     share: filesystem.share,
-  tree: filesystem.tree,
+    tree: filesystem.tree,
   }),
   {
     changePasswordRequest: actions.changePasswordRequest,
