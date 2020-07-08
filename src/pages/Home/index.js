@@ -115,6 +115,7 @@ export class Home extends React.Component {
         break;
       }
     }
+    console.log("INFO:", info);
     this.setState({
       permissionData: {
         title: info[type + 'Name'], hash: info[type + 'Hash'],
@@ -266,11 +267,10 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.writeUsers.map((data, user, i) => {
-
+                permissionData.writeUsers.map((user, i) => {
                   return (
                     <Row key={user} className='sharedUser editor'>
-                      <Col className="sharedUserName">
+                      <Col className="sharedUserName editor">
                         {permissionData.writeUsers[i]}
                       </Col>
                       <Col className="permissionIcons">
@@ -297,7 +297,7 @@ export class Home extends React.Component {
                   return (
                     !permissionData.writeUsers.includes(user) &&
                     <Row key={user} className='sharedUser viewer'>
-                      <Col className="sharedUserName">
+                      <Col className="sharedUserName viewer">
                         {permissionData.readUsers[i]}
                       </Col>
                       <Col className="permissionIcons">

@@ -96,7 +96,7 @@ export default class Drive extends Component {
         <Menu.Item key={`1${hash}`} onClick={async() => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
-          <span><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
@@ -169,14 +169,13 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(filesInfo[i])}
-                   onDoubleClick={() => this.props.downloadFile(file.name, file.fileHash,
-                     'null')}
+                   onDoubleClick={() => this.props.downloadFile(file.name, file.hash, 'null')}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
                     <span className="fileTitle"
-                          onDoubleClick={() => this.props.downloadFile(file.name, file.fileHash,
-                            'null')}>{file.name}</span>
+                          onDoubleClick={() => this.props.downloadFile(file.name,
+                            file.hash, 'null')}>{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             trigger={['click']}>
