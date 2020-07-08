@@ -29,7 +29,7 @@ Feature: Grant view access for a file
     And User has View rights to "TestUpload.txt" file that contain "Good night!"
     And The user press the Actions button in "TestUpload.txt" file
     And Button "Update File" "not.be.visible"
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
     And Login as new user without UI
     And The user 1 is the owner of the file
 
@@ -111,7 +111,7 @@ Feature: Grant view access for a file
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The user press the Actions button in "TestUpload.txt" file
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
 
   @negative
   Scenario: 6 User can not grand view access for a file to the user with incorrect email

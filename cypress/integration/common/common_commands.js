@@ -25,7 +25,7 @@ Then(/^Sign Up form is open$/, () => {
 });
 
 When(/^the user press Log in button$/, () => {
-  cy.get('.ant-btn').click()
+  cy.get('.ant-btn.loginFormItem.LoginButtonItem.loginButton.ant-btn-primary').click()
 });
 
 Then(/^User is signed in$/, () => {
@@ -115,4 +115,10 @@ Given(/^Back to My Drive from folder$/, () => {
 
 Given(/^The user located on root dashboard$/, () => {
   cy.userAuth()
+});
+Given(/^RELOAD$/, () => {
+  cy.reload()
+  cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
 });
