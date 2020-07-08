@@ -116,6 +116,7 @@ export class Home extends React.Component {
         break;
       }
     }
+    console.log("INFO:", info);
     this.setState({
       permissionData: {
         title: info[`${type}Name`],
@@ -277,6 +278,7 @@ export class Home extends React.Component {
                     <Col className="permissionIcons">
                       <Col className="sharedUserAccess">
                         <img src={editorIcon} title="View and update" alt=""/>
+
                       </Col>
                       <Col className="revokeAccess">
                         <img src={revokeAccessIcon} alt="Revoke access"
@@ -293,6 +295,7 @@ export class Home extends React.Component {
                 ))
               }
               {
+
                 permissionData.readUsers.map((user, i) => (
                   !permissionData.writeUsers.includes(user)
                   && <Row key={user} className='sharedUser viewer'>
@@ -302,6 +305,7 @@ export class Home extends React.Component {
                     <Col className="permissionIcons">
                       <Col className="sharedUserAccess">
                         <img src={viewerIcon} title="View only" alt=""/>
+
                       </Col>
                       <Col className="revokeAccess">
                         <img src={revokeAccessIcon} alt="Revoke access"

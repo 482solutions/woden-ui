@@ -14,7 +14,7 @@ Feature: Grant edit access for a folder
     And Create folder with name "testFolder" in root without UI
 
   @positive @BAG
-#  BAG 692
+#  TODO: BAG 692
   Scenario: 1 Edit access by owner
     When The user press the Actions button in "testFolder" folder
     And The user press the Share button in "testFolder" folder
@@ -208,7 +208,7 @@ Feature: Grant edit access for a folder
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
-  @negative
+  @negativeTestUpload.txt
   Scenario: 11 Owner can not grand access for a folder if field "email" contain username
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the Actions button in "testFolder" folder

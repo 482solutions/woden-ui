@@ -16,7 +16,7 @@ it('Render without crashing', () => {
 
 it('Calls functions Login', () => {
   const wrapper = shallow(<Sidebar
-    onSelect={() => {
+    onClick={() => {
     }}
   />);
 });

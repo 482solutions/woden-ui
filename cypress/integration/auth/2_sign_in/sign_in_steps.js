@@ -52,11 +52,11 @@ Given(/^filled valid password field$/, () => {
 });
 
 Given(/^Pin cert$/, () => {
-    cy.get('input[type=file]').attachFile('cert.pem').wait(3000)
+    cy.get('input[type=file]').attachFile('cert.pem').wait(2000)
 });
 
 Given(/^Pin privateKey$/, () => {
-    cy.get('input[type=file]').attachFile('privateKey.pem').wait(3000)
+    cy.get('input[type=file]').attachFile('privateKey.pem').wait(2000)
 });
 
 Given(/^User has filled in the field valid email$/, () => {

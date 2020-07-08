@@ -10,7 +10,6 @@ Feature: Transfer folder ownership
 
     @positive
     Scenario: 1 Transfer folder ownership in root folder
-      Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
       And Enter "User2" email to field "#form_in_modal_username"
@@ -34,7 +33,6 @@ Feature: Transfer folder ownership
 
     @positive @BAG
     Scenario: 2 Transfer ownership to a folder in a folder
-      Given The user 1 is the owner of the folder "Folder1"
       And The user opens folder "Folder1"
       And Create folder with name "Folder2" in "Folder1"
 #      TODO delete And The user opens folder "Folder1":
@@ -64,7 +62,6 @@ Feature: Transfer folder ownership
 
     @positive @BAG
     Scenario: 3 User can back to My Drive from transferred folder
-      Given The user 1 is the owner of the folder "Folder1"
       And The user opens folder "Folder1"
       And Create folder with name "Folder2" in "Folder1"
 #    TODO delete And The user opens folder "Folder1":
@@ -85,7 +82,7 @@ Feature: Transfer folder ownership
       Then The user located on root dashboard
 
     @negative
-    Scenario: 3 User can not transfer folder ownership to the user with incorrect email
+    Scenario: 4 User can not transfer folder ownership to the user with incorrect email
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
@@ -95,7 +92,7 @@ Feature: Transfer folder ownership
       Then Error message "User for sharing not found"
 
     @negative
-    Scenario: 4 User can not transfer folder ownership to the user if he already has them
+    Scenario: 5 User can not transfer folder ownership to the user if he already has them
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
@@ -105,7 +102,7 @@ Feature: Transfer folder ownership
       Then Warning message "This user is the owner of this file"
 
     @negative
-    Scenario: 5 User can not transfer folder ownership to some users
+    Scenario: 6 User can not transfer folder ownership to some users
       Given The user 1 is the owner of the folder "Folder1"
       And Register without UI user3
       When The user press the Actions button in "Folder1" folder
@@ -115,7 +112,7 @@ Feature: Transfer folder ownership
       Then Notification below the field "Please enter a valid Email!"
 
     @negative
-    Scenario: 6 User can not transfer folder ownership if field "email" is empty
+    Scenario: 7 User can not transfer folder ownership if field "email" is empty
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
@@ -125,7 +122,7 @@ Feature: Transfer folder ownership
       Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
 
     @negative
-    Scenario: 7 User can not transfer folder ownership if field "email" contain spaces
+    Scenario: 8 User can not transfer folder ownership if field "email" contain spaces
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
@@ -134,7 +131,7 @@ Feature: Transfer folder ownership
       Then Notification below the field "Please enter a valid Email!"
 
     @negative
-    Scenario: 8 User can not transfer folder ownership if field "email" contain username
+    Scenario: 9 User can not transfer folder ownership if field "email" contain username
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the Actions button in "Folder1" folder
       And The user press the Share button in "Folder1" folder
