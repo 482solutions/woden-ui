@@ -8,14 +8,18 @@ import { NewFolder } from '..';
 import goHome from '../../../assets/images/goHome.svg';
 import goBack from '../../../assets/images/goBack.svg';
 import fileUploadIcon from '../../../assets/images/fileUploadIcon.svg';
-import { Drive } from '../Drive/index';
 
 class Buttons extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userPermission: 'null',
+      hash: null,
+    };
     this.beforeUpload = this.beforeUpload.bind(this);
     this.goHome = this.goHome.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.detectUserPermission = this.detectUserPermission.bind(this);
   }
 
   beforeUpload(file) {
@@ -30,6 +34,24 @@ class Buttons extends Component {
 
   async goBack() {
     this.props.getFolderData(this.props.folderData.parentHash);
+  }
+
+  detectUserPermission(username, hash, infoArray, type) {
+    let info = {};
+    for (let i = 0; i < infoArray.length; i++) {
+      if (infoArray[i][`${type}Hash`] === hash) {
+        info = infoArray[i];
+        break;
+      }
+    }
+    if (info.ownerId === username) {
+      this.setState({ userPermission: 'owner' });
+    } else if (info.writeUsers.includes(username)) {
+      this.setState({ userPermission: 'edit' });
+    } else if (info.readUsers.includes(username)) {
+      this.setState({ userPermission: 'view' });
+    } else return false;
+    return this.state.userPermission;
   }
 
   render() {
