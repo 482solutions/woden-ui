@@ -8,6 +8,7 @@ import { NewFolder } from '..';
 import goHome from '../../../assets/images/goHome.svg';
 import goBack from '../../../assets/images/goBack.svg';
 import fileUploadIcon from '../../../assets/images/fileUploadIcon.svg';
+import { Drive } from '../Drive/index';
 
 class Buttons extends Component {
   constructor(props) {
@@ -37,38 +38,38 @@ class Buttons extends Component {
         <Col span={1}>
           {this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goHome} className="goHome">
-                <img src={goHome} alt="goHome"/>
-              </div>
+              <img src={goHome} alt="goHome"/>
+            </div>
             : <div className="goHome_inactive goHome">
-                <img src={goHome} alt="goHome"/>
-              </div>
+              <img src={goHome} alt="goHome"/>
+            </div>
           }
         </Col>
-         <Col span={1}>
+        <Col span={1}>
           {this.props.folderData.parentHash !== 'root'
             ? <div onClick={this.goBack} className="goBack">
-                <img src={goBack} alt="goBack"/>
-              </div>
+              <img src={goBack} alt="goBack"/>
+            </div>
             : <div className="goBack_inactive goBack">
-                <img src={goBack} alt="goBack"/>
-              </div>
+              <img src={goBack} alt="goBack"/>
+            </div>
           }
-         </Col>
+        </Col>
         <Col span={3}>
           {
             this.props.folderData.parentHash !== 'root'
-            ? <span className="currentFolder">{this.props.folderData.folderName}</span>
-            : <span className="currentFolder">{this.props.mode ==='drive' ?
-              'My Drive' : this.props.mode === 'share' ?
-                'Shared with me' : null}</span>
+              ? <span className="currentFolder">{this.props.folderData.folderName}</span>
+              : <span className="currentFolder">{this.props.mode === 'drive'
+                ? 'My Drive' : this.props.mode === 'share'
+                  ? 'Shared with me' : null}</span>
           }
         </Col>
         {
-          this.props.mode === 'drive' ?
-          <Col span={2} offset={13}>
-            <NewFolder onFinish={this.props.newFolder}/>
-          </Col> : this.props.folderData.parentHash !== 'root' ?
-            <Col span={2} offset={13}>
+          this.props.mode === 'drive'
+            ? <Col span={2} offset={13}>
+              <NewFolder onFinish={this.props.newFolder}/>
+            </Col> : this.props.folderData.parentHash !== 'root'
+              ? <Col span={2} offset={13}>
               <NewFolder onFinish={this.props.newFolder}/>
             </Col> : null
         }
@@ -79,11 +80,12 @@ class Buttons extends Component {
                 <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
               </Button>
             </Upload>
-          </Col> : this.props.folderData.parentHash !== 'root' ?
-            <Col offset={1} span={3}>
+          </Col> : this.props.folderData.parentHash !== 'root'
+            ? <Col offset={1} span={3}>
               <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
                 <Button className="upload-button">
-                  <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
+                  <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File
+                  Upload
                 </Button>
               </Upload>
             </Col> : null
