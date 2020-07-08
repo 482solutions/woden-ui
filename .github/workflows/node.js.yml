@@ -17,22 +17,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm i
-      - run: npm run fix:js
-      - run: npm run lint:js
+#       - run: npm run fix:js
+#       - run: npm run lint:js
       - run: sudo docker system prune -a -f
       - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
       - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
       - run: cd ..
       - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
       - run: cd woden-server-js && docker-compose up --build -d
-      - run: sleep 30
+#       - run: sleep 30
       - run: cd ..
-      - run: npm run startci -d & sleep 40
+      - run: npm run start -d & sleep 40
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
+#           wait-on-timeout: 120
           record: true
           parallel: true
 #          browser: chrome
