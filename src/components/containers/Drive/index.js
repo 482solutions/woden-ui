@@ -25,7 +25,7 @@ export default class Drive extends Component {
     };
   }
 
-  detectUserPermission(username, hash, infoArray, type) {
+  beforeUpload(username, hash, infoArray, type) {
     let info = {};
     for (let i = 0; i < infoArray.length; i++) {
       if (infoArray[i][`${type}Hash`] === hash) {
@@ -36,17 +36,13 @@ export default class Drive extends Component {
     console.log('info: ', info);
     if (info.ownerId === username) {
       this.setState({ userPermission: 'owner' });
-      console.log(this.state.userPermissions);
-      return 'owner';
-    }
-    if (info.writeUsers.includes(username)) {
+    } else if (info.writeUsers.includes(username)) {
       this.setState({ userPermission: 'edit' });
-      console.log(this.state.userPermissions);
-      return 'edit';
-    }
-    if (info.readUsers.includes(username)) {
+    } else if (info.readUsers.includes(username)) {
       this.setState({ userPermission: 'view' });
-    }
+    } else return false;
+    console.log(this.state.userPermission);
+    return this.state.userPermission;
   }
 
   fileMenu(hash, name, filesData, user) {
@@ -155,7 +151,7 @@ export default class Drive extends Component {
                 <div>
                   <Dropdown
                     overlay={this.folderMenu(folder.hash, folder.name, foldersInfo[i], username)}
-                    onClick={() => this.detectUserPermission(username,
+                    beforeUpload={() => this.beforeUpload(username,
                       folder.hash,
                       foldersInfo,
                       'folder')}
