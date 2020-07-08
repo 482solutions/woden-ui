@@ -19,5 +19,6 @@ When(/^User can update file "([^"]*)"$/,  (fileName) => {
     cy.wait('@getFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.updateTxtFile(fileName).as('UpdateTxtFile')
+        cy.writeFile(`cypress/fixtures/${fileName}`, 'Good night!')
     })
 });

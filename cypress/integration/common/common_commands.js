@@ -25,7 +25,7 @@ Then(/^Sign Up form is open$/, () => {
 });
 
 When(/^the user press Log in button$/, () => {
-  cy.get('.ant-btn').as('Log in btn').click()
+  cy.get('.ant-btn').click()
 });
 
 Then(/^User is signed in$/, () => {
@@ -83,9 +83,9 @@ Then(/^The folder is created with name (.*)$/, (folderName) => {
   cy.server()
   cy.route('GET', '/api/v1/folder/*').as('getFolder')
   cy.reload()
-    cy.wait('@getFolder').then((xhr) => {
-      cy.contains(folderName).should('be.visible')
-    })
+  cy.wait('@getFolder').then((xhr) => {
+    cy.contains(folderName).should('be.visible')
+  })
 
 });
 
@@ -109,7 +109,7 @@ When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
 });
 
-Given(/^Back to My Drive from folder$/,  () => {
+Given(/^Back to My Drive from folder$/, () => {
   cy.get('.goBack').click().wait(3000)
 });
 
