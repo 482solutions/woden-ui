@@ -25,11 +25,11 @@ export const detectUserPermission = (username, hash, infoArray, type) => {
   if (info.ownerId === username) {
     return 'owner';
   }
-  if (info.writeUsers.includes(username)) {
-    return 'editer';
+  if (info.writeUsers.includes(username) && info.readUsers.includes(username)) {
+    return 'write';
   }
   if (info.readUsers.includes(username)) {
-    return 'viewer';
+    return 'read';
   }
   return false;
 };

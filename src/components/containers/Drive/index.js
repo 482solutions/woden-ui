@@ -35,7 +35,7 @@ export default class Drive extends Component {
                                              alt=""/>Versions</span>
         </Menu.Item>
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
             <Upload name="file" beforeUpload={(file) => {
               this.props.updateFile(file, hash);
@@ -46,7 +46,7 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item key={`2${hash}`} onClick={() => {
             this.props.shareModal(hash, name, filesData);
           }}>
@@ -67,7 +67,7 @@ export default class Drive extends Component {
     return (
       <Menu>
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item key={`0${hash}`} onClick={() => {
             this.props.shareModal(hash, name, folderData);
           }}>
