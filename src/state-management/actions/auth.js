@@ -46,8 +46,6 @@ const registration = async(user, dispatch) => {
         }
       },
     );
-    // eslint-disable-next-line no-console
-    // eslint-disable-next-line no-console
   } catch (e) {
     message.error(e.message, 3);
   }
