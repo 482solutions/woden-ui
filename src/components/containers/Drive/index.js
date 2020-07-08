@@ -25,7 +25,7 @@ export default class Drive extends Component {
     };
   }
 
-  beforeUpload(username, hash, infoArray, type) {
+  detectUserPermission(username, hash, infoArray, type) {
     let info = {};
     for (let i = 0; i < infoArray.length; i++) {
       if (infoArray[i][`${type}Hash`] === hash) {
@@ -33,7 +33,6 @@ export default class Drive extends Component {
         break;
       }
     }
-    console.log('info: ', info);
     if (info.ownerId === username) {
       this.setState({ userPermission: 'owner' });
     } else if (info.writeUsers.includes(username)) {
@@ -41,11 +40,10 @@ export default class Drive extends Component {
     } else if (info.readUsers.includes(username)) {
       this.setState({ userPermission: 'view' });
     } else return false;
-    console.log(this.state.userPermission);
     return this.state.userPermission;
   }
 
-  fileMenu(hash, name, filesData, user) {
+  fileMenu(hash, name, filesData) {
     return (
       <Menu>
         <Menu.Item key={`0${hash}`} onClick={async() => {
@@ -55,7 +53,7 @@ export default class Drive extends Component {
                                              alt=""/>Versions</span>
         </Menu.Item>
         {
-          (filesData.writeUsers.includes(user) || filesData.ownerId === user)
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
             <Upload name="file" beforeUpload={(file) => {
               this.props.updateFile(file, hash);
@@ -66,7 +64,7 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         {
-          (this.state.userPermissions === 'owner' || this.state.userPermissions === 'edit')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item key={`2${hash}`} onClick={() => {
             this.props.shareModal(hash, name, filesData);
           }}>
@@ -87,7 +85,7 @@ export default class Drive extends Component {
     return (
       <Menu>
         {
-          (this.state.userPermissions === 'owner' || this.state.userPermissions === 'edit')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
           && <Menu.Item key={`0${hash}`} onClick={() => {
             this.props.shareModal(hash, name, folderData);
           }}>
@@ -150,8 +148,8 @@ export default class Drive extends Component {
                     </span>
                 <div>
                   <Dropdown
-                    overlay={this.folderMenu(folder.hash, folder.name, foldersInfo[i], username)}
-                    beforeUpload={() => this.beforeUpload(username,
+                    overlay={this.folderMenu(folder.hash, folder.name, username)}
+                    onClick={() => this.detectUserPermission(username,
                       folder.hash,
                       foldersInfo,
                       'folder')}
@@ -180,7 +178,7 @@ export default class Drive extends Component {
                           onDoubleClick={() => this.props.downloadFile(file.name, file.fileHash,
                             'null')}>{file.name}</span>
                 <div>
-                  <Dropdown overlay={this.fileMenu(file.hash, file.name, filesInfo[i])}
+                  <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             trigger={['click']}>
                     <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                       <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>
