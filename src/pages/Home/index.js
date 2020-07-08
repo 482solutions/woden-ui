@@ -19,6 +19,7 @@ export class Home extends React.Component {
     this.state = {
       fileWrapperVisible: false,
       accessListVisible: false,
+      userPermission: 'null',
       permissionData: {
         title: 'null',
         hash: null,

@@ -15,32 +15,14 @@ import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
+import { detectUserPermission } from '../../../utils/functions/filesystem';
 
 export default class Drive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPermission: 'null',
-      hash: null,
+      userPermissions: 'null',
     };
-  }
-
-  detectUserPermission(username, hash, infoArray, type) {
-    let info = {};
-    for (let i = 0; i < infoArray.length; i++) {
-      if (infoArray[i][`${type}Hash`] === hash) {
-        info = infoArray[i];
-        break;
-      }
-    }
-    if (info.ownerId === username) {
-      this.setState({ userPermission: 'owner' });
-    } else if (info.writeUsers.includes(username)) {
-      this.setState({ userPermission: 'edit' });
-    } else if (info.readUsers.includes(username)) {
-      this.setState({ userPermission: 'view' });
-    } else return false;
-    return this.state.userPermission;
   }
 
   fileMenu(hash, name, filesData) {
@@ -53,7 +35,7 @@ export default class Drive extends Component {
                                              alt=""/>Versions</span>
         </Menu.Item>
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
           && <Menu.Item id={`Update_${hash}`} key={`1${hash}`}>
             <Upload name="file" beforeUpload={(file) => {
               this.props.updateFile(file, hash);
@@ -64,7 +46,7 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
           && <Menu.Item key={`2${hash}`} onClick={() => {
             this.props.shareModal(hash, name, filesData);
           }}>
@@ -85,7 +67,7 @@ export default class Drive extends Component {
     return (
       <Menu>
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'edit')
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'editer')
           && <Menu.Item key={`0${hash}`} onClick={() => {
             this.props.shareModal(hash, name, folderData);
           }}>
@@ -125,6 +107,11 @@ export default class Drive extends Component {
     }
   }
 
+  detectPermission(username, hash, infoArray, type) {
+    const detectPermission = detectUserPermission(username, hash, infoArray, type);
+    this.setState({ userPermission: detectPermission });
+  }
+
   render() {
     const {
       entryFolders, entryFiles, filesInfo, foldersInfo,
@@ -149,7 +136,7 @@ export default class Drive extends Component {
                 <div>
                   <Dropdown
                     overlay={this.folderMenu(folder.hash, folder.name, username)}
-                    onClick={() => this.detectUserPermission(username,
+                    onClick={() => this.detectPermission(username,
                       folder.hash,
                       foldersInfo,
                       'folder')}
@@ -179,6 +166,10 @@ export default class Drive extends Component {
                             'null')}>{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
+                            onClick={() => this.detectPermission(username,
+                              file.hash,
+                              filesInfo,
+                              'file')}
                             trigger={['click']}>
                     <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                       <img title="More" alt="More" src={More} id={`Actions_${file.hash}`}/>

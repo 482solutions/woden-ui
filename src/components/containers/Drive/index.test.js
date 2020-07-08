@@ -11,7 +11,7 @@ let fakeFiles = [];
 let versions = {};
 let fakeFilesInfo = [];
 let fakeFoldersInfo = [];
-let fakeParentHash = '567f7d6dc9d1d2ee6f4a3dd53118eda2317e17b437953c2aba665816b69ec753';
+const fakeParentHash = '567f7d6dc9d1d2ee6f4a3dd53118eda2317e17b437953c2aba665816b69ec753';
 beforeAll(() => {
   versions = {
     versionList: [
@@ -56,38 +56,38 @@ beforeAll(() => {
 
   fakeFilesInfo = [
     {
-      fileHash: "85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e",
-      fileName: "WebStorm Reference Card.pdf",
-      fileType: "application/pdf",
-      ownerId: "DEMo12345eniorfn3o",
-      parentFolderHash: "455d2fb5a574f17061d41abeed117b6ef3f60739a295f0cf2a0b0b9f7b49a20c",
-      readUsers: ["DEMo12345"],
+      fileHash: '85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e',
+      fileName: 'WebStorm Reference Card.pdf',
+      fileType: 'application/pdf',
+      ownerId: 'DEMo12345eniorfn3o',
+      parentFolderHash: '455d2fb5a574f17061d41abeed117b6ef3f60739a295f0cf2a0b0b9f7b49a20c',
+      readUsers: ['DEMo12345'],
       versions: [{}],
       writeUsers: [],
     },
     {
-      fileHash: "85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e",
-      fileName: "WebStorm Reference Card.pdf",
-      fileType: "application/pdf",
-      ownerId: "DEMo12345eniorfn3o",
-      parentFolderHash: "455d2fb5a574f17061d41abeed117b6ef3f60739a295f0cf2a0b0b9f7b49a20c",
-      readUsers: ["DEMo12345"],
+      fileHash: '85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e',
+      fileName: 'WebStorm Reference Card.pdf',
+      fileType: 'application/pdf',
+      ownerId: 'DEMo12345eniorfn3o',
+      parentFolderHash: '455d2fb5a574f17061d41abeed117b6ef3f60739a295f0cf2a0b0b9f7b49a20c',
+      readUsers: ['DEMo12345'],
       versions: [{}],
       writeUsers: [],
-    }
+    },
   ];
   fakeFoldersInfo = [
     {
       files: [],
-      folderHash: "480889de94fd76cae5c50f876fffca5b3c4571605c51f2374de96dba39e408f7",
-      folderName: "njKWENenef",
+      folderHash: '480889de94fd76cae5c50f876fffca5b3c4571605c51f2374de96dba39e408f7',
+      folderName: 'njKWENenef',
       folders: [],
-      ownerId: "HJWEci32",
-      parentFolderHash: "9bde73ea60e15d2574acf608d148f3d1c5cbd3b5ad05822c0181bb27361fb2e6",
-      readUsers: ["HJWEci32232233f2"],
+      ownerId: 'HJWEci32',
+      parentFolderHash: '9bde73ea60e15d2574acf608d148f3d1c5cbd3b5ad05822c0181bb27361fb2e6',
+      readUsers: ['HJWEci32232233f2'],
       writeUsers: [],
-    }
-  ]
+    },
+  ];
 });
 it('Render without crashing', () => {
   const wrapper = shallow(<Drive folderData={{
@@ -139,7 +139,7 @@ it('Simulate double click on Folders for open', () => {
   }}
                                  getFolderData={() => {
                                  }} openFolder={() => {
-  }}/>);
+                                 }}/>);
   expect(wrapper.find('.folder').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folder').at(1).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folderTitle').at(0).simulate('doubleclick')).to.be.ok;
@@ -155,8 +155,11 @@ it('Check all Dropdown and simulate click', () => {
     foldersInfo: fakeFoldersInfo,
   }}
                                  createFolder={() => {
-                                 }} getFolderData={() => {
-  }}
+                                 }}
+                                 getFolderData={() => {
+                                 }}
+                                 detectUserPermission={() => {
+                                 }}
                                  versions={versions}/>);
   expect(wrapper.find(Dropdown).at(0).simulate('click')).to.be.ok;
   expect(wrapper.find(Dropdown).at(1).simulate('click')).to.be.ok;

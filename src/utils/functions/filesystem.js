@@ -13,3 +13,23 @@ export const validationCertificate = (string) => {
 export const getRootFolderHash = () => (
   localStorage.getItem('rootFolder')
 );
+
+export const detectUserPermission = (username, hash, infoArray, type) => {
+  let info = {};
+  for (let i = 0; i < infoArray.length; i++) {
+    if (infoArray[i][`${type}Hash`] === hash) {
+      info = infoArray[i];
+      break;
+    }
+  }
+  if (info.ownerId === username) {
+    return 'owner';
+  }
+  if (info.writeUsers.includes(username)) {
+    return 'editer';
+  }
+  if (info.readUsers.includes(username)) {
+    return 'viewer';
+  }
+  return false;
+};
