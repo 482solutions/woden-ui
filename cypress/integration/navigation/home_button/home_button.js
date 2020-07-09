@@ -1,9 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before(() => {
-    cy.registerUser();
-})
-
 Given(/^The user double click this folder "([^"]*)"$/, (folder) => {
     cy.contains(folder).dblclick()
 });
@@ -25,6 +21,6 @@ Then(/^The Home button becomes inactive$/,  () => {
 Then(/^The user is located in root folder$/,  () => {
     cy.wait('@getFolder').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        cy.inRootFolder()
+        cy.get('.currentFolder').should('contain.text', 'My Drive')
     })
 });

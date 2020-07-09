@@ -28,7 +28,7 @@ export function getPassword(length, sha) {
 
 export function getLogin() {
   return generate({
-    length: 12,
+    length: 10,
     lowercase: true,
     uppercase: true,
   })
@@ -49,47 +49,6 @@ export function getHashFromFolder(folderName, arrFolders) {
     }
   }
 }
-
-Cypress.Commands.add('registerUser', () => {
-  Cypress.env('login', getLogin())
-  Cypress.env('password', getPassword(8, true))
-  Cypress.env('email', getLogin() + '@gmail.com')
-
-  let csr = getCSR({username: Cypress.env('login')})
-  cy.writeFile('cypress/fixtures/privateKey.pem', csr.privateKeyPem)
-    .readFile('cypress/fixtures/privateKey.pem')
-    .then((text) => {
-      expect(text).to.include('-----BEGIN PRIVATE KEY-----')
-      expect(text).to.include('-----END PRIVATE KEY-----')
-    })
-  cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
-    cy.request({
-      method: 'POST',
-      url: `${Cypress.env('backendURL')}/user`,
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: {
-        'login': Cypress.env('login'),
-        'email': Cypress.env('email'),
-        'password': Cypress.env('password'),
-        'privateKey': key,
-        'CSR': csr.csrPem
-      },
-    }).then((resp) => {
-      if (expect(201).to.eq(resp.status)) {
-        Cypress.env('respStatus', resp.status)
-        cy.writeFile('cypress/fixtures/cert.pem', resp.body.cert).then(() => {
-          cy.readFile('cypress/fixtures/cert.pem').then((text) => {
-            expect(text).to.include('-----BEGIN CERTIFICATE-----')
-            expect(text).to.include('-----END CERTIFICATE-----')
-          })
-        })
-      }
-    })
-  }).as('Register new user')
-})
-
 
 Cypress.Commands.add('uploadFile', (fullFileName) => {
   cy.server()
@@ -166,14 +125,6 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
   })
 })
 
-Cypress.Commands.add('userAuth', () => {
-  expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
-})
-
-Cypress.Commands.add('inRootFolder', () => {
-  cy.get('.currentFolder').should('contain.text', 'My Drive')
-})
-
 Cypress.Commands.add('createFolderInRoot', (name) => {
   headers.Authorization = `Bearer ${Cypress.env('token')}`
   cy.request({
@@ -187,6 +138,7 @@ Cypress.Commands.add('createFolderInRoot', (name) => {
   }).then((resp) => {
     Cypress.env('foldersInRoot', resp.body.folder.folders)
     expect(resp.status).to.eq(201)
+    Cypress.env('foldersInRoot', resp.body.folder.folders)
   })
 })
 

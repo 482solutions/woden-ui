@@ -50,3 +50,7 @@ Given(/^Create folder with name "([^"]*)" in "([^"]*)"$/, (folder2, folder1) => 
     cy.reload()
   })
 });
+
+Then(/^The user located in Shared with me$/,  () => {
+  cy.get('.currentFolder').should('contain.text', 'Shared with me')
+});

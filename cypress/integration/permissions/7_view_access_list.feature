@@ -68,7 +68,6 @@ Feature:  View access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
 
-
   @positive
   Scenario: 3 View file access list by viewer
     And The user upload "TestUpload.txt" without UI
@@ -179,7 +178,7 @@ Feature:  View access list
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The user press the Actions button in "Access" folder
-    And The user press the Share button in "Access" folder
+    And The user press the Access list button in "Access" folder
     Then The user sees the access list
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
@@ -209,7 +208,7 @@ Feature:  View access list
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The user press the Actions button in "Access" folder
-    And The user press the Share button in "Access" folder
+    And The user press the Access list button in "Access" folder
     Then The user sees the access list
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list

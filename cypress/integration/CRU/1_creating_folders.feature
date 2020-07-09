@@ -41,7 +41,6 @@ Feature: Creating folders
       And Press Create folder
       And Spin is visible "Creating folder..."
       Then The folder is created with name <Name>
-#    And The user becomes the owner of this folder
       Examples: Folder's Name
         | Name                 |
         | Folder-1             |

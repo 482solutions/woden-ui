@@ -7,8 +7,8 @@ Then(/^User has Editors rights to "([^"]*)" "([^"]*)"$/, (fileName, obj) => {
     switch (obj) {
       case 'file':
         const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'));
-        cy.get(`#Actions_${hashFile}`).click().wait(1000);
-        cy.get(`#Update_${hashFile}`).click().wait(1000);
+        cy.get(`#Actions_${hashFile}`).click().wait(2000);
+        cy.get(`#Update_${hashFile}`).click().wait(2000);
         cy.server();
         cy.route('PUT', '/api/v1/file').as('updateFile');
         cy.get(`#Update_${hashFile} input[type=file]`).attachFile(fileName);

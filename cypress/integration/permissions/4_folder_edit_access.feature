@@ -33,6 +33,7 @@ Feature: Grant edit access for a folder
     And User has Editors rights to "testFolder" folder
 
   @positive @BAG
+  #  TODO: BAG 692
   Scenario: 2 Edit access by editor
     When The user press the Actions button in "testFolder" folder
     And The user press the Share button in "testFolder" folder
