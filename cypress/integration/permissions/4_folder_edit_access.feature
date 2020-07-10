@@ -13,8 +13,7 @@ Feature: Grant edit access for a folder
     And Login as new user without UI
     And Create folder with name "testFolder" in root without UI
 
-  @positive @BAG
-#  TODO: BAG 692
+  @positive
   Scenario: 1 Edit access by owner
     When The user press the Actions button in "testFolder" folder
     And The user press the Share button in "testFolder" folder
@@ -30,10 +29,16 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
+    #    TODO: delete reload and steps for opening folder, after fix reload:
     And User has Editors rights to "testFolder" folder
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "testFolder" is visible
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    And The file "TestUpload.txt" is visible
 
-  @positive @BAG
-  #  TODO: BAG 692
+  @positive
   Scenario: 2 Edit access by editor
     When The user press the Actions button in "testFolder" folder
     And The user press the Share button in "testFolder" folder
@@ -69,6 +74,15 @@ Feature: Grant edit access for a folder
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     Then User has Editors rights to "testFolder" folder
+
+#    TODO: delete reload and steps for opening folder, after fix reload:
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "testFolder" is visible
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    And The file "TestUpload.txt" is visible
+
     And Button "New Folder" "be.visible"
     And Button "File Upload" "be.visible"
 
