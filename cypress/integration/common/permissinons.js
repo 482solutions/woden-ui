@@ -15,6 +15,11 @@ Then(/^The user open Shared with me$/,  () => {
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
+  switch (btn) {
+    case 'Revoke access':
+      btn = '.revokeAccess'
+      break;
+  }
   cy.contains(btn).should(visible)
 });
 
