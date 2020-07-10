@@ -96,7 +96,7 @@ Feature: Grant edit access for a file
     Then User has Editors rights to "TestUpload.txt" "file"
 
   @negative
-  Scenario: 3 User can not grand access for a file to the user with incorrect email
+  Scenario: 4 User can not grand access for a file to the user with incorrect email
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
@@ -107,8 +107,8 @@ Feature: Grant edit access for a file
     Then Error message "User for sharing not found"
 
   @negative
-  Scenario: 4 User can not grand access for a file to the user if he already has them
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 5 User can not grand access for a file to the user if he already has them
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -125,7 +125,7 @@ Feature: Grant edit access for a file
     Then Warning message "This user is the editor of this file"
 
   @negative
-  Scenario: 5 Owner can not grand access for a file to himself
+  Scenario: 6 Owner can not grand access for a file to himself
       And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
@@ -136,8 +136,8 @@ Feature: Grant edit access for a file
     Then Warning message "This user is the owner of this file"
 
   @negative
-  Scenario: 6 Editor can not grand access for a file to himself
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 7 Editor can not grand access for a file to himself
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -158,7 +158,7 @@ Feature: Grant edit access for a file
     Then Warning message "This user is the editor of this file"
 
   @negative
-  Scenario: 7 Owner can not grand access for a file to some users
+  Scenario: 8 Owner can not grand access for a file to some users
       And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And Register without UI user3
@@ -169,8 +169,8 @@ Feature: Grant edit access for a file
     Then Notification below the field "Please enter a valid Email!"
 
   @negative
-  Scenario: 8 Owner can not grand access for a file if field "email" is empty
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 9 Owner can not grand access for a file if field "email" is empty
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -180,8 +180,8 @@ Feature: Grant edit access for a file
     Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
 
   @negative
-  Scenario: 9 Owner can not grand access for a file if field "email" contain spaces
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 10 Owner can not grand access for a file if field "email" contain spaces
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -190,8 +190,8 @@ Feature: Grant edit access for a file
     Then Notification below the field "Please enter a valid Email!"
 
   @negative
-  Scenario: 10 Owner can not grand access for a file if field "email" contain username
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 11 Owner can not grand access for a file if field "email" contain username
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     When The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file
@@ -200,8 +200,8 @@ Feature: Grant edit access for a file
     Then Notification below the field "Please enter a valid Email!"
 
   @negative
-  Scenario: 11 Editor can can not to transfer ownership for a file
-      And The user upload "TestUpload.txt" without UI
+  Scenario: 12 Editor can can not to transfer ownership for a file
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And The user press the Actions button in "TestUpload.txt" file
     And The user press the Share button in "TestUpload.txt" file

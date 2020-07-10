@@ -19,7 +19,7 @@ Feature: Transfer file ownership
       And Spin is visible "Changing permissions..."
       Then Message about transfer ownership "Permissions updated successfully"
       And Login as new user 2 without UI
-      And User 2 became Owner of "TestUpload.txt" file
+      And The file "TestUpload.txt" is visible
       And Login as new user without UI
       And The user open Shared with me
       And Spin is visible "Getting data..."

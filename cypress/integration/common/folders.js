@@ -35,8 +35,8 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
         //TODO: delete cy.reload()
-        // cy.reload()
-        cy.contains('TestUpload.txt').should('be.visible')
+        cy.reload()
+        // cy.contains('TestUpload.txt').should('be.visible')
       })
     })
   })
@@ -49,4 +49,8 @@ Given(/^Create folder with name "([^"]*)" in "([^"]*)"$/, (folder2, folder1) => 
     //TODO: delete cy.reload() and open folder
     cy.reload()
   })
+});
+
+Then(/^The user located in Shared with me$/,  () => {
+  cy.get('.currentFolder').should('contain.text', 'Shared with me')
 });

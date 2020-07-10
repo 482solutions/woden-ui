@@ -27,7 +27,7 @@ Feature: Grant view access for a folder
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user press the Actions button in "testFolder" folder
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
     And The user opens folder "testFolder"
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
@@ -58,7 +58,7 @@ Feature: Grant view access for a folder
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user press the Actions button in "testFolder" folder
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
     And The user opens folder "testFolder"
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"

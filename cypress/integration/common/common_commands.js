@@ -1,4 +1,6 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
+import {getCSR} from "../../../src/utils/functions";
+import {getLogin, getPassword} from "../../support/commands";
 
 
 Given(/^The application is opened$/, () => {
@@ -12,10 +14,6 @@ When(/^there is no open session$/, () => {
   }
 });
 
-Given("Register without UI", () => {
-  cy.registerUser();
-});
-
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -25,7 +23,7 @@ Then(/^Sign Up form is open$/, () => {
 });
 
 When(/^the user press Log in button$/, () => {
-  cy.get('.ant-btn').click()
+  cy.get('.ant-btn.loginFormItem.LoginButtonItem.loginButton.ant-btn-primary').click()
 });
 
 Then(/^User is signed in$/, () => {
@@ -62,12 +60,12 @@ Then(/^Error message Password can not be empty$/, () => {
 Given(/^The user is located in his root folder$/, () => {
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    cy.inRootFolder()
+    cy.get('.currentFolder').should('contain.text', 'My Drive')
   })
 });
 
 When(/^The user press Create a new folder button$/, () => {
-  cy.contains('New Folder').click().wait(2000)
+  cy.get('.ant-btn.newFolder-button').click().wait(2000)
 });
 
 When(/^The field name is empty$/, () => {
@@ -79,18 +77,24 @@ When(/^The field name (.*) is filled by user from list of folder name$/, (folder
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-  //TODO delete cy.reload()
+
+  cy.wait('@createFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
   cy.server()
   cy.route('GET', '/api/v1/folder/*').as('getFolder')
+  //TODO delete cy.reload()
   cy.reload()
   cy.wait('@getFolder').then((xhr) => {
-    cy.contains(folderName).should('be.visible')
+    cy.contains(folderName).should('be.visible').wait(2000)
   })
 
 });
 
 When(/^Press Create folder$/, () => {
-  cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click().wait(2000)
+  cy.server()
+  cy.route('POST', '/api/v1/folder').as('createFolder')
+  cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click()
 });
 
 When(/^The user press Upload a new file button$/, () => {
@@ -98,7 +102,7 @@ When(/^The user press Upload a new file button$/, () => {
 });
 
 Given(/^The user is authorized$/, () => {
-  cy.userAuth()
+  expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
 });
 
 Then(/^The file is uploaded$/, (file) => {
@@ -114,5 +118,12 @@ Given(/^Back to My Drive from folder$/, () => {
 });
 
 Given(/^The user located on root dashboard$/, () => {
-  cy.userAuth()
+  expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
+});
+
+Given(/^RELOAD$/, () => {
+  cy.reload()
+  cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
 });

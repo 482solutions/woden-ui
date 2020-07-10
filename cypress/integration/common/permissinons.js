@@ -6,25 +6,16 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
 });
 
 Then(/^The user open Shared with me$/,  () => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
+  // cy.wait('@getFolder').then((xhr) => {
+  //   expect(xhr.responseBody).to.not.have.property('stack')
     cy.server()
     cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.get('.shared').should('be.visible').click()
-  })
+  // })
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
   cy.contains(btn).should(visible)
-});
-
-Then(/^User 2 became Owner of "([^"]*)" file$/, (file) => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    console.log(xhr.responseBody)
-    expect(1).to.equal(xhr.responseBody.folder.files.length)
-    cy.contains(file).should('be.visible')
-  })
 });
 
 Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
