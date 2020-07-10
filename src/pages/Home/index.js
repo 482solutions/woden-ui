@@ -120,7 +120,6 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log('INFO:', info);
     this.setState({
       permissionData: {
         title: info[`${type}Name`],
@@ -180,7 +179,6 @@ export class Home extends React.Component {
       shareModalInfo, mode,
     } = this.state;
     const { versions } = this.props;
-    console.log('mode: ', this.props[mode]);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -300,7 +298,6 @@ export class Home extends React.Component {
                 ))
               }
               {
-
                 permissionData.readUsers.map((user, i) => (
                   !permissionData.writeUsers.includes(user)
                   && <Row key={user} className='sharedUser viewer'>
