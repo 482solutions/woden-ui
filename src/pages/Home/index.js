@@ -84,7 +84,7 @@ export class Home extends React.Component {
   createFolder(dataRequest) {
     this.props.createFolder({
       name: dataRequest.newFolder,
-      parentFolder: this.props.drive.folderHash,
+      parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
     });
   }
 
@@ -116,7 +116,7 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log("INFO:", info);
+    console.log('INFO:', info);
     this.setState({
       permissionData: {
         title: info[`${type}Name`],
@@ -176,6 +176,7 @@ export class Home extends React.Component {
       shareModalInfo, mode,
     } = this.state;
     const { versions } = this.props;
+    console.log('mode: ', this.props[mode]);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
