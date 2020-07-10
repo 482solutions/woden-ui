@@ -116,7 +116,6 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log("INFO:", info);
     this.setState({
       permissionData: {
         title: info[type + 'Name'], hash: info[type + 'Hash'],
