@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 import { Buttons, Drive, Sidebar } from '../../components/containers';
-import { getRootFolderHash } from '../../utils/functions';
+import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -59,24 +59,27 @@ export class Home extends React.Component {
     this.viewAccessList = this.viewAccessList.bind(this);
     this.closeAccessList = this.closeAccessList.bind(this);
     this.getFoldersTree = this.getFoldersTree.bind(this);
+    this.getPermission = this.getPermission.bind(this);
   }
 
   async componentDidMount() {
     this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
+    const { username } = this.props;
+    const infoArray = this.state.mode.foldersInfo;
+    const type = 'folder';
+    const detectPermission = detectUserPermission(username, hash, infoArray, type);
+    this.setState({ userPermission: detectPermission });
   }
 
-  openFolder(hash) {
+  openFolder(hash, permission) {
     this.props.getFolderData(hash, this.state.mode);
+    this.setState({ userPermission: permission });
   }
 
   uploadFile(file) {
-    this.props.uploadFile({
-      name: file.name,
-      parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
-      file,
-    });
+    this.props.uploadFile({ name: file.name, parentFolder: this.props.drive.folderHash, file });
     return false;
   }
 
@@ -173,6 +176,10 @@ export class Home extends React.Component {
     this.props.getFoldersTree();
   }
 
+  getPermission(permission) {
+    this.setState({ userPermission: permission });
+  }
+
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
@@ -192,24 +199,25 @@ export class Home extends React.Component {
           <Buttons newFolder={this.createFolder}
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
+                   getPermission={this.getPermission}
                    mode={mode}
                    folderData={this.props[mode]}
-          />
-          {
-            this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
-              ? <div className="emptyHere">
-                <img src={emptyHere} alt=""/>
-              </div>
-              : <div className="flex-start ff-rw">
-                <Drive folderData={this.props[mode]}
-                       username={this.props.userName}
-                       updateFile={this.updateFile}
-                       shareModal={this.shareModal}
-                       openFolder={this.openFolder}
-                       getVersions={this.getVersions}
-                       downloadFile={this.downloadFile}
-                       viewAccessList={this.viewAccessList}/>
-              </div>
+                   username={this.props.userName}/>
+          {this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
+            ? <div className="emptyHere">
+              <img src={emptyHere} alt=""/>
+            </div>
+            : <div className="flex-start ff-rw">
+              <Drive folderData={this.props[mode]}
+                     username={this.props.userName}
+                     updateFile={this.updateFile}
+                     shareModal={this.shareModal}
+                     openFolder={this.openFolder}
+                     getVersions={this.getVersions}
+                     downloadFile={this.downloadFile}
+                     viewAccessList={this.viewAccessList}
+                     getPermission={this.getPermission}/>
+            </div>
           }
         </div>
         {
@@ -281,7 +289,6 @@ export class Home extends React.Component {
                     <Col className="permissionIcons">
                       <Col className="sharedUserAccess">
                         <img src={editorIcon} title="View and update" alt=""/>
-
                       </Col>
                       <Col className="revokeAccess">
                         {
@@ -295,13 +302,13 @@ export class Home extends React.Component {
                                     });
                                   }}/>
                         }
-
                       </Col>
                     </Col>
                   </Row>
                 ))
               }
               {
+
                 permissionData.readUsers.map((user, i) => (
                   !permissionData.writeUsers.includes(user)
                   && <Row key={user} className='sharedUser viewer'>
@@ -311,7 +318,6 @@ export class Home extends React.Component {
                     <Col className="permissionIcons">
                       <Col className="sharedUserAccess">
                         <img src={viewerIcon} title="View only" alt=""/>
-
                       </Col>
                       <Col className="revokeAccess">
                         {
