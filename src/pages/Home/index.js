@@ -287,13 +287,13 @@ export class Home extends React.Component {
                         {
                           (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
                           && <img src={revokeAccessIcon} alt="Revoke access"
-                                                          onClick={() => {
-                                                            this.revokePermissions({
-                                                              user: permissionData.writeUsers[i],
-                                                              hash: permissionData.hash,
-                                                              permission: 'unwrite',
-                                                            });
-                                                          }}/>
+                                  onClick={() => {
+                                    this.revokePermissions({
+                                      user: permissionData.writeUsers[i],
+                                      hash: permissionData.hash,
+                                      permission: 'unwrite',
+                                    });
+                                  }}/>
                         }
 
                       </Col>
@@ -317,13 +317,13 @@ export class Home extends React.Component {
                         {
                           (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
                           && <img src={revokeAccessIcon} alt="Revoke access"
-                                                          onClick={() => {
-                                                            this.revokePermissions({
-                                                              user: permissionData.readUsers[i],
-                                                              hash: permissionData.hash,
-                                                              permission: 'unread',
-                                                            });
-                                                          }}/>
+                                  onClick={() => {
+                                    this.revokePermissions({
+                                      user: permissionData.readUsers[i],
+                                      hash: permissionData.hash,
+                                      permission: 'unread',
+                                    });
+                                  }}/>
                         }
                       </Col>
                     </Col>
