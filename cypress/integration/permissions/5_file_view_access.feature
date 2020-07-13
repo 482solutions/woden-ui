@@ -203,3 +203,5 @@ Feature: Grant view access for a file
     And Enter "UsernameUser2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
+
+

@@ -13,7 +13,7 @@ Feature: Uploading files
     @positive
     Scenario: 1 User can upload txt file
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."
@@ -23,7 +23,7 @@ Feature: Uploading files
     @positive
     Scenario: 2 User can upload PNG file
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Upload a new file button
       And Choose the needed "image.png" file from its PC directory
       And Spin is visible "Uploading file..."
@@ -33,7 +33,7 @@ Feature: Uploading files
     @negative
     Scenario: 3 cannot upload one file twice
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
+      And The user is located in "My drive"
       And The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."
@@ -46,7 +46,7 @@ Feature: Uploading files
     @positive
     Scenario: 4 User can upload 2 files with the same name and different extension
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."

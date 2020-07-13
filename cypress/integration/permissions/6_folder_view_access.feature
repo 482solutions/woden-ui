@@ -208,3 +208,22 @@ Feature: Grant view access for a folder
     And Enter "UsernameUser2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
+
+  @positive
+  Scenario: 13 Viewer can see files that were created in the shared folder after the transfer of viewing rights
+    Given The user 1 is the owner of the folder "testFolder"
+    And The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
+    And Enter "User2" email to field "#form_in_modal_username"
+    And Choose the "View Only" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    And Message about transfer ownership "Permissions updated successfully"
+    And Upload file "TestUpload.txt" to "testFolder"
+    And Login as new user 2 without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "testFolder" is visible
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    And The file "TestUpload.txt" is visible

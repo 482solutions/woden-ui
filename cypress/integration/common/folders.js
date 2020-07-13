@@ -10,14 +10,6 @@ Given(/^Create folder with name "([^"]*)" in root without UI$/, (folder) => {
   })
 });
 
-Then(/^Folder "([^"]*)" should be visible on dashboard$/, (folderName) => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.get('.folderTitle').should('contain.text', folderName)
-      .as(`Folder ${folderName} on the dashboard`).wait(1000)
-  })
-});
-
 Given(/^Create folder with name "([^"]*)" in "([^"]*)"$/, (folder2, folder1) => {
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
