@@ -111,5 +111,10 @@ Given(/^The user located on root dashboard$/, () => {
 });
 
 Given(/^RELOAD$/, () => {
+  cy.wait(1000)
   cy.reload()
+});
+
+When(/^The user press the back button$/, () => {
+  cy.get('.goBack').click()
 });
