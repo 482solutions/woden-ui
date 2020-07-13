@@ -15,6 +15,11 @@ Then(/^The user open Shared with me$/,  () => {
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
+  switch (btn) {
+    case 'Revoke access':
+      btn = '.revokeAccess'
+      break;
+  }
   cy.contains(btn).should(visible)
 });
 
@@ -26,17 +31,31 @@ Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
   })
 });
 
-When(/^The user press the Actions button in "([^"]*)" folder$/, (folder) => {
+When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, name, obj) => {
+  let hash;
   cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Actions_${hashFolder}`).click().wait(1000)
+  switch (action) {
+    case 'Access list':
+      action = 'Permissions';
+      break;
+  }
+  switch (obj) {
+    case 'folder':
+      obj = 'folder';
+      hash = getHashFromFolder(name, Cypress.env('foldersInRoot'));
+      break;
+    case 'file':
+      obj = 'file';
+      hash = getHashFromFile(name, Cypress.env('filesInRoot'));
+      break;
+  }
+  if (hash === undefined) {
+    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(1000)
+  } else {
+    cy.get(`#${action}_${hash}`).click().wait(1000)
+  }
 });
 
-When(/^The user press the Share button in "([^"]*)" folder$/, (folder) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Share_${hashFolder}`).click().wait(1000)
-});
 
 Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
   cy.wait('@getFolder').then((xhr) => {
@@ -45,19 +64,6 @@ Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
     cy.contains(folder).should('be.visible')
   })
 });
-
-When(/^The user press the Access list button in "([^"]*)" folder$/, (folder) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
-});
-
-When(/^The user press the Access list button in "([^"]*)" file$/, (file) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFile(file, Cypress.env('filesInRoot'))
-  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
-});
-
 
 When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" "([^"]*)" to "([^"]*)"$/,
   (fromUser, permission, object, name, toUser) => {

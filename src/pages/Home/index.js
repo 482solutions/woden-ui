@@ -67,11 +67,6 @@ export class Home extends React.Component {
     this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
-    const { username } = this.props;
-    const infoArray = this.state.mode.foldersInfo;
-    const type = 'folder';
-    const detectPermission = detectUserPermission(username, hash, infoArray, type);
-    this.setState({ userPermission: detectPermission });
   }
 
   async openFolder(hash) {
@@ -83,7 +78,7 @@ export class Home extends React.Component {
   }
 
   uploadFile(file) {
-    this.props.uploadFile({ name: file.name, parentFolder: this.props.drive.folderHash, file });
+    this.props.uploadFile({ name: file.name, parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash, file });
     return false;
   }
 
@@ -182,6 +177,7 @@ export class Home extends React.Component {
 
   getPermission(permission) {
     this.setState({ userPermission: permission });
+    console.log(this.state.userPermission)
   }
 
   render() {
