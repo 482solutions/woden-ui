@@ -21,7 +21,7 @@ export default class Drive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPermissions: 'null',
+      userPermission: 'null',
     };
   }
 
@@ -126,6 +126,9 @@ export default class Drive extends Component {
                  key={i}>
               <img width={80}
                    onDoubleClick={() => this.props.openFolder(folder.hash)}
+                   onClick={() => this.detectPermission(username,
+                     folder.hash,
+                     foldersInfo,
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>
