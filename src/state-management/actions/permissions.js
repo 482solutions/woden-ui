@@ -2,13 +2,13 @@ import Woden from 'woden';
 import { message } from 'antd';
 import { CHANGE_PERMISSION, REVOKE_PERMISSIONS } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
-import {getFolderData} from './filesystem';
+import { getFolderData } from './filesystem';
 
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
-export const changePermissions = (permissionData) => async (dispatch) => {
+export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
 
@@ -23,7 +23,6 @@ export const changePermissions = (permissionData) => async (dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Permissions updated successfully');
-        
         dispatch({
           type: CHANGE_PERMISSION,
         });
@@ -31,7 +30,7 @@ export const changePermissions = (permissionData) => async (dispatch) => {
     });
 };
 
-export const revokePermissions = (permissionData) => async (dispatch) => {
+export const revokePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Revoking access...', 0);
 
@@ -51,4 +50,4 @@ export const revokePermissions = (permissionData) => async (dispatch) => {
         });
       }
     });
-}
+};

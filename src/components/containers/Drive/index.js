@@ -157,13 +157,11 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(filesInfo[i])}
-                   onDoubleClick={() => this.props.downloadFile(file.name, file.hash, foldersInfo, 'null')}
+                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null')}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
-                    <span className="fileTitle"
-                          onDoubleClick={() => this.props.downloadFile(file.name,
-                            file.hash, 'null')}>{file.name}</span>
+                    <span className="fileTitle">{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             onClick={() => this.detectPermission(username,

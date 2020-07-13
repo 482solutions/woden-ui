@@ -79,7 +79,7 @@ export class Home extends React.Component {
   }
 
   uploadFile(file) {
-    this.props.uploadFile({ name: file.name, parentFolder: this.props.drive.folderHash, file });
+    this.props.uploadFile({ name: file.name, parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash, file });
     return false;
   }
 
@@ -95,8 +95,8 @@ export class Home extends React.Component {
     });
   }
 
-  downloadFile(name, cid, hash) {
-    this.props.downloadFile(name, cid, hash);
+  downloadFile(hash, cid) {
+    this.props.downloadFile(hash, cid);
   }
 
   changePermissions(data) {
