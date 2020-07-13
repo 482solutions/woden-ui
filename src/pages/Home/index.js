@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 import { Buttons, Drive, Sidebar } from '../../components/containers';
-import { getRootFolderHash } from '../../utils/functions';
+import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -67,21 +67,27 @@ export class Home extends React.Component {
     this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
+    const { username } = this.props;
+    const infoArray = this.state.mode.foldersInfo;
+    const type = 'folder';
+    const detectPermission = detectUserPermission(username, hash, infoArray, type);
+    this.setState({ userPermission: detectPermission });
   }
-
 
   async openFolder(hash) {
     const rootHash = await getRootFolderHash();
     if (rootHash === this.props[this.state.mode].folderHash) {
-      this.setState({ folderHash: hash });
+      this.setState({folderHash: hash});
     }
     this.props.getFolderData(hash, this.state.mode);
   }
 
-  uploadFile(file) {
-    this.props.uploadFile({ name: file.name, parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash, file });
-    return false;
-  }
+    uploadFile(file)
+    {
+      this.props.uploadFile({ name: file.name, parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash, file });
+      return false;
+    }
+
 
   updateFile(file, hash) {
     this.props.updateFile({ fileHash: hash, file });
@@ -95,8 +101,8 @@ export class Home extends React.Component {
     });
   }
 
-  downloadFile(name, cid, hash) {
-    this.props.downloadFile(name, cid, hash);
+  downloadFile(hash, cid) {
+    this.props.downloadFile(hash, cid);
   }
 
   changePermissions(data) {
@@ -179,7 +185,6 @@ export class Home extends React.Component {
   getPermission(permission) {
     this.setState({ userPermission: permission });
   }
-
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
@@ -199,10 +204,12 @@ export class Home extends React.Component {
           <Buttons newFolder={this.createFolder}
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
+                   getPermission={this.getPermission}
                    mode={mode}
                    folderData={this.props[mode]}
-                   username={this.props.userName}
-                   userPermission={this.state.userPermission}/>
+                   folderHash={this.state.folderHash}
+                   userPermission={this.state.userPermission}
+                   username={this.props.userName}/>
           {this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
             ? <div className="emptyHere">
               <img src={emptyHere} alt=""/>
@@ -307,33 +314,31 @@ export class Home extends React.Component {
                   </Row>
                 ))
               }
-              {
-
-                permissionData.readUsers.map((user, i) => (
-                  !permissionData.writeUsers.includes(user)
-                  && <Row key={user} className='sharedUser viewer'>
-                    <Col className="sharedUserName">
-                      {permissionData.readUsers[i]}
-                    </Col>
-                    <Col className="permissionIcons">
-                      <Col className="sharedUserAccess">
-                        <img src={viewerIcon} title="View only" alt=""/>
-                      </Col>
-                      <Col className="revokeAccess">
-                        {
-                          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
-                          && <img src={revokeAccessIcon} alt="Revoke access"
-                                  onClick={() => {
-                                    this.revokePermissions({
-                                      user: permissionData.readUsers[i],
-                                      hash: permissionData.hash,
-                                      permission: 'unread',
-                                    });
-                                  }}/>
-                        }
-                      </Col>
-                    </Col>
-                  </Row>
+              {permissionData.readUsers.map((user, i) => (
+                !permissionData.writeUsers.includes(user)
+                && <Row key={user} className='sharedUser viewer'>
+                <Col className="sharedUserName">
+                {permissionData.readUsers[i]}
+                </Col>
+                <Col className="permissionIcons">
+                <Col className="sharedUserAccess">
+                <img src={viewerIcon} title="View only" alt=""/>
+                </Col>
+                <Col className="revokeAccess">
+                {
+                  (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                  && <img src={revokeAccessIcon} alt="Revoke access"
+                          onClick={() => {
+                            this.revokePermissions({
+                              user: permissionData.readUsers[i],
+                              hash: permissionData.hash,
+                              permission: 'unread',
+                            });
+                          }}/>
+                }
+                </Col>
+                </Col>
+                </Row>
                 ))
               }
             </Col>
@@ -343,26 +348,25 @@ export class Home extends React.Component {
     );
   }
 }
-
 export default connect(({ auth, filesystem }) => ({
-  userName: auth.user.name,
-  versions: filesystem.versions,
-  drive: filesystem.drive,
-  share: filesystem.share,
-  tree: filesystem.tree,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  initialFilesystem: actions.initialFilesystem,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-  revokePermissions: actions.revokePermissions,
-  getFoldersTree: actions.getFoldersTree,
-})(
+    userName: auth.user.name,
+    versions: filesystem.versions,
+    drive: filesystem.drive,
+    share: filesystem.share,
+    tree: filesystem.tree,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    initialFilesystem: actions.initialFilesystem,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+    revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
+  })(
   Home,
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Col, Row, Upload,
+  Button, Upload,
 } from 'antd';
 import { getRootFolderHash } from '../../../utils/functions';
 import './style.css';
@@ -38,6 +38,7 @@ class Buttons extends Component {
 
   render() {
     const { userPermission } = this.props;
+
     return (
       <div className='buttonsWrapper'>
         <div className='navigation'>

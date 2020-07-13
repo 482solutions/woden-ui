@@ -119,7 +119,11 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img width={80}
-                   onDoubleClick={() => this.props.openFolder(username, folder.hash, foldersInfo, 'folder')}
+                   onClick={() => this.detectPermission(username,
+                     folder.hash,
+                     foldersInfo,
+                     'folder')}
+                   onDoubleClick={() => this.props.openFolder(folder.hash)}
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>

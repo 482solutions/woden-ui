@@ -17,6 +17,7 @@
   display: flex;
   justify-content: space-between;
   width: 330px;
+  margin-left: 15px;
 }
 
 .goHome{
