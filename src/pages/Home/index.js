@@ -20,6 +20,7 @@ export class Home extends React.Component {
       fileWrapperVisible: false,
       accessListVisible: false,
       userPermission: 'null',
+      folderHash: 'null',
       permissionData: {
         title: 'null',
         hash: null,
@@ -73,9 +74,12 @@ export class Home extends React.Component {
     this.setState({ userPermission: detectPermission });
   }
 
-  openFolder(hash, permission) {
+  async openFolder(hash) {
+    const rootHash = await getRootFolderHash();
+    if (rootHash === this.props[this.state.mode].folderHash) {
+      this.setState({ folderHash: hash });
+    }
     this.props.getFolderData(hash, this.state.mode);
-    this.setState({ userPermission: permission });
   }
 
   uploadFile(file) {
@@ -202,6 +206,7 @@ export class Home extends React.Component {
                    getPermission={this.getPermission}
                    mode={mode}
                    folderData={this.props[mode]}
+                   folderHash={this.state.folderHash}
                    username={this.props.userName}/>
           {this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
             ? <div className="emptyHere">
