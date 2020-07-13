@@ -120,9 +120,11 @@ Feature: Transfer folder ownership
     @positive
     Scenario: 9 User can transfer folder ownership with files in folder
       Given Upload file "TestUpload.txt" to "Folder1"
-      And Back to My Drive from folder
+      And The user press the back button
+      And Spin is visible "Getting data..."
       And Upload file "image.png" to "Folder1"
-      And Back to My Drive from folder
+      And The user press the back button
+      And Spin is visible "Getting data..."
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
       And Enter "User2" email to field "#form_in_modal_username"

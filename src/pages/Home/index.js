@@ -123,7 +123,6 @@ export class Home extends React.Component {
         break;
       }
     }
-    console.log('INFO: ', info);
     this.setState({
       permissionData: {
         title: info[`${type}Name`],
@@ -179,7 +178,6 @@ export class Home extends React.Component {
 
   getPermission(permission) {
     this.setState({ userPermission: permission });
-    console.log(this.state.userPermission)
   }
 
   render() {

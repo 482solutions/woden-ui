@@ -66,9 +66,11 @@ Feature: Grant view access for a folder
   @positive
   Scenario: 3 User can grand view access for a folder with files inside
     And Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -89,9 +91,11 @@ Feature: Grant view access for a folder
   @positive
   Scenario: 4 Editor can grand view access for a folder in the shared folder to the user 3
     And Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"

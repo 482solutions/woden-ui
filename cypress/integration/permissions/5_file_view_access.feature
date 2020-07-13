@@ -85,7 +85,8 @@ Feature: Grant view access for a file
   Scenario: 4 Owner can provide the access to view 1 file in a folder with many files
     And Create folder with name "testFolder" in root without UI
     And Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
     When The user press the "Actions" button in "txtFile.txt" "file"
     And The user press the "Share" button in "txtFile.txt" "file"

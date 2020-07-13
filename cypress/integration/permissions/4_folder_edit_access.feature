@@ -90,7 +90,8 @@ Feature: Grant edit access for a folder
   @positive
   Scenario: 3 User can grand edit access for a folder with files inside
     Given Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -114,9 +115,11 @@ Feature: Grant edit access for a folder
   Scenario: 4 Editor can grand edit access for a file in the shared
   folder to the user 3 and user3 has rights only for shared file
     Given Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     And Upload file "image.png" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"

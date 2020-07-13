@@ -72,7 +72,6 @@ Then(/^Login as new user 2 without UI$/, () => {
   })
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    console.log(xhr.responseBody)
   })
 });
 

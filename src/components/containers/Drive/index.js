@@ -16,15 +16,13 @@ import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import { detectUserPermission } from '../../../utils/functions';
-
 export default class Drive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPermission: 'null',
+      userPermissions: 'null',
     };
   }
-
   fileMenu(hash, name, filesData) {
     return (
       <Menu>
@@ -62,7 +60,6 @@ export default class Drive extends Component {
       </Menu>
     );
   }
-
   folderMenu(hash, name, folderData) {
     return (
       <Menu>
@@ -83,7 +80,6 @@ export default class Drive extends Component {
       </Menu>
     );
   }
-
   detectImage(file) {
     switch (file.fileType) {
       case 'application/pdf':
@@ -106,13 +102,11 @@ export default class Drive extends Component {
         return fileImageDefault;
     }
   }
-
   detectPermission(username, hash, infoArray, type) {
     const detectPermission = detectUserPermission(username, hash, infoArray, type);
     this.setState({ userPermission: detectPermission });
     this.props.getPermission(detectPermission);
   }
-
   render() {
     const {
       entryFolders, entryFiles, filesInfo, foldersInfo,
@@ -125,10 +119,7 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img width={80}
-                   onDoubleClick={() => this.props.openFolder(folder.hash)}
-                   onClick={() => this.detectPermission(username,
-                     folder.hash,
-                     foldersInfo,
+                   onDoubleClick={() => this.props.openFolder(username, folder.hash, foldersInfo, 'folder')}
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>
@@ -154,19 +145,16 @@ export default class Drive extends Component {
             </div>
           ))
         }
-
         {
           entryFiles.map((file, i) => (
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(filesInfo[i])}
-                   onDoubleClick={() => this.props.downloadFile(file.name, file.hash, foldersInfo, 'null')}
+                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null')}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
-                    <span className="fileTitle"
-                          onDoubleClick={() => this.props.downloadFile(file.name,
-                            file.hash, 'null')}>{file.name}</span>
+                <span className="fileTitle">{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             onClick={() => this.detectPermission(username,

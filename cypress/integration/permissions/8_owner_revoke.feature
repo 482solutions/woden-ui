@@ -196,7 +196,8 @@ Feature: Owner revoke access
 #
 #    Then The "User1" is the "owner" in access list
 #    And The "User2" is the "viewer" in access list
-#    And Back to My Drive from folder
+#   And The user press the back button
+#    And Spin is visible "Getting data..."
 #    And The user press the Actions button in "Revoke" folder
 #    And The user press the Access list button in "Revoke" folder
 #    And The user sees the access list
