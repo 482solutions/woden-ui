@@ -66,11 +66,6 @@ export class Home extends React.Component {
     this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
-    const { username } = this.props;
-    const infoArray = this.state.mode.foldersInfo;
-    const type = 'folder';
-    const detectPermission = detectUserPermission(username, hash, infoArray, type);
-    this.setState({ userPermission: detectPermission });
   }
 
   openFolder(hash, permission) {
@@ -178,6 +173,7 @@ export class Home extends React.Component {
 
   getPermission(permission) {
     this.setState({ userPermission: permission });
+    console.log(this.state.userPermission)
   }
 
   render() {

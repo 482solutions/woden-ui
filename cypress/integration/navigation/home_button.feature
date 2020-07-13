@@ -29,7 +29,7 @@ Feature: Home button
       And The folder "FolderFolder" is visible
       And The user opens folder "FolderFolder"
       And Spin is visible "Getting data..."
-      And User has Editors rights to "Folder2" "FolderFolder"
+      And "User2" has Editors rights to "Folder2" "FolderFolder"
       When User click Home button
       And Spin is visible "Getting data..."
       Then The user is located in "Shared with me"

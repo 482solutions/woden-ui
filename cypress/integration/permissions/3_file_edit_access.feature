@@ -29,7 +29,7 @@ Feature: Grant edit access for a file
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The file "TestUpload.txt" is visible
-    Then User has Editors rights to "TestUpload.txt" "file"
+    Then "User2" has Editors rights to "TestUpload.txt" "file"
     And Login as new user without UI
     And The file "TestUpload.txt" is visible
     And User can update file "TestUpload.txt"
@@ -52,7 +52,7 @@ Feature: Grant edit access for a file
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The file "TestUpload.txt" is visible
-    Then User has Editors rights to "TestUpload.txt" "file"
+    Then "User2" has Editors rights to "TestUpload.txt" "file"
     And Login as new user without UI
     And The folder "Folder1" is visible
     And The user opens folder "Folder1"
@@ -77,7 +77,7 @@ Feature: Grant edit access for a file
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The file "TestUpload.txt" is visible
-    And User has Editors rights to "TestUpload.txt" "file"
+    And "User2" has Editors rights to "TestUpload.txt" "file"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Choose the "View and Update" option from pop-up window
@@ -93,7 +93,7 @@ Feature: Grant edit access for a file
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And The file "TestUpload.txt" is visible
-    Then User has Editors rights to "TestUpload.txt" "file"
+    Then "User3" has Editors rights to "TestUpload.txt" "file"
 
   @negative
   Scenario: 4 User can not grand access for a file to the user with incorrect email
@@ -149,7 +149,7 @@ Feature: Grant edit access for a file
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And User has Editors rights to "TestUpload.txt" "file"
+    And "User2" has Editors rights to "TestUpload.txt" "file"
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"

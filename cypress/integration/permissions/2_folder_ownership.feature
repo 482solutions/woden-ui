@@ -27,7 +27,7 @@ Feature: Transfer folder ownership
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
       And The user opens folder "Folder1"
-      And User has Editors rights to "Folder1" "folder"
+      And "User1" has Editors rights to "Folder1" "folder"
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
 
@@ -55,7 +55,7 @@ Feature: Transfer folder ownership
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
       And The user opens folder "Folder2"
-      And User has Editors rights to "testFolder2" "folder"
+      And "User1" has Editors rights to "testFolder2" "folder"
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
 

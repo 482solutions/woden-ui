@@ -30,13 +30,13 @@ Feature: Grant edit access for a folder
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     #    TODO: delete reload and steps for opening folder, after fix reload:
-    And User has Editors rights to "testFolder" folder
+    And "User2" has Editors rights to "testFolder" "folder"
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
-    And The file "TestUpload.txt" is visible
+    And The file "test.pem" is visible
 
   @positive
   Scenario: 2 Edit access by editor
@@ -54,7 +54,7 @@ Feature: Grant edit access for a folder
     And The folder "testFolder" is visible
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
-    And User has Editors rights to "testFolder" folder
+    And "User1" has Editors rights to "testFolder" "folder"
     And Button "New Folder" "be.visible"
     And Button "File Upload" "be.visible"
     And The user open Shared with me
@@ -73,21 +73,22 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
-    Then User has Editors rights to "testFolder" folder
-
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    Then "User3" has Editors rights to "testFolder" "folder"
 #    TODO: delete reload and steps for opening folder, after fix reload:
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
-    And The file "TestUpload.txt" is visible
 
+    And The file "TestUpload.txt" is visible
     And Button "New Folder" "be.visible"
     And Button "File Upload" "be.visible"
 
   @positive
-  Scenario: 3 User can  grand edit access for a folder with files inside
+  Scenario: 3 User can grand edit access for a folder with files inside
     Given Upload file "TestUpload.txt" to "testFolder"
     And Back to My Drive from folder
     When The user press the "Actions" button in "testFolder" "folder"
@@ -247,7 +248,7 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     Then "Transfer ownership" option from pop-up window is not visible
 
-  @positive @BAG
+  @positive
   Scenario: 13 Editor can see the folders that were created in the shared folder after the transfer of editing rights
     Given The user 1 is the owner of the folder "testFolder"
     And The user press the "Actions" button in "testFolder" "folder"
@@ -274,7 +275,6 @@ Feature: Grant edit access for a folder
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible
-#    TODO BAG 697
     Then The user opens folder "testFolder2"
     And Spin is visible "Getting data..."
     And The user is located in "testFolder2"

@@ -25,7 +25,7 @@ Feature: Back button
       And The folder "Folder_level_1" is visible
       And The user opens folder "Folder_level_1"
       And Spin is visible "Getting data..."
-      And User has Editors rights to "Folder2" "Folder_level_1"
+      And "User2" has Editors rights to "Folder2" "Folder_level_1"
       And Back to My Drive from folder
       And Spin is visible "Getting data..."
 #      TODO BAG 685
