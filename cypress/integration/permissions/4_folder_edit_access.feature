@@ -15,8 +15,8 @@ Feature: Grant edit access for a folder
 
   @positive
   Scenario: 1 Edit access by owner
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -40,8 +40,8 @@ Feature: Grant edit access for a folder
 
   @positive
   Scenario: 2 Edit access by editor
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -59,8 +59,8 @@ Feature: Grant edit access for a folder
     And Button "File Upload" "be.visible"
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Choose the "View and Update" option from pop-up window
     And Register without UI user3
     And Enter "User3" email to field "#form_in_modal_username"
@@ -90,8 +90,8 @@ Feature: Grant edit access for a folder
   Scenario: 3 User can  grand edit access for a folder with files inside
     Given Upload file "TestUpload.txt" to "testFolder"
     And Back to My Drive from folder
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -116,8 +116,8 @@ Feature: Grant edit access for a folder
     And Back to My Drive from folder
     And Upload file "image.png" to "testFolder"
     And Back to My Drive from folder
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -131,8 +131,8 @@ Feature: Grant edit access for a folder
     And The user opens folder "testFolder"
     And The file "TestUpload.txt" is visible
     And The file "image.png" is visible
-    And The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Register without UI user3
     And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
@@ -149,8 +149,8 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 5 User can not grand access for a folder to the user with incorrect email
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -159,15 +159,15 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 6 User can not grand edit access for a folder to the user if he already has them
     Given The user 1 is the owner of the folder "testFolder"
-    And The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    And The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -176,8 +176,8 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 7 Owner can not grand access for a folder to himself
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User1" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -186,8 +186,8 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 8 Editor can not grand access for a folder to himself
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -197,8 +197,8 @@ Feature: Grant edit access for a folder
     And The user open Shared with me
     And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
-    And The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    And The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -208,8 +208,8 @@ Feature: Grant edit access for a folder
   Scenario: 9 Owner can not grand access for a file to some users
     Given The user 1 is the owner of the folder "testFolder"
     And Register without UI user3
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2 and User3" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
@@ -217,17 +217,17 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 10 Owner can not grand access for a folder if field "email" contain spaces
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "spaces" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
-  @negativeTestUpload.txt
+  @negative
   Scenario: 11 Owner can not grand access for a folder if field "email" contain username
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "UsernameUser2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
@@ -235,8 +235,8 @@ Feature: Grant edit access for a folder
   @negative
   Scenario: 12 Editor can can not to transfer ownership for a folder
     Given The user 1 is the owner of the folder "testFolder"
-    When The user press the Actions button in "testFolder" folder
-    And The user press the Share button in "testFolder" folder
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
@@ -246,3 +246,35 @@ Feature: Grant edit access for a folder
     And The user open Shared with me
     And Spin is visible "Getting data..."
     Then "Transfer ownership" option from pop-up window is not visible
+
+  @positive @BAG
+  Scenario: 13 Editor can see the folders that were created in the shared folder after the transfer of editing rights
+    Given The user 1 is the owner of the folder "testFolder"
+    And The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
+    And Enter "User2" email to field "#form_in_modal_username"
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    And Message about transfer ownership "Permissions updated successfully"
+    And Login as new user 2 without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "testFolder" is visible
+    And Login as new user without UI
+    When Create folder with name "testFolder2" in "testFolder"
+    And Spin is visible "Getting data..."
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    And The folder "testFolder2" is visible
+    And Login as new user 2 without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "testFolder" is visible
+    And The user opens folder "testFolder"
+    And Spin is visible "Getting data..."
+    And The folder "testFolder2" is visible
+#    TODO BAG 697
+    Then The user opens folder "testFolder2"
+    And Spin is visible "Getting data..."
+    And The user is located in "testFolder2"

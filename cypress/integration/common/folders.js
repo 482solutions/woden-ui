@@ -32,11 +32,11 @@ Then(/^User has Editors rights to "([^"]*)" folder$/, (folder) => {
       cy.get(`input[type=file]`).attachFile('TestUpload.txt')
       cy.get('.ant-message-custom-content').as('spin').should('be.visible')
       cy.wait('@uploadFile').then((xhr) => {
+        expect(xhr.status).to.equal(200)
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
         //TODO: delete cy.reload()
         cy.reload()
-        // cy.contains('TestUpload.txt').should('be.visible')
       })
     })
   })
@@ -51,6 +51,8 @@ Given(/^Create folder with name "([^"]*)" in "([^"]*)"$/, (folder2, folder1) => 
   })
 });
 
-Then(/^The user located in Shared with me$/,  () => {
-  cy.get('.currentFolder').should('contain.text', 'Shared with me')
+Then(/^The user is located in "([^"]*)"$/, (folderName) => {
+  cy.get('.currentFolder')
+    .should('be.visible')
+    .should('contain.text', folderName)
 });

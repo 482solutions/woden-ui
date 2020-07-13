@@ -10,8 +10,8 @@ Feature: Transfer folder ownership
 
     @positive
     Scenario: 1 Transfer folder ownership in root folder
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "User2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
@@ -37,8 +37,8 @@ Feature: Transfer folder ownership
       And Create folder with name "Folder2" in "Folder1"
 #      TODO delete And The user opens folder "Folder1":
       And The user opens folder "Folder1"
-      When The user press the Actions button in "Folder2" folder
-      And The user press the Share button in "Folder2" folder
+      When The user press the "Actions" button in "Folder2" "folder"
+      And The user press the "Share" button in "Folder2" "folder"
       And Enter "User2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
@@ -62,8 +62,8 @@ Feature: Transfer folder ownership
     @negative
     Scenario: 3 User can not transfer folder ownership to the user with incorrect email
       Given The user 1 is the owner of the folder "Folder1"
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Choose the "Transfer ownership" option from pop-up window
       And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
       And Press "Confirm"
@@ -72,8 +72,8 @@ Feature: Transfer folder ownership
     @negative
     Scenario: 4 User can not transfer folder ownership to the user if he already has them
       Given The user 1 is the owner of the folder "Folder1"
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "User1" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
@@ -83,8 +83,8 @@ Feature: Transfer folder ownership
     Scenario: 5 User can not transfer folder ownership to some users
       Given The user 1 is the owner of the folder "Folder1"
       And Register without UI user3
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "User2 and User3" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
@@ -92,8 +92,8 @@ Feature: Transfer folder ownership
     @negative
     Scenario: 6 User can not transfer folder ownership if field "email" is empty
       Given The user 1 is the owner of the folder "Folder1"
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "nothing" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
@@ -102,8 +102,8 @@ Feature: Transfer folder ownership
     @negative
     Scenario: 7 User can not transfer folder ownership if field "email" contain spaces
       Given The user 1 is the owner of the folder "Folder1"
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "spaces" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
@@ -111,8 +111,8 @@ Feature: Transfer folder ownership
     @negative
     Scenario: 8 User can not transfer folder ownership if field "email" contain username
       Given The user 1 is the owner of the folder "Folder1"
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "UsernameUser2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
@@ -123,8 +123,8 @@ Feature: Transfer folder ownership
       And Back to My Drive from folder
       And Upload file "image.png" to "Folder1"
       And Back to My Drive from folder
-      When The user press the Actions button in "Folder1" folder
-      And The user press the Share button in "Folder1" folder
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
       And Enter "User2" email to field "#form_in_modal_username"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"

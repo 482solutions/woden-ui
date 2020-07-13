@@ -30,7 +30,7 @@ Feature: Back button
       And Spin is visible "Getting data..."
 #      TODO BAG 685
       Then The User is transferred to the previous folder 1 level back
-      And The user located in Shared with me
+      And The user is located in "Shared with me"
 
     Scenario: 3 Back button from the n lvl folder
       And Create folder with name "Folder_level_2" in "Folder_level_1"

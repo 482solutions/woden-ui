@@ -14,7 +14,7 @@ Feature: Home button
       Given Folder "FolderFolder" should be visible on dashboard
       And The user double click this folder "FolderFolder"
       And Spin is visible "Getting data..."
-      And The user is located in his created folder "FolderFolder"
+      And The user is located in "FolderFolder"
       When User click Home button
       And Spin is visible "Getting data..."
       Then The user is located in root folder
@@ -32,4 +32,4 @@ Feature: Home button
       And User has Editors rights to "Folder2" "FolderFolder"
       When User click Home button
       And Spin is visible "Getting data..."
-      Then The user located in Shared with me
+      Then The user is located in "Shared with me"

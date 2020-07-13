@@ -123,7 +123,7 @@ Given(/^The user located on root dashboard$/, () => {
 
 Given(/^RELOAD$/, () => {
   cy.reload()
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-  })
+  // cy.wait('@getFolder').then((xhr) => {
+  //   expect(xhr.responseBody).to.not.have.property('stack')
+  // })
 });
