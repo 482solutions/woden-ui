@@ -160,7 +160,9 @@ it('Check all Dropdown and simulate click', () => {
                                  }}
                                  detectUserPermission={() => {
                                  }}
-                                 versions={versions}/>);
+                                 versions={versions}
+                                 getPermission={() => {
+                                 }}/>);
   expect(wrapper.find(Dropdown).at(0).simulate('click')).to.be.ok;
   expect(wrapper.find(Dropdown).at(1).simulate('click')).to.be.ok;
 });
