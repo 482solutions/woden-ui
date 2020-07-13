@@ -16,7 +16,6 @@ export const getRootFolderHash = () => (
 
 export const detectUserPermission = (username, hash, infoArray, type) => {
   let info = {};
-  console.log(infoArray);
   for (let i = 0; i < infoArray.length; i++) {
     if (infoArray[i][`${type}Hash`] === hash) {
       info = infoArray[i];

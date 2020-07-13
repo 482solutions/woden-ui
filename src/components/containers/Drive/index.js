@@ -16,7 +16,6 @@ import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import { detectUserPermission } from '../../../utils/functions';
-
 export default class Drive extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +23,6 @@ export default class Drive extends Component {
       userPermissions: 'null',
     };
   }
-
   fileMenu(hash, name, filesData) {
     return (
       <Menu>
@@ -62,7 +60,6 @@ export default class Drive extends Component {
       </Menu>
     );
   }
-
   folderMenu(hash, name, folderData) {
     return (
       <Menu>
@@ -83,7 +80,6 @@ export default class Drive extends Component {
       </Menu>
     );
   }
-
   detectImage(file) {
     switch (file.fileType) {
       case 'application/pdf':
@@ -106,13 +102,11 @@ export default class Drive extends Component {
         return fileImageDefault;
     }
   }
-
   detectPermission(username, hash, infoArray, type) {
     const detectPermission = detectUserPermission(username, hash, infoArray, type);
     this.setState({ userPermission: detectPermission });
     this.props.getPermission(detectPermission);
   }
-
   render() {
     const {
       entryFolders, entryFiles, filesInfo, foldersInfo,
@@ -125,7 +119,11 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img width={80}
-                   onDoubleClick={() => this.props.openFolder(username, folder.hash, foldersInfo, 'folder')}
+                   onClick={() => this.detectPermission(username,
+                     folder.hash,
+                     foldersInfo,
+                     'folder')}
+                   onDoubleClick={() => this.props.openFolder(folder.hash)}
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>

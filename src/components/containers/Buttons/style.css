@@ -1,20 +1,31 @@
-.homeButtons {
+.buttonsWrapper {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  align-items: center;
+  width: 95%;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  cursor: pointer;
+}
+.homeButtons{
+  display: flex;
+  justify-content: space-between;
+  width: 330px;
+  margin-left: 15px;
 }
 
 .goHome{
-  margin-left: 15px;
-  cursor: pointer;
   color: #8998AC;
 }
 
 .goBack {
-  cursor: pointer;
   color: #8998AC;
-  margin-left: 5px;
 }
 
 .goBack_inactive {
