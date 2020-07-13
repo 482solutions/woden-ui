@@ -28,7 +28,12 @@ class Buttons extends Component {
   }
 
   async goBack() {
-    this.props.getFolderData(this.props.folderData.parentHash);
+    if (this.props.folderData.folderHash === this.props.folderHash) {
+      const hash = await getRootFolderHash();
+      this.props.getFolderData(hash, this.props.mode);
+    } else {
+      this.props.getFolderData(this.props.folderData.parentHash);
+    }
   }
 
   render() {

@@ -14,13 +14,13 @@ Feature:  File updating
   Scenario: 1 File updating
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
-    When The user press the Actions button in "test.pem" file
-    And The user press the Update button in "test.pem" file
+    When The user press the "Actions" button in "test.pem" "file"
+    And The user press the "Update" button in "test.pem" "file"
     And Choose the needed "test.pem" file from its PC directory for update
     And Spin is visible "Updating file..."
     Then Message about update file "File updated successfully"
-    Then The user press the Actions button in "test.pem" file
-    And The user press the Versions button in "test.pem" file
+    Then The user press the "Actions" button in "test.pem" "file"
+    And The user press the "Versions" button in "test.pem" "file"
     And The sidebar "VersionWrapper" is visible
     And The last version remains in the system
 
@@ -28,13 +28,13 @@ Feature:  File updating
   Scenario: 2 File updating with other name
     Given Spin is visible "Getting data..."
     And Update file "test.pem"
-    When The user press the Actions button in "test.pem" file
-    And The user press the Update button in "test.pem" file
+    When The user press the "Actions" button in "test.pem" "file"
+    And The user press the "Update" button in "test.pem" "file"
     And Choose the needed "test.pem" for update to file with "txtFile.pem" name
     And Spin is visible "Updating file..."
     Then Message about update file "File updated successfully"
-    Then The user press the Actions button in "test.pem" file
-    And The user press the Versions button in "test.pem" file
+    Then The user press the "Actions" button in "test.pem" "file"
+    And The user press the "Versions" button in "test.pem" "file"
     And The sidebar "VersionWrapper" is visible
     And The last version remains in the system
 
@@ -43,8 +43,8 @@ Feature:  File updating
 #  Scenario: Scenario: 3 User can not update txt file to image
 #    Given Spin is visible "Getting data..."
 #    And Update file "test.pem"
-#    When The user press the Actions button in "test.pem" file
-#    And The user press the Update button in "test.pem" file
+#    When The user press the "Actions" button in "test.pem" "file"
+#    And The user press the "Update" button in "test.pem" "file"
 #    And Choose the needed "test.pem" for update to file with "image.png" name
 #    And Spin is visible "Updating file..."
 #    Then Message "You cannot upload a file of a different format"

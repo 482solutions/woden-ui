@@ -129,7 +129,6 @@ export default class Drive extends Component {
                    onClick={() => this.detectPermission(username,
                      folder.hash,
                      foldersInfo,
-                     'folder')}
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>
