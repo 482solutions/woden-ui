@@ -28,7 +28,7 @@ Feature: Open folders
       When The user double click this folder <folder> from list
       And Spin is visible "Getting data..."
       And Folder is opened <folder>
-      And Back to My Drive from folder
+      And User click Home button
       Examples: folder
         | folder               |
         | Folder-1             |
