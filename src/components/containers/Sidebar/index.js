@@ -13,8 +13,10 @@ class Sidebar extends Component {
         <div className="folders content">
           <div className="folderWrapper">
             <div className="">
-              .<FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree}/>
-              <img src={switcherIconRight} alt=""/>
+              <div className="">
+                <FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree}/>
+              </div>
+              <img src={switcherIconRight} onClick={this.props.getFoldersTree} alt=""/>
             </div>
             <img src={folderImage} className="folderImage" alt=""/>
             <div className="sideBarMode myDrive folderTree"

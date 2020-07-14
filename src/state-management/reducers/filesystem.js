@@ -1,5 +1,5 @@
 import {
-  GET_FOLDER_DATA, GET_VERSIONS, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, CLEAN_STORAGE,GET_FOLDERS_TREE
+  GET_FOLDER_DATA, GET_VERSIONS, SEARCH_FOLDER_FILE, SET_FOLDER_DATA, CLEAN_STORAGE, GET_FOLDERS_TREE,
 } from '../types';
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
     file: null,
     versionList: [],
   },
-  tree:[]
+  tree: [],
 };
 const cleanStorage = () => initialState;
 const handleSetFolder = (state, folderData, mode) => ({
@@ -67,10 +67,10 @@ const handleVersions = (state, fileData) => ({
     versionList: fileData.versionList,
   },
 });
-const handleTree = (state, treeData)=> ({
-...state,
-  tree: treeData
-})
+const handleTree = (state, treeData) => ({
+  ...state,
+  tree: treeData,
+});
 const handlers = {
   [SET_FOLDER_DATA]: handleSetFolder,
   [GET_FOLDER_DATA]: handleGetFolder,
@@ -82,6 +82,5 @@ const handlers = {
 
 export default (state = initialState, action) => {
   const handler = handlers[action.type];
-  console.log(action.type);
   return handler ? handler(state, action.payload, action.mode) : state;
 };
