@@ -38,7 +38,6 @@ class Buttons extends Component {
 
   render() {
     const { userPermission } = this.props;
-
     return (
       <div className='buttonsWrapper'>
         <div className='navigation'>
@@ -81,8 +80,7 @@ class Buttons extends Component {
               <div>
                 <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
                   <Button className="upload-button">
-                    <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File
-                    Upload
+                    <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
                   </Button>
                 </Upload>
               </div>
