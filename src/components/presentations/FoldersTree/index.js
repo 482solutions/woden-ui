@@ -2,9 +2,12 @@ import React from 'react';
 import { Tree } from 'antd';
 import './style.css';
 
+const { DirectoryTree } = Tree;
+
 
 const foldersTree = ({ tree }) => (
-  <Tree
+
+  <DirectoryTree
     className="directoryTree"
     multiple
     defaultExpandAll

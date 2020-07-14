@@ -182,14 +182,14 @@ export const getVersions = (hash) => async(dispatch) => {
 const replaceValues = (name, hash, folders) => {
   const key = hash;
   const title = name;
-  const tree = {
+  const tree = [{
     key,
     title,
     children: [],
-  };
+  }];
   for (let i = 0; i < folders.length; i++) {
     const child = replaceValues(folders[i].name, folders[i].hash, folders[i].folders);
-    tree.children.push(child);
+    tree[0].children.push(child);
   }
   return tree;
 };
@@ -205,7 +205,7 @@ export const getFoldersTree = () => async(dispatch) => {
       } else {
         const oldData = response.body.response;
         const tree = replaceValues(oldData.name, oldData.hash, oldData.folders);
-        console.log(tree)
+        console.log(tree);
         dispatch({
           type: GET_FOLDERS_TREE,
           payload: tree,
