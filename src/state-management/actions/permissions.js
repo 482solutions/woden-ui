@@ -1,12 +1,20 @@
 import Woden from 'woden';
 import { message } from 'antd';
-import { CHANGE_PERMISSION, REVOKE_PERMISSIONS } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
+import { UPDATE_PERMISSION } from '../types';
+
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
-export const changePermissions = (permissionData) => async (dispatch) => {
+// export const updatePermission = (folderData) => async(dispatch) => {
+//   dispatch({
+//     type: UPDATE_PERMISSION,
+//     payload: folderData,
+//   });
+// };
+
+export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
   const body = new Woden.ChangePermissions();
@@ -20,14 +28,17 @@ export const changePermissions = (permissionData) => async (dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Permissions updated successfully');
+        const folderData = response.body.response;
+        console.log('folderdata', folderData);
         dispatch({
-          type: CHANGE_PERMISSION,
+          type: UPDATE_PERMISSION,
+          payload: folderData,
         });
       }
     });
 };
 
-export const revokePermissions = (permissionData) => async (dispatch) => {
+export const revokePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Revoking access...', 0);
   const body = new Woden.RevokePermissions();
@@ -41,8 +52,11 @@ export const revokePermissions = (permissionData) => async (dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Access revoked successfully');
+        const folderData = response.body.response;
+        console.log('folderdata', folderData);
         dispatch({
-          type: REVOKE_PERMISSIONS,
+          type: UPDATE_PERMISSION,
+          payload: folderData,
         });
       }
     });

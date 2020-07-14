@@ -83,7 +83,11 @@ export class Home extends React.Component {
   }
 
   uploadFile(file) {
-    this.props.uploadFile({ name: file.name, parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash, file });
+    this.props.uploadFile({
+      name: file.name,
+      parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
+      file,
+    });
     return false;
   }
 
@@ -317,27 +321,27 @@ export class Home extends React.Component {
               {permissionData.readUsers.map((user, i) => (
                 !permissionData.writeUsers.includes(user)
                 && <Row key={user} className='sharedUser viewer'>
-                <Col className="sharedUserName">
-                {permissionData.readUsers[i]}
-                </Col>
-                <Col className="permissionIcons">
-                <Col className="sharedUserAccess">
-                <img src={viewerIcon} title="View only" alt=""/>
-                </Col>
-                <Col className="revokeAccess">
-                {
-                  (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
-                  && <img src={revokeAccessIcon} alt="Revoke access"
-                          onClick={() => {
-                            this.revokePermissions({
-                              user: permissionData.readUsers[i],
-                              hash: permissionData.hash,
-                              permission: 'unread',
-                            });
-                          }}/>
-                }
-                </Col>
-                </Col>
+                  <Col className="sharedUserName">
+                    {permissionData.readUsers[i]}
+                  </Col>
+                  <Col className="permissionIcons">
+                    <Col className="sharedUserAccess">
+                      <img src={viewerIcon} title="View only" alt=""/>
+                    </Col>
+                    <Col className="revokeAccess">
+                      {
+                        (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                        && <img src={revokeAccessIcon} alt="Revoke access"
+                                onClick={() => {
+                                  this.revokePermissions({
+                                    user: permissionData.readUsers[i],
+                                    hash: permissionData.hash,
+                                    permission: 'unread',
+                                  });
+                                }}/>
+                      }
+                    </Col>
+                  </Col>
                 </Row>
               ))
               }
@@ -348,6 +352,7 @@ export class Home extends React.Component {
     );
   }
 }
+
 export default connect(({ auth, filesystem }) => ({
   userName: auth.user.name,
   versions: filesystem.versions,

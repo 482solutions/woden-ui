@@ -28,7 +28,7 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
       files: data.sharedFiles,
     });
   }
-  data = Object.assign(data, {folderInfo:folderData.folders, filesInfo: folderData.files})
+  data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files });
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -132,7 +132,7 @@ export const updateFile = (file) => async() => {
   );
 };
 
-export const downloadFile = (cid, hash) => async(dispatch) => {
+export const downloadFile = (hash, cid) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(
@@ -146,7 +146,7 @@ export const downloadFile = (cid, hash) => async(dispatch) => {
         const name = name;
         const type = response.headers['content-type'];
         const file = response.text;
-        download(file, name, type,);
+        download(file, name, type);
         dispatch({
           type: DOWNLOAD_FILE,
         });
@@ -185,17 +185,20 @@ export const getFoldersTree = () => async(dispatch) => {
   api.tree(
     (error, data, response) => {
       message.destroy();
-      if(error){
+      if (error) {
         message.error(response.body.message);
       } else {
         const oldData = JSON.stringify(response.body.response);
         const tree = [];
-        tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(/folders/g, 'children'));
+        tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(
+          /folders/g,
+          'children',
+        ));
         dispatch({
           type: GET_FOLDERS_TREE,
-          payload: tree
+          payload: tree,
         });
       }
-    }
-  )
-}
+    },
+  );
+};
