@@ -195,6 +195,8 @@ export class Home extends React.Component {
       shareModalInfo, mode,
     } = this.state;
     const { versions } = this.props;
+    const { permissions } = this.props;
+    console.log(permissions);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -322,7 +324,7 @@ export class Home extends React.Component {
                 !permissionData.writeUsers.includes(user)
                 && <Row key={user} className='sharedUser viewer'>
                   <Col className="sharedUserName">
-                    {permissionData.readUsers[i]}
+                    {permissions.readUsers[i]}
                   </Col>
                   <Col className="permissionIcons">
                     <Col className="sharedUserAccess">
@@ -353,12 +355,13 @@ export class Home extends React.Component {
   }
 }
 
-export default connect(({ auth, filesystem }) => ({
+export default connect(({ auth, filesystem, permissions }) => ({
   userName: auth.user.name,
   versions: filesystem.versions,
   drive: filesystem.drive,
   share: filesystem.share,
   tree: filesystem.tree,
+  permissions,
 }),
 {
   changePasswordRequest: actions.changePasswordRequest,

@@ -10,6 +10,7 @@ import {
   SET_FOLDER_DATA,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
+import { updatePermission } from './permissions';
 
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -29,6 +30,7 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
     });
   }
   data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files });
+
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
