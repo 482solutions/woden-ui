@@ -44,6 +44,7 @@ Then(/^Button Download is visible$/, () => {
 
 Then(/^The file "([^"]*)" is visible$/, (file) => {
     cy.contains(file).should('be.visible')
+
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
     cy.contains(file).should('not.be.visible')

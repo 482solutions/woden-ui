@@ -70,7 +70,6 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
     const headers = {
       'content-type': 'application/json'
     }
-
     switch (fromUser) {
       case 'User1':
         headers.Authorization = `Bearer ${Cypress.env('token')}`;

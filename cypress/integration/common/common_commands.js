@@ -118,3 +118,11 @@ Given(/^RELOAD$/, () => {
 When(/^The user press the back button$/, () => {
   cy.get('.goBack').click()
 });
+
+When(/^User click Home button$/, () => {
+  cy.get('.goHome').click().wait(1000)
+});
+
+Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) => {
+  cy.get(`.${obj}Title`).should('have.length', count)
+});
