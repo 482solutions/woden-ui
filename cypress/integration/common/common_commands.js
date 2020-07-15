@@ -57,13 +57,6 @@ Then(/^Error message Password can not be empty$/, () => {
   cy.contains('Password can not be empty').should('be.visible')
 });
 
-Given(/^The user is located in his root folder$/, () => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.get('.currentFolder').should('contain.text', 'My Drive')
-  })
-});
-
 When(/^The user press Create a new folder button$/, () => {
   cy.get('.ant-btn.newFolder-button').click().wait(2000)
 });
@@ -113,17 +106,23 @@ When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
 });
 
-Given(/^Back to My Drive from folder$/, () => {
-  cy.get('.goBack').click().wait(3000)
-});
-
 Given(/^The user located on root dashboard$/, () => {
   expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
 });
 
 Given(/^RELOAD$/, () => {
+  cy.wait(1000)
   cy.reload()
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-  })
+});
+
+When(/^The user press the back button$/, () => {
+  cy.get('.goBack').click()
+});
+
+When(/^User click Home button$/, () => {
+  cy.get('.goHome').click().wait(1000)
+});
+
+Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) => {
+  cy.get(`.${obj}Title`).should('have.length', count)
 });

@@ -185,7 +185,6 @@ export class Home extends React.Component {
   getPermission(permission) {
     this.setState({ userPermission: permission });
   }
-
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
@@ -208,6 +207,8 @@ export class Home extends React.Component {
                    getPermission={this.getPermission}
                    mode={mode}
                    folderData={this.props[mode]}
+                   folderHash={this.state.folderHash}
+                   userPermission={this.state.userPermission}
                    username={this.props.userName}/>
           {this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
             ? <div className="emptyHere">
@@ -313,33 +314,31 @@ export class Home extends React.Component {
                   </Row>
                 ))
               }
-              {
-
-                permissionData.readUsers.map((user, i) => (
-                  !permissionData.writeUsers.includes(user)
-                  && <Row key={user} className='sharedUser viewer'>
-                    <Col className="sharedUserName">
-                      {permissionData.readUsers[i]}
-                    </Col>
-                    <Col className="permissionIcons">
-                      <Col className="sharedUserAccess">
-                        <img src={viewerIcon} title="View only" alt=""/>
-                      </Col>
-                      <Col className="revokeAccess">
-                        {
-                          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
-                          && <img src={revokeAccessIcon} alt="Revoke access"
-                                  onClick={() => {
-                                    this.revokePermissions({
-                                      user: permissionData.readUsers[i],
-                                      hash: permissionData.hash,
-                                      permission: 'unread',
-                                    });
-                                  }}/>
-                        }
-                      </Col>
-                    </Col>
-                  </Row>
+              {permissionData.readUsers.map((user, i) => (
+                !permissionData.writeUsers.includes(user)
+                && <Row key={user} className='sharedUser viewer'>
+                <Col className="sharedUserName">
+                {permissionData.readUsers[i]}
+                </Col>
+                <Col className="permissionIcons">
+                <Col className="sharedUserAccess">
+                <img src={viewerIcon} title="View only" alt=""/>
+                </Col>
+                <Col className="revokeAccess">
+                {
+                  (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                  && <img src={revokeAccessIcon} alt="Revoke access"
+                          onClick={() => {
+                            this.revokePermissions({
+                              user: permissionData.readUsers[i],
+                              hash: permissionData.hash,
+                              permission: 'unread',
+                            });
+                          }}/>
+                }
+                </Col>
+                </Col>
+                </Row>
                 ))
               }
             </Col>
@@ -349,26 +348,25 @@ export class Home extends React.Component {
     );
   }
 }
-
 export default connect(({ auth, filesystem }) => ({
-  userName: auth.user.name,
-  versions: filesystem.versions,
-  drive: filesystem.drive,
-  share: filesystem.share,
-  tree: filesystem.tree,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  initialFilesystem: actions.initialFilesystem,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-  revokePermissions: actions.revokePermissions,
-  getFoldersTree: actions.getFoldersTree,
-})(
+    userName: auth.user.name,
+    versions: filesystem.versions,
+    drive: filesystem.drive,
+    share: filesystem.share,
+    tree: filesystem.tree,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    initialFilesystem: actions.initialFilesystem,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+    revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
+  })(
   Home,
 );

@@ -118,7 +118,6 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
         .then((data) => {
           expect(Cypress.env('login')).to.equal(data.file.ownerId)
           expect(fileName).to.equal(data.file.fileName)
-          // const fileHash = data.file.fileHash
           Cypress.env('versions', data.file.versions)
         })
     }).as('Update txt file').wait(6000)
@@ -136,7 +135,6 @@ Cypress.Commands.add('createFolderInRoot', (name) => {
       'parentFolder': Cypress.env('rootFolder')
     },
   }).then((resp) => {
-    Cypress.env('foldersInRoot', resp.body.folder.folders)
     expect(resp.status).to.eq(201)
     Cypress.env('foldersInRoot', resp.body.folder.folders)
   })
@@ -159,6 +157,7 @@ Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
       }).then((resp) => {
         expect(resp.status).to.eq(201)
         Cypress.env('foldersInRoot', resp.body.folder.folders)
+        Cypress.env('rootFolder', resp.body.folder.folderHash)
       })
     }
   }

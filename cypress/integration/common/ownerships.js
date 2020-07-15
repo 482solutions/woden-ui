@@ -105,6 +105,7 @@ Then(/^The folder "([^"]*)" is not visible$/,  (folder) => {
 
 Then(/^The user opens folder "([^"]*)"$/, (folder) => {
   cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.status).to.equal(200)
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.contains(folder).dblclick()
   })
