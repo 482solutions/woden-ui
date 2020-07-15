@@ -13,7 +13,7 @@ Feature: Creating folders
 
     @positive
     Scenario Outline: 1 New folder in root folder
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Create a new folder button
       And The field name is empty
       And The field name <Name> is filled by user from list of folder name
@@ -52,7 +52,7 @@ Feature: Creating folders
 
     @negative
     Scenario: 3 User can not create folder without name
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Create a new folder button
       And The field name is empty
       And Press Create folder
@@ -61,7 +61,7 @@ Feature: Creating folders
 
     @negative
     Scenario Outline: 4 User can not create folder with name more than 20 characters 
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Create a new folder button
       And The field name is empty
       And The name field is filled by the user with data from the list <invalidName>
@@ -76,7 +76,7 @@ Feature: Creating folders
 
     @negative
     Scenario: 5 User can not create folder with spaces in name
-      And The user is located in his root folder
+      And The user is located in "My drive"
       When The user press Create a new folder button
       And The field name is empty
       And The field name contain only spaces

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './style.css';
-import { Dropdown, Menu, Upload } from 'antd';
+import {Dropdown, Menu, Upload} from 'antd';
 import folderImage from '../../../assets/images/folderImage.svg';
 import More from '../../../assets/images/more-vertical.svg';
 import Share from '../../../assets/images/Share.svg';
@@ -15,7 +15,8 @@ import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
-import { detectUserPermission } from '../../../utils/functions';
+import {detectUserPermission} from '../../../utils/functions';
+
 export default class Drive extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +24,7 @@ export default class Drive extends Component {
       userPermissions: 'null',
     };
   }
+
   fileMenu(hash, name, filesData) {
     return (
       <Menu>
@@ -53,13 +55,14 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         <Menu.Item key={`3${hash}`}>
-          <span id={`Permissions_${hash}`} onClick={async() => {
+          <span id={`Permissions_${hash}`} onClick={async () => {
             await this.props.viewAccessList(hash, 'file');
           }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
   }
+
   folderMenu(hash, name, folderData) {
     return (
       <Menu>
@@ -72,7 +75,7 @@ export default class Drive extends Component {
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`1${hash}`} onClick={async() => {
+        <Menu.Item key={`1${hash}`} onClick={async () => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
           <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
@@ -80,6 +83,7 @@ export default class Drive extends Component {
       </Menu>
     );
   }
+
   detectImage(file) {
     switch (file.fileType) {
       case 'application/pdf':
@@ -102,11 +106,13 @@ export default class Drive extends Component {
         return fileImageDefault;
     }
   }
+
   detectPermission(username, hash, infoArray, type) {
     const detectPermission = detectUserPermission(username, hash, infoArray, type);
     this.setState({ userPermission: detectPermission });
     this.props.getPermission(detectPermission);
   }
+
   render() {
     const {
       entryFolders, entryFiles, filesInfo, foldersInfo,
@@ -119,19 +125,27 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img width={80}
-                   onClick={() => this.detectPermission(username,
-                     folder.hash,
-                     foldersInfo,
-                     'folder')}
-                   onDoubleClick={() => this.props.openFolder(folder.hash)}
+                   onDoubleClick={() => {
+                     this.detectPermission(username,
+                       folder.hash,
+                       foldersInfo,
+                       'folder');
+                     this.props.openFolder(folder.hash);
+                   }}
                    src={folderImage}
                    alt={'Folder'}
                    title={`Folder - ${folder.name}`} className="folder"/>
               <div className="itemData">
-                    <span className="folderTitle"
-                          onDoubleClick={() => this.props.openFolder(folder.hash)}>
-                      {folder.name}
-                    </span>
+                  <span className="folderTitle"
+                        onDoubleClick={() => {
+                          this.detectPermission(username,
+                            folder.hash,
+                            foldersInfo,
+                            'folder');
+                          this.props.openFolder(folder.hash);
+                        }}>
+                        {folder.name}
+                  </span>
                 <div>
                   <Dropdown
                     overlay={this.folderMenu(folder.hash, folder.name, username)}
@@ -159,7 +173,7 @@ export default class Drive extends Component {
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
-                    <span className="fileTitle">{file.name}</span>
+                <span className="fileTitle">{file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             onClick={() => this.detectPermission(username,

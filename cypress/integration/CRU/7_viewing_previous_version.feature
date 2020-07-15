@@ -15,8 +15,8 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: Viewing first version of the file
-    And The user press the Actions button in "TestUpload.txt" file
-    And The user press the Versions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
     And The user sees the list of versions
     And Button Download is visible
@@ -25,8 +25,8 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: Viewing second version of the file
-    And The user press the Actions button in "TestUpload.txt" file
-    And The user press the Versions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
     And The user sees the list of versions
     And Button Download is visible

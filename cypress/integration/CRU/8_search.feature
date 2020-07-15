@@ -13,7 +13,7 @@ Feature:  Search of files and folders
     Scenario: Create a user before starting the tests
       Given The user is authorized
       When Create folder with name "testFolder" in root without UI
-      And Folder "testFolder" should be visible on dashboard
+      And The folder "testFolder" is visible
       And Upload files test1.txt, test.pem to these folders without UI
       And Upload file to folder with name testFolder
 

@@ -22,23 +22,6 @@ Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
     })
 });
 
-When(/^The user press the Actions button in "([^"]*)" file$/, (fileName) => {
-    cy.wait(1000)
-    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
-    cy.get(`#Actions_${hashFile}`).click().wait(2000)
-});
-
-Given(/^The user press the Share button in "([^"]*)" file$/,  (fileName) => {
-    cy.wait(1000)
-    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
-    cy.get(`#Share_${hashFile}`).click().wait(1000)
-});
-
-When(/^The user press the Update button in "([^"]*)" file$/, (fileName2) => {
-    const hashFile = getHashFromFile(fileName2, Cypress.env('filesInRoot'))
-    cy.get(`#Update_${hashFile}`).click().wait(1000)
-});
-
 When(/^Choose the needed "([^"]*)" file from its PC directory$/, (file) => {
     cy.server()
     cy.route('POST', '/api/v1/file').as('uploadFile')
@@ -54,14 +37,6 @@ Then(/^Message about update file "([^"]*)"$/, (messUploadFile) => {
     })
 });
 
-
-Then(/^The user press the Versions button in "([^"]*)" file$/, (fileName) => {
-    cy.server()
-    cy.route('GET', '/api/v1/versions/*').as('getVersions')
-    const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'))
-    cy.get(`#Versions_${hashFile}`).click()
-});
-
 Then(/^Button Download is visible$/, () => {
     cy.get(`#Download_${Cypress.env('versions')[0].cid}`).should("be.visible")
     cy.get(`#Download_${Cypress.env('versions')[1].cid}`).should("be.visible")
@@ -69,6 +44,7 @@ Then(/^Button Download is visible$/, () => {
 
 Then(/^The file "([^"]*)" is visible$/, (file) => {
     cy.contains(file).should('be.visible')
+
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
     cy.contains(file).should('not.be.visible')
