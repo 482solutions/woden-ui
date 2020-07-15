@@ -7,12 +7,6 @@ const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
-export const updatePermission = (folderData) => async(dispatch) => {
-  dispatch({
-    type: UPDATE_PERMISSION,
-    payload: folderData,
-  });
-};
 
 export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
@@ -29,7 +23,11 @@ export const changePermissions = (permissionData) => async(dispatch) => {
       } else {
         message.success('Permissions updated successfully');
         const folderData = response.body.response;
-        dispatch(updatePermission(folderData));
+        console.log('UP');
+        dispatch({
+          type: UPDATE_PERMISSION,
+          payload: folderData,
+        });
       }
     });
 };
@@ -49,7 +47,11 @@ export const revokePermissions = (permissionData) => async(dispatch) => {
       } else {
         message.success('Access revoked successfully');
         const folderData = response.body.response;
-        dispatch(updatePermission(folderData));
+        console.log('DP');
+        dispatch({
+          type: UPDATE_PERMISSION,
+          payload: folderData,
+        });
       }
     });
 };
