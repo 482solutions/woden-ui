@@ -19,7 +19,7 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
         Cypress.env('filesInRoot', xhr.responseBody.folder.files)
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('.ant-message-notice-content').should('be.visible')
-        cy.contains('TestUpload.txt').should('be.visible')
+        cy.contains(fileName).should('be.visible')
       })
     })
   })
