@@ -11,18 +11,14 @@ class Sidebar extends Component {
       <div className="sidebar">
         <h2 className="sidebarTitle">All Folders</h2>
         <div className="folders content">
-
-
           <div className="folderWrapper">
-            <img src={switcherIconRight} onClick={this.props.getFoldersTree} alt=""/>
+            <img src={switcherIconRight} onClick={this.props.getFoldersTree} alt="" className="switcherIconRight"/>
             <img src={folderImage} className="folderImage" alt=""/>
             <div className="sideBarMode myDrive folderTree"
               onClick={() => this.props.changeMode('drive')}>My Drive
             </div>
           </div>
-          <FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree}/>
-
-
+          <FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree} key={this.props.tree}/>
           <div onClick={() => this.props.changeMode('share')} className="sideBarMode shared"><img
             src={Share} alt="Share" title="Share"/>Shared with me
           </div>

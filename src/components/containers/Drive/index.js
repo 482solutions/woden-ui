@@ -68,9 +68,8 @@ export default class Drive extends Component {
     );
   }
 
-  fileType
   detectImage(file) {
-    switch(file.fileType) {
+    switch (file.fileType) {
       case 'application/pdf':
         return fileImagePDF;
       case 'image/jpeg':
@@ -83,9 +82,9 @@ export default class Drive extends Component {
         return fileImageAU;
       case 'application/ai':
         return fileImageAI;
-      case 'image/png' :
-        return fileImagePNG
-      case 'text/plain' :
+      case 'image/png':
+        return fileImagePNG;
+      case 'text/plain':
         return fileImageDefault;
       default:
         return fileImageDefault;

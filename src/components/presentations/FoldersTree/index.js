@@ -4,9 +4,7 @@ import './style.css';
 
 const { DirectoryTree } = Tree;
 
-
-const foldersTree = ({ tree }) => (
-
+const FoldersTree = ({ tree }) => (
   <DirectoryTree
     className="directoryTree"
     multiple
@@ -16,4 +14,4 @@ const foldersTree = ({ tree }) => (
   />
 );
 
-export default foldersTree;
+export default FoldersTree;

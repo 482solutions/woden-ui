@@ -183,8 +183,8 @@ const replaceValues = (name, hash, folders) => {
   const key = hash;
   const title = name;
   const tree = [{
-    key,
     title,
+    key,
     children: [],
   }];
   for (let i = 0; i < folders.length; i++) {
