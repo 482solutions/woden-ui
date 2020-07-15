@@ -6,12 +6,9 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
 });
 
 Then(/^The user open Shared with me$/,  () => {
-  // cy.wait('@getFolder').then((xhr) => {
-  //   expect(xhr.responseBody).to.not.have.property('stack')
     cy.server()
     cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.get('.shared').should('be.visible').click()
-  // })
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
@@ -70,7 +67,6 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
     const headers = {
       'content-type': 'application/json'
     }
-
     switch (fromUser) {
       case 'User1':
         headers.Authorization = `Bearer ${Cypress.env('token')}`;
