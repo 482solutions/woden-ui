@@ -15,7 +15,7 @@ import { getTokenForHeader } from '../../utils/functions';
 const api = new Woden.FileSystemApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
-export const initialFilesystem = () => async (dispatch) => {
+export const initialFilesystem = () => async(dispatch) => {
   dispatch({
     type: CLEAN_STORAGE,
   });
@@ -29,7 +29,7 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
       files: data.sharedFiles,
     });
   }
-  data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files })
+  data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files });
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -37,7 +37,7 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
   });
 };
 
-export const search = (value) => async (dispatch) => {
+export const search = (value) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   api.search(value, (error, data, response) => {
     if (response.status === 200) {
@@ -51,7 +51,7 @@ export const search = (value) => async (dispatch) => {
   });
 };
 
-export const getFolderData = (hash, mode = 'drive') => async (dispatch) => {
+export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
   message.loading('Getting data...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.getFolder(
@@ -77,7 +77,7 @@ export const getFolderData = (hash, mode = 'drive') => async (dispatch) => {
   );
 };
 
-export const createFolder = (folder) => async (dispatch) => {
+export const createFolder = (folder) => async(dispatch) => {
   message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const body = new Woden.CreateFolder();
@@ -97,7 +97,7 @@ export const createFolder = (folder) => async (dispatch) => {
   );
 };
 
-export const uploadFile = (file) => async (dispatch) => {
+export const uploadFile = (file) => async(dispatch) => {
   message.loading('Uploading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { name, parentFolder, file: fileData } = file;
@@ -116,7 +116,7 @@ export const uploadFile = (file) => async (dispatch) => {
   );
 };
 
-export const updateFile = (file) => async () => {
+export const updateFile = (file) => async() => {
   message.loading('Updating file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const { fileHash, file: fileData } = file;
@@ -132,45 +132,29 @@ export const updateFile = (file) => async () => {
     },
   );
 };
-// api.downloadFile(
-//   hash, cid,
-//   (error, data, response) => {
-//     message.destroy();
-//     if (error) {
-//       console.log(error)
-//       message.error("response.body.message");
-//     } else {
-//       message.success('File downloaded successfully');
-//       const name = name;
-//       const type = response.headers['content-type'];
-//       const file = response.text;
-//       downloads( name,file, type,);
-//       dispatch({
-//         type: DOWNLOAD_FILE,
-//       });
-//     }
-//   },
-// );
-export const downloadFile = (hash, cid) => async (dispatch) => {
+
+export const downloadFile = (hash, cid, name) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   const token = await getTokenForHeader();
-  axios.get(`http://localhost:1823/api/v1/file/${hash}/${cid}`,
+  axios.get(`http://192.168.88.42:1823/api/v1/file/${hash}/${cid}`,
     {
-      headers: { 'Authorization': token, 'Access-Control-Allow-Origin': '*' },
-      responseType: 'blob'
+      headers: { Authorization: token, 'Access-Control-Allow-Origin': '*' },
+      responseType: 'blob',
     }).then((response) => {
-      console.log(response)
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'file'+'.jpg'); //or any other extension
+    link.setAttribute('download', name);
     document.body.appendChild(link);
     link.click();
+    message.destroy();
   });
-
+  dispatch({
+    type: DOWNLOAD_FILE,
+  });
 };
 
-export const getVersions = (hash) => async (dispatch) => {
+export const getVersions = (hash) => async(dispatch) => {
   message.loading('Getting file versions...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.versions(
@@ -194,7 +178,7 @@ export const getVersions = (hash) => async (dispatch) => {
   );
 };
 
-export const getFoldersTree = () => async (dispatch) => {
+export const getFoldersTree = () => async(dispatch) => {
   message.loading('Getting folders tree...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.tree(
@@ -207,12 +191,13 @@ export const getFoldersTree = () => async (dispatch) => {
         const tree = [];
         tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(
           /folders/g,
-          'children'));
+          'children',
+        ));
         dispatch({
           type: GET_FOLDERS_TREE,
-          payload: tree
+          payload: tree,
         });
       }
-    }
-  )
-}
+    },
+  );
+};
