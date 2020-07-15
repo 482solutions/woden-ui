@@ -15,6 +15,7 @@ import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
+import { detectUserPermission } from '../../../utils/functions';
 
 export default class Drive extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class Drive extends Component {
   fileMenu(hash, name, filesData) {
     return (
       <Menu>
-        <Menu.Item key={`0${hash}`} onClick={async () => {
+        <Menu.Item key={`0${hash}`} onClick={async() => {
           await this.props.getVersions(hash, name);
         }}>
           <span id={`Versions_${hash}`}><img className="dropdownIcon" src={fileVersionsIcon}
@@ -54,7 +55,7 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         <Menu.Item key={`3${hash}`}>
-          <span id={`Permissions_${hash}`} onClick={async () => {
+          <span id={`Permissions_${hash}`} onClick={async() => {
             await this.props.viewAccessList(hash, 'file');
           }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
@@ -74,7 +75,7 @@ export default class Drive extends Component {
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`1${hash}`} onClick={async () => {
+        <Menu.Item key={`1${hash}`} onClick={async() => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
           <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
