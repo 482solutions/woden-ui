@@ -47,6 +47,7 @@ Then(/^The file "([^"]*)" is visible$/, (file) => {
 
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
+    cy.wait(1000)
     cy.contains(file).should('not.be.visible')
 });
 
