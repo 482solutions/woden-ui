@@ -141,6 +141,7 @@ export class Home extends React.Component {
         writeUsers: info.writeUsers,
       },
     });
+    this.props.updatePermission(info);
   }
 
   shareModal(hash, name, permission) {
@@ -196,7 +197,6 @@ export class Home extends React.Component {
     } = this.state;
     const { versions } = this.props;
     const { permissions } = this.props;
-    console.log('permissions', permissions);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -294,7 +294,7 @@ export class Home extends React.Component {
             </Row>
             <Col>
               {
-                permissionData.writeUsers.map((user, i) => (
+                permissions.writeUsers.map((user, i) => (
                   <Row key={user} className='sharedUser editor'>
                     <Col className="sharedUserName">
                       {permissionData.writeUsers[i]}
@@ -309,7 +309,7 @@ export class Home extends React.Component {
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({
-                                      user: permissionData.writeUsers[i],
+                                      user: permissions.writeUsers[i],
                                       hash: permissionData.hash,
                                       permission: 'unwrite',
                                     });
@@ -320,8 +320,8 @@ export class Home extends React.Component {
                   </Row>
                 ))
               }
-              {permissionData.readUsers.map((user, i) => (
-                !permissionData.writeUsers.includes(user)
+              {permissions.readUsers.map((user, i) => (
+                !permissions.writeUsers.includes(user)
                 && <Row key={user} className='sharedUser viewer'>
                   <Col className="sharedUserName">
                     {permissionData.readUsers[i]}
@@ -336,7 +336,7 @@ export class Home extends React.Component {
                         && <img src={revokeAccessIcon} alt="Revoke access"
                                 onClick={() => {
                                   this.revokePermissions({
-                                    user: permissionData.readUsers[i],
+                                    user: permissions.readUsers[i],
                                     hash: permissionData.hash,
                                     permission: 'unread',
                                   });
@@ -375,6 +375,8 @@ export default connect(({ auth, filesystem, permissions }) => ({
   changePermissions: actions.changePermissions,
   revokePermissions: actions.revokePermissions,
   getFoldersTree: actions.getFoldersTree,
+  updateFolderData: actions.updateFolderData,
+  updatePermission: actions.updatePermission,
 })(
   Home,
 );

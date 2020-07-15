@@ -30,9 +30,15 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
       files: data.sharedFiles,
     });
   }
+
   data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files });
-  console.log('UFD');
-  console.log(data);
+
+  const { writeUsers } = data;
+  const { readUsers } = data;
+  const access = {
+    readUsers,
+    writeUsers,
+  };
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
@@ -40,7 +46,7 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
   });
   dispatch({
     type: UPDATE_PERMISSION,
-    payload: data,
+    payload: access,
   });
 };
 

@@ -5,14 +5,14 @@ const initialState = {
   writeUsers: [],
 };
 
-const handlePermission = (state, folderData) => ({
+const handleUpdatePermission = (state, info) => ({
   ...state,
-  readUsers: folderData.readUsers,
-  writeUsers: folderData.writeUsers,
+  readUsers: info.readUsers,
+  writeUsers: info.writeUsers,
 });
 
 const handlers = {
-  [UPDATE_PERMISSION]: handlePermission,
+  [UPDATE_PERMISSION]: handleUpdatePermission,
 };
 
 export default (state = initialState, action) => {
