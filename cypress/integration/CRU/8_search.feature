@@ -13,7 +13,7 @@ Feature:  Search of files and folders
       And Create folder with name "testFolder" in root without UI
       And The folder "testFolder" is visible
       And Upload file "test1.txt" to "testFolder"
-      And The folder "test1.txt" is visible
+      And The file "test1.txt" is visible
       And The user press the back button
       And Spin is visible "Getting data..."
       And Upload file "test.pem" to "testFolder"

@@ -1,8 +1,8 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile} from "../../support/commands";
+import {getHash} from "../../support/commands";
 
 Given(/^Choose the needed "([^"]*)" file from its PC directory for update$/, (f) => {
-    const hashFile = getHashFromFile(f, Cypress.env('filesInRoot'))
+    const hashFile = getHash(f, Cypress.env('filesInRoot'))
     cy.server()
     cy.route('PUT', '/api/v1/file').as('updateFile')
     cy.get(`#Update_${hashFile} input[type=file]`).attachFile(f);
