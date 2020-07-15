@@ -1,17 +1,14 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile, getHashFromFolder} from "../../support/commands";
+import {getFolderOwner, getHash} from "../../support/commands";
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 
 Then(/^The user open Shared with me$/,  () => {
-  // cy.wait('@getFolder').then((xhr) => {
-  //   expect(xhr.responseBody).to.not.have.property('stack')
     cy.server()
     cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.get('.shared').should('be.visible').click()
-  // })
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
@@ -42,11 +39,11 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
   switch (obj) {
     case 'folder':
       obj = 'folder';
-      hash = getHashFromFolder(name, Cypress.env('foldersInRoot'));
+      hash = getHash(name, Cypress.env('foldersInRoot'));
       break;
     case 'file':
       obj = 'file';
-      hash = getHashFromFile(name, Cypress.env('filesInRoot'));
+      hash = getHash(name, Cypress.env('filesInRoot'));
       break;
   }
   if (hash === undefined) {
@@ -57,11 +54,17 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
 });
 
 
-Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
+Then(/^"([^"]*)" became Owner of "([^"]*)" folder$/, (user, folderName) => {
+  const logins = {
+    User1: Cypress.env('login'),
+    User2: Cypress.env('login_2'),
+    User3: Cypress.env('login_3'),
+  }
+  user = logins[user];
   cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    expect(1).to.equal(xhr.responseBody.folder.folders.length)
-    cy.contains(folder).should('be.visible')
+    expect(xhr.responseBody).to.not.have.property('stack');
+    let owner = getFolderOwner(folderName, xhr.responseBody.folders);
+    expect(user).to.equal(owner)
   })
 });
 
@@ -99,10 +102,10 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
         break;
     } switch (object) {
       case 'file':
-        object = getHashFromFile(name, Cypress.env('filesInRoot'));
+        object = getHash(name, Cypress.env('filesInRoot'));
         break;
       case 'folder':
-        object = getHashFromFolder(name, Cypress.env('foldersInRoot'));
+        object = getHash(name, Cypress.env('foldersInRoot'));
         break;
     }
     cy.request({
