@@ -43,6 +43,7 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
           cy.wait('@uploadFile').then((xhr) => {
             // expect(xhr.responseBody).to.not.have.property('stack')
             expect(xhr.status).to.equal(200)
+            Cypress.env('filesInRoot', xhr.responseBody.folder.files)
             cy.get('.ant-message-custom-content').as('spin').should('be.visible')
           });
         })
