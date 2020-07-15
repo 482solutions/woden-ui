@@ -14,18 +14,13 @@ class Sidebar extends Component {
 
 
           <div className="folderWrapper">
-            <div className="">
-              <FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree}/>
-              <img src={switcherIconRight} onClick={this.props.getFoldersTree} alt=""/>
-            </div>
-
+            <img src={switcherIconRight} onClick={this.props.getFoldersTree} alt=""/>
             <img src={folderImage} className="folderImage" alt=""/>
-
-
             <div className="sideBarMode myDrive folderTree"
-                 onClick={() => this.props.changeMode('drive')}>My Drive
+              onClick={() => this.props.changeMode('drive')}>My Drive
             </div>
           </div>
+          <FolderTree onClick={this.props.getFoldersTree} tree={this.props.tree}/>
 
 
           <div onClick={() => this.props.changeMode('share')} className="sideBarMode shared"><img
