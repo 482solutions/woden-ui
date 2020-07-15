@@ -1,7 +1,4 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
-import {getCSR} from "../../../src/utils/functions";
-import {getLogin, getPassword} from "../../support/commands";
-
 
 Given(/^The application is opened$/, () => {
   cy.visit('/');
@@ -125,4 +122,8 @@ When(/^User click Home button$/, () => {
 
 Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) => {
   cy.get(`.${obj}Title`).should('have.length', count)
+});
+
+When(/^Notification error "([^"]*)"$/,  (msg) => {
+  cy.get('.ant-message-notice-content').should('contain.text', msg)
 });
