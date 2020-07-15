@@ -16,6 +16,7 @@ export const getRootFolderHash = () => (
 
 export const detectUserPermission = (username, hash, infoArray, type) => {
   let info = {};
+  //TODO: TypeError: Cannot read property 'length' of undefined
   for (let i = 0; i < infoArray.length; i++) {
     if (infoArray[i][`${type}Hash`] === hash) {
       info = infoArray[i];

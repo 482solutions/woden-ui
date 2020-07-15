@@ -1,5 +1,5 @@
 import {Then} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile} from "../../support/commands";
+import {getHash} from "../../support/commands";
 
 Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) => {
   const logins = {
@@ -12,7 +12,7 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
     expect(xhr.responseBody).to.not.have.property('stack')
     switch (obj) {
       case 'file':
-        const hashFile = getHashFromFile(name, Cypress.env('filesInRoot'));
+        const hashFile = getHash(name, Cypress.env('filesInRoot'));
         cy.get(`#Actions_${hashFile}`).click().wait(2000);
         cy.get(`#Update_${hashFile}`).click().wait(2000);
         cy.server();
@@ -41,7 +41,6 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
           cy.get('.ant-message-notice-content').should('be.visible')
 
           cy.wait('@uploadFile').then((xhr) => {
-            // expect(xhr.responseBody).to.not.have.property('stack')
             expect(xhr.status).to.equal(200)
             Cypress.env('filesInRoot', xhr.responseBody.folder.files)
             cy.get('.ant-message-custom-content').as('spin').should('be.visible')

@@ -40,8 +40,20 @@ Feature: Folders tree
     Then The user is located in "testFolder3"
     And The file "TestUpload.txt" is visible
 
-#  @positive
-#  Scenario: 3
-#
-#  @positive
-#  Scenario: 3
+  @positive
+  Scenario: 3 The user can see the folder in the tree that was transferred to him in ownership
+    And Upload file "TestUpload.txt" to "testFolder"
+    And Register without UI user2
+    And The "User1" sends a request to grant "owner" access to the "folder" "testFolder" to "User2"
+    And Login as new user 2 without UI
+    And The user open folders tree
+    And The tree is contain "testFolder"
+    When User presses on "testFolder" folder in the tree
+    And Spin is visible "Getting data..."
+    Then The user is located in "testFolder3"
+    And The file "TestUpload.txt" is visible
+
+
+
+
+
