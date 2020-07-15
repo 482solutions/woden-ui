@@ -182,9 +182,11 @@ export const getVersions = (hash) => async(dispatch) => {
 const replaceValues = (name, hash, folders) => {
   const key = hash;
   const title = name;
+  const icon = '';
   const tree = [{
     title,
     key,
+    icon,
     children: [],
   }];
   for (let i = 0; i < folders.length; i++) {

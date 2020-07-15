@@ -12,7 +12,6 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
-import { revokePermissions } from '../../state-management/actions';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -165,8 +164,8 @@ export class Home extends React.Component {
     }
   }
 
-  getFoldersTree() {
-    this.props.getFoldersTree();
+  getFoldersTree(folderImage) {
+    this.props.getFoldersTree(folderImage);
   }
 
   render() {
