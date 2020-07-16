@@ -164,8 +164,8 @@ export class Home extends React.Component {
     }
   }
 
-  getFoldersTree(folderImage) {
-    this.props.getFoldersTree(folderImage);
+  getFoldersTree() {
+    this.props.getFoldersTree();
   }
 
   render() {
@@ -181,6 +181,7 @@ export class Home extends React.Component {
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
+                   getFolderData={this.openFolder}
                    tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
@@ -188,8 +189,7 @@ export class Home extends React.Component {
                    uploadFile={this.uploadFile}
                    getFolderData={this.openFolder}
                    mode={mode}
-                   folderData={this.props[mode]}
-          />
+                   folderData={this.props[mode]}/>
           {
             this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
               ? <div className="emptyHere">
