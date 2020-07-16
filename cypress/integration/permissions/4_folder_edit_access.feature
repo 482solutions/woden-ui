@@ -73,10 +73,9 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
-    And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
-    Then "User3" has Editors rights to "testFolder" "folder"
+    Then Upload file "txtFile.pem" to "testFolder"
 #    TODO: delete reload and steps for opening folder, after fix reload:
+    And RELOAD
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
@@ -84,6 +83,7 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
 
     And The file "TestUpload.txt" is visible
+    And The file "txtFile.pem" is visible
     And Button "New Folder" "be.visible"
     And Button "File Upload" "be.visible"
 
