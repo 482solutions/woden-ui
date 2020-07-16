@@ -78,6 +78,8 @@ Feature: Grant edit access for a file
     And Button "File Upload" "not.be.visible"
     And The file "TestUpload.txt" is visible
     And "User2" has Editors rights to "TestUpload.txt" "file"
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Choose the "View and Update" option from pop-up window
@@ -150,6 +152,8 @@ Feature: Grant edit access for a file
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And "User2" has Editors rights to "TestUpload.txt" "file"
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
