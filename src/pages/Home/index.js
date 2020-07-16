@@ -297,7 +297,7 @@ export class Home extends React.Component {
                 permissions.writeUsers.map((user, i) => (
                   <Row key={user} className='sharedUser editor'>
                     <Col className="sharedUserName">
-                      {permissionData.writeUsers[i]}
+                      {permissions.writeUsers[i]}
                     </Col>
                     <Col className="permissionIcons">
                       <Col className="sharedUserAccess">
