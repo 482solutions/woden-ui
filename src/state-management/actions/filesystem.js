@@ -90,7 +90,7 @@ export const getFolderData = (hash, mode = 'drive') => async(dispatch) => {
   );
 };
 
-export const createFolder = (folder) => async(dispatch) => {
+export const createFolder = (folder, mode) => async(dispatch) => {
   message.loading('Creating folder...', 0);
   Bearer.apiKey = await getTokenForHeader();
   const body = new Woden.CreateFolder();
@@ -104,7 +104,7 @@ export const createFolder = (folder) => async(dispatch) => {
         message.error(response.body.message);
       } else if (response.status === 201) {
         const folderData = response.body;
-        dispatch(updateFolderData(folderData, 'drive'));
+        dispatch(updateFolderData(folderData, mode));
       }
     },
   );

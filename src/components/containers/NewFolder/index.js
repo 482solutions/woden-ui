@@ -2,23 +2,20 @@ import React, { useState } from 'react';
 import {
   Button, Form, Input, Modal, Col,
 } from 'antd';
-import newFolderIcon from '../../../assets/images/newFolderIcon.svg'
+import newFolderIcon from '../../../assets/images/newFolderIcon.svg';
 
 
 const NewFolder = ({ onFinish: createFolder }) => {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
   const showModal = () => {
     setVisible(true);
   };
 
   const onFinish = (e) => {
-    setLoading(true);
     createFolder(e);
     form.resetFields();
     setVisible(false);
-    setLoading(false);
   };
 
   const handleCancel = () => {
@@ -55,7 +52,7 @@ const NewFolder = ({ onFinish: createFolder }) => {
               </Button>
             </Col>
             <Col span={1} offset={5}>
-              <Button htmlType='submit' type="primary" loading={loading}>
+              <Button htmlType='submit' type="primary">
                 Create
               </Button>
             </Col>

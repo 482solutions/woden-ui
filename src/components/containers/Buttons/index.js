@@ -38,6 +38,7 @@ class Buttons extends Component {
 
   render() {
     const { userPermission } = this.props;
+    const { mode } = this.props;
     return (
       <div className='buttonsWrapper'>
         <div className='navigation'>
@@ -75,7 +76,8 @@ class Buttons extends Component {
           this.props.mode === 'drive' || (this.props.folderData.parentHash !== 'root' && (userPermission === 'owner' || userPermission === 'write'))
             ? <div className="homeButtons">
               <div>
-                <NewFolder onFinish={this.props.newFolder}/>
+                <NewFolder onFinish={this.props.newFolder(mode)}
+                            mode={mode}/>
               </div>
               <div>
                 <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>

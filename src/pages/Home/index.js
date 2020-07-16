@@ -97,11 +97,11 @@ export class Home extends React.Component {
     return false;
   }
 
-  createFolder(dataRequest) {
+  createFolder(dataRequest, mode) {
     this.props.createFolder({
       name: dataRequest.newFolder,
       parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
-    });
+    }, mode);
   }
 
   downloadFile(hash, cid) {
