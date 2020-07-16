@@ -4,10 +4,6 @@ import folderImage from '../../../assets/images/folderImage.svg';
 import './style.css';
 
 export class FoldersTree extends React.Component {
-  onSelect() {
-    console.log('onSelect');
-  }
-
   showIcon() {
     return (
       <img src={folderImage} className="smallFolderImage" alt=""/>
@@ -18,13 +14,17 @@ export class FoldersTree extends React.Component {
     const { DirectoryTree } = Tree;
     const { tree } = this.props;
 
+    const onSelect = (keys, event) => {
+      this.props.openFolder(event.key);
+    };
+
     return (
       <DirectoryTree
         className="directoryTree"
         multiple
         treeData={tree}
         selectable={false}
-        onSelect={this.onSelect}
+        onClick={onSelect}
         icon={this.showIcon}
       />
     );

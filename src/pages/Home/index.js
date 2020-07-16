@@ -181,7 +181,7 @@ export class Home extends React.Component {
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
-                   getFolderData={this.openFolder}
+                   openFolder={this.openFolder}
                    tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">

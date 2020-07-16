@@ -20,7 +20,7 @@ class Sidebar extends Component {
             </div>
           </div>
           <FolderTree tree={this.props.tree}
-                      onClick={this.props.getFolderData}/>
+                      openFolder={this.props.openFolder}/>
           <div onClick={() => this.props.changeMode('share')}
                className="sideBarMode shared">
             <img src={Share} alt="Share"
