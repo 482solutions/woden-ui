@@ -27,10 +27,19 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: cd ..
       - run: npm run start -d & sleep 40
+
       - name: Cypress authorization tests
         run: npm run cy:run:auth
-      - name: Cypress run
-        run: npm run cypress:run:chrome
+
+      - name: Cypress navigations tests
+        run: npm run cy:run:nav
+
+      - name: Cypress permissions tests
+        run: npm run cy:run:per
+
+      - name: Cypress CRU tests
+        run: npm run cy:run:cru
+        #        run: npm run cypress:run:chrome
       #         uses: cypress-io/github-action@v2
 #         with:
 #           wait-on-timeout: 80

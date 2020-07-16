@@ -175,9 +175,9 @@ Feature: Grant view access for a folder
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    Then The folder "testFolder" is not visible
+    Then The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
 
   @negative
   Scenario: 9 Owner can not grand view access for a folder to some users

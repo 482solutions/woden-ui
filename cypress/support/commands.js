@@ -122,7 +122,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
   })
 })
 
-Cypress.Commands.add('createFolderInRoot', (name) => {
+export function createFolderInRoot(name) {
   headers.Authorization = `Bearer ${Cypress.env('token')}`
   cy.request({
     method: 'POST',
@@ -136,7 +136,7 @@ Cypress.Commands.add('createFolderInRoot', (name) => {
     expect(resp.status).to.eq(201)
     Cypress.env('foldersInRoot', resp.body.folder.folders)
   })
-})
+}
 
 Cypress.Commands.add('createFolderInFolder', (newFolder, oldFolder) => {
   const folders = Cypress.env('foldersInRoot')

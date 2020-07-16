@@ -170,6 +170,7 @@ export default class Drive extends Component {
             </div>
           ))
         }
+
         {
           entryFiles.map((file, i) => (
             <div className="driveItem"
@@ -179,7 +180,9 @@ export default class Drive extends Component {
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
-                <span className="fileTitle">{file.name}</span>
+                <span className="fileTitle"
+                      onDoubleClick={() => this.props.downloadFile(file.hash, 'null', file.name)}>
+                  {file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
                             onClick={() => this.detectPermission(username,

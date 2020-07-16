@@ -16,6 +16,12 @@ When(/^The user double click the file$/, () => {
 Then(/^The file "([^"]*)" is downloaded and contain text "([^"]*)"$/, (file, text) => {
   cy.wait('@getFile').then((xhr) => {
     expect(200).to.equal(xhr.status)
-    expect('This file is ok!\n').to.equal(xhr.responseBody)
+    const blob = xhr.responseBody;
+    const reader = new FileReader();
+    reader.addEventListener('loadend', (e) => {
+      const text = e.srcElement.result;
+      expect(text).to.equal('This file is ok!\n')
+    });
+    reader.readAsText(blob);
   })
 });

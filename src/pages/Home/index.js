@@ -104,8 +104,8 @@ export class Home extends React.Component {
     });
   }
 
-  downloadFile(hash, cid) {
-    this.props.downloadFile(hash, cid);
+  downloadFile(hash, cid, name) {
+    this.props.downloadFile(hash, cid, name);
   }
 
   changePermissions(data) {
@@ -264,7 +264,7 @@ export class Home extends React.Component {
                     <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
                     <Col span={3} className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(version.cid, wrapperInfo.fileHash);
+                        this.downloadFile(wrapperInfo.fileHash, version.cid);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>

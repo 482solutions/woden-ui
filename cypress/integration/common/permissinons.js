@@ -35,6 +35,10 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
     case 'Access list':
       action = 'Permissions';
       break;
+    case 'Versions':
+      cy.server()
+      cy.route('GET', '/api/v1/versions/*').as('getVersions');
+      break;
   }
   switch (obj) {
     case 'folder':
