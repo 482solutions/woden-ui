@@ -12,13 +12,11 @@
     "foldersInRoot": null,
     "versions": null,
     "token": null,
-
     "login_2": null,
     "password_2": null,
     "email_2": null,
     "rootFolder_2": null,
     "token_2": null,
-
     "login_3": null,
     "password_3": null,
     "email_3": null,
@@ -27,8 +25,8 @@
   },
   "defaultCommandTimeout": 12000,
   "requestTimeout": 10000,
-  "projectId": "mxxwps",
   "video": false,
+  "videoCompression": 0,
   "viewportWidth": 1920,
   "viewportHeight": 1080,
   "reporter": "mochawesome",
@@ -37,5 +35,6 @@
     "overwrite": true,
     "html": true,
     "json": true
-  }
+  },
+  "projectId": "8f2ikx"
 }

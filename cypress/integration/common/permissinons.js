@@ -1,30 +1,23 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile, getHashFromFolder} from "../../support/commands";
+import {getFolderOwner, getHash} from "../../support/commands";
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 
 Then(/^The user open Shared with me$/,  () => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
     cy.server()
     cy.route('GET', '/api/v1/folder/*').as('getFolder')
     cy.get('.shared').should('be.visible').click()
-  })
 });
 
 Then(/^Button "([^"]*)" "([^"]*)"$/,  (btn, visible) => {
+  switch (btn) {
+    case 'Revoke access':
+      btn = '.revokeAccess'
+      break;
+  }
   cy.contains(btn).should(visible)
-});
-
-Then(/^User 2 became Owner of "([^"]*)" file$/, (file) => {
-  cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    console.log(xhr.responseBody)
-    expect(1).to.equal(xhr.responseBody.folder.files.length)
-    cy.contains(file).should('be.visible')
-  })
 });
 
 Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
@@ -35,45 +28,51 @@ Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
   })
 });
 
-When(/^The user press the Actions button in "([^"]*)" folder$/, (folder) => {
+When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, name, obj) => {
+  let hash;
   cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Actions_${hashFolder}`).click().wait(1000)
+  switch (action) {
+    case 'Access list':
+      action = 'Permissions';
+      break;
+  }
+  switch (obj) {
+    case 'folder':
+      obj = 'folder';
+      hash = getHash(name, Cypress.env('foldersInRoot'));
+      break;
+    case 'file':
+      obj = 'file';
+      hash = getHash(name, Cypress.env('filesInRoot'));
+      break;
+  }
+  if (hash === undefined) {
+    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(1000)
+  } else {
+    cy.get(`#${action}_${hash}`).click().wait(1000)
+  }
 });
 
-When(/^The user press the Share button in "([^"]*)" folder$/, (folder) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Share_${hashFolder}`).click().wait(1000)
-});
 
-Then(/^User 2 became Owner of "([^"]*)" folder$/, (folder) => {
+Then(/^"([^"]*)" became Owner of "([^"]*)" folder$/, (user, folderName) => {
+  const logins = {
+    User1: Cypress.env('login'),
+    User2: Cypress.env('login_2'),
+    User3: Cypress.env('login_3'),
+  }
+  user = logins[user];
   cy.wait('@getFolder').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    expect(1).to.equal(xhr.responseBody.folder.folders.length)
-    cy.contains(folder).should('be.visible')
+    expect(xhr.responseBody).to.not.have.property('stack');
+    let owner = getFolderOwner(folderName, xhr.responseBody.folders);
+    expect(user).to.equal(owner)
   })
 });
-
-When(/^The user press the Access list button in "([^"]*)" folder$/, (folder) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFolder(folder, Cypress.env('foldersInRoot'))
-  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
-});
-
-When(/^The user press the Access list button in "([^"]*)" file$/, (file) => {
-  cy.wait(1000)
-  const hashFolder = getHashFromFile(file, Cypress.env('filesInRoot'))
-  cy.get(`#Permissions_${hashFolder}`).click().wait(1000)
-});
-
 
 When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" "([^"]*)" to "([^"]*)"$/,
   (fromUser, permission, object, name, toUser) => {
     const headers = {
       'content-type': 'application/json'
     }
-
     switch (fromUser) {
       case 'User1':
         headers.Authorization = `Bearer ${Cypress.env('token')}`;
@@ -103,10 +102,10 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
         break;
     } switch (object) {
       case 'file':
-        object = getHashFromFile(name, Cypress.env('filesInRoot'));
+        object = getHash(name, Cypress.env('filesInRoot'));
         break;
       case 'folder':
-        object = getHashFromFolder(name, Cypress.env('foldersInRoot'));
+        object = getHash(name, Cypress.env('foldersInRoot'));
         break;
     }
     cy.request({

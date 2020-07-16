@@ -3,11 +3,13 @@ import download from 'downloadjs';
 import { message } from 'antd';
 import {
   CLEAN_STORAGE,
-  DOWNLOAD_FILE, GET_FOLDERS_TREE,
+  DOWNLOAD_FILE,
+  GET_FOLDERS_TREE,
   GET_VERSIONS,
   LOGOUT,
   SEARCH_FOLDER_FILE,
   SET_FOLDER_DATA,
+  UPDATE_PERMISSION,
 } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
 
@@ -28,11 +30,23 @@ export const updateFolderData = (folderData, mode) => (dispatch) => {
       files: data.sharedFiles,
     });
   }
+
   data = Object.assign(data, { folderInfo: folderData.folders, filesInfo: folderData.files });
+
+  const { writeUsers } = data;
+  const { readUsers } = data;
+  const access = {
+    readUsers,
+    writeUsers,
+  };
   dispatch({
     type: SET_FOLDER_DATA,
     payload: data,
     mode,
+  });
+  dispatch({
+    type: UPDATE_PERMISSION,
+    payload: access,
   });
 };
 
@@ -132,7 +146,7 @@ export const updateFile = (file) => async() => {
   );
 };
 
-export const downloadFile = (cid, hash) => async(dispatch) => {
+export const downloadFile = (hash, cid) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   Bearer.apiKey = await getTokenForHeader();
   api.downloadFile(

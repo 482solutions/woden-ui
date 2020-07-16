@@ -1,17 +1,27 @@
 import Woden from 'woden';
 import { message } from 'antd';
-import { CHANGE_PERMISSION, REVOKE_PERMISSIONS } from '../types';
 import { getTokenForHeader } from '../../utils/functions';
-import { getFolderData } from './filesystem';
+import { UPDATE_PERMISSION } from '../types';
 
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
 const { Bearer } = defaultClient.authentications;
 
+export const updatePermission = (info) => async(dispatch) => {
+  const { writeUsers, readUsers } = info;
+  dispatch({
+    type: UPDATE_PERMISSION,
+    payload: {
+      readUsers,
+      writeUsers,
+    },
+  });
+};
+
+
 export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
-
   const body = new Woden.ChangePermissions();
   body.email = permissionData.username;
   body.hash = permissionData.hash;
@@ -23,9 +33,8 @@ export const changePermissions = (permissionData) => async(dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Permissions updated successfully');
-        dispatch({
-          type: CHANGE_PERMISSION,
-        });
+        const folderData = response.body.response;
+        dispatch(updatePermission(folderData));
       }
     });
 };
@@ -33,7 +42,6 @@ export const changePermissions = (permissionData) => async(dispatch) => {
 export const revokePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Revoking access...', 0);
-
   const body = new Woden.RevokePermissions();
   body.email = permissionData.user;
   body.hash = permissionData.hash;
@@ -45,9 +53,8 @@ export const revokePermissions = (permissionData) => async(dispatch) => {
         message.error(response.body.message);
       } else {
         message.success('Access revoked successfully');
-        dispatch({
-          type: REVOKE_PERMISSIONS,
-        });
+        const folderData = response.body.response;
+        dispatch(updatePermission(folderData));
       }
     });
 };

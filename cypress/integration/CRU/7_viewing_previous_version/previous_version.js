@@ -20,7 +20,6 @@ When(/^The user press Download button on (\d+) version$/, (version) => {
 Then(/^Version (\d+) should contain text "([^"]*)"$/, (version, text) => {
     cy.wait('@getFile').then((xhr) => {
         expect(xhr.responseBody).to.not.have.property('stack')
-        console.log(xhr.responseBody)
         expect(text).to.eq(xhr.responseBody)
     })
 });

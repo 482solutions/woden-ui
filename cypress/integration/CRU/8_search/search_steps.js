@@ -1,26 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-before(() => {
-  cy.registerUser()
-})
-
-When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
-  cy.contains('File Upload').click().wait(1000)
-
-  cy.server()
-  cy.route('POST', '/api/v1/file').as('uploadFile')
-  cy.get('input[type=file]').attachFile('test1.txt');
-
-  cy.wait('@uploadFile').then((xhr) => {
-    cy.contains('File Upload').click().wait(1000)
-    cy.get('input[type=file]').attachFile('test.pem').wait(1000);
-  })
-});
-
-Given(/^Any page of the application is open$/, () => {
-
-});
-
 When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
   cy.get('.ant-input').as('Search string')
     .should('be.visible').type(test1)
@@ -30,29 +9,8 @@ When(/^The user presses the search button$/, () => {
   cy.get('.ant-input-suffix').should('be.visible').click().wait(1000)
 });
 
-Given(/^Upload file to folder with name testFolder$/, () => {
-  cy.wait('@uploadFile').then((xhr) => {
-    expect(xhr.responseBody).to.not.have.property('stack')
-    cy.contains('testFolder').dblclick()
-    cy.wait('@getFolder').then((xhr) => {
-      expect(xhr.responseBody).to.not.have.property('stack')
-      cy.contains('File Upload').click().wait(1000)
-      cy.get('input[type=file]').attachFile('txtFile.txt').wait(2000);
-    })
-  })
-});
-
-Then(/^Search result is file "([^"]*)"$/, (resultSearch) => {
+Then(/^Search result is "([^"]*)"$/, (resultSearch) => {
   cy.contains(resultSearch).should('be.visible')
-});
-
-Then(/^Search results are files "([^"]*)" and "([^"]*)"$/, (resultSearch1, resultSearch2) => {
-  cy.contains(resultSearch1).should('be.visible')
-  cy.contains(resultSearch2).should('be.visible')
-});
-
-Then(/^search result is folder with name "([^"]*)"$/, (resultSearchFolder) => {
-  cy.contains(resultSearchFolder).should('be.visible')
 });
 
 When(/^Search field is empty$/, () => {

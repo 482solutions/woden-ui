@@ -1,5 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
-import {getHashFromFolder} from "../../support/commands";
+import {getHash} from "../../support/commands";
 
 Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
   switch (userEmail) {
@@ -43,7 +43,7 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
 Given(/^Choose the "([^"]*)" option from pop-up window$/, (option) => {
   cy.get('.ant-modal-header').should('be.visible')
   cy.get('#form_in_modal_permissions').should('be.visible').click().wait(1000)
-  cy.contains(option).click(1000)
+  cy.contains(option).click().wait(1000)
 });
 
 Given(/^Press "([^"]*)"$/, (button) => {
@@ -105,6 +105,7 @@ Then(/^The folder "([^"]*)" is not visible$/,  (folder) => {
 
 Then(/^The user opens folder "([^"]*)"$/, (folder) => {
   cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.status).to.equal(200)
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.contains(folder).dblclick()
   })

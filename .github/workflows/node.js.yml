@@ -2,42 +2,46 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
-on:
-  push:
-#    branches: [ master ]
-  pull_request:
-#    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
-
+        node-version: [10.x]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: npm run fix:js
-    - run: npm run lint:js
-    - run: sudo docker system prune -a -f
-    - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
-    - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
-    - run: cd ..
-    - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
-    - run: cd woden-server-js && docker-compose up --build -d
-    - run: sleep 60
-    - run: cd ..
-    - run: npm i
-    - run: npm run startci & sleep 10
-    - run: npm run cypress:run
-    - run: npm run coverage
-    
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run fix:js
+      - run: npm run lint:js
+      - run: sudo docker system prune -a -f
+      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
+      - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
+      - run: cd ..
+      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
+      - run: cd woden-server-js && docker-compose up --build -d
+      - run: cd ..
+      - run: npm run start -d & sleep 40
+      - name: Cypress authorization tests
+        run: npm run cy:run:auth
+      - name: Cypress run
+        run: npm run cypress:run:chrome
+      #         uses: cypress-io/github-action@v2
+#         with:
+#           wait-on-timeout: 80
+#           wait-on: 'http://localhost:3000'
+#           record: true
+#           parallel: true
+#           group: 'Actions'
+#           spec: "cypress/integration/*/*.feature"
+#         env:
+#           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+#           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
+      - run: npm run coverage
+
 

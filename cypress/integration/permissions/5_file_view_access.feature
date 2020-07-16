@@ -16,8 +16,8 @@ Feature: Grant view access for a file
   Scenario: 1 View access by owner
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -27,9 +27,9 @@ Feature: Grant view access for a file
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And User has View rights to "TestUpload.txt" file that contain "Good night!"
-    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
     And Button "Update File" "not.be.visible"
-    And Button "Share" "not.be.visible"
+    And Button "Share " "not.be.visible"
     And Login as new user without UI
     And The user 1 is the owner of the file
 
@@ -41,8 +41,8 @@ Feature: Grant view access for a file
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
-    And The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Choose the "View Only" option from pop-up window
     And Register without UI user3
     And Enter "User3" email to field "#form_in_modal_username"
@@ -54,18 +54,18 @@ Feature: Grant view access for a file
     And Spin is visible "Getting data..."
     Then The file "TestUpload.txt" is visible
     And User has View rights to "TestUpload.txt" file that contain "Good night!"
-    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
     And Button "Update File" "not.be.visible"
 
   @positive
   Scenario: 3 User with View rights can view all versions of the file
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
-    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
     And Choose the needed "TestUpload.txt" for update to file with "txtFile.pem" name
     And Spin is visible "Updating file..."
     Then Message about update file "File updated successfully"
-    And The user press the Share button in "TestUpload.txt" file
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -75,9 +75,9 @@ Feature: Grant view access for a file
     And The user open Shared with me
     And Spin is visible "Getting data..."
     Then The file "TestUpload.txt" is visible
-    And The user press the Actions button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
     And Button "Update File" "not.be.visible"
-    And The user press the Versions button in "TestUpload.txt" file
+    And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
     And The user sees the list of available versions and the time, date when the version was created
 
@@ -85,10 +85,11 @@ Feature: Grant view access for a file
   Scenario: 4 Owner can provide the access to view 1 file in a folder with many files
     And Create folder with name "testFolder" in root without UI
     And Upload file "TestUpload.txt" to "testFolder"
-    And Back to My Drive from folder
+    And The user press the back button
+    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
-    When The user press the Actions button in "txtFile.txt" file
-    And The user press the Share button in "txtFile.txt" file
+    When The user press the "Actions" button in "txtFile.txt" "file"
+    And The user press the "Share" button in "txtFile.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -100,7 +101,7 @@ Feature: Grant view access for a file
     Then The folder "testFolder" is not visible
     And The file "txtFile.txt" is visible
     And The file "TestUpload.txt" is not visible
-    And The user press the Actions button in "txtFile.txt" file
+    And The user press the "Actions" button in "txtFile.txt" "file"
     And Button "Update File" "not.be.visible"
 
   @positive
@@ -110,14 +111,14 @@ Feature: Grant view access for a file
     When Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And The user press the Actions button in "TestUpload.txt" file
-    And Button "Share" "not.be.visible"
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And Button "Share " "not.be.visible"
 
   @negative
   Scenario: 6 User can not grand view access for a file to the user with incorrect email
     And The user upload "TestUpload.txt" without UI
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -126,15 +127,15 @@ Feature: Grant view access for a file
   @negative
   Scenario: 7 User can not grand view access for a file to the user if he already has them
     And The user upload "TestUpload.txt" without UI
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
-    And The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -143,8 +144,8 @@ Feature: Grant view access for a file
   @negative
   Scenario: 8 Owner can not grand view access for a file to himself
     And The user upload "TestUpload.txt" without UI
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User1" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -156,8 +157,8 @@ Feature: Grant view access for a file
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     When Login as new user 2 without UI
     And The user open Shared with me
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -168,8 +169,8 @@ Feature: Grant view access for a file
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And Register without UI user3
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2 and User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
@@ -178,8 +179,8 @@ Feature: Grant view access for a file
   Scenario: 11 Owner can not grand view access for a file if field "email" is empty
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "nothing" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -189,8 +190,8 @@ Feature: Grant view access for a file
   Scenario: 12 Owner can not grand view access for a file if field "email" contain spaces
     And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "spaces" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
@@ -198,8 +199,10 @@ Feature: Grant view access for a file
   @negative
   Scenario: 13 Owner can not grand view access for a file if field "email" contain username
     And The user upload "TestUpload.txt" without UI
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Share button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "UsernameUser2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
+
+

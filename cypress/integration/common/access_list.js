@@ -26,5 +26,8 @@ Then(/^The "([^"]*)" is the "([^"]*)" in access list$/,  (user, access) => {
       cy.get('.sharedUser.viewer').should('contain.text', user)
       break;
   }
+});
 
+Given(/^Close Access list$/,  () => {
+  cy.get('#CloseVersionsWrapper').click()
 });

@@ -1,43 +1,54 @@
 import {Then} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile} from "../../support/commands";
+import {getHash} from "../../support/commands";
 
-Then(/^User has Editors rights to "([^"]*)" "([^"]*)"$/, (fileName, obj) => {
+Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) => {
+  const logins = {
+    User1: 'TestUpload.txt',
+    User2: 'test.pem',
+    User3: 'txtFile.pem',
+  }
+  user = logins[user];
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
     switch (obj) {
       case 'file':
-        const hashFile = getHashFromFile(fileName, Cypress.env('filesInRoot'));
-        cy.get(`#Actions_${hashFile}`).click().wait(1000);
-        cy.get(`#Update_${hashFile}`).click().wait(1000);
+        const hashFile = getHash(name, Cypress.env('filesInRoot'));
+        cy.get(`#Actions_${hashFile}`).click().wait(2000);
+        cy.get(`#Update_${hashFile}`).click().wait(2000);
         cy.server();
         cy.route('PUT', '/api/v1/file').as('updateFile');
-        cy.get(`#Update_${hashFile} input[type=file]`).attachFile(fileName);
+        cy.get(`#Update_${hashFile} input[type=file]`).attachFile(name);
         cy.get('.ant-message-notice-content').should('be.visible');
 
         cy.wait('@updateFile').then((xhr) => {
           expect(xhr.responseBody).to.not.have.property('stack');
           cy.get('.ant-message-custom-content').as('File updated successfully')
             .should('be.visible')
-            .should("contain.text", 'File updated successfully');
+            .should('contain.text', 'File updated successfully');
         });
         break;
       case 'folder':
-        cy.contains('File Upload').click().wait(1000)
-        cy.server()
-        cy.route('POST', '/api/v1/file').as('uploadFile')
-
-        cy.get(`input[type=file]`).attachFile('TestUpload.txt');
-        cy.get('.ant-message-notice-content').should('be.visible')
-
-        cy.wait('@uploadFile').then((xhr) => {
+        cy.contains(name).dblclick()
+        cy.wait('@getFolder').then((xhr) => {
           expect(xhr.responseBody).to.not.have.property('stack')
-          cy.get('.ant-message-custom-content').as('spin')
-            .should('be.visible')
-          //TODO: delete reload
-          cy.reload()
-          cy.contains('TestUpload.txt').should('be.visible')
+          cy.server()
+          cy.route('POST', '/api/v1/file').as('uploadFile')
+          cy.contains('File Upload').click().wait(1000)
+          cy.server()
+          cy.route('POST', '/api/v1/file').as('uploadFile')
+
+          cy.get(`input[type=file]`).attachFile(user);
+          cy.get('.ant-message-notice-content').should('be.visible')
+
+          cy.wait('@uploadFile').then((xhr) => {
+            expect(xhr.status).to.equal(200)
+            Cypress.env('filesInRoot', xhr.responseBody.folder.files)
+            cy.get('.ant-message-custom-content').as('spin').should('be.visible')
+          });
         })
         break;
     }
-  })
+    //TODO: delete reload
+    cy.reload()
+  });
 });
