@@ -20,7 +20,6 @@ Then(/^The file "([^"]*)" is downloaded and contain text "([^"]*)"$/, (file, tex
     const reader = new FileReader();
     reader.addEventListener('loadend', (e) => {
       const text = e.srcElement.result;
-      console.log(text);
       expect(text).to.equal('This file is ok!\n')
     });
     reader.readAsText(blob);

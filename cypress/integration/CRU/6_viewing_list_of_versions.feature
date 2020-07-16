@@ -15,7 +15,6 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: 1 Viewing list of versions
-#    Given The user has access to the file with any type of rights
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
@@ -26,7 +25,6 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: 2 User can close list of versions
-#    Given The user has access to the file with any type of rights
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
