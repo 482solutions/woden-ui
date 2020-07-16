@@ -15,17 +15,18 @@ Feature: Folders tree
   @positive
   Scenario: 1 Owner can view tree and open open folder from tree
     And Upload file "TestUpload.txt" to "testFolder"
-#    And Spin is visible "Uploading file..."
-#    And The user open folders tree
-#    And The tree is contain "testFolder"
+#    And Spin is visible "File created successful"
+    And The user open folders tree
+    And Spin is visible "Uploading file..."
+    And The tree is contain "testFolder"
 #    When User presses on "testFolder" folder in the tree
 #    And Spin is visible "Getting data..."
 #    Then The user is located in "testFolder"
 #    And The file "TestUpload.txt" is visible
 
-  @positive
-  Scenario: 2 Owner can view tree and open folders of the n-th nesting
-    And Create folder with name "testFolder2" in "testFolder"
+#  @positive
+#  Scenario: 2 Owner can view tree and open folders of the n-th nesting
+#    And Create folder with name "testFolder2" in "testFolder"
 #    And Create folder with name "testFolder3" in "testFolder2"
 #    And Upload file "TestUpload.txt" to "testFolder3"
 #    And Spin is visible "Uploading file..."
@@ -40,9 +41,9 @@ Feature: Folders tree
 #    Then The user is located in "testFolder3"
 #    And The file "TestUpload.txt" is visible
 
-  @positive
-  Scenario: 3 The user can see the folder in the tree that was transferred to him in ownership
-    And Upload file "TestUpload.txt" to "testFolder"
+#  @positive
+#  Scenario: 3 The user can see the folder in the tree that was transferred to him in ownership
+#    And Upload file "TestUpload.txt" to "testFolder"
 #    And Register without UI user2
 #    And The "User1" sends a request to grant "owner" access to the "folder" "testFolder" to "User2"
 #    And Login as new user 2 without UI

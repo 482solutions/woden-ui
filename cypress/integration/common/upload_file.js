@@ -18,7 +18,7 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
       cy.wait('@uploadFile').then((xhr) => {
         Cypress.env('filesInRoot', xhr.responseBody.folder.files)
         expect(xhr.responseBody).to.not.have.property('stack')
-        cy.get('.ant-message-notice-content').should('be.visible')
+        cy.get('.ant-message-notice-content').should('be.visible').and('contain.text', 'File created successful')
         // cy.contains(fileName).should('be.visible')
       })
     })
