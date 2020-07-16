@@ -35,10 +35,10 @@ jobs:
         run: npm run cy:run:nav
 
       - name: Cypress permissions tests
-        run: cy:run:per
+        run: npm run cy:run:per
 
       - name: Cypress CRU tests
-        run: cy:run:cru
+        run: npm run cy:run:cru
         #        run: npm run cypress:run:chrome
       #         uses: cypress-io/github-action@v2
 #         with:
