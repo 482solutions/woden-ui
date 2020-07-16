@@ -197,6 +197,7 @@ export class Home extends React.Component {
     } = this.state;
     const { versions } = this.props;
     const { permissions } = this.props;
+    console.log(permissions);
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
@@ -305,7 +306,7 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(this.props.userName) !== this.props.userName))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({
