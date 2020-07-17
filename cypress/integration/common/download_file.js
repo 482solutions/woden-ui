@@ -19,8 +19,8 @@ Then(/^The file "([^"]*)" is downloaded and contain text "([^"]*)"$/, (file, tex
     const blob = xhr.responseBody;
     const reader = new FileReader();
     reader.addEventListener('loadend', (e) => {
-      const text = e.srcElement.result;
-      expect(text).to.equal('This file is ok!\n')
+      const result = e.srcElement.result;
+      expect(result).to.equal(text)
     });
     reader.readAsText(blob);
   })

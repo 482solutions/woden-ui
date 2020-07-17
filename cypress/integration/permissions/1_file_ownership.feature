@@ -74,11 +74,21 @@ Feature: Transfer file ownership
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
-    @negative
-    Scenario: 7 User can not transfer file ownership if field "email" contain username
-      And The user 1 is the owner of the file
-      When The user press the "Actions" button in "TestUpload.txt" "file"
-      And The user press the "Share" button in "TestUpload.txt" "file"
-      And Enter "UsernameUser2" email to field "#form_in_modal_username"
-      And Choose the "Transfer ownership" option from pop-up window
-      Then Notification below the field "Please enter a valid Email!"
+#      TODO:
+#    @positive
+#    Scenario: 7 User can transfer file ownership if field "email" contain username
+#      Given The user 1 is the owner of the file
+#      And The user press the "Actions" button in "TestUpload.txt" "file"
+#      And The user press the "Share" button in "TestUpload.txt" "file"
+#      And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#      And Choose the "Transfer ownership" option from pop-up window
+#      And Press "Confirm"
+#      And Spin is visible "Changing permissions..."
+#      When Message about transfer ownership "Permissions updated successfully"
+#      And Login as new user 2 without UI
+#      And The file "TestUpload.txt" is visible
+#      And Login as new user without UI
+#      And The user open Shared with me
+#      And Spin is visible "Getting data..."
+#      Then "User1" has Editors rights to "TestUpload.txt" "file"
+
