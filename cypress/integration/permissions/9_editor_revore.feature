@@ -28,11 +28,9 @@ Feature: Editor revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User2" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User3"
-#    TODO: delete RELOAD
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -40,14 +38,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
     When The user press the "delete" button near "editor" "User3"
-  #    TODO: delete RELOAD
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
-
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
@@ -72,23 +63,24 @@ Feature: Editor revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User2" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
-        #    TODO: delete RELOAD
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
-
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
+    When The user press the "delete" button near "viewer" "User3"
+    And Spin is visible "Revoking access..."
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "editor" in access list
+    And The "User3" is the "absent" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
-    And The file "TestUpload.txt" is visible
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And Button "Update File" "not.be.visible"
+    And The file "TestUpload.txt" is not visible
 
   Scenario: 3 Editor can revoke edit access for a folder
     And Create folder with name "Revoke" in root without UI
@@ -108,14 +100,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
     When The user press the "delete" button near "editor" "User3"
-          #    TODO: delete RELOAD
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
-
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
@@ -147,14 +132,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
-           #    TODO: delete RELOAD
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
-
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
@@ -188,16 +166,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
     When The user press the "delete" button near "editor" "User3"
-#    TODO: delete RELOAD
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
-
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
@@ -262,12 +231,15 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
     And Spin is visible "Revoking access..."
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "editor" in access list
+    And The "User3" is the "absent" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The user opens folder "Revoke"
     And Spin is visible "Getting data..."
-    Then The file "TestUpload.txt" is not visible
+    Then The file "TestUpload.txt" is visible
 
   Scenario: 8 After revoking the viewing rights for a file, the editor can restore them
     And The user upload "TestUpload.txt" without UI
@@ -283,16 +255,9 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
     And Spin is visible "Revoking access..."
-
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User3" email to field "#form_in_modal_username"
@@ -323,28 +288,16 @@ Feature: Editor revoke access
     And The "User3" is the "editor" in access list
     And The user press the "delete" button near "editor" "User3"
     And Spin is visible "Revoking access..."
-
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
-
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
-
+    And Login as new user 2 without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User3" email to field "#form_in_modal_username"
@@ -375,17 +328,10 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
-
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
-
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
     And Enter "User3" email to field "#form_in_modal_username"
@@ -438,4 +384,3 @@ Feature: Editor revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
-

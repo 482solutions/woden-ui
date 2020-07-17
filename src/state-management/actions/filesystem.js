@@ -1,5 +1,6 @@
 import Woden from 'woden';
 import download from 'downloadjs';
+import axios from 'axios'
 import { message } from 'antd';
 import {
   CLEAN_STORAGE,
@@ -146,27 +147,25 @@ export const updateFile = (file) => async() => {
   );
 };
 
-export const downloadFile = (hash, cid) => async(dispatch) => {
+export const downloadFile = (hash, cid, name) => async(dispatch) => {
   message.loading('Downloading file...', 0);
-  Bearer.apiKey = await getTokenForHeader();
-  api.downloadFile(
-    hash, cid,
-    (error, data, response) => {
-      message.destroy();
-      if (error) {
-        message.error(response.body.message);
-      } else {
-        message.success('File downloaded successfully');
-        const name = name;
-        const type = response.headers['content-type'];
-        const file = response.text;
-        download(file, name, type);
-        dispatch({
-          type: DOWNLOAD_FILE,
-        });
-      }
-    },
-  );
+  const token = await getTokenForHeader();
+  axios.get(`http://localhost:1823/api/v1/file/${hash}/${cid}`,
+    {
+      headers: { Authorization: token, 'Access-Control-Allow-Origin': '*' },
+      responseType: 'blob',
+    }).then((response) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', name);
+    document.body.appendChild(link);
+    link.click();
+    message.destroy();
+  });
+  dispatch({
+    type: DOWNLOAD_FILE,
+  });
 };
 
 export const getVersions = (hash) => async(dispatch) => {

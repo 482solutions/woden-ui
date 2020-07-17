@@ -1,8 +1,8 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile} from "../../support/commands";
+import {getHash} from "../../support/commands";
 
 Given(/^Choose the needed "([^"]*)" file from its PC directory for update$/, (f) => {
-    const hashFile = getHashFromFile(f, Cypress.env('filesInRoot'))
+    const hashFile = getHash(f, Cypress.env('filesInRoot'))
     cy.server()
     cy.route('PUT', '/api/v1/file').as('updateFile')
     cy.get(`#Update_${hashFile} input[type=file]`).attachFile(f);
@@ -47,6 +47,7 @@ Then(/^The file "([^"]*)" is visible$/, (file) => {
 
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
+    cy.wait(1000)
     cy.contains(file).should('not.be.visible')
 });
 

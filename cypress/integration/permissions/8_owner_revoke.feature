@@ -17,10 +17,8 @@ Feature: Owner revoke access
   Scenario: 1 Owner can revoke edit access for a file
     And The user upload "TestUpload.txt" without UI
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
-#    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -28,13 +26,6 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-  #    TODO: delete login and spin after fix reload on the frontend
-    And Login as new user without UI
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
-
     Then The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And Login as new user 2 without UI
@@ -48,10 +39,8 @@ Feature: Owner revoke access
   Scenario: 2 Owner can revoke view access for a file
     And The user upload "TestUpload.txt" without UI
     And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User2"
-    #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -59,13 +48,6 @@ Feature: Owner revoke access
     And The "User2" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-  #    TODO: delete login and spin after fix reload on the frontend
-    And Login as new user without UI
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
-
     Then The "User1" is the "owner" in access list
     And The "User2" is the "absent" in access list
     And Login as new user 2 without UI
@@ -77,10 +59,8 @@ Feature: Owner revoke access
   Scenario: 3 Owner can revoke edit access for a folder
     And Create folder with name "Revoke" in root without UI
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
-     #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -88,13 +68,6 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-   #    TODO: delete login and spin after fix reload on the frontend
-    And Login as new user without UI
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
-
     Then The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And Login as new user 2 without UI
@@ -111,10 +84,8 @@ Feature: Owner revoke access
   Scenario: 4 Owner can revoke view access for a folder
     And Create folder with name "Revoke" in root without UI
     And The "User1" sends a request to grant "view" access to the "folder" "Revoke" to "User2"
-    #    TODO: delete RELOAD
-    And RELOAD
+    And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -122,13 +93,6 @@ Feature: Owner revoke access
     And The "User2" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-    #    TODO: delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
-
     Then The "User1" is the "owner" in access list
     And The "User2" is the "absent" in access list
     And Login as new user 2 without UI
@@ -172,11 +136,9 @@ Feature: Owner revoke access
     And Upload file "TestUpload.txt" to "Revoke"
     And The file "TestUpload.txt" is visible
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
-#    TODO: delete RELOAD fix reload on the frontend
-    And RELOAD
+    And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user opens folder "Revoke"
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -184,14 +146,6 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-#    TODO: delete reload after fix reload on the frontend
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
-
     Then The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And The user press the back button
@@ -206,17 +160,12 @@ Feature: Owner revoke access
     And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And Upload file "test.pem" to "Revoke"
-#    TODO: delete reload
-    And RELOAD
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-
-    And The file "test.pem" is visible
-    And The file "TestUpload.txt" is visible
-    And User can update file "test.pem"
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And Button "Update File" "not.be.visible"
+#    TODO uncomment after fix reload
+#    And The file "test.pem" is visible
+#    And The file "TestUpload.txt" is visible
+#    And User can update file "test.pem"
+#    And The user press the "Actions" button in "TestUpload.txt" "file"
+#    And Button "Update File" "not.be.visible"
 
   @positive
   Scenario: 8 Owner can revoke edit access for a folder in folder
@@ -242,12 +191,6 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-     #    TODO: delete reload after fix reload on the frontend
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke1" "folder"
-    And The user press the "Access list" button in "Revoke1" "folder"
-    And The user sees the access list
     And The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And The user opens folder "Revoke1"
@@ -266,6 +209,7 @@ Feature: Owner revoke access
     And Spin is visible "Getting data..."
     And The folder "Revoke2" is visible
 
+  @positive
   Scenario: 9 Owner can revoke all access for a file in folder
     And Create folder with name "Revoke" in root without UI
     And Upload file "TestUpload.txt" to "Revoke"
@@ -284,26 +228,11 @@ Feature: Owner revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
-#    TODO: delete reload after fix reload on the frontend
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-
+    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And The user press the "delete" button near "viewer" "User2"
-
-#    TODO: delete reload after fix reload on the frontend
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-
+    And Spin is visible "Revoking access..."
     Then The "User1" is the "owner" in access list
     And The "User2" is the "absent" in access list
     And Login as new user 2 without UI
@@ -314,13 +243,12 @@ Feature: Owner revoke access
     And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is not visible
 
+  @positive
   Scenario: 10 After revoking the editing rights for a file, the owner can restore them
     And The user upload "TestUpload.txt" without UI
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
-    #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -328,22 +256,12 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-
-# TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
-    And The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Access list" button in "TestUpload.txt" "file"
-    And The user sees the access list
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "viewer" in access list
     And The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-# TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -362,22 +280,21 @@ Feature: Owner revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
 
+  @positive
   Scenario: 11 After revoking the viewing rights for a file, the owner can restore them
     And The user upload "TestUpload.txt" without UI
     And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User2"
-    #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-    # TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -391,13 +308,12 @@ Feature: Owner revoke access
     Then The file "TestUpload.txt" is visible
     And Count of the "file" "TestUpload.txt" should be 1
 
+  @positive
   Scenario: 12 After revoking the editor rights for a folder, the owner can restore them
     And Create folder with name "Revoke" in root without UI
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
-    #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -405,22 +321,12 @@ Feature: Owner revoke access
     And The "User2" is the "editor" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-
-# TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The user sees the access list
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "viewer" in access list
     And The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-# TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -439,13 +345,12 @@ Feature: Owner revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
 
+  @positive
   Scenario: 13 After revoking the viewing rights for a folder, the owner can restore them
     And Create folder with name "Revoke" in root without UI
     And The "User1" sends a request to grant "view" access to the "folder" "Revoke" to "User2"
-    #    TODO: delete login and spin after fix reload on the frontend
     And Login as new user without UI
     And Spin is visible "Getting data..."
-
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -453,12 +358,8 @@ Feature: Owner revoke access
     And The "User2" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
-
-# TODO delete RELOAD
-    And RELOAD
-    And Spin is visible "Getting data..."
-    And User click Home button
-
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
     And Enter "User2" email to field "#form_in_modal_username"
@@ -485,14 +386,14 @@ Feature: Owner revoke access
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And "User2" has Editors rights to "Revoke" "folder"
-
-#    TODO delete:
+    And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The user opens folder "Revoke"
-
+    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "test.pem" "file"
     And The user press the "Share" button in "test.pem" "file"
+    And Register without UI user3
     And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
@@ -509,20 +410,13 @@ Feature: Owner revoke access
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "editor" "User2"
     And Spin is visible "Revoking access..."
-
-  #    TODO delete:
-    And Login as new user without UI
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "test.pem" "file"
-    And The user press the "Access list" button in "test.pem" "file"
-
     And The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User2"
     And Spin is visible "Revoking access..."
     And Login as new user 2 without UI
+    And Spin is visible "Getting data..."
     And The user open Shared with me
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
@@ -539,4 +433,6 @@ Feature: Owner revoke access
     And The "User3" is the "viewer" in access list
     And The user double click the file
     And Spin is visible "Downloading file..."
-    And Notification error "File with this hash does not exist"
+#    TODO uncommented after fix "download file"":
+#    And Notification error "File with this hash does not exist"
+

@@ -1,5 +1,5 @@
 import {Given, When, Then} from "cypress-cucumber-preprocessor/steps";
-import {getHashFromFile} from "../../../support/commands";
+import {getHash} from "../../../support/commands";
 
 Given(/^Update file "([^"]*)"$/, (fileName) => {
     const textBefore = 'Good night!'

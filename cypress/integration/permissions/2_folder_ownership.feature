@@ -18,7 +18,7 @@ Feature: Transfer folder ownership
       And Spin is visible "Changing permissions..."
       Then Message about transfer ownership "Permissions updated successfully"
       And Login as new user 2 without UI
-      And User 2 became Owner of "Folder1" folder
+      And "User2" became Owner of "Folder1" folder
       And The folder "Folder1" is visible
       And Login as new user without UI
       And The user open Shared with me
@@ -26,10 +26,17 @@ Feature: Transfer folder ownership
       And The folder "Folder1" is visible
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
+      And Upload file "test1.txt" to "Folder1"
+# TODO: delete
+      And Login as new user without UI
+      And The user open Shared with me
+      And Spin is visible "Getting data..."
       And The user opens folder "Folder1"
-      And "User1" has Editors rights to "Folder1" "folder"
+      And Spin is visible "Getting data..."
+
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
+      And The file "test1.txt" is visible
 
     @positive
     Scenario: 2 Transfer ownership to a folder in a folder
@@ -45,7 +52,7 @@ Feature: Transfer folder ownership
       And Spin is visible "Changing permissions..."
       And Message about transfer ownership "Permissions updated successfully"
       And Login as new user 2 without UI
-      And User 2 became Owner of "Folder2" folder
+      And "User2" became Owner of "Folder2" folder
       And The folder "Folder2" is visible
       And Login as new user without UI
       Then The folder "Folder1" is visible
@@ -54,10 +61,17 @@ Feature: Transfer folder ownership
       And The folder "Folder2" is visible
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
+      And Upload file "test1.txt" to "Folder2"
+#    TODO: delete
+      And Login as new user without UI
+      And The user open Shared with me
+      And Spin is visible "Getting data..."
       And The user opens folder "Folder2"
-      And "User1" has Editors rights to "testFolder2" "folder"
+      And Spin is visible "Getting data..."
+
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
+      And The file "test1.txt" is visible
 
     @negative
     Scenario: 3 User can not transfer folder ownership to the user with incorrect email
