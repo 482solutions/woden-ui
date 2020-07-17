@@ -15,6 +15,7 @@ import fileImageJPG from '../../../assets/images/fileImages/fileImageJPG.svg';
 import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
+import fileImageTXT from '../../../assets/images/fileImages/fileImageTXT.svg';
 import { detectUserPermission } from '../../../utils/functions';
 
 export default class Drive extends Component {
@@ -78,33 +79,39 @@ export default class Drive extends Component {
         <Menu.Item key={`1${hash}`} onClick={async() => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
-          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon}
+                                                alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
   }
 
-  detectImage(file) {
-    switch (file.fileType) {
-      case 'application/pdf':
-        return fileImagePDF;
-      case 'image/jpeg':
-        return fileImageJPG;
-      case 'image/vnd.adobe.photoshop':
-        return fileImagePSD;
-      case 'image/svg+xml':
-        return fileImageSVG;
-      case 'audio/basic':
-        return fileImageAU;
-      case 'application/ai':
-        return fileImageAI;
-      case 'image/png':
-        return fileImagePNG;
-      case 'text/plain':
-        return fileImageDefault;
-      default:
-        return fileImageDefault;
+  detectImage(name) {
+    if (name.match(/\.(pdf)$/)) {
+      return fileImagePDF;
     }
+    if (name.match(/\.(png)$/)) {
+      return fileImagePNG;
+    }
+    if (name.match(/\.(jpg|jpeg)$/)) {
+      return fileImageJPG;
+    }
+    if (name.match(/\.(au)$/)) {
+      return fileImageAU;
+    }
+    if (name.match(/\.(ai)$/)) {
+      return fileImageAI;
+    }
+    if (name.match(/\.(psd)$/)) {
+      return fileImagePSD;
+    }
+    if (name.match(/\.(svg)$/)) {
+      return fileImageSVG;
+    }
+    if (name.match(/\.(txt)$/)) {
+      return fileImageTXT;
+    }
+    return fileImageDefault;
   }
 
   detectPermission(username, hash, infoArray, type) {
@@ -168,8 +175,8 @@ export default class Drive extends Component {
           entryFiles.map((file, i) => (
             <div className="driveItem"
                  key={i}>
-              <img src={this.detectImage(filesInfo[i])}
-                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null', file.name)}
+              <img src={this.detectImage(file.name)}
+                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null')}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">

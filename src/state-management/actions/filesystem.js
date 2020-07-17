@@ -58,9 +58,10 @@ export const search = (value) => async(dispatch) => {
       dispatch({
         type: SEARCH_FOLDER_FILE,
         payload: response.body,
+        mode: 'drive',
       });
     } else {
-      message.error(response.body.message);
+      message.error(response.body.message, 2);
     }
   });
 };
