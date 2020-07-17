@@ -16,11 +16,12 @@ Given(/^The user open folders tree$/,  () => {
 });
 
 Given(/^The tree is contain "([^"]*)"$/,  (folders) => {
-  cy.get('.ant-tree-list').should('contain.text', folders)
+  let f = folders.replace(/[\s,]/g, '');
+  cy.get('.ant-tree-list').should('contain.text', f)
 });
 
 When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
-  cy.get('.ant-tree-title').contains(folderTitle).dblclick()
+  cy.get('.ant-tree-title').contains(folderTitle).click()
   cy.get('.ant-message-notice-content')
     .should('be.visible')
     .and('contain.text', 'Getting data...')
@@ -30,5 +31,10 @@ When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
   })
 });
 Given(/^The user presses on arrow near "([^"]*)"$/, (folderTitle) => {
-
+  cy.get('.ant-tree-list-holder-inner')
+    .children('.ant-tree-treenode.ant-tree-treenode-switcher-close')
+    .contains(folderTitle)
+    .parent()
+    .parent()
+    .children('.ant-tree-switcher.ant-tree-switcher_close').click()
 });
