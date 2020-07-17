@@ -202,14 +202,13 @@ export const getFoldersTree = () => async(dispatch) => {
         message.error(response.body.message);
       } else {
         const oldData = JSON.stringify(response.body.response);
-        const tree = [];
-        tree[0] = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(
+        const tree = JSON.parse(oldData.replace(/hash/g, 'key').replace(/name/g, 'title').replace(
           /folders/g,
           'children',
         ));
         dispatch({
           type: GET_FOLDERS_TREE,
-          payload: tree,
+          payload: tree.children,
         });
       }
     },
