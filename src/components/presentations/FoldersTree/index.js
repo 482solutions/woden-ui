@@ -1,17 +1,34 @@
 import React from 'react';
 import { Tree } from 'antd';
+import folderImage from '../../../assets/images/folderImage.svg';
 import './style.css';
 
-const { DirectoryTree } = Tree;
+export class FoldersTree extends React.Component {
+  showIcon() {
+    return (
+      <img src={folderImage} className="smallFolderImage" alt=""/>
+    );
+  }
 
-const foldersTree = ({ tree }) => (
-    <DirectoryTree
-      className="directoryTree"
-      multiple
-      defaultExpandAll
-      treeData={tree}
-      selectable={false}
-    />
-);
+  render() {
+    const { DirectoryTree } = Tree;
+    const { tree } = this.props;
 
-export default foldersTree;
+    const onSelect = (keys, event) => {
+      this.props.openFolder(event.key);
+    };
+
+    return (
+      <DirectoryTree
+        className="directoryTree"
+        multiple
+        treeData={tree}
+        selectable={false}
+        onClick={onSelect}
+        icon={this.showIcon}
+      />
+    );
+  }
+}
+
+export default FoldersTree;

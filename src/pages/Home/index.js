@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 import { Buttons, Drive, Sidebar } from '../../components/containers';
-import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
+import { getRootFolderHash } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -67,11 +67,6 @@ export class Home extends React.Component {
     this.props.initialFilesystem();
     const hash = await getRootFolderHash();
     this.props.getFolderData(hash, this.state.mode);
-    const { username } = this.props;
-    const infoArray = this.state.mode.foldersInfo;
-    const type = 'folder';
-    const detectPermission = detectUserPermission(username, hash, infoArray, type);
-    this.setState({ userPermission: detectPermission });
   }
 
   async openFolder(hash) {
@@ -205,6 +200,7 @@ export class Home extends React.Component {
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
+                   openFolder={this.openFolder}
                    tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">

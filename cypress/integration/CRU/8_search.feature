@@ -7,8 +7,10 @@ Feature:  Search of files and folders
   Rule: user should be registered and has files in folders.
 
     Background:
-      Given Register without UI
       And Login as new user without UI
+
+    @before
+    Scenario: Upload files and create folders before tests
       And The user is authorized
       And Create folder with name "testFolder" in root without UI
       And The folder "testFolder" is visible

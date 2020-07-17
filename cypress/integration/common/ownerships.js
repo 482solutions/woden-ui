@@ -1,5 +1,4 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
-import {getHash} from "../../support/commands";
 
 Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
   switch (userEmail) {
