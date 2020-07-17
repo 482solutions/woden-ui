@@ -77,12 +77,12 @@ export class Home extends React.Component {
     this.props.getFolderData(hash, this.state.mode);
   }
 
-  uploadFile(file) {
+  uploadFile(file, mode) {
     this.props.uploadFile({
       name: file.name,
       parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
       file,
-    });
+    }, mode);
     return false;
   }
 

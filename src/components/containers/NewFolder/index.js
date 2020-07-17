@@ -23,10 +23,6 @@ const NewFolder = (props) => {
     setVisible(false);
   };
 
-  const { mode } = props;
-
-  console.log(mode);
-
   return (
     <div>
       <Button onClick={showModal} className="newFolder-button">

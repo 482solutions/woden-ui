@@ -18,7 +18,7 @@ class Buttons extends Component {
   }
 
   beforeUpload(file) {
-    this.props.uploadFile(file);
+    this.props.uploadFile(file, this.props.mode);
     return false;
   }
 
