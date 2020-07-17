@@ -15,24 +15,21 @@ Feature: Folders tree
   @positive
   Scenario: 1 Owner can view tree and open open folder from tree
     And Upload file "TestUpload.txt" to "testFolder"
-#    And Spin is visible "File created successful"
     And The user open folders tree
-    And Spin is visible "Uploading file..."
     And The tree is contain "testFolder"
-#    When User presses on "testFolder" folder in the tree
-#    And Spin is visible "Getting data..."
-#    Then The user is located in "testFolder"
-#    And The file "TestUpload.txt" is visible
+    When User presses on "testFolder" folder in the tree
+    Then The user is located in "testFolder"
+    And The file "TestUpload.txt" is visible
 
-#  @positive
-#  Scenario: 2 Owner can view tree and open folders of the n-th nesting
-#    And Create folder with name "testFolder2" in "testFolder"
-#    And Create folder with name "testFolder3" in "testFolder2"
-#    And Upload file "TestUpload.txt" to "testFolder3"
+  @positive
+  Scenario: 2 Owner can view tree and open folders of the n-th nesting
+    And Create folder with name "testFolder2" in "testFolder"
+    And Create folder with name "testFolder3" in "testFolder2"
+    And Upload file "TestUpload.txt" to "testFolder3"
 #    And Spin is visible "Uploading file..."
-#    And The user open folders tree
-#    And The tree is contain "testFolder"
-#    And The user presses on arrow near "testFolder"
+    And The user open folders tree
+    And The tree is contain "testFolder"
+    And The user presses on arrow near "testFolder"
 #    And The tree is contain "testFolder, testFolder2"
 #    And The user presses on arrow near "testFolder2"
 #    And The tree is contain "testFolder, testFolder2, testFolder3"
