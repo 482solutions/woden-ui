@@ -1,7 +1,6 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^The user open folders tree$/,  () => {
-  //TODO delete  cy.wait(3000)
   cy.wait(3000)
   cy.server()
   cy.route('GET', '/api/v1/tree').as('getTree')

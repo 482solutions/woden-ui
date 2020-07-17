@@ -51,11 +51,6 @@ Feature: Folders tree
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And Create folder with name "testFolder2" in "testFolder"
-
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The folder "testFolder" is visible
-
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible
@@ -74,6 +69,14 @@ Feature: Folders tree
     And Spin is visible "Getting data..."
     Then The user is located in "testFolder2"
     And The file "TestUpload.txt" is visible
+
+  @positive
+  Scenario: 4 The folder appears in the tree after it is created
+    And The user open folders tree
+    And The tree is contain "testFolder"
+    When Create folder with name "testFolder2" in root without UI
+    And The user open folders tree
+    Then The tree is contain "testFolder, testFolder2"
 
 #    TODO: add "User can close folders tree, when click on "My Drive"
 
