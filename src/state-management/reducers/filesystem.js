@@ -64,9 +64,9 @@ const handleSearch = (state, folderData, mode) => ({
   [mode]: {
     folderName: folderData.folderName,
     folderHash: folderData.folderHash,
-    parentHash: null,
     entryFolders: folderData.folders,
     entryFiles: folderData.files,
+    parentHash: null,
   },
 });
 
