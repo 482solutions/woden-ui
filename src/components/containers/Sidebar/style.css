@@ -40,3 +40,7 @@
 .folderImage {
   max-height: 25px;
 }
+
+.switcherIconRight {
+  cursor: pointer;
+}
