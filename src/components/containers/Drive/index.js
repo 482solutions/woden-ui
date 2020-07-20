@@ -176,7 +176,7 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(file.name)}
-                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null')}
+                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null', file.name)}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">

@@ -55,30 +55,27 @@ Then(/^Error message Password can not be empty$/, () => {
 });
 
 When(/^The user press Create a new folder button$/, () => {
-  cy.get('.ant-btn.newFolder-button').click().wait(2000)
+  cy.wait('@getFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.get('.ant-btn.newFolder-button').click().wait(2000)
+  })
 });
 
 When(/^The field name is empty$/, () => {
+  cy.wait(2000)
   cy.get('#newFolder').should('be.empty')
 });
 
 When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {
-  cy.get('#newFolder').type(folderName).wait(1000)
+  cy.wait(2000)
+  cy.get('.ant-input.formItem.inputItem').type(folderName).wait(1000)
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-
   cy.wait('@createFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
+    cy.contains(folderName).should('be.visible')
   })
-  cy.server()
-  cy.route('GET', '/api/v1/folder/*').as('getFolder')
-  //TODO delete cy.reload()
-  cy.reload()
-  cy.wait('@getFolder').then((xhr) => {
-    cy.contains(folderName).should('be.visible').wait(2000)
-  })
-
 });
 
 When(/^Press Create folder$/, () => {

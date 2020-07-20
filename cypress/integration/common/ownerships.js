@@ -24,7 +24,7 @@ Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
       cy.get(field).should('be.visible').type(Cypress.env('login_3'));
       break;
     case 'nothing':
-        cy.get(field).should('be.visible')
+      cy.get(field).should('be.visible')
       break;
     case 'User2 and User3':
       cy.get(field).should('be.visible').type(`${Cypress.env('email_2')}, ${Cypress.env('email_3')}`);
@@ -35,7 +35,7 @@ Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
   }
 });
 
-Then(/^"([^"]*)" option from pop-up window is not visible$/,  () => {
+Then(/^"([^"]*)" option from pop-up window is not visible$/, () => {
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 
@@ -88,16 +88,16 @@ Given(/^The user 1 is the owner of the file$/, () => {
   })
 });
 
-When(/^Enter User 2 username$/,  () => {
+When(/^Enter User 2 username$/, () => {
   cy.get('#form_in_modal_username').should('be.visible')
     .type(Cypress.env('login_2'))
 });
 
-Then(/^The folder "([^"]*)" is visible$/,  (folder) => {
+Then(/^The folder "([^"]*)" is visible$/, (folder) => {
   cy.contains(folder).should('be.visible')
 });
 
-Then(/^The folder "([^"]*)" is not visible$/,  (folder) => {
+Then(/^The folder "([^"]*)" is not visible$/, (folder) => {
   cy.contains(folder).should('not.be.visible')
 });
 
@@ -116,6 +116,12 @@ Then(/^User has View rights to "([^"]*)" file that contain "([^"]*)"$/, (file, t
   cy.get('.ant-message-notice-content').should('be.visible')
   cy.wait('@getFile').then((xhr) => {
     expect(200).to.equal(xhr.status)
-    expect(text).to.equal(xhr.responseBody)
+    const blob = xhr.responseBody;
+    const reader = new FileReader();
+    reader.addEventListener('loadend', (e) => {
+      const result = e.srcElement.result;
+      expect(result).to.equal(text)
+    });
+    reader.readAsText(blob);
   })
 });

@@ -20,7 +20,6 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
         cy.get('.ant-message-notice-content')
           .should('be.visible')
           .and('contain.text', 'File created successful')
-        // cy.contains(fileName).should('be.visible')
       })
     })
   })

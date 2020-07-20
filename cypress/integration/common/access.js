@@ -51,6 +51,6 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
         break;
     }
     //TODO: delete reload
-    cy.reload()
+    // cy.reload()
   });
 });

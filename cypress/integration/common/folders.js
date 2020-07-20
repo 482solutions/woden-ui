@@ -13,10 +13,10 @@ Given(/^Create folder with name "([^"]*)" in root without UI$/, (folder) => {
 
 Given(/^Create folder with name "([^"]*)" in "([^"]*)"$/, (folder2, folder1) => {
   cy.wait('@getFolder').then((xhr) => {
+    cy.server()
+    cy.route('POST', '/api/v1/folder').as('getFolder')
     expect(xhr.responseBody).to.not.have.property('stack')
     cy.createFolderInFolder(folder2, folder1)
-    //TODO: delete cy.reload() and open folder
-    cy.reload()
   })
 });
 

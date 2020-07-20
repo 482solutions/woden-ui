@@ -18,7 +18,7 @@ class Buttons extends Component {
   }
 
   beforeUpload(file) {
-    this.props.uploadFile(file);
+    this.props.uploadFile(file, this.props.mode);
     return false;
   }
 
@@ -74,8 +74,9 @@ class Buttons extends Component {
         {
           this.props.mode === 'drive' || (this.props.folderData.parentHash !== 'root' && (userPermission === 'owner' || userPermission === 'write'))
             ? <div className="homeButtons">
+              <NewFolder mode={this.props.mode}
+                         onFinish={this.props.newFolder}/>
               <div>
-                <NewFolder onFinish={this.props.newFolder}/>
               </div>
               <div>
                 <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
