@@ -51,7 +51,7 @@ Then(/^The folder with invalid name (.*) is NOT created$/, (invalidFolderName) =
 
 When(/^The name field is filled by the user with data from the list (.*)$/, (invalidName) => {
   cy.get('.ant-modal-body').should('be.visible')
-  cy.get('#newFolder').type(invalidName)
+  cy.get('.ant-btn.newFolder-button').type(invalidName)
 });
 
 Then(/^Close folder creation window$/, () => {
@@ -59,7 +59,7 @@ Then(/^Close folder creation window$/, () => {
 });
 
 When(/^The field name contain only spaces$/, () => {
-  cy.get('#newFolder').type('           ')
+  cy.get('.ant-btn.newFolder-button').type('           ')
 });
 
 Given(/^The user is created folder in root folder with name (.*) from list$/, (name) => {

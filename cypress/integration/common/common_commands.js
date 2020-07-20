@@ -63,7 +63,7 @@ When(/^The user press Create a new folder button$/, () => {
 
 When(/^The field name is empty$/, () => {
   cy.wait(2000)
-  cy.get('#newFolder').should('be.empty')
+  cy.get('.ant-btn.newFolder-button').should('be.empty')
 });
 
 When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {

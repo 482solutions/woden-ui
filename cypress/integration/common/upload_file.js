@@ -19,7 +19,7 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
         Cypress.env('filesInRoot', xhr.responseBody.folder.files)
         cy.get('.ant-message-notice-content')
           .should('be.visible')
-          .and('contain.text', 'File created successful')
+          .and('contain.text', 'File created successfully')
       })
     })
   })

@@ -61,7 +61,7 @@ Feature: Folders tree
     When The user press Upload a new file button
     And Choose the needed "TestUpload.txt" file from its PC directory
     And Spin is visible "Uploading file..."
-    And Message "File created successful"
+    And Message "File created successfully"
     And Login as new user 2 without UI
     And The user open folders tree
     And The tree is contain "testFolder"

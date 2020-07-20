@@ -95,7 +95,7 @@
     "coverage": "npm test -- --coverage --watchAll=false",
     "cypress:open": "cypress open",
     "cy:run:auth": "cypress run --browser chrome --spec \"cypress/integration/auth/*.feature\"",
-    "cy:run:cru": "cypress run --browser chrome --spec \"cypress/integration/CRU/*.feature\"",
+    "cy:run:cru": "cypress run --browser chrome --spec \"cypress/integration/CRU/1_creating_folders.feature\"",
     "cy:run:nav": "cypress run --browser chrome --spec \"cypress/integration/navigation/*.feature\"",
     "cy:run:per": "cypress run --browser chrome --spec \"cypress/integration/permissions/*.feature\"",
     "cypress:run:chrome": "cypress run --browser chrome --spec \"cypress/integration/*/*.feature\"",
