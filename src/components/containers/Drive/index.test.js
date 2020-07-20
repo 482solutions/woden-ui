@@ -122,7 +122,9 @@ it('Simulate double click on Files for download', () => {
   }}
                                  downloadFile={() => {
                                  }}
-                                 versions={versions}/>);
+                                 versions={versions}
+                                 getPermission={() => {
+                                 }}/>);
 
   expect(wrapper.find('.file').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.file').at(1).simulate('doubleclick')).to.be.ok;
