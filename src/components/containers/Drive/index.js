@@ -22,7 +22,7 @@ export default class Drive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPermissions: 'null',
+      userPermission: 'null',
     };
   }
 
@@ -118,6 +118,7 @@ export default class Drive extends Component {
     const detectPermission = detectUserPermission(username, hash, infoArray, type);
     this.setState({ userPermission: detectPermission });
     this.props.getPermission(detectPermission);
+    return detectPermission;
   }
 
   render() {
@@ -176,12 +177,22 @@ export default class Drive extends Component {
             <div className="driveItem"
                  key={i}>
               <img src={this.detectImage(file.name)}
-                   onDoubleClick={() => this.props.downloadFile(file.hash, 'null', file.name)}
+                   onDoubleClick={() => {
+                     const perm = this.detectPermission(username,
+                       file.hash,
+                       filesInfo,
+                       'file')
+                     this.props.downloadFile(file.hash, 'null', file.name, perm)}}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
                 <span className="fileTitle"
-                      onDoubleClick={() => this.props.downloadFile(file.hash, 'null', file.name)}>
+                      onDoubleClick={() => {
+                        const perm = this.detectPermission(username,
+                          file.hash,
+                          filesInfo,
+                          'file')
+                        this.props.downloadFile(file.hash, 'null', file.name, perm)}}>
                   {file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name)}
