@@ -27,22 +27,15 @@ Feature: Transfer folder ownership
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
       And Upload file "test1.txt" to "Folder1"
-# TODO: delete
-      And Login as new user without UI
-      And The user open Shared with me
-      And Spin is visible "Getting data..."
-      And The user opens folder "Folder1"
-      And Spin is visible "Getting data..."
-
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
       And The file "test1.txt" is visible
 
     @positive
     Scenario: 2 Transfer ownership to a folder in a folder
-      And The user opens folder "Folder1"
       And Create folder with name "Folder2" in "Folder1"
-#      TODO delete And The user opens folder "Folder1":
+      And RELOAD
+      And Spin is visible "Getting data..."
       And The user opens folder "Folder1"
       When The user press the "Actions" button in "Folder2" "folder"
       And The user press the "Share" button in "Folder2" "folder"
@@ -62,13 +55,6 @@ Feature: Transfer folder ownership
       And Button "New Folder" "not.be.visible"
       And Button "File Upload" "not.be.visible"
       And Upload file "test1.txt" to "Folder2"
-#    TODO: delete
-      And Login as new user without UI
-      And The user open Shared with me
-      And Spin is visible "Getting data..."
-      And The user opens folder "Folder2"
-      And Spin is visible "Getting data..."
-
       And Button "New Folder" "be.visible"
       And Button "File Upload" "be.visible"
       And The file "test1.txt" is visible
@@ -122,14 +108,23 @@ Feature: Transfer folder ownership
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
-    @negative
-    Scenario: 8 User can not transfer folder ownership if field "email" contain username
-      Given The user 1 is the owner of the folder "Folder1"
-      When The user press the "Actions" button in "Folder1" "folder"
-      And The user press the "Share" button in "Folder1" "folder"
-      And Enter "UsernameUser2" email to field "#form_in_modal_username"
-      And Choose the "Transfer ownership" option from pop-up window
-      Then Notification below the field "Please enter a valid Email!"
+#      TODO
+#    @positive
+#    Scenario: 8 User can transfer folder ownership if field "email" contain username
+#      Given The user 1 is the owner of the folder "Folder1"
+#      When The user press the "Actions" button in "Folder1" "folder"
+#      And The user press the "Share" button in "Folder1" "folder"
+#      And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#      And Choose the "Transfer ownership" option from pop-up window
+#      And Press "Confirm"
+#      And Spin is visible "Changing permissions..."
+#      When Message about transfer ownership "Permissions updated successfully"
+#      And Login as new user 2 without UI
+#      And The file "TestUpload.txt" is visible
+#      And Login as new user without UI
+#      And The user open Shared with me
+#      And Spin is visible "Getting data..."
+#      Then "User1" has Editors rights to "Folder1" "folder"
 
     @positive
     Scenario: 9 User can transfer folder ownership with files in folder

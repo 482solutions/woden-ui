@@ -160,12 +160,11 @@ Feature: Owner revoke access
     And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And Upload file "test.pem" to "Revoke"
-#    TODO uncomment after fix reload
-#    And The file "test.pem" is visible
-#    And The file "TestUpload.txt" is visible
-#    And User can update file "test.pem"
-#    And The user press the "Actions" button in "TestUpload.txt" "file"
-#    And Button "Update File" "not.be.visible"
+    And The file "test.pem" is visible
+    And The file "TestUpload.txt" is visible
+    And User can update file "test.pem"
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And Button "Update File" "not.be.visible"
 
   @positive
   Scenario: 8 Owner can revoke edit access for a folder in folder
@@ -378,61 +377,62 @@ Feature: Owner revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "viewer" in access list
 
-  @positive
-  Scenario: 14 Owner can revoke access for a file which was created by the editor
-    And Create folder with name "Revoke" in root without UI
-    And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And "User2" has Editors rights to "Revoke" "folder"
-    And Login as new user 2 without UI
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "test.pem" "file"
-    And The user press the "Share" button in "test.pem" "file"
-    And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
-    And Choose the "View Only" option from pop-up window
-    And Press "Confirm"
-    And Spin is visible "Changing permissions..."
-    And Message about transfer ownership "Permissions updated successfully"
-    And Login as new user without UI
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "test.pem" "file"
-    And The user press the "Access list" button in "test.pem" "file"
-    And The user sees the access list
-    And The "User1" is the "owner" in access list
-    And The "User2" is the "editor" in access list
-    And The "User3" is the "viewer" in access list
-    When The user press the "delete" button near "editor" "User2"
-    And Spin is visible "Revoking access..."
-    And The "User1" is the "owner" in access list
-    And The "User2" is the "viewer" in access list
-    And The "User3" is the "viewer" in access list
-    When The user press the "delete" button near "viewer" "User2"
-    And Spin is visible "Revoking access..."
-    And Login as new user 2 without UI
-    And Spin is visible "Getting data..."
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "Revoke" "folder"
-    And The user press the "Access list" button in "Revoke" "folder"
-    And The "User1" is the "owner" in access list
-    And The "User2" is the "editor" in access list
-    And The "User3" is the "absent" in access list
-    And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
-    And The user press the "Actions" button in "test.pem" "file"
-    And The user press the "Access list" button in "test.pem" "file"
-    And The "User1" is the "owner" in access list
-    And The "User2" is the "absent" in access list
-    And The "User3" is the "viewer" in access list
-    And The user double click the file
-    And Spin is visible "Downloading file..."
-#    TODO uncommented after fix "download file"":
-#    And Notification error "File with this hash does not exist"
+#  @positive TODO
+#  Scenario: 14 Owner can revoke access for a file which was created by the editor
+#    And Create folder with name "Revoke" in root without UI
+#    And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
+#    And Login as new user 2 without UI
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    And "User2" has Editors rights to "Revoke" "folder"
+#    And Login as new user 2 without UI
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    And The user opens folder "Revoke"
+#    And Spin is visible "Getting data..."
+#    And The user press the "Actions" button in "test.pem" "file"
+#    And The user press the "Share" button in "test.pem" "file"
+#    And Register without UI user3
+#    And Enter "User3" email to field "#form_in_modal_username"
+#    And Choose the "View Only" option from pop-up window
+#    And Press "Confirm"
+#    And Spin is visible "Changing permissions..."
+#    And Message about transfer ownership "Permissions updated successfully"
+#    And Login as new user without UI
+#    And The user opens folder "Revoke"
+#    And Spin is visible "Getting data..."
+#    And The user press the "Actions" button in "test.pem" "file"
+#    And The user press the "Access list" button in "test.pem" "file"
+#    And The user sees the access list
+#    And The "User1" is the "owner" in access list
+#    And The "User2" is the "editor" in access list
+#    And The "User3" is the "viewer" in access list
+#    When The user press the "delete" button near "editor" "User2"
+#    And Spin is visible "Revoking access..."
+#    And The "User1" is the "owner" in access list
+#    And The "User2" is the "viewer" in access list
+#    And The "User3" is the "viewer" in access list
+#    When The user press the "delete" button near "viewer" "User2"
+#    And Spin is visible "Revoking access..."
+#    And Login as new user 2 without UI
+#    And Spin is visible "Getting data..."
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    And The user press the "Actions" button in "Revoke" "folder"
+#    And The user press the "Access list" button in "Revoke" "folder"
+#    And The "User1" is the "owner" in access list
+#    And The "User2" is the "editor" in access list
+#    And The "User3" is the "absent" in access list
+#    And The user opens folder "Revoke"
+#    And Spin is visible "Getting data..."
+#    And The user press the "Actions" button in "test.pem" "file"
+#    And The user press the "Access list" button in "test.pem" "file"
+#    And The "User1" is the "owner" in access list
+#    And The "User2" is the "absent" in access list
+#    And The "User3" is the "viewer" in access list
+#    And The user double click the file
+#    And Spin is visible "Downloading file..."
+#    And Notification error "User does not have permission"
+##    User 2 has editor rights for a folder but, owner revoked his access for a file inside the folder
+##  User open folder, and try to download file. File is downloaded, but user is absent in file's access list
 

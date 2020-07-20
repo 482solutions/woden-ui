@@ -77,12 +77,12 @@ export class Home extends React.Component {
     this.props.getFolderData(hash, this.state.mode);
   }
 
-  uploadFile(file) {
+  uploadFile(file, mode) {
     this.props.uploadFile({
       name: file.name,
       parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
       file,
-    });
+    }, mode);
     return false;
   }
 
@@ -92,15 +92,17 @@ export class Home extends React.Component {
     return false;
   }
 
-  createFolder(dataRequest) {
+  createFolder(dataRequest, mode) {
     this.props.createFolder({
       name: dataRequest.newFolder,
       parentFolder: this.state.mode === 'drive' ? this.props.drive.folderHash : this.props.share.folderHash,
-    });
+    }, mode);
   }
 
   downloadFile(hash, cid, name) {
-    this.props.downloadFile(hash, cid, name);
+    if(this.state.userPermission === 'owner' || this.state.userPermission === 'write' || this.state.userPermission === 'read') {
+      this.props.downloadFile(hash, cid, name);
+    }
   }
 
   changePermissions(data) {
@@ -261,7 +263,7 @@ export class Home extends React.Component {
                     <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
                     <Col span={3} className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid);
+                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
@@ -321,7 +323,7 @@ export class Home extends React.Component {
                 !permissions.writeUsers.includes(user)
                 && <Row key={user} className='sharedUser viewer'>
                   <Col className="sharedUserName">
-                    {permissionData.readUsers[i]}
+                    {permissions.readUsers[i]}
                   </Col>
                   <Col className="permissionIcons">
                     <Col className="sharedUserAccess">
