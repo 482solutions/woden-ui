@@ -62,12 +62,12 @@ When(/^The user press Create a new folder button$/, () => {
 });
 
 When(/^The field name is empty$/, () => {
-  cy.wait(2000)
-  cy.get('.ant-btn.newFolder-button').should('be.empty')
+  cy.wait(3000)
+  cy.get('.ant-input.formItem.inputItem').should('be.empty')
 });
 
 When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {
-  cy.wait(2000)
+  cy.wait(1000)
   cy.get('.ant-input.formItem.inputItem').type(folderName).wait(1000)
 });
 
@@ -81,7 +81,7 @@ Then(/^The folder is created with name (.*)$/, (folderName) => {
 When(/^Press Create folder$/, () => {
   cy.server()
   cy.route('POST', '/api/v1/folder').as('createFolder')
-  cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click()
+  cy.get('.ant-btn.ant-btn-primary').contains('Create').click()
 });
 
 When(/^The user press Upload a new file button$/, () => {
