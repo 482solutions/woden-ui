@@ -100,7 +100,7 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name) {
-    if(this.state.userPermission === 'owner' || this.state.userPermission === 'write' || this.state.userPermission === 'read') {
+    if (this.state.userPermission === 'owner' || this.state.userPermission === 'write' || this.state.userPermission === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
   }
@@ -194,11 +194,13 @@ export class Home extends React.Component {
     } = this.state;
     const { versions } = this.props;
     const { permissions } = this.props;
-    console.log(permissions);
     return (
       <div className="container flex-direction-row">
-        <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
-                          close={this.closeShareModal} changePermissions={this.changePermissions}/>
+        <PermissionsModal visible={shareModalVisible}
+                          info={shareModalInfo}
+                          close={this.closeShareModal}
+                          changePermissions={this.changePermissions}
+                          permission={this.state.userPermission}/>
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}

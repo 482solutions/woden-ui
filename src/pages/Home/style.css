@@ -1,6 +1,5 @@
 .container {
   display: flex;
-
 }
 
 .emptyHere {
@@ -11,7 +10,7 @@
 
 .main {
   background: #F9FAFC;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .driveItem {
@@ -55,7 +54,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 510px;
+  min-width: 350px;
+  max-width: 350px;
   font-style: normal;
   padding: 24px;
   line-height: 40px;
