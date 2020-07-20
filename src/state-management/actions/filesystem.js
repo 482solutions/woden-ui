@@ -151,7 +151,7 @@ export const updateFile = (file) => async() => {
 export const downloadFile = (hash, cid, name) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   const token = await getTokenForHeader();
-  axios.get(`http://192.168.88.42:1823/api/v1/file/${hash}/${cid}`,
+  axios.get(`http://localhost:1823/api/v1/file/${hash}/${cid}`,
     {
       headers: { Authorization: token, 'Access-Control-Allow-Origin': '*' },
       responseType: 'blob',
