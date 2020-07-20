@@ -1,6 +1,6 @@
 import Woden from 'woden';
 import download from 'downloadjs';
-import axios from 'axios'
+import axios from 'axios';
 import { message } from 'antd';
 import {
   CLEAN_STORAGE,
@@ -123,7 +123,7 @@ export const uploadFile = (file, mode) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else if (response.status === 200) {
-        message.success('File created successful');
+        message.success('File created successfully');
         const folderData = response.body;
         dispatch(updateFolderData(folderData, mode));
       }
@@ -151,7 +151,7 @@ export const updateFile = (file) => async() => {
 export const downloadFile = (hash, cid, name) => async(dispatch) => {
   message.loading('Downloading file...', 0);
   const token = await getTokenForHeader();
-  axios.get(`http://localhost:1823/api/v1/file/${hash}/${cid}`,
+  axios.get(`http://192.169.88.42:1823/api/v1/file/${hash}/${cid}`,
     {
       headers: { Authorization: token, 'Access-Control-Allow-Origin': '*' },
       responseType: 'blob',

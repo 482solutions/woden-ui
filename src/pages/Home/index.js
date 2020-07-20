@@ -114,13 +114,19 @@ export class Home extends React.Component {
   }
 
   async getVersions(hash, name) {
-    this.setState({ fileWrapperVisible: true });
+    if (this.state.accessListVisible === true) {
+      this.setState({ accessListVisible: false });
+      this.setState({ fileWrapperVisible: true });
+    } else this.setState({ fileWrapperVisible: true });
     this.setState({ wrapperInfo: { fileName: name, fileHash: hash } });
     await this.props.getVersions(hash);
   }
 
   async viewAccessList(hash, type) {
-    this.setState({ accessListVisible: true });
+    if (this.state.fileWrapperVisible === true) {
+      this.setState({ fileWrapperVisible: false });
+      this.setState({ accessListVisible: true });
+    } else this.setState({ accessListVisible: true });
     const infoArray = (type === 'file' ? this.props[this.state.mode].filesInfo : this.props[this.state.mode].foldersInfo);
     let info = {};
     for (let i = 0; i < infoArray.length; i++) {
@@ -237,12 +243,12 @@ export class Home extends React.Component {
         {
           fileWrapperVisible && <div id='VersionWrapper'
                                      className="fileInfoWrapper">
-            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
-              <Col className='infoTitle' span={20}>{wrapperInfo.fileName}</Col>
-              <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
+            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }} className="versionHeader">
+              <span className='infoTitle'>{wrapperInfo.fileName}</span>
+              <div id='CloseVersionsWrapper' className='closeButton'>
                 <img onClick={this.closeFileWrapper} alt='Close' title='Close info'
                      src={CloseIcon}/>
-              </Col>
+              </div>
             </Row>
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Versions</Col>
@@ -258,12 +264,12 @@ export class Home extends React.Component {
                   minute: '2-digit',
                 });
                 return (
-                  <Row key={version.cid} style={{ width: '100%' }}>
+                  <Row key={version.cid} style={{ width: '100%' }} className="versionItem">
                     <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
-                    <Col span={10} className='versionCode'><span
+                    <Col className='versionCode'><span
                       id={`Time_${version.cid}`}>{time}</span></Col>
-                    <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
-                    <Col span={3} className='versionDownload'>
+                    <Col className='versionAuthor'>{version.user}</Col>
+                    <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
                         this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>

@@ -6,6 +6,11 @@
   display: flex;
   justify-content: center;
   margin-top: 15%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .main {
@@ -78,14 +83,28 @@
   align-items: center;
   color: #3B7CFF;
 }
+
+.versionHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.versionItem {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .versionCode {
-  font-weight: normal;
   color: #333333;
 }
+
 .versionAuthor {
-  font-weight: 600;
   color: #AEB8C7;
-  /*margin-left: 0px;*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .versionDownload {
   cursor: pointer;

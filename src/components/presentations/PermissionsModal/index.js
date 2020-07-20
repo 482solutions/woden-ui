@@ -45,12 +45,8 @@ export const PermissionsModal = ({
         <Form.Item name="username"
                    rules={[
                      {
-                       type: 'email',
-                       message: 'Please enter a valid Email!',
-                     },
-                     {
                        required: true,
-                       message: 'Please enter the email of the user to whom you want to transfer rights',
+                       message: 'Please enter the username of the user to whom you want to transfer rights',
                      },
                    ]}>
           <Input style={{ width: 300 }} placeholder="User's Email"/>

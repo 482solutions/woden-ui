@@ -7,8 +7,8 @@ import { Home } from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
 let drive = [];
-let entryFolders = [];
-let entryFiles = [];
+const entryFolders = [];
+const entryFiles = [];
 let versions = {};
 beforeAll(() => {
   versions = {
@@ -51,8 +51,8 @@ beforeAll(() => {
         hash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM',
         versions: [{ cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5', time: 1590657000000 }],
       },
-    ]
-  }
+    ],
+  };
 });
 it('Check createFolder method', () => {
   const dataRequest = {
