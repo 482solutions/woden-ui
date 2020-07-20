@@ -1,11 +1,11 @@
 pipeline {
-  agent { label '1' }
-
+  agent { label '1' } 
+  
   tools { nodejs "nodejs" }
 
-  options {
-    timestamps ()
-    ansiColor('xterm')
+  options { 
+    timestamps () 
+    ansiColor('xterm') 
   }
 
     stages {
@@ -17,9 +17,9 @@ pipeline {
           }
        }
     }
-  post {
-    always {
-      cleanWs()
+  post { 
+    always { 
+      cleanWs() 
     }
-  }
+  } 
 }
