@@ -29,6 +29,7 @@ Feature: Back button
 
   Scenario: 3 Back button from the n lvl folder
     Given Create folder with name "Folder_level_2" in "Folder_level_1"
+    And RELOAD
     And The user opens folder "Folder_level_1"
     And Spin is visible "Getting data..."
     And The user opens folder "Folder_level_2"
