@@ -20,7 +20,7 @@
            sh 'npm run fix:js'
            sh 'npm run lint:js'
            sh 'sudo rm -R -f woden-network && git clone https://github.com/482solutions/woden-network.git && cd woden-network && sudo -S ./deploy.sh'
-           sh 'docker login -u $NEXUS_READER_NAME -p $NEXUS_READER_PASSWORD $DOCKER_REGISTRY &&  wget https://raw.githubusercontent.com/482solutions/woden-server-js/master/docker-compose-nexus.yaml && docker-compose -f docker-compose-nexus.yaml up -d'
+           sh 'docker login -u $NEXUS_READER_NAME -p $NEXUS_READER_PASSWORD $DOCKER_REGISTRY &&  wget https://raw.githubusercontent.com/482solutions/woden-server-js/master/docker-compose-nexus.yaml && wget https://raw.githubusercontent.com/482solutions/woden-server-js/master/.env && docker-compose -f docker-compose-nexus.yaml up'
            sh 'sleep 60 && npm ci'
            sh 'npm run startci & sleep 10'
            sh 'npm run cypress:run'
