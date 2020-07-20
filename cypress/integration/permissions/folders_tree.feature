@@ -24,7 +24,9 @@ Feature: Folders tree
   @positive
   Scenario: 2 Owner can view tree and open folders of the n-th nesting
     And Create folder with name "testFolder2" in "testFolder"
+    And RELOAD
     And Create folder with name "testFolder3" in "testFolder2"
+    And RELOAD
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
     And The user opens folder "testFolder2"
