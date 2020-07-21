@@ -42,11 +42,11 @@
       sh 'sudo rm -R -f woden-network'
       cleanWs() 
     }
-    success {
+   /* success {
            slackSend channel: "#wg-rnd", color: "green", message: "SUCCESS ${JOB_NAME} BUILD_NUMBER ${VERSION}", tokenCredentialId: "Slack482"
     }
     failure {
             slackSend channel: "#wg-rnd", color: "red", message: "FAILURE ${JOB_NAME} BUILD_NUMBER ${VERSION}", tokenCredentialId: "Slack482"
-    }
+    } */
   } 
 }
