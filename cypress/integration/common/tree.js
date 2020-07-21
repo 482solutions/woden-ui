@@ -20,6 +20,7 @@ Given(/^The tree is contain "([^"]*)"$/,  (folders) => {
 });
 
 When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
+  cy.wait(2000)
   cy.get('.ant-tree-title').contains(folderTitle).click()
   cy.get('.ant-message-notice-content')
     .should('be.visible')
@@ -29,6 +30,7 @@ When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
     expect(xhr.responseBody).to.not.have.property('stack')
   })
 });
+
 Given(/^The user presses on arrow near "([^"]*)"$/, (folderTitle) => {
   cy.get('.ant-tree-list-holder-inner')
     .children('.ant-tree-treenode.ant-tree-treenode-switcher-close')

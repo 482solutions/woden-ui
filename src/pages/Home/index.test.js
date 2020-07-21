@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import { Buttons, Sidebar, Drive } from '../../components/containers';
 import { Home } from './index';
-
 Enzyme.configure({ adapter: new Adapter() });
 let drive = [];
 const entryFolders = [];
@@ -85,7 +84,9 @@ it('Open file version Wrapper', () => {
                                 }}
                                 getFolderData={() => {
                                 }}
-                                versions={versions}/>);
+                                versions={versions}
+                                getPermission={() => {
+                                }}/>);
   const instance = wrapper.instance();
   expect(instance.getVersions(drive.entryFiles[0].hash, drive.entryFiles[0].name)).to.be.ok;
   expect(wrapper.find(`#CID_${versions.versionList[0].cid}`).text())

@@ -259,7 +259,6 @@ Feature: Grant edit access for a folder
     And The folder "testFolder" is visible
     And Login as new user without UI
     When Create folder with name "testFolder2" in "testFolder"
-    And Spin is visible "Getting data..."
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible

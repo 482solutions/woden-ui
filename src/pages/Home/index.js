@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 import { Buttons, Drive, Sidebar } from '../../components/containers';
-import { getRootFolderHash } from '../../utils/functions';
+import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -12,6 +12,7 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
+
 
 export class Home extends React.Component {
   constructor(props) {
@@ -99,8 +100,8 @@ export class Home extends React.Component {
     }, mode);
   }
 
-  downloadFile(hash, cid, name) {
-    if (this.state.userPermission === 'owner' || this.state.userPermission === 'write' || this.state.userPermission === 'read') {
+  downloadFile(hash, cid, name, perm) {
+    if(perm === 'owner' || perm=== 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
   }
@@ -198,8 +199,7 @@ export class Home extends React.Component {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
       shareModalInfo, mode,
     } = this.state;
-    const { versions } = this.props;
-    const { permissions } = this.props;
+    const { permissions,userName, versions } = this.props;
     return (
       <div className="container flex-direction-row">
         <PermissionsModal visible={shareModalVisible}

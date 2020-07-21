@@ -253,8 +253,6 @@ Feature:  View access list
     And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     When Create folder with name "testFolder2" in "testFolder"
-    And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The user opens folder "testFolder"
     And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible

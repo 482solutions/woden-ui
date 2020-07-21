@@ -184,7 +184,6 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke1" to "User2"
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke1" to "User3"
     And Create folder with name "Revoke2" in "Revoke1"
-    And Spin is visible "Getting data..."
     And Login as new user 2 without UI
     And The user open Shared with me
     And Spin is visible "Getting data..."
