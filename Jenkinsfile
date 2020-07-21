@@ -38,7 +38,7 @@
     }
   post { 
     always { 
-      sh ''''docker rm -v -f fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres || true''''
+      sh "docker rm -v -f fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres || true"
       sh 'sudo rm -R -f woden-network'
       cleanWs() 
     }
