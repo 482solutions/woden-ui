@@ -8,9 +8,9 @@
     ansiColor('xterm') 
   }
    environment {
-    DOCKER_REGISTRY = "nexus.482.solutions"
-    NEXUS_READER_NAME = "woden_nexus_reader_name"
-    NEXUS_READER_PASSWORD = "woden_nexus_reader_password"
+    DOCKER_REGISTRY = 'nexus.482.solutions'
+    NEXUS_READER_NAME = 'woden_nexus_reader_name'
+    NEXUS_READER_PASSWORD = 'woden_nexus_reader_password'
     }
     stages {
       stage("Run Tests") {
