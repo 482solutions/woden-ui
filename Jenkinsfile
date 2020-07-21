@@ -8,7 +8,7 @@
     ansiColor('xterm') 
   }
    environment {
-    DOCKER_REGISTRY = credentials('nexus.482.solutions')
+    DOCKER_REGISTRY = 'nexus.482.solutions'
     NEXUS_READER_NAME = credentials('woden_nexus_reader_name')
     NEXUS_READER_PASSWORD = credentials('woden_nexus_reader_password')
     }
