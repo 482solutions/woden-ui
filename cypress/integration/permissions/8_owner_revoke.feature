@@ -171,7 +171,7 @@ Feature: Owner revoke access
     And Create folder with name "Revoke1" in root without UI
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke1" to "User2"
     And Create folder with name "Revoke2" in "Revoke1"
-    And Spin is visible "Getting data..."
+    And RELOAD
     And The folder "Revoke1" is visible
     And The user opens folder "Revoke1"
     And Spin is visible "Getting data..."
