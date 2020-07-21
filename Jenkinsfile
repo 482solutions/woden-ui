@@ -19,8 +19,11 @@
            sh 'npm i'
            sh 'npm run fix:js'
            sh 'npm run lint:js'
+           sh 'echo "*** run fabric ***"'
            sh 'sudo rm -R -f woden-network && git clone https://github.com/482solutions/woden-network.git && cd woden-network && sudo -S ./deploy.sh'
+           sh 'echo "*** run server ***"'
            sh 'docker login -u $NEXUS_READER_NAME -p $NEXUS_READER_PASSWORD $DOCKER_REGISTRY &&  git clone https://github.com/482solutions/woden-server-js.git && cd woden-server-js && docker-compose -f docker-compose-nexus.yaml up -d'
+           sh 'echo "*** run UI ***"'
            sh 'npm run start -d & sleep 40'
            sh 'echo "*** Cypress authorization tests ***"'
            sh 'npm run cy:run:auth'
@@ -35,8 +38,7 @@
     }
   post { 
     always { 
-      sh 'docker stop fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres'
-      sh 'docker rm -v fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres'
+      sh 'docker rm -v -f fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres || true'
       sh 'sudo rm -R -f woden-network'
       cleanWs() 
     }
