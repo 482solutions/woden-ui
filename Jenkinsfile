@@ -15,7 +15,7 @@
   stages {
     stage("Run Tests") {
       steps {
-        slackSend channel: "#wg-rnd", color: "green", message: "STARTED ${JOB_NAME} BUILD_NUMBER ${VERSION}", tokenCredentialId: "Slack482"
+        //slackSend channel: "#wg-rnd", color: "green", message: "STARTED ${JOB_NAME} BUILD_NUMBER ${VERSION}", tokenCredentialId: "Slack482"
         sh 'npm i'
         sh 'npm run fix:js'
         sh 'npm run lint:js'
