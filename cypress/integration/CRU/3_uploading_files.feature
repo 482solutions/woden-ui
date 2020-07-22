@@ -13,54 +13,47 @@ Feature: Uploading files
     @positive
     Scenario: 1 User can upload txt file
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
-#        or in the folder where he has "Editors" rights
+      And The user is located in "My Drive"
       When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."
-      Then Message "File created successful"
+      Then Message "File created successfully"
       And The file "txtFile.txt" is uploaded
-#    And The user is the owner of this file
 
     @positive
     Scenario: 2 User can upload PNG file
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
-#      or in the folder where he has "Editors" rights
+      And The user is located in "My Drive"
       When The user press Upload a new file button
       And Choose the needed "image.png" file from its PC directory
       And Spin is visible "Uploading file..."
-      Then Message "File created successful"
+      Then Message "File created successfully"
       And The file "image.png" is uploaded
-#    And The user is the owner of this file
 
     @negative
-    #  TODO:
-#    Scenario: 3 cannot upload one file twice
-#      Given Spin is visible "Getting data..."
-#      And The user is located in his root folder
-##    or in the  folder where he has "Editors" rights
-#      When The user press Upload a new file button
-#      And Choose the needed "txtFile.txt" file from its PC directory
-#      And Spin is visible "Uploading file..."
-#      And Message "File created successful"
-#      And Choose the needed "txtFile.txt" file from its PC directory
-#      Then The user gets error notification "The file with this name already exists"
-#      And The file "txtFile.txt" is not uploaded
+    Scenario: 3 cannot upload one file twice
+      Given Spin is visible "Getting data..."
+      And The user is located in "My Drive"
+      And The user press Upload a new file button
+      And Choose the needed "txtFile.txt" file from its PC directory
+      And Spin is visible "Uploading file..."
+      And Message "File created successfully"
+      When The user press Upload a new file button
+      And Choose the needed "txtFile.txt" file from its PC directory
+      Then The user gets error notification "File already exist"
+      And The file "txtFile.txt" is not uploaded
 
     @positive
     Scenario: 4 User can upload 2 files with the same name and different extension
       Given Spin is visible "Getting data..."
-      And The user is located in his root folder
-#    or in the folder where he has "Editors" rights
+      And The user is located in "My Drive"
       When The user press Upload a new file button
       And Choose the needed "txtFile.txt" file from its PC directory
       And Spin is visible "Uploading file..."
-      Then Message "File created successful"
+      Then Message "File created successfully"
       And The user press Upload a new file button
       And Choose the needed "txtFile.pem" file from its PC directory
       And Spin is visible "Uploading file..."
-      And Message "File created successful"
+      And Message "File created successfully"
       Then The file "txtFile.txt" is uploaded
       And The file "txtFile.pem" is uploaded
-#    And The user is the owner of this file

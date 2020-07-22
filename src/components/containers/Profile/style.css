@@ -1,11 +1,8 @@
 .homeProfile{
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .userName {
-  display: flex;
-  justify-content: center;
-  width: 180px;
+  margin-left: 15px;
 }

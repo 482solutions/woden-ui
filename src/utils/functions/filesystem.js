@@ -13,3 +13,24 @@ export const validationCertificate = (string) => {
 export const getRootFolderHash = () => (
   localStorage.getItem('rootFolder')
 );
+
+export const detectUserPermission = (username, hash, infoArray, type) => {
+  let info = {};
+  //TODO: TypeError: Cannot read property 'length' of undefined
+  for (let i = 0; i < infoArray.length; i++) {
+    if (infoArray[i][`${type}Hash`] === hash) {
+      info = infoArray[i];
+      break;
+    }
+  }
+  if (info.ownerId === username) {
+    return 'owner';
+  }
+  if (info.writeUsers.includes(username) && info.readUsers.includes(username)) {
+    return 'write';
+  }
+  if (info.readUsers.includes(username)) {
+    return 'read';
+  }
+  return false;
+};

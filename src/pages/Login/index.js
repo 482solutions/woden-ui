@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { LoginForm } from '../../components';
 import loginWelcome from '../../assets/images/loginWelcome.svg';
 import logoCol from '../../assets/images/logoCol.svg';
-import './style.css';
 import { actions } from '../../state-management';
+import './style.css';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -27,7 +27,6 @@ export class Login extends React.Component {
     await this.props.loginRequest(loginData);
     this.replace();
   }
-
 
   render() {
     return (

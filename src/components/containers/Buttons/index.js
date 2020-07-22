@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Button, Col, Row, Upload,
+  Button, Upload,
 } from 'antd';
-import { FileAddTwoTone, HomeOutlined, LeftOutlined } from '@ant-design/icons';
 import { getRootFolderHash } from '../../../utils/functions';
 import './style.css';
 import { NewFolder } from '..';
+import goHome from '../../../assets/images/goHome.svg';
+import goBack from '../../../assets/images/goBack.svg';
+import fileUploadIcon from '../../../assets/images/fileUploadIcon.svg';
 
 class Buttons extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class Buttons extends Component {
   }
 
   beforeUpload(file) {
-    this.props.uploadFile(file);
+    this.props.uploadFile(file, this.props.mode);
     return false;
   }
 
@@ -26,52 +28,67 @@ class Buttons extends Component {
   }
 
   async goBack() {
-    this.props.getFolderData(this.props.folderData.parentHash);
+    if (this.props.folderData.folderHash === this.props.folderHash) {
+      const hash = await getRootFolderHash();
+      this.props.getFolderData(hash, this.props.mode);
+    } else {
+      this.props.getFolderData(this.props.folderData.parentHash);
+    }
   }
 
   render() {
+    const { userPermission } = this.props;
     return (
-      <Row className='homeButtons'>
-        <Col span={1}>
-          {this.props.mode !== 'drive' || this.props.folderData.parentHash !== 'root'
-            ? <div onClick={this.goHome} className="goHome">
-                <HomeOutlined/>
+      <div className='buttonsWrapper'>
+        <div className='navigation'>
+          <div>
+            {this.props.folderData.parentHash !== 'root'
+              ? <div onClick={this.goHome} className="goHome">
+                <img src={goHome} alt="goHome"/>
               </div>
-            : <div className="goHome_inactive goHome">
-                <HomeOutlined/>
+              : <div className="goHome_inactive goHome">
+                <img src={goHome} alt="goHome"/>
               </div>
-          }
-        </Col>
-         <Col span={1}>
-          {this.props.folderData.parentHash !== 'root'
-            ? <div onClick={this.goBack} className="goBack">
-                <LeftOutlined/>
+            }
+          </div>
+          <div>
+            {this.props.folderData.parentHash !== 'root'
+              ? <div onClick={this.goBack} className="goBack">
+                <img src={goBack} alt="goBack"/>
               </div>
-            : <div className="goBack_inactive goBack">
-                <LeftOutlined disabled={true}/>
+              : <div className="goBack_inactive goBack">
+                <img src={goBack} alt="goBack"/>
               </div>
-          }
-         </Col>
-        <Col span={2}>
-          {this.props.mode === 'drive' && this.props.folderData.parentHash !== 'root'
-            ? <span className="currentFolder">{this.props.folderData.folderName}</span>
-            : <span className="currentFolder">My Drive</span>
-          }
-        </Col>
+            }
+          </div>
+          <div>
+            {
+              this.props.folderData.parentHash !== 'root'
+                ? <span className="currentFolder">{this.props.folderData.folderName}</span>
+                : <span className="currentFolder">{this.props.mode === 'drive'
+                  ? 'My Drive' : this.props.mode === 'share'
+                    ? 'Shared with me' : null}</span>
+            }
+          </div>
+        </div>
         {
-          this.props.mode === 'drive' && <Col offset={14} span={3}>
-            <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
-              <Button className="upload-button">
-                <FileAddTwoTone/>File Upload
-              </Button>
-            </Upload>
-          </Col>}
-        {
-          this.props.mode === 'drive' && <Col span={2}>
-          <NewFolder onFinish={this.props.newFolder}/>
-          </Col>
+          this.props.mode === 'drive' || (this.props.folderData.parentHash !== 'root' && (userPermission === 'owner' || userPermission === 'write'))
+            ? <div className="homeButtons">
+              <NewFolder mode={this.props.mode}
+                         onFinish={this.props.newFolder}/>
+              <div>
+              </div>
+              <div>
+                <Upload name="file" beforeUpload={this.beforeUpload} showUploadList={false}>
+                  <Button className="upload-button">
+                    <img src={fileUploadIcon} alt="" className="buttonIcon fileUploadIcon"/>File Upload
+                  </Button>
+                </Upload>
+              </div>
+            </div>
+            : null
         }
-      </Row>
+      </div>
     );
   }
 }

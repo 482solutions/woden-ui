@@ -1,25 +1,35 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
+import {getLogin, getPassword} from "../../../support/commands";
+import {getCSR} from "../../../../src/utils/functions";
 
 before(() => {
-  cy.registerUser()
+  Cypress.env('login', `USER1${getLogin()}`)
+  Cypress.env('password', getPassword(8, true))
+  Cypress.env('email', `USER1${getLogin()}@gmail.com`)
+
+  let csr = getCSR({username: Cypress.env('login')})
+  cy.writeFile('cypress/fixtures/privateKey.pem', csr.privateKeyPem)
+  cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
+    cy.request({
+      method: 'POST',
+      url: `${Cypress.env('backendURL')}/user`,
+      headers: {'content-type': 'application/json'},
+      body: {
+        'login': Cypress.env('login'),
+        'email': Cypress.env('email'),
+        'password': Cypress.env('password'),
+        'privateKey': key,
+        'CSR': csr.csrPem
+      },
+    }).then((resp) => {
+      if (expect(201).to.eq(resp.status)) {
+        Cypress.env('respStatus', resp.status)
+        cy.writeFile('cypress/fixtures/cert.pem', resp.body.cert).then(() => {
+        })
+      }
+    })
+  }).as('Register new user')
 })
-
-When(/^Upload files test1.txt, test.pem to these folders without UI$/, () => {
-  cy.contains('File Upload').click().wait(1000)
-
-  cy.server()
-  cy.route('POST', '/api/v1/file').as('uploadFile')
-  cy.get('input[type=file]').attachFile('test1.txt');
-
-  cy.wait('@uploadFile').then((xhr) => {
-    cy.contains('File Upload').click().wait(1000)
-    cy.get('input[type=file]').attachFile('test.pem').wait(1000);
-  })
-});
-
-Given(/^Any page of the application is open$/, () => {
-
-});
 
 When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
   cy.get('.ant-input').as('Search string')
@@ -27,32 +37,19 @@ When(/^The user types the name "([^"]*)" of a file or folder$/, (test1) => {
 });
 
 When(/^The user presses the search button$/, () => {
-  cy.contains('Search').should('be.visible').click().wait(1000)
-});
-
-Given(/^Upload file to folder with name testFolder$/, () => {
-  cy.wait('@uploadFile').then((xhr) => {
+  cy.server()
+  cy.route('GET', '/api/v1/search/*').as('search')
+  cy.get('.ant-input-suffix').should('be.visible').click()
+  cy.get('.ant-message-notice-content')
+    .should('be.visible')
+    .should('contain.text', 'Getting data...')
+  cy.wait('@search').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    cy.contains('testFolder').dblclick()
-    cy.wait('@getFolder').then((xhr) => {
-      expect(xhr.responseBody).to.not.have.property('stack')
-      cy.contains('File Upload').click().wait(1000)
-      cy.get('input[type=file]').attachFile('txtFile.txt').wait(2000);
-    })
   })
 });
 
-Then(/^Search result is file "([^"]*)"$/, (resultSearch) => {
+Then(/^Search result is "([^"]*)"$/, (resultSearch) => {
   cy.contains(resultSearch).should('be.visible')
-});
-
-Then(/^Search results are files "([^"]*)" and "([^"]*)"$/, (resultSearch1, resultSearch2) => {
-  cy.contains(resultSearch1).should('be.visible')
-  cy.contains(resultSearch2).should('be.visible')
-});
-
-Then(/^search result is folder with name "([^"]*)"$/, (resultSearchFolder) => {
-  cy.contains(resultSearchFolder).should('be.visible')
 });
 
 When(/^Search field is empty$/, () => {

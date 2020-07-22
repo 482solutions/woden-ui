@@ -1,6 +1,5 @@
 import {Given, When, Then} from 'cypress-cucumber-preprocessor/steps';
 
-
 Given(/^The application is opened$/, () => {
   cy.visit('/');
 });
@@ -12,46 +11,6 @@ When(/^there is no open session$/, () => {
   }
 });
 
-Given("Register without UI", () => {
-  cy.registerUser();
-});
-
-When(/^Login as new user without UI$/, () => {
-  cy.wait(2000)
-  cy.readFile('cypress/fixtures/cert.pem').then((certificate) => {
-    cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
-      cy.request({
-        method: 'POST',
-        url: `http://localhost:1823/api/v1/user/auth`,
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: {
-          'login': Cypress.env('login'),
-          'password': Cypress.env('password'),
-          'certificate': certificate,
-          'privateKey': key,
-        },
-      }).then((resp) => {
-        expect(resp.body).to.not.have.property('stack')
-        if (expect(200).to.eq(resp.status)) {
-          Cypress.env('token', resp.body.token)
-          Cypress.env('respStatus', resp.status)
-          Cypress.env('rootFolder', resp.body.folder)
-        }
-      })
-    }).as('Login')
-    cy.server()
-    cy.route('GET', '/api/v1/folder/*').as('getRootFolder')
-      .visit('/', {
-        onBeforeLoad(win) {
-          win.localStorage.setItem('token', Cypress.env('token'))
-          win.localStorage.setItem('rootFolder', Cypress.env('rootFolder'))
-        },
-      }).as('Set user token')
-  })
-});
-
 When(/^The user press Register now button$/, () => {
   cy.get('.ant-col-offset-2 > a').click();
 });
@@ -61,7 +20,7 @@ Then(/^Sign Up form is open$/, () => {
 });
 
 When(/^the user press Log in button$/, () => {
-  cy.get('.ant-btn').as('Log in btn').click()
+  cy.get('.ant-btn.loginFormItem.LoginButtonItem.loginButton.ant-btn-primary').click()
 });
 
 Then(/^User is signed in$/, () => {
@@ -95,31 +54,34 @@ Then(/^Error message Password can not be empty$/, () => {
   cy.contains('Password can not be empty').should('be.visible')
 });
 
-Given(/^The user is located in his root folder$/, () => {
-  cy.wait('@getRootFolder').then((xhr) => {
+When(/^The user press Create a new folder button$/, () => {
+  cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    cy.inRootFolder()
+    cy.get('.ant-btn.newFolder-button').click().wait(2000)
   })
 });
 
-When(/^The user press Create a new folder button$/, () => {
-  cy.contains('New Folder').click().wait(2000)
-});
-
 When(/^The field name is empty$/, () => {
-  cy.get('#newFolder').should('be.empty')
+  cy.wait(3000)
+  cy.get('.ant-input.formItem.inputItem').should('be.empty')
 });
 
 When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {
-  cy.get('#newFolder').type(folderName).wait(1000)
+  cy.wait(1000)
+  cy.get('.ant-input.formItem.inputItem').type(folderName).wait(1000)
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
-  cy.contains(folderName).should('be.visible').wait(1000)
+  cy.wait('@createFolder').then((xhr) => {
+    expect(xhr.responseBody).to.not.have.property('stack')
+    cy.contains(folderName).should('be.visible')
+  })
 });
 
 When(/^Press Create folder$/, () => {
-  cy.get('.ant-col-offset-5 > .ant-btn').as('Create btn').click().wait(2000)
+  cy.server()
+  cy.route('POST', '/api/v1/folder').as('createFolder')
+  cy.get('.ant-btn.ant-btn-primary').contains('Create').click()
 });
 
 When(/^The user press Upload a new file button$/, () => {
@@ -127,7 +89,7 @@ When(/^The user press Upload a new file button$/, () => {
 });
 
 Given(/^The user is authorized$/, () => {
-  cy.userAuth()
+  expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
 });
 
 Then(/^The file is uploaded$/, (file) => {
@@ -136,4 +98,29 @@ Then(/^The file is uploaded$/, (file) => {
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
   cy.get('.currentFolder').should('contain.text', userCreatedFolder)
+});
+
+Given(/^The user located on root dashboard$/, () => {
+  expect(Cypress.env('rootFolder')).to.equal(localStorage.rootFolder)
+});
+
+Given(/^RELOAD$/, () => {
+  cy.wait(1000)
+  cy.reload()
+});
+
+When(/^The user press the back button$/, () => {
+  cy.get('.goBack').click()
+});
+
+When(/^User click Home button$/, () => {
+  cy.get('.goHome').click().wait(1000)
+});
+
+Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) => {
+  cy.get(`.${obj}Title`).should('have.length', count)
+});
+
+When(/^Notification error "([^"]*)"$/,  (msg) => {
+  cy.get('.ant-message-notice-content').should('contain.text', msg)
 });

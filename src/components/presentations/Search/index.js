@@ -18,7 +18,6 @@ class Search extends React.Component {
       <Input.Search
         className="searchElements"
         placeholder="Input folder or file name for search"
-        enterButton="Search"
         size="large"
         onSearch={this.searchFile}
       />

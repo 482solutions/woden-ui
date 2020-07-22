@@ -15,9 +15,8 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: 1 Viewing list of versions
-#    Given The user has access to the file with any type of rights
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Versions button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
     Then The user sees the list of available versions and the time, date when the version was created
     And List of versions should contain name of file "TestUpload.txt"
@@ -26,9 +25,8 @@ Feature:  Viewing previous version
 
   @positive
   Scenario: 2 User can close list of versions
-#    Given The user has access to the file with any type of rights
-    When The user press the Actions button in "TestUpload.txt" file
-    And The user press the Versions button in "TestUpload.txt" file
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Versions" button in "TestUpload.txt" "file"
     And Spin is visible "Getting file versions..."
     And The user sees the list of available versions and the time, date when the version was created
     Then Button Close versions is visible

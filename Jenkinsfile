@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
   agent { label '1' } 
   
   tools { nodejs "nodejs" }
@@ -7,7 +7,7 @@
     timestamps () 
     ansiColor('xterm') 
   }
- 
+
     stages {
       stage("Run Tests") {
          steps {

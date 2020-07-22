@@ -25,11 +25,10 @@ Feature: Open folders
 
     @positive
     Scenario Outline: 1 Open folder
-#    And the user has access to any available folder (not root)
       When The user double click this folder <folder> from list
       And Spin is visible "Getting data..."
       And Folder is opened <folder>
-      And User go back to root folder
+      And User click Home button
       Examples: folder
         | folder               |
         | Folder-1             |

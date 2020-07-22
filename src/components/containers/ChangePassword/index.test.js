@@ -23,17 +23,17 @@ window.matchMedia = window.matchMedia || function() {
 
 it('Renders "ChangePassword" check all components', () => {
   const wrapper = shallow(<ChangePassword/>);
-  expect(wrapper.find(Button)).to.have.lengthOf(2);
+  expect(wrapper.find(Button)).to.have.lengthOf(1);
   expect(wrapper.find(Form)).to.have.lengthOf(1);
   expect(wrapper.find(Input.Password)).to.have.lengthOf(3);
   expect(wrapper.find(Modal)).to.have.lengthOf(1);
-  expect(wrapper.find(SettingFilled)).to.have.lengthOf(1);
+  expect(wrapper.find('.settingsIcon')).to.have.lengthOf(1);
 });
 
 it('Renders "ChangePassword" check change "visible" state after click on special button', () => {
   const wrapper = shallow(<ChangePassword/>);
   expect(wrapper.state().visible).to.equal(false);
-  wrapper.find(Button).at(0).simulate('click');
+  wrapper.find('#SettingsIcon').at(0).simulate('click');
   expect(wrapper.state().visible).to.equal(true);
 });
 
