@@ -40,7 +40,7 @@
   post { 
     always { 
  //     sh "docker rm -v -f fabric_orderer fabric_peer fabric_ca fabric_ca_db backend ipfs redis postgres || true"
-      sh 'docker stop $(docker ps -q ) || true'
+      sh 'docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {}'
       sh 'docker system prune -a -f --volumes'
       sh 'sudo rm -R -f woden-network'
       cleanWs() 
