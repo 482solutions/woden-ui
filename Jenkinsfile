@@ -43,6 +43,7 @@
       sh 'docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {}'
       sh 'docker system prune -a -f --volumes'
       sh 'sudo rm -R -f woden-network'
+      sh 'sudo killall node'
       cleanWs() 
     }
     success {
