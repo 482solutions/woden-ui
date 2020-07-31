@@ -4,6 +4,7 @@ import { Dropdown, Menu, Upload } from 'antd';
 import folderImage from '../../../assets/images/folderImage.svg';
 import More from '../../../assets/images/more-vertical.svg';
 import Share from '../../../assets/images/Share.svg';
+import Voting from '../../../assets/images/voting.svg';
 import accessListIcon from '../../../assets/images/accessListIcon.svg';
 import updateFileIcon from '../../../assets/images/updateFileIcon.svg';
 import fileVersionsIcon from '../../../assets/images/fileVersionsIcon.svg';
@@ -27,6 +28,7 @@ export default class Drive extends Component {
   }
 
   fileMenu(hash, name, filesData) {
+    const  fileInfo = this.getFileInfo(hash, filesData)
     return (
       <Menu>
         <Menu.Item key={`0${hash}`} onClick={async() => {
@@ -47,15 +49,25 @@ export default class Drive extends Component {
           </Menu.Item>
         }
         {
-          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+          (this.state.userPermission === 'owner')
           && <Menu.Item key={`2${hash}`} onClick={() => {
+            console.log("MENU_FILESDATA:", fileInfo)
+            this.props.votingModal(fileInfo);
+          }}>
+            <span id={`Share_${hash}`}><img className="dropdownIcon" src={Voting}
+                                            alt=""/>Create Voting</span>
+          </Menu.Item>
+        }
+        {
+          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+          && <Menu.Item key={`3${hash}`} onClick={() => {
             this.props.shareModal(hash, name, filesData);
           }}>
             <span id={`Share_${hash}`}><img className="dropdownIcon" src={Share}
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`3${hash}`}>
+        <Menu.Item key={`4${hash}`}>
           <span id={`Permissions_${hash}`} onClick={async() => {
             await this.props.viewAccessList(hash, 'file');
           }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
@@ -120,6 +132,11 @@ export default class Drive extends Component {
     this.props.getPermission(detectPermission);
     return detectPermission;
   }
+
+  getFileInfo(fileHash, filesArray) {
+  return filesArray[filesArray.findIndex(v => v.fileHash === fileHash)]
+  }
+
 
   render() {
     const {
@@ -195,7 +212,7 @@ export default class Drive extends Component {
                         this.props.downloadFile(file.hash, 'null', file.name, perm)}}>
                   {file.name}</span>
                 <div>
-                  <Dropdown overlay={this.fileMenu(file.hash, file.name)}
+                  <Dropdown overlay={this.fileMenu(file.hash, file.name, filesInfo)}
                             onClick={() => this.detectPermission(username,
                               file.hash,
                               filesInfo,

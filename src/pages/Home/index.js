@@ -12,7 +12,7 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import { PermissionsModal } from '../../components/presentations';
-
+import { VotingModal } from '../../components/presentations';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -34,6 +34,7 @@ export class Home extends React.Component {
         fileHash: null,
       },
       shareModalVisible: false,
+      votingModalVisible: false,
       shareModalInfo: {
         title: null,
         hash: null,
@@ -43,6 +44,9 @@ export class Home extends React.Component {
         title: 'null',
         key: 'null',
         children: null,
+      },
+      votingModalInfo: {
+        fileData: {}
       },
       mode: 'drive',
     };
@@ -55,7 +59,10 @@ export class Home extends React.Component {
     this.closeFileWrapper = this.closeFileWrapper.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
+    this.votingModal = this.votingModal.bind(this);
+    this.closeVotingModal = this.closeVotingModal.bind(this),
     this.changePermissions = this.changePermissions.bind(this);
+    this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
@@ -110,6 +117,10 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
+  createVoting(data) {
+    this.props.createVoting(data);
+  }
+
   revokePermissions(data) {
     this.props.revokePermissions(data);
   }
@@ -153,6 +164,24 @@ export class Home extends React.Component {
     });
   }
 
+ votingModal(fileData) {
+    this.setState({ votingModalVisible: true });
+    this.setState({
+      votingModalInfo: {
+        fileData
+      },
+    });
+  }
+
+  closeVotingModal() {
+    this.setState({ votingModalVisible: false });
+    this.setState({
+      votingModalInfo: {
+        fileData:{}
+      },
+    });
+  }
+
   closeShareModal() {
     this.setState({ shareModalVisible: false });
     this.setState({
@@ -190,12 +219,14 @@ export class Home extends React.Component {
 
   render() {
     const {
-      fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
-      shareModalInfo, mode,
+      fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible, votingModalVisible,
+      shareModalInfo,votingModalInfo, mode,
     } = this.state;
     const { permissions,userName, versions } = this.props;
     return (
       <div className="container flex-direction-row">
+        <VotingModal key='VotingModal' visible={votingModalVisible} info={votingModalInfo}
+                          close={this.closeVotingModal} createVoting={this.createVoting}/>
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
@@ -223,6 +254,7 @@ export class Home extends React.Component {
                      username={this.props.userName}
                      updateFile={this.updateFile}
                      shareModal={this.shareModal}
+                     votingModal={this.votingModal}
                      openFolder={this.openFolder}
                      getVersions={this.getVersions}
                      downloadFile={this.downloadFile}
@@ -377,6 +409,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
   getFoldersTree: actions.getFoldersTree,
   updateFolderData: actions.updateFolderData,
   updatePermission: actions.updatePermission,
+  createVoting: actions.createVoting
 })(
   Home,
 );
