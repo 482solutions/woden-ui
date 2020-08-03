@@ -98,10 +98,10 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
         toUser = Cypress.env('email_3');
         break;
     } switch (permission) {
-      case 'edit':
+      case 'edit' || 'Editor':
         permission = 'write';
         break;
-      case 'view':
+      case 'view' || 'Viewer':
         permission = 'read';
         break;
     } switch (object) {

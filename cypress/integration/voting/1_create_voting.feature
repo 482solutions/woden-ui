@@ -17,7 +17,7 @@ Feature:  Create voting
   Scenario Outline: 1 Owner can create voting of the file with variants of answers
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Register without UI user3
-    And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User2"
+    And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
