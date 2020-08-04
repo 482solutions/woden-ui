@@ -10,20 +10,21 @@ Feature:  Create voting
     Given Register without UI
     And Register without UI user2
     And Login as new user without UI
-    And The user upload "TestUpload.txt" without UI
-    And Spin is visible "Getting data..."
 
   @positive
   Scenario Outline: 1 Owner can create voting of the file with variants of answers
+    And Login as new user without UI
+    And The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Register without UI user3
-    And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User2"
+#    And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
     And User adding <count> of choices
     And Press "NEXT STEP"
@@ -31,11 +32,12 @@ Feature:  Create voting
     And User selects date and time
     And Press "NEXT STEP"
     And Tab "3.Description" is opened and title "Info" is visible
-    And Description field <256> characters
+    And Description field 256 characters
     And Press "NEXT STEP"
-    And Tab "4.List of voters" is opened and title "Voting participants" is visible
-    And 2 users participate in the voting "User2" and "User3"
+    And Tab "4.List of Voters" is opened and title "Voting participants" is visible
+    And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
+    And Spin is visible "Creating vote..."
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
     Examples: Count of answers
@@ -47,13 +49,15 @@ Feature:  Create voting
 
   @positive
   Scenario Outline: 2 Owner can create voting without description
+    And The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
     And User adding <count> of choices
     And Press "NEXT STEP"
@@ -61,10 +65,10 @@ Feature:  Create voting
     And User selects date and time
     And Press "NEXT STEP"
     And Tab "3.Description" is opened and title "Info" is visible
-    And Description field "not filled"
+    And Description field 0 characters
     And Press "NEXT STEP"
     And Tab "4.List of voters" is opened and title "Voting participants" is visible
-    And 2 users participate in the voting "User2" and "User3"
+    And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
@@ -73,54 +77,58 @@ Feature:  Create voting
       | 2     |
 
   @negative
-  Scenario: 3 Owner ca't start voting for a folder
+  Scenario: 3 Owner can't start voting for a folder
     Given Create folder with name "Folder123" in root without UI
     And The "User1" sends a request to grant "edit" access to the "folder" "Folder123" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "Folder123" "folder"
-    Then Button Start Voting is not active
+    Then Button "Start Voting" "be.not.visible"
 
   @negative
   Scenario: 4 Owner can't create voting if another users haven't got permissions for this file
-    And Login as new user without UI
+    Given The user upload "TestUpload.txt" without UI
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "TestUpload.txt" "file"
-    Then  Button Start Voting is not active
+    Then Button "Start Voting" "be.not.visible"
 
   @negative
   Scenario: 5 Owner can't add more than 5 or less than 2 answer options
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
 #    TODO: not active?? Press and locate at the same page:
-    And Button "NEXT STEP" is not active
+    And Button "NEXT STEP" is disabled
     And User adding 1 of choices
-    And Button "NEXT STEP" is not active
+    And Button "NEXT STEP" is disabled
     And User adding 4 of choices
-    And Button "add choice" is not active
+    And Button "add choice" is disabled
 
   @negative
-  Scenario Outline: 6 Owner can't re-create a vote for the same file
+  Scenario Outline: 6 Owner can re-create a vote for the same file
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And User adding <count> of choices
     And Press "NEXT STEP"
     And Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
     And User selects date and time
     And Press "NEXT STEP"
     And Tab "3.Description" is opened and title "Info" is visible
-    And Description field "not filled"
+    And Description field 0 characters
     And Press "NEXT STEP"
     And Tab "4.List of voters" is opened and title "Voting participants" is visible
     And 2 users participate in the voting "User2"
@@ -130,28 +138,45 @@ Feature:  Create voting
     When User click Home button
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
-    Then Button "Start voting" is not active
+    Then Button "Start voting" "be.visible"
+    And The user press the "Start Voting" button in "TestUpload.txt" "file"
+    And The screen for entering voting parameters is opened
+    And Tab "1.Creating" is opened and title "Create voting" is visible
+    And User adding <2count> of choices
+    And Press "NEXT STEP"
+    And Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
+    And User selects date and time
+    And Press "NEXT STEP"
+    And Tab "3.Description" is opened and title "Info" is visible
+    And Description field 0 characters
+    And Press "NEXT STEP"
+    And Tab "4.List of voters" is opened and title "Voting participants" is visible
+    And 2 users participate in the voting "User2"
+    And Press "START VOTING"
+    And Pop-up "Done!" with description "The voting becomes available" is visible
     Examples: Count of answers
-      | count |
-      | 2     |
+      | count | 2count |
+      | 2     | 3      |
 
   @negative
   Scenario Outline: 7 Owner can't create voting if description more than 256 characters
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
-    And User adding <2> of choices
+    And Tab "1.Creating" is opened and title "Create voting" is visible
+    And User adding 2 of choices
     And Press "NEXT STEP"
     And Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
     And User selects date and time
     And Press "NEXT STEP"
     And Tab "3.Description" is opened and title "Info" is visible
     And Description field <count> characters
-    And Button NEXT STEP is not active
+    And Button "NEXT STEP" is disabled
     Examples: Count of characters
       | count |
       | 257   |
@@ -159,13 +184,15 @@ Feature:  Create voting
 
   @negative
   Scenario: 8 Owner can't create voting if due time is real time
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And User adding <2> of choices
     And Press "NEXT STEP"
     And Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
@@ -174,13 +201,15 @@ Feature:  Create voting
 
   @negative
   Scenario: 9 Owner can't create voting if due time less than the real time
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And User adding <2> of choices
     And Press "NEXT STEP"
     When Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
@@ -188,6 +217,8 @@ Feature:  Create voting
 
   @positive
   Scenario Outline: 10 Owner can delete variant of answer
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Register without UI user3
     And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User2"
@@ -196,7 +227,7 @@ Feature:  Create voting
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
     And User adding <count> of choices
     When Delete 1 variant
@@ -210,6 +241,8 @@ Feature:  Create voting
 
   @positive
   Scenario: 11 Owner can close pop-up "Creating voting"
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
@@ -222,6 +255,8 @@ Feature:  Create voting
 
   @positive
   Scenario Outline: 12 Owner can back from <fromlocation> to <tolocation>
+    Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
     And Spin is visible "Getting data..."
@@ -237,6 +272,8 @@ Feature:  Create voting
 
   @positive
   Scenario Outline: 13 Owner can create voting for the second versions of the file with variants of answers
+      Given The user upload "TestUpload.txt" without UI
+    And Spin is visible "Getting data..."
     And The user updating file "TestUpload.txt"
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
@@ -244,7 +281,7 @@ Feature:  Create voting
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
-    And Tab "1.Creating" is opened and title "Creating voting" is visible
+    And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
     And User adding <count> of choices
     And Press "NEXT STEP"
@@ -255,7 +292,7 @@ Feature:  Create voting
     And Description field "not filled"
     And Press "NEXT STEP"
     And Tab "4.List of voters" is opened and title "Voting participants" is visible
-    And 2 users participate in the voting "User2" and "User3"
+    And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
