@@ -225,8 +225,11 @@ export class Home extends React.Component {
     const { permissions,userName, versions } = this.props;
     return (
       <div className="container flex-direction-row">
-        <VotingModal key='VotingModal' visible={votingModalVisible} info={votingModalInfo}
-                          close={this.closeVotingModal} createVoting={this.createVoting}/>
+        <VotingModal key='VotingModal'
+                     visible={votingModalVisible}
+                     info={votingModalInfo}
+                     close={this.closeVotingModal}
+                     createVoting={this.createVoting}/>
         <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
                           close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>

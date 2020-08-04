@@ -107,7 +107,6 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         }
       }
     }
-    console.log(users)
     return users
   };
   return (
@@ -135,7 +134,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                 onClick={() => {
                   current === 0 ? close() : setCurrent(current - 1)
                 }}>
-          Cancel
+          CANCEL
         </Button>,
         <Button key="submit" type="primary" style={{
           height: "56px",
@@ -143,10 +142,11 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           background: '#007AFF',
           borderRadius: '4px',
         }}
+                disabled={state.variants.length<2 || state.variants.length>5 || (current === 1 && state.time === null) || (current === 1 && state.date === null) || (current === 1 && state.time <= Date.now())}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
                 }}>
-          Next
+           NEXT STEP
         </Button>,
       ]}
       onOk={() => {
@@ -182,9 +182,13 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           </Row>
           <Row align={'top'} justify={'start'}>
             <label className='modal-label'>Add choices</label>
-            <Search value={tempValues.variants} onChange={(e) => {
+            <Search value={tempValues.variants}
+                    onChange={(e) => {
               setTempValues({ ...tempValues, variants: e.target.value })
-            }} placeholder="input variant" onSearch={addVariant}
+            }}
+                    disabled={state.variants.length>=5}
+                    placeholder="input variant"
+                    onSearch={addVariant}
                     enterButton/>
           </Row>
           <Row justify={'center'}>
@@ -248,9 +252,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
             </Row>
             <Row align={'top'} justify={'center'}>
               <TimePicker
-                defaultValue={moment('12:08', format)}
-                format={format} onChange={(time) => {
-                setState({ ...state, time: new Date(time).getTime() })
+                format={format}
+                onChange={(time) => {setState({ ...state, time: new Date(time).getTime() })
               }}
               />
             </Row>
@@ -310,7 +313,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           </Col>
         </Row>
       </div>)}
-      {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
+      <pre>{JSON.stringify(state, null, 2)}</pre>
     </Modal>
   );
 };
