@@ -4,7 +4,7 @@ import {
   Col,
   DatePicker,
   Form,
-  Input,
+  Input, message,
   Modal,
   Row,
   Steps,
@@ -16,7 +16,9 @@ import datePickerImage from '../../../assets/images/datePicker.svg'
 import votingInfoImage from '../../../assets/images/votingInfoImage.svg'
 import moment from 'moment';
 import "./styles.css"
-import revokeAccessIcon from '../../../assets/images/revokeAccessIcon.svg';
+import deleteVariantIcon from '../../../assets/images/deleteVariantIcon.svg';
+import deleteUserIcon from '../../../assets/images/revokeAccessIcon.svg';
+import buttonForVoting from '../../../assets/images/buttonForVoting1.svg';
 import { unixToString } from '../../../utils/functions';
 
 
@@ -32,6 +34,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     {
       variants: [],
       excludedUsers: [],
+      allUsers: [],
       date: null,
       time: null,
       description: null
@@ -39,6 +42,10 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
   );
   const [form] = Form.useForm();
   const [current, setCurrent] = useState(0)
+  const [buttons, setButtons] = useState({
+    cancel: "CANCEL",
+    next: "NEXT STEP"
+  })
   const [tempValues, setTempValues] = useState({ variants: '' })
   const onFinish = async () => {
     const data = {
@@ -53,10 +60,27 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     close();
   };
   const addVariant = () => {
-    const variants = state.variants;
-    variants.push(tempValues.variants)
-    setState({ ...state, variants })
-    setTempValues({ ...tempValues, variants: '' })
+    let checkVariants = true
+    for (let i = 0; i < state.variants.length; i++) {
+      if (tempValues.variants === state.variants[i]) {
+        checkVariants = false
+        message.error('Variant already exist')
+      }
+    }
+    if (tempValues.variants.length > 1 && state.variants.length < 5 && checkVariants) {
+      const variants = state.variants;
+      variants.push(tempValues.variants)
+      setState({ ...state, variants })
+      setTempValues({ ...tempValues, variants: '' })
+    }
+    if (state.variants.length === 5) {
+      message.error('Fuck you 5')
+    }
+    if (tempValues.variants.length < 2) {
+      message.error('Fuck you 4')
+    }
+
+
   }
   const onChange = (current) => {
     setCurrent(current);
@@ -133,8 +157,18 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         }}
                 onClick={() => {
                   current === 0 ? close() : setCurrent(current - 1)
+                  if (current === 0) setState({
+                    variants: [],
+                    excludedUsers: [],
+                    allUsers: [],
+                    date: null,
+                    time: null,
+                    description: null
+                  })
+                  if (current === 1) setButtons({ ...buttons, cancel: "CANCEL" })
+                  if (current === 3) setButtons({ ...buttons, next: "NEXT STEP" })
                 }}>
-          CANCEL
+          {buttons.cancel}
         </Button>,
         <Button key="submit" type="primary" style={{
           height: "56px",
@@ -145,8 +179,23 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                 disabled={state.variants.length<2 || state.variants.length>5 || (current === 1 && state.time === null) || (current === 1 && state.date === null) || (current === 1 && state.time <= Date.now())}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
+                  if (current === 3) setState({
+                      variants: [],
+                      excludedUsers: [],
+                      allUsers: [],
+                      date: null,
+                      time: null,
+                      description: null
+                    }
+                  )
+                  if (current === 0) setButtons({ ...buttons, cancel: "BACK" })
+                  if (current === 2) setButtons({ ...buttons, next: "START VOTING" })
+                  if (current === 2 && state.allUsers.length < 1) setState({
+                    ...state,
+                    allUsers: data()
+                  })
                 }}>
-           NEXT STEP
+          {buttons.next}
         </Button>,
       ]}
       onOk={() => {
@@ -182,14 +231,16 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           </Row>
           <Row align={'top'} justify={'start'}>
             <label className='modal-label'>Add choices</label>
-            <Search value={tempValues.variants}
-                    onChange={(e) => {
+            <Search maxLength={35} value={tempValues.variants} onChange={(e) => {
               setTempValues({ ...tempValues, variants: e.target.value })
             }}
                     disabled={state.variants.length>=5}
                     placeholder="input variant"
                     onSearch={addVariant}
                     enterButton/>
+            }} placeholder="input variant" onSearch={addVariant}
+                    enterButton={<img src={buttonForVoting}/>}
+            />
           </Row>
           <Row justify={'center'}>
             <Col>
@@ -201,7 +252,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                     </Col>
                     <Col className="revokeAccess">
                       {
-                        <img src={revokeAccessIcon} alt="Revoke access"
+                        <img src={deleteVariantIcon} alt="Delete variant"
                              onClick={() => {
                                let newVariants = state.variants;
                                newVariants.splice(i, 1)
@@ -271,9 +322,10 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           <label className='modal-label'>Add description</label>
         </Row>
         <Row align={'top'} justify={'center'}>
-          <TextArea rows={5} placeholder="Enter description" allowClear onChange={(e) => {
-            setState({ ...state, description: e.target.value })
-          }}/>
+          <TextArea maxLength={256} rows={5} placeholder="Enter description" allowClear
+                    onChange={(e) => {
+                      setState({ ...state, description: e.target.value })
+                    }}/>
         </Row>
         <Row align={'top'} justify={'start'}>
           <h3 className='modal-filetime-title'>{"*There is an optional description filed"}</h3>
@@ -289,19 +341,24 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         <Row align={'top'} justify={'center'}>
           <Col>
             {
-              data().map((user, i) => (
+              state.allUsers.map((user, i) => (
                 <Row key={user} className='sharedUser'>
                   <Col className="sharedUserName">
-                    <div className={"text-users-name"}>{data()[i]}</div>
+                    <div className={"text-users-name"}>{state.allUsers[i]}</div>
                   </Col>
                   <Col className="revokeAccess">
                     {
-                      <img src={revokeAccessIcon} alt="Revoke access"
+                      <img src={deleteUserIcon} alt="Revoke access"
                            onClick={() => {
                              {
-                               let excludeUsers = state.excludedUsers;
-                               excludeUsers.push(data()[i])
-                               setState({ ...state, excludeUsers })
+                               if (state.allUsers.length > 1) {
+                                 let excludeUsers = state.excludedUsers;
+                                 excludeUsers.push(state.allUsers[i])
+                                 setState({ ...state, excludeUsers })
+                                 let newAllUsers = state.allUsers;
+                                 newAllUsers.splice(i, 1)
+                                 setState({ ...state, variants: newAllUsers })
+                               }
                              }
                            }
                            }/>
@@ -317,4 +374,3 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     </Modal>
   );
 };
-
