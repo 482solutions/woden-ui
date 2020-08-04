@@ -18,6 +18,7 @@ import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import fileImageTXT from '../../../assets/images/fileImages/fileImageTXT.svg';
 import { detectUserPermission } from '../../../utils/functions';
+import {VotingModal} from "../../presentations/VotingModal";
 
 export default class Drive extends Component {
   constructor(props) {
@@ -50,12 +51,17 @@ export default class Drive extends Component {
         }
         {
           (this.state.userPermission === 'owner')
-          && <Menu.Item key={`2${hash}`} onClick={() => {
+          && <Menu.Item key={`2${hash}`}
+                        disabled={fileInfo.writeUsers.length === 0 && fileInfo.readUsers.length === 0}
+                        onClick={() => {
             console.log("MENU_FILESDATA:", fileInfo)
             this.props.votingModal(fileInfo);
+
           }}>
-            <span id={`Share_${hash}`}><img className="dropdownIcon" src={Voting}
-                                            alt=""/>Create Voting</span>
+            <span id={`Voting_${hash}`
+            }><img className="dropdownIcon"
+                   src={Voting}
+                   alt=""/>Start Voting</span>
           </Menu.Item>
         }
         {
