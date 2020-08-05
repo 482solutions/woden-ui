@@ -13,7 +13,6 @@ export class Voting extends Component {
   }
   componentDidMount() {
     this.props.getVoting()
-    console.log("1111111111111111111111111111111111111111111111111111111111111111",this.props.voting.data)
   }
   prepareData(){
     console.log(this.props.voting.data)

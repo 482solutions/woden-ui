@@ -1,5 +1,5 @@
 import Woden from 'woden';
-import {Row, Col, message, Modal } from 'antd';
+import { message, Modal, Row } from 'antd';
 import { getTokenForHeader } from '../../utils/functions';
 import { CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA } from '../types';
 import '../../components/containers/Voting/style.css';
@@ -65,16 +65,16 @@ export const getVotingData = () => async (dispatch) => {
         });
       } else {
         for(let i = 0; i < response.body.response.length; i++){
-          let versionTimeCorrect =  new Date(response.body.response[i].versionTime * 1000).toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: 'numeric',
-            hour12: false,
-            minute: '2-digit',
-          })
-          console.log(versionTimeCorrect)
-          response.body.response[i].versionTime = versionTimeCorrect
+          response.body.response[i].versionTime = new Date(response.body.response[i].versionTime * 1000).toLocaleString(
+            'en-US',
+            {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+              hour: 'numeric',
+              hour12: false,
+              minute: '2-digit',
+            })
           response.body.response[i].dueDate = new Date(response.body.response[i].dueDate * 1000).toLocaleString('en-US', {
             year: 'numeric',
             month: 'short',

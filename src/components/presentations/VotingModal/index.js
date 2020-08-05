@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import "./styles.css"
 import votingLabel from '../../../assets/images/votingFileLabel.svg'
+import buttonForVoting from '../../../assets/images/buttonForVoting1.svg'
 import datePickerImage from '../../../assets/images/datePicker.svg'
 import votingInfoImage from '../../../assets/images/votingInfoImage.svg'
 import deleteVariantIcon from '../../../assets/images/deleteVariantIcon.svg';
@@ -84,12 +85,14 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     setCurrent(current);
   };
   const prepareTime = (data, time) => {
-    const year = new Date(data).getFullYear()
-    const day = new Date(data).getDate()
-    const month = new Date(data).getMonth() + 1
-    const hours = new Date(time).getHours()
-    const minutes = new Date(time).getMinutes()
-    return (new Date(`${year}/${month}/${day} ${hours}:${minutes}`).getTime() / 1000)
+    if (data && time) {
+      const year = new Date(data).getFullYear()
+      const day = new Date(data).getDate()
+      const month = new Date(data).getMonth() + 1
+      const hours = new Date(time).getHours()
+      const minutes = new Date(time).getMinutes()
+      return (new Date(`${year}/${month}/${day} ${hours}:${minutes}`).getTime() / 1000)
+    }
   }
   const stepTitle = () => {
     return (<Steps
@@ -175,9 +178,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           borderRadius: '4px',
         }}
                 disabled={state.variants.length < 2 || state.variants.length > 5 || (
-                  current === 1 && state.time === null) || (current === 1 && state.time === null) || (
-                  current === 1 && state.time <= Date.now()
-                )}
+                  current === 1 && state.date === null) || (current === 1 && state.time === null) || (
+                  current === 1 && prepareTime(state.date, state.time) * 1000 <= Date.now())}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
 
@@ -242,7 +244,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                     disabled={state.variants.length >= 5}
                     placeholder="input variant"
                     onSearch={addVariant}
-                    enterButton/>
+                    enterButton={<img src={buttonForVoting}/>}/>
             <h3 className='modal-filetime-title'>{"*Please add at least 2 options."}</h3>
           </Row>
           <Row justify={'center'}>
