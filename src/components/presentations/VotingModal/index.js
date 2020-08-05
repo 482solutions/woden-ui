@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Col,
@@ -19,17 +19,17 @@ import "./styles.css"
 import deleteVariantIcon from '../../../assets/images/deleteVariantIcon.svg';
 import deleteUserIcon from '../../../assets/images/revokeAccessIcon.svg';
 import buttonForVoting from '../../../assets/images/buttonForVoting1.svg';
-import { unixToString } from '../../../utils/functions';
+import {unixToString} from '../../../utils/functions';
 
 
 const format = 'HH:mm';
 
 
-const { Search } = Input;
-const { Title } = Typography;
-const { Step } = Steps;
-const { TextArea } = Input;
-export const VotingModal = ({ visible, info, close, createVoting, }) => {
+const {Search} = Input;
+const {Title} = Typography;
+const {Step} = Steps;
+const {TextArea} = Input;
+export const VotingModal = ({visible, info, close, createVoting,}) => {
   const [state, setState] = useState(
     {
       variants: [],
@@ -37,7 +37,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       allUsers: [],
       date: null,
       time: null,
-      description: null
+      description: ''
     }
   );
   const [form] = Form.useForm();
@@ -46,7 +46,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     cancel: "CANCEL",
     next: "NEXT STEP"
   })
-  const [tempValues, setTempValues] = useState({ variants: '' })
+  const [tempValues, setTempValues] = useState({variants: ''})
   const onFinish = async () => {
     const data = {
       fileHash: info.fileData.fileHash,
@@ -55,7 +55,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       dueDate: prepareTime(state.date, state.time),
       description: state.description
     }
-    console.log()
+    console.log(prepareTime(state.date, state.time))
     createVoting(data);
     close();
   };
@@ -64,20 +64,20 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     for (let i = 0; i < state.variants.length; i++) {
       if (tempValues.variants === state.variants[i]) {
         checkVariants = false
-        message.error('Variant already exist')
+        message.warning('Variant already exist')
       }
     }
-    if (tempValues.variants.length > 1 && state.variants.length < 5 && checkVariants) {
+    if (tempValues.variants.length > 0 && state.variants.length < 5 && checkVariants) {
       const variants = state.variants;
       variants.push(tempValues.variants)
-      setState({ ...state, variants })
-      setTempValues({ ...tempValues, variants: '' })
+      setState({...state, variants})
+      setTempValues({...tempValues, variants: ''})
     }
     if (state.variants.length === 5) {
-      message.error('Fuck you 5')
+      message.info('You can add up to 5 options')
     }
-    if (tempValues.variants.length < 2) {
-      message.error('Fuck you 4')
+    if (tempValues.variants.length < 1) {
+      message.info('The answer option must have a minimum of 1 character and a maximum of 35')
     }
 
 
@@ -137,8 +137,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     <Modal
       visible={visible}
       title={stepTitle()}
-      style={{ padding: '16px' }}
-      bodyStyle={{ padding: '50px 120px' }}
+      style={{padding: '16px'}}
+      bodyStyle={{padding: '50px 120px'}}
       width={608}
       okText="Confirm"
       cancelText="Cancel"
@@ -163,10 +163,10 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                     allUsers: [],
                     date: null,
                     time: null,
-                    description: null
+                    description: ''
                   })
-                  if (current === 1) setButtons({ ...buttons, cancel: "CANCEL" })
-                  if (current === 3) setButtons({ ...buttons, next: "NEXT STEP" })
+                  if (current === 1) setButtons({...buttons, cancel: "CANCEL"})
+                  if (current === 3) setButtons({...buttons, next: "NEXT STEP"})
                 }}>
           {buttons.cancel}
         </Button>,
@@ -176,7 +176,10 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           background: '#007AFF',
           borderRadius: '4px',
         }}
-                disabled={state.variants.length<2 || state.variants.length>5 || (current === 1 && state.time === null) || (current === 1 && state.date === null) || (current === 1 && state.time <= Date.now())}
+                disabled={state.variants.length < 2 || state.variants.length > 5 || (
+                  current === 1 && state.time === null) || (current === 1 && state.time === null) || (
+                  current === 1 && state.time <= Date.now()
+                )}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
                   if (current === 3) setState({
@@ -185,16 +188,17 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                       allUsers: [],
                       date: null,
                       time: null,
-                      description: null
+                      description: ''
                     }
                   )
-                  if (current === 0) setButtons({ ...buttons, cancel: "BACK" })
-                  if (current === 2) setButtons({ ...buttons, next: "START VOTING" })
+                  if (current === 0) setButtons({...buttons, cancel: "BACK"})
+                  if (current === 2) setButtons({...buttons, next: "START VOTING"})
                   if (current === 2 && state.allUsers.length < 1) setState({
                     ...state,
                     allUsers: data()
                   })
                 }}>
+
           {buttons.next}
         </Button>,
       ]}
@@ -232,17 +236,16 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           <Row align={'top'} justify={'start'}>
             <label className='modal-label'>Add choices</label>
             <Search maxLength={35} value={tempValues.variants} onChange={(e) => {
-              setTempValues({ ...tempValues, variants: e.target.value })
+              setTempValues({...tempValues, variants: e.target.value})
             }}
-                    disabled={state.variants.length>=5}
+                    disabled={state.variants.length >= 5}
                     placeholder="input variant"
                     onSearch={addVariant}
                     enterButton/>
-            }} placeholder="input variant" onSearch={addVariant}
-                    enterButton={<img src={buttonForVoting}/>}
-            />
+            <h3 className='modal-filetime-title'>{"*Please add at least 2 options."}</h3>
           </Row>
           <Row justify={'center'}>
+
             <Col>
               {
                 state.variants.map((user, i) => (
@@ -256,7 +259,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                              onClick={() => {
                                let newVariants = state.variants;
                                newVariants.splice(i, 1)
-                               setState({ ...state, variants: newVariants })
+                               setState({...state, variants: newVariants})
                              }}/>
                       }
                     </Col>
@@ -289,7 +292,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                   );
                 }}
                 onChange={(date) => {
-                  setState({ ...state, date: new Date(date).getTime() })
+                  setState({...state, date: new Date(date).getTime()})
                 }}
               />
             </Row>
@@ -304,8 +307,9 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
             <Row align={'top'} justify={'center'}>
               <TimePicker
                 format={format}
-                onChange={(time) => {setState({ ...state, time: new Date(time).getTime() })
-              }}
+                onChange={(time) => {
+                  setState({...state, time: new Date(time).getTime()})
+                }}
               />
             </Row>
           </Col>
@@ -324,11 +328,11 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         <Row align={'top'} justify={'center'}>
           <TextArea maxLength={256} rows={5} placeholder="Enter description" allowClear
                     onChange={(e) => {
-                      setState({ ...state, description: e.target.value })
+                      setState({...state, description: e.target.value})
                     }}/>
         </Row>
         <Row align={'top'} justify={'start'}>
-          <h3 className='modal-filetime-title'>{"*There is an optional description filed"}</h3>
+          <h3 className='modal-filetime-title'>{"*There is an optional description filed. Max length 256 characters."}</h3>
         </Row>
         <Row align={'top'} justify={'center'}>
           <img src={votingInfoImage} alt='add' title='add'/>
@@ -337,6 +341,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       {current === 3 && (<div>
         <Row align={'top'} justify={'center'}>
           <h2 className='modal-title'>Voting participants</h2>
+          <h3 className='modal-filetime-title'>{"*At least 1 user can participate in the vote."}</h3>
         </Row>
         <Row align={'top'} justify={'center'}>
           <Col>
@@ -354,10 +359,10 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                                if (state.allUsers.length > 1) {
                                  let excludeUsers = state.excludedUsers;
                                  excludeUsers.push(state.allUsers[i])
-                                 setState({ ...state, excludeUsers })
+                                 setState({...state, excludeUsers})
                                  let newAllUsers = state.allUsers;
                                  newAllUsers.splice(i, 1)
-                                 setState({ ...state, variants: newAllUsers })
+                                 setState({...state, variants: newAllUsers})
                                }
                              }
                            }
@@ -370,7 +375,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           </Col>
         </Row>
       </div>)}
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
     </Modal>
   );
 };
