@@ -5,7 +5,7 @@ import {
 
 const { Option } = Select;
 export const PermissionsModal = ({
-  visible, info, close, changePermissions,
+  visible, info, close, changePermissions, permission,
 }) => {
   const [form] = Form.useForm();
 
@@ -45,12 +45,8 @@ export const PermissionsModal = ({
         <Form.Item name="username"
                    rules={[
                      {
-                       type: 'email',
-                       message: 'Please enter a valid Email!',
-                     },
-                     {
                        required: true,
-                       message: 'Please enter the email of the user to whom you want to transfer rights',
+                       message: 'Please enter the username of the user to whom you want to transfer rights',
                      },
                    ]}>
           <Input style={{ width: 300 }} placeholder="User's Email"/>
@@ -64,7 +60,7 @@ export const PermissionsModal = ({
             placeholder="Access Type"
             style={{ width: 300, marginTop: 20 }}
           >
-            {true && <Option value="owner">Transfer ownership</Option>}
+            {permission === 'owner' && <Option value="owner">Transfer ownership</Option>}
             {true && <Option value="write">View and Update</Option>}
             {true && <Option value="read">View Only</Option>}
           </Select>}

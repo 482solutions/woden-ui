@@ -1,6 +1,14 @@
 .sidebar {
-  width: 312px;
+  width: 350px;
   padding: 0 16px;
+}
+
+.ant-tree {
+  margin-left: 25px;
+}
+
+.ant-tree-node-content-wrapper, .ant-tree-node-content-wrapper-close {
+  width: 150px;
 }
 
 .sidebarTitle {

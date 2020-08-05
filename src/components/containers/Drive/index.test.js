@@ -144,8 +144,7 @@ it('Simulate double click on Folders for open', () => {
                                  openFolder={() => {
                                  }}
                                  getPermission={() => {
-                                 }}
-  />);
+                                 }}/>);
   expect(wrapper.find('.folder').at(0).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folder').at(1).simulate('doubleclick')).to.be.ok;
   expect(wrapper.find('.folderTitle').at(0).simulate('doubleclick')).to.be.ok;
