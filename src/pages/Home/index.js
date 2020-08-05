@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 import { Buttons, Drive, Sidebar, Voting } from '../../components/containers';
-import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
+import { getRootFolderHash } from '../../utils/functions';
+import { PermissionsModal, VotingModal } from '../../components/presentations';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -11,8 +12,7 @@ import emptyHere from '../../assets/images/emptyHere.svg';
 import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
-import { PermissionsModal } from '../../components/presentations';
-import { VotingModal } from '../../components/presentations';
+
 
 export class Home extends React.Component {
   constructor(props) {
@@ -73,7 +73,7 @@ export class Home extends React.Component {
   }
 
   async componentDidMount() {
-    if(!this.state.voting){
+    if (!this.state.voting) {
       this.props.initialFilesystem();
       const hash = await getRootFolderHash();
       this.props.getFolderData(hash, this.state.mode);
@@ -206,13 +206,13 @@ export class Home extends React.Component {
 
   async changeMode(mode) {
     if (mode !== this.state.mode) {
-      if(this.state.mode === 'voting'){
-        this.setState({voting: false})
+      if (this.state.mode === 'voting') {
+        this.setState({ voting: false })
       }
       this.setState({ mode });
-      if(mode === 'voting'){
-        this.setState({voting: true})
-      }else{
+      if (mode === 'voting') {
+        this.setState({ voting: true })
+      } else {
         const hash = await getRootFolderHash();
         this.props.getFolderData(hash, mode);
       }
@@ -247,30 +247,30 @@ export class Home extends React.Component {
         </div>
         <div className="main flex-direction-column w100">
           {!this.state.voting && (<Buttons newFolder={this.createFolder}
-                   uploadFile={this.uploadFile}
-                   getFolderData={this.openFolder}
-                   getPermission={this.getPermission}
-                   mode={mode}
-                   folderData={this.props[mode]}
-                   folderHash={this.state.folderHash}
-                   userPermission={this.state.userPermission}
-                   username={this.props.userName}/>)}
+                                           uploadFile={this.uploadFile}
+                                           getFolderData={this.openFolder}
+                                           getPermission={this.getPermission}
+                                           mode={mode}
+                                           folderData={this.props[mode]}
+                                           folderHash={this.state.folderHash}
+                                           userPermission={this.state.userPermission}
+                                           username={this.props.userName}/>)}
           {!this.state.voting && (this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
-            ? <div className="emptyHere">
-              <img src={emptyHere} alt=""/>
-            </div>
-            : <div className="flex-start ff-rw">
-              <Drive folderData={this.props[mode]}
-                     username={this.props.userName}
-                     updateFile={this.updateFile}
-                     shareModal={this.shareModal}
-                     votingModal={this.votingModal}
-                     openFolder={this.openFolder}
-                     getVersions={this.getVersions}
-                     downloadFile={this.downloadFile}
-                     viewAccessList={this.viewAccessList}
-                     getPermission={this.getPermission}/>
-            </div>
+              ? <div className="emptyHere">
+                <img src={emptyHere} alt=""/>
+              </div>
+              : <div className="flex-start ff-rw">
+                <Drive folderData={this.props[mode]}
+                       username={this.props.userName}
+                       updateFile={this.updateFile}
+                       shareModal={this.shareModal}
+                       votingModal={this.votingModal}
+                       openFolder={this.openFolder}
+                       getVersions={this.getVersions}
+                       downloadFile={this.downloadFile}
+                       viewAccessList={this.viewAccessList}
+                       getPermission={this.getPermission}/>
+              </div>
           )}
           {this.state.voting && (<Voting/>)}
         </div>

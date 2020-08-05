@@ -13,24 +13,20 @@ export class Voting extends Component {
   }
   componentDidMount() {
     this.props.getVoting()
+    console.log("1111111111111111111111111111111111111111111111111111111111111111",this.props.voting.data)
+  }
+  prepareData(){
+    console.log(this.props.voting.data)
   }
 
   render() {
-    const data = [
-      {
-        votingName: "Test",
-        versionTime: 1576859403,
-        status: true,
-        dueDate: 1576859403,
-        voters: 2
-      }
-    ]
     return (
       <>
-        <Table dataSource={this.props.voting.data}>
-          <Column title="Name" dataIndex="votingName" key="votingName"/>
-          <Column title="Version" dataIndex="versionTime" key="versionTime"/>
-          <Column
+        <Table tableLayout={"auto"} dataSource={this.props.voting.data}>
+          <Column className={"table-text"} title="#"/>
+          <Column className={"table-text"} title="Name" dataIndex="votingName" key="votingName"/>
+          <Column className={"table-text"} title="Version" dataIndex="versionTime" key="versionTime"/>
+          <Column className={"table-text"}
             title="Status"
             dataIndex="status"
             key="status"
@@ -38,8 +34,8 @@ export class Voting extends Component {
               status ? 'Active':'Closed'
             )}
           />
-          <Column title="Due Date" dataIndex="dueDate" key="dueDate"/>
-          <Column
+          <Column className={"table-text"} title="Due Date" dataIndex="dueDate" key="dueDate"/>
+          <Column className={"table-text"}
             title="Actions"
             dataIndex="status"
             key="status"
@@ -47,7 +43,7 @@ export class Voting extends Component {
               status ? 'Vote':'Results'
             )}
           />
-          <Column
+          <Column className={"table-text"}
             title="Total votes"
             dataIndex="voters"
             key="voters"
@@ -57,7 +53,6 @@ export class Voting extends Component {
               </>
             )}
           />
-
         </Table>
       </>
     );
