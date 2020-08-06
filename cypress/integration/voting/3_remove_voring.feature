@@ -58,6 +58,7 @@ Feature:  Remove users from voting
     And Press "START VOTING"
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
+    And Press "CONTINUE"
 
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
