@@ -42,7 +42,7 @@ export const PermissionsModal = ({
         name="form_in_modal"
         initialValues={{ modifier: 'public' }}
       >
-        <Form.Item name="username"
+        <Form.Item name="email"
                    rules={[
                      {
                        required: true,

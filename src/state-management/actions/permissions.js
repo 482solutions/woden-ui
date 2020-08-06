@@ -23,7 +23,7 @@ export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
   const body = new Woden.ChangePermissions();
-  body.username = permissionData.username;
+  body.email = permissionData.email;
   body.hash = permissionData.hash;
   body.permission = permissionData.permissions;
   console.log(permissionData);

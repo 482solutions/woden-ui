@@ -248,8 +248,6 @@ export class Home extends React.Component {
                           permission={this.state.userPermission}/>
         <VotingModal key='VotingModal' visible={votingModalVisible} info={votingModalInfo}
                      close={this.closeVotingModal} createVoting={this.createVoting}/>
-        <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
-                          close={this.closeShareModal} changePermissions={this.changePermissions}/>
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
