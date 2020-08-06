@@ -1,6 +1,5 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getFolderOwner, getHash} from "../../support/commands";
-import {unixToString} from "../../../src/utils/functions";
+import {getDateTime} from "../../support/commands";
 
 const variants = {
   0: [],
@@ -14,7 +13,7 @@ const variants = {
 }
 
 const desc = {
-  0: '',
+  5: 'ccccc',
   256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   257: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   300: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
@@ -50,36 +49,25 @@ When(/^User adding (.*) of choices$/,  (count) => {
       .should('have.length', index+1);
   }
 });
+
 When(/^User selects date and time$/,  () => {
-  let dateString;
-  const unixTime = Math.round( new Date().getTime() / 1000) + 200000;
-
-  let year = new Date(unixTime * 1000).getFullYear();
-  let month = new Date(unixTime * 1000).getMonth();
-  let date = new Date(unixTime * 1000).getDate();
-  let hour = new Date(unixTime * 1000).getHours();
-  let minutes = new Date(unixTime * 1000).getMinutes();
-
-  if (date < 10 || month < 10) {
-    dateString = `${year}-0${month +1}-0${date}`;
-    // console.log(dateString)
-  } else {
-    dateString = `${year}-${month +1}-${date}`;
-    // console.log(dateString)
-  }
+  const fullDate = getDateTime('future')
   cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
-    .type(dateString)
-    .wait(2000);
+    .type(fullDate.dateString)
+    .wait(3000);
+
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
-    .type(`${hour}:${minutes}`)
+    .type(`${fullDate.hour}:${fullDate.minutes}`)
     .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
-  // cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input').contains(`${hour}:${minutes}`)
+});
 
-});
 When(/^Description field (.*) characters$/,  (description) => {
-  cy.get(':nth-child(3) > .ant-input-affix-wrapper > .ant-input').type(desc[description]);
+  if (description !== 0) {
+    cy.get(':nth-child(3) > .ant-input-affix-wrapper > .ant-input').type(desc[description]);
+  }
 });
+
 When(/^(\d+) users participate in the voting "([^"]*)"$/,  (count, user) => {
  switch (user) {
    case 'User2, User3':
@@ -100,9 +88,67 @@ When(/^(\d+) users participate in the voting "([^"]*)"$/,  (count, user) => {
   } else {
     cy.get('.ant-row.sharedUser').should('contain.text', user)
   }
-
 });
 
-Given(/^Button "([^"]*)" is disabled$/, (btn) => {
-  cy.contains(btn).should('be.disabled')
+Given(/^Button Start Voting is disabled$/, () => {
+  cy.get('.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child').contains('Start Voting')
+  cy.get('[aria-disabled=true]').children().contains('Start Voting')
+});
+
+Then(/^Pop\-up "([^"]*)" with description "([^"]*)" is visible$/,  (name, description) => {
+  cy.get('.voting-success-title').contains(name).should('be.visible')
+  cy.get('.voting-success-message').contains(description).should('be.visible')
+});
+
+Given(/^Button NEXT STEP is disabled$/, () => {
+  cy.get('.ant-btn-primary').should('be.disabled')
+});
+
+Then(/^Button Add variant is disabled$/, () => {
+  cy.get('.ant-input-group-addon > .ant-btn').should('be.disabled').as('Field')
+  cy.get('.ant-input').should('be.disabled').as('Button Add Variant')
+});
+
+Given(/^User click CONTINUE button$/, () => {
+  cy.get('.ant-btn.ant-btn-primary').contains('CONTINUE').click()
+});
+
+Given(/^In field "([^"]*)" can contain only (\d+) characters$/, (desc, count) => {
+  cy.get('textarea').invoke('val')
+    .then(text => expect(text.length).to.eq(256));
+});
+
+When(/^User selects date and time, which is real time$/, () => {
+  const fullDate = getDateTime('now');
+  cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
+    .type(fullDate.dateString)
+
+    .wait(3000);
+  cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
+    .click()
+    .type(`${fullDate.hour}:${fullDate.minutes}`)
+    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
+});
+
+Then(/^User selects date and time, which less than the real time$/, () => {
+  const fullDate = getDateTime('past');
+  cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
+    .type(fullDate.dateString)
+
+    .wait(3000);
+  cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
+    .click()
+    .type(`${fullDate.hour}:${fullDate.minutes}`)
+    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
+});
+When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
+  cy.get('.variants')
+    .children('.text-users-name')
+    .contains(variant)
+    .parent()
+    .children('.revokeAccess')
+    .click()
+});
+Then(/^Count of variants (.*)$/, (count) => {
+  cy.get('.variants').should('have.length', count)
 });

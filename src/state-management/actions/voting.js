@@ -13,7 +13,7 @@ const { Bearer } = defaultClient.authentications;
 
 export const createVoting = (votingData) => async (dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
-  message.loading('Creating voting...', 0);
+  message.loading('Creating vote...', 0);
   const body = new Woden.Voting();
   body.hash = votingData.fileHash;
   body.dueDate = votingData.dueDate.toString();
@@ -29,11 +29,11 @@ export const createVoting = (votingData) => async (dispatch) => {
         const modal = Modal.success();
         modal.update({
           centered: true,
-          okText: 'Continue',
+          okText: 'CONTINUE',
           icon: (<img className={"voting-success-image"} src={votingLabel} alt='add' title='add'/>),
           content: (<div className={"modal-size"}>
             <Row>
-              <h3 className={"voting-success-title"}>Done</h3>
+              <h3 className={"voting-success-title"}>Done!</h3>
             </Row>
             <Row>
               <h4 className={"voting-success-message"}>The voting becomes available</h4>

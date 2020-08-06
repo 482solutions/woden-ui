@@ -48,6 +48,31 @@ export function getFolderOwner(folderName, arrFolders) {
   }
 }
 
+export function getDateTime(when){
+  let dateString, unixTime;
+  switch (when) {
+    case 'future':
+      unixTime = Math.round( new Date().getTime() / 1000) + 200000;
+      break;
+    case 'now':
+      unixTime = Math.round( new Date().getTime() / 1000)
+      break;
+    case 'past':
+      unixTime = Math.round( new Date().getTime() / 1000) - 200000;
+      break;
+  }
+  let year = new Date(unixTime * 1000).getFullYear();
+  let month = new Date(unixTime * 1000).getMonth() + 1;
+  let date = new Date(unixTime * 1000).getDate();
+  let hour = new Date(unixTime * 1000).getHours();
+  let minutes = new Date(unixTime * 1000).getMinutes();
+  date < 10 || month < 10 ? dateString = `${year}-0${month}-0${date}`: dateString = `${year}-${month}-${date}`;
+
+  hour.toString().length === 1 ? hour = `0${hour}` : hour
+  minutes.toString().length === 1 ? minutes = `0${minutes}` : minutes
+  return {dateString, hour, minutes};
+}
+
 Cypress.Commands.add('uploadFile', (fullFileName) => {
   cy.server()
   cy.route('POST', '/api/v1/file').as('uploadFile')
@@ -70,6 +95,7 @@ Cypress.Commands.add('uploadFile', (fullFileName) => {
     })
     const result = await resp.json()
     if (expect(200).to.eq(resp.status)) {
+      expect(result).to.not.have.property('stack')
       Cypress.env('respStatus', result.status)
       Cypress.env('filesInRoot', result.folder.files)
       expect(Cypress.env('login')).to.equal(result.folder.folderName)
@@ -83,7 +109,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
   const textAfter = 'Good morning!'
 
   const hashFile = getHash(fileName, Cypress.env('filesInRoot'))
-
+  cy.writeFile(`cypress/fixtures/${fileName}`, textBefore)
   cy.readFile(`cypress/fixtures/${fileName}`).then((str1) => {
     expect(str1).to.equal(textBefore)
 
