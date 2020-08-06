@@ -47,7 +47,7 @@ Feature:  Create voting
       | 5     |
 
   @positive
-  Scenario Outline: 2 Owner can create voting without description
+  Scenario : 2 Owner can create voting without description
     And The user upload "TestUpload.txt" without UI
     And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
@@ -58,22 +58,18 @@ Feature:  Create voting
     And The screen for entering voting parameters is opened
     And Tab "1.Creating" is opened and title "Create voting" is visible
     And Name of the document "TestUpload.txt" is visible in pop-up
-    And User adding <count> of choices
+    And User adding 2 of choices
     And Press "NEXT STEP"
     And Tab "2.Due Date" is opened and title "Pick end date and end time" is visible
     And User selects date and time
     And Press "NEXT STEP"
     And Tab "3.Description" is opened and title "Info" is visible
-    And Description field 0 characters
     And Press "NEXT STEP"
     And Tab "4.List of Voters" is opened and title "Voting participants" is visible
     And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
-    Examples: Count of answers
-      | count |
-      | 2     |
 
   @negative
   Scenario: 3 Owner can't start voting for a folder
