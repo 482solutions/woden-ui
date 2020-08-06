@@ -2,7 +2,7 @@
   "baseUrl": "http://localhost:3000",
   "env": {
     "RETRIES": 0,
-    "backendURL": "http://192.168.88.42:1823/api/v1",
+    "backendURL": "http://localhost:1823/api/v1",
     "respStatus": null,
     "rootFolder": null,
     "login": null,
