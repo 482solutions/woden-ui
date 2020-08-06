@@ -23,13 +23,16 @@
 .voting-success-image{
   margin-left: 125px;
 }
+.ant-table-thead > tr > th {
+  background: #FFFFFF !important;
+}
 .table-text{
   position: absolute;
   width: 181px;
   left: 54px;
   top: 32.73%;
   bottom: 32.73%;
-
+  background: #FFFFFF;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
@@ -64,5 +67,9 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;
+  color: #FFFFFF;
+}
+
+.table-style {
   color: #FFFFFF;
 }
