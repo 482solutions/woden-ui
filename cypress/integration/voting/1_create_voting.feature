@@ -1,6 +1,6 @@
 @test_case_4.1
 @create_voting
-# ./node_modules/.bin/cypress-tags run -e TAGS='@test_case_4.1'
+#./node_modules/.bin/cypress-tags run -e TAGS='@test_case_4.1'
 
 Feature:  Create voting
   As a file owner, I want to create new voting so that I can collect other opinions
@@ -47,7 +47,7 @@ Feature:  Create voting
       | 5     |
 
   @positive
-  Scenario : 2 Owner can create voting without description
+  Scenario: 2 Owner can create voting without description
     And The user upload "TestUpload.txt" without UI
     And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
