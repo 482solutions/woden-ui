@@ -21,8 +21,7 @@ class Sidebar extends Component {
             </div>
           </div>
           <FolderTree tree={this.props.tree}
-                      openFolder={this.props.openFolder}
-                      className="foldersTree"/>
+                      openFolder={this.props.openFolder}/>
           <div onClick={() => this.props.changeMode('share')}
                className="sideBarMode shared">
             <img src={Share} alt="Share"
