@@ -19,13 +19,6 @@ function summVotes(tags) {
   return `${voted}/${tags.length}`
 }
 
-function numerate() {
-  // if (number > 9) {
-  //   number = 0
-  // }
-  number++
-  return `${number}`
-}
 
 export class Voting extends Component {
   constructor(props) {
