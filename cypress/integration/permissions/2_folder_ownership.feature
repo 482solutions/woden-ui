@@ -12,7 +12,7 @@ Feature: Transfer folder ownership
     Scenario: 1 Transfer folder ownership in root folder
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "User2" email to field "#form_in_modal_username"
+      And Enter "User2" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       And Spin is visible "Changing permissions..."
@@ -39,7 +39,7 @@ Feature: Transfer folder ownership
       And The user opens folder "Folder1"
       When The user press the "Actions" button in "Folder2" "folder"
       And The user press the "Share" button in "Folder2" "folder"
-      And Enter "User2" email to field "#form_in_modal_username"
+      And Enter "User2" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       And Spin is visible "Changing permissions..."
@@ -65,7 +65,7 @@ Feature: Transfer folder ownership
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
       And Choose the "Transfer ownership" option from pop-up window
-      And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
+      And Enter "invalidemail@gmail.com" email to field "#form_in_modal_email"
       And Press "Confirm"
       Then Error message "User for sharing not found"
 
@@ -74,7 +74,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "User1" email to field "#form_in_modal_username"
+      And Enter "User1" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       Then Warning message "This user is the owner of this file"
@@ -85,7 +85,7 @@ Feature: Transfer folder ownership
       And Register without UI user3
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "User2 and User3" email to field "#form_in_modal_username"
+      And Enter "User2 and User3" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
@@ -94,7 +94,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "nothing" email to field "#form_in_modal_username"
+      And Enter "nothing" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
@@ -104,7 +104,7 @@ Feature: Transfer folder ownership
       Given The user 1 is the owner of the folder "Folder1"
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "spaces" email to field "#form_in_modal_username"
+      And Enter "spaces" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       Then Notification below the field "Please enter a valid Email!"
 
@@ -114,7 +114,7 @@ Feature: Transfer folder ownership
 #      Given The user 1 is the owner of the folder "Folder1"
 #      When The user press the "Actions" button in "Folder1" "folder"
 #      And The user press the "Share" button in "Folder1" "folder"
-#      And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#      And Enter "UsernameUser2" email to field "#form_in_modal_email"
 #      And Choose the "Transfer ownership" option from pop-up window
 #      And Press "Confirm"
 #      And Spin is visible "Changing permissions..."
@@ -136,7 +136,7 @@ Feature: Transfer folder ownership
       And Spin is visible "Getting data..."
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
-      And Enter "User2" email to field "#form_in_modal_username"
+      And Enter "User2" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       And Spin is visible "Changing permissions..."

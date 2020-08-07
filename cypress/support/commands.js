@@ -146,6 +146,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
         })
     }).as('Update txt file').wait(6000)
   })
+  cy.writeFile(`cypress/fixtures/${fileName}`, textAfter)
 })
 
 export function createFolderInRoot(name) {

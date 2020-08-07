@@ -139,11 +139,10 @@ export default class Drive extends Component {
   }
 
   getFileInfo(fileHash, filesArray) {
-    // console.log(fileHash)
-    // console.log(filesArray)
-    return filesArray[filesArray.findIndex(v => v.fileHash === fileHash)]
+    if (filesArray){
+      return filesArray[filesArray.findIndex(v => v.fileHash === fileHash)]
+    }
   }
-
 
   render() {
     const {

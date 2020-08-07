@@ -36,6 +36,7 @@ Given(/^Enter "([^"]*)" email to field "([^"]*)"$/, (userEmail, field) => {
 });
 
 Then(/^"([^"]*)" option from pop-up window is not visible$/, () => {
+  //     TODO ALL #form_in_modal_username
   cy.get('#form_in_modal_permissions').should('not.be.visible')
 });
 

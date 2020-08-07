@@ -18,7 +18,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -40,7 +40,7 @@ Feature: Grant edit access for a file
     And Upload file "TestUpload.txt" to "Folder1"
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -65,7 +65,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -82,7 +82,7 @@ Feature: Grant edit access for a file
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Choose the "View and Update" option from pop-up window
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
@@ -101,7 +101,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
+    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Error message "User for sharing not found"
@@ -112,14 +112,14 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the editor of this file"
@@ -130,7 +130,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User1" email to field "#form_in_modal_username"
+    And Enter "User1" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the owner of this file"
@@ -141,7 +141,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -152,7 +152,7 @@ Feature: Grant edit access for a file
     And "User2" has Editors rights to "TestUpload.txt" "file"
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the editor of this file"
@@ -164,7 +164,7 @@ Feature: Grant edit access for a file
     And Register without UI user3
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2 and User3" email to field "#form_in_modal_username"
+    And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -174,7 +174,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "nothing" email to field "#form_in_modal_username"
+    And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
@@ -185,7 +185,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "spaces" email to field "#form_in_modal_username"
+    And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -196,7 +196,7 @@ Feature: Grant edit access for a file
 #    And The user 1 is the owner of the file
 #    When The user press the "Actions" button in "TestUpload.txt" "file"
 #    And The user press the "Share" button in "TestUpload.txt" "file"
-#    And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
 #    And Choose the "View and Update" option from pop-up window
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
@@ -214,7 +214,7 @@ Feature: Grant edit access for a file
     And The user 1 is the owner of the file
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
