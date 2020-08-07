@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { message, Modal, Row, Button } from 'antd';
+import {  Modal, Row, Button } from 'antd';
 import  { VotingModalSuccess }  from '../VotingModalSuccess/index.js';
 
-export function VotingModal(variants, votingName, voters, versionTime){
+export function VotingModal(vote){
+    const { variants, votingName, voters, versionTime, votingHash } = vote;
     const [voted, setVoted] = useState(false);
     const [btnText, setBtnText] = useState('Submit Your Vote'.toUpperCase());
 

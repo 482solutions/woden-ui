@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 
 import { Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
+import { VotingModal } from '../../containers/VotingModal/index.js';
+import { VotingResults } from '../../containers/VotingResults/index.js';
+
 import activeVoting from '../../../assets/images/activeVoting.svg';
 import closedVoting from '../../../assets/images/closedVoting.svg';
 
 const { Column } = Table;
-let number = 0
+let number = 0;
 
 function summVotes(tags) {
-  let voted = 0
+  let voted = 0;
   for (let i = 0; i < tags.length; i++) {
     if (tags[i].vote !== null) {
       voted++
@@ -25,20 +28,29 @@ export class Voting extends Component {
     super(props);
   }
 
+  getVotingInfo(index) {
+    if (newData[index].status) {
+      return <Button className='button-style-vote' onClick={() => {
+        VotingModal(newData[index])
+      }}>Vote</Button>
+    } else {
+      return <Button className='button-style-result' onClick={() => {
+        VotingResults(newData[index])
+      }}>Results</Button>  }
+  }
+
   componentDidMount() {
     this.props.getVoting()
   }
 
-  prepareData() {
-  }
-
   render() {
-    const newData =[];
+    const newData = [];
     for(let i = 0; i < this.props.voting.data.length; i++ ) {
       const item = this.props.voting.data[i];
       item.index = i + 1;
       newData.push(item)
     }
+
     return (
       <div className='votingContainer'>
         <Table tableLayout={"auto"} dataSource={newData}>
@@ -60,12 +72,9 @@ export class Voting extends Component {
                   title="Actions"
                   dataIndex="status"
                   key="status"
-                  render={(status) => (
-                    status ? <Button className='button-style-vote' onClick={() => {
-                      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                    }}>Vote</Button> : <Button className='button-style-result' onClick={() => {
-                      console.log("+++++++++++++++++++++++++++++++++++++++++++++")
-                    }}>Results</Button>)}
+                  render={(index) => (
+                    this.getVotingInfo(index)
+                  )}
           />
           <Column className={"table-text"}
                   title="Total votes"

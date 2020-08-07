@@ -3,11 +3,12 @@ import { Modal, Row, Progress } from 'antd';
 
 import fileIcon from '../../../assets/images/fileImages/fileImage.svg'
 
-export function VotingResults(variants, votingName, voters, versionTime){
+export function VotingResults(vote){
+    const { variants, votingName, voters, versionTime, votingHash } = vote;
     const colors = ['#6FCF97', '#56CCF2', '#3B7CFF', '#FB8832', '#BA33FA'];
     
     const countPercent = (votedCount) => {
-        return voters.length / totalVoters * 100;
+        return voters.length / votedCount * 100;
     } 
     
     
