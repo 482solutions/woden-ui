@@ -54,7 +54,7 @@ export default class Drive extends Component {
           && <Menu.Item key={`2${hash}`}
                         disabled={fileInfo.writeUsers.length === 0 && fileInfo.readUsers.length === 0}
                         onClick={() => {
-            console.log("MENU_FILESDATA:", fileInfo)
+            // console.log("MENU_FILESDATA:", fileInfo)
             this.props.votingModal(fileInfo);
 
           }}>
