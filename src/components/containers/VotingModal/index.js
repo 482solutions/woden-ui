@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Modal, Row, Button } from 'antd';
 import { VotingModalSuccess } from '../VotingModalSuccess/index.js';
 
-export function VotingModal(vote) {
+export function VotingModal(vote, useVote, useBtn) {
   const {
     variants, votingName, voters, versionTime, votingHash,
   } = vote;
-  const [voted, setVoted] = useState(false);
-  const [btnText, setBtnText] = useState('Submit Your Vote'.toUpperCase());
+  console.log(useBtn)
+  const [voted, setVoted] = useVote;
+  const [btnText, setBtnText] = useBtn;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -19,12 +20,13 @@ export function VotingModal(vote) {
   return !voted ? (
     modal.update({
       centered: true,
-      okText: { btnText },
+      okText: '{ btnText }',
       content: (<div className={'modal-size'}>
               <Row>
                 <h3 className={'voting-success-title'}>Voting</h3>
               </Row>
               <Row>
+                {btnText}
                 <h4 className={'voting-success-message'}>{votingName}</h4>
                 <p>{versionTime}</p>
               </Row>

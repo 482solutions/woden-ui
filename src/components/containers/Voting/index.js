@@ -22,6 +22,8 @@ function summVotes(tags) {
 }
 
 export const Voting = (props) => {
+  const [voted, setVoted] = React.useState(false)
+  const [btnText, setBtnText] = React.useState('Submit Your Vote'.toUpperCase())
   useEffect(() => {
     props.getVoting();
   }, []);
@@ -34,7 +36,8 @@ export const Voting = (props) => {
   }
 
   const handleClick = (option, record) => {
-    option === 'modal' ? VotingModal(record) : VotingResults(record);
+    // setVotingModal(record)
+    console.log(option === 'modal' ? VotingModal(record,[voted, setVoted], [btnText, setBtnText]) : VotingResults(record));
   };
 
   return (
@@ -77,6 +80,7 @@ export const Voting = (props) => {
                   )}
           />
         </Table>
+        {/*{votingModal && <VotingModal {...votingModal}/>}*/}
       </div>
   );
 };
