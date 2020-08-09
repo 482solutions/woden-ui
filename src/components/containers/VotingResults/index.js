@@ -4,6 +4,7 @@ import { Modal, Row, Progress } from 'antd';
 import fileIcon from '../../../assets/images/votingFileLabel.svg';
 
 import './style.css';
+
 export function VotingResults(vote) {
   const {
     variants, votingName, voters, versionTime, votingHash,

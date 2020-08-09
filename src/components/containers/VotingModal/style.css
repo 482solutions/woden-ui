@@ -1,0 +1,69 @@
+.voting-title{
+    padding-left: 100px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 132%;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    color: #333333;
+}
+
+.voting-file-name{
+    max-width: 250px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    font-family: Montserrat;
+    color: #8998AC;
+}
+
+.voting-file-date{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #8998AC;
+}
+
+.voting-file-container{
+    margin-left: 82px;
+}
+
+.button-row{
+    margin: 6px auto;
+}
+
+.voting-button{
+    width: 180px;
+    margin-left: 82px;
+    font-size: 14px;
+    color: #3B7CFF;
+    border: 1.2px solid #3B7CFF;
+}
+
+.voting-submit-button{
+    position: absolute;
+    width: 180px;
+    margin-top: 13px;
+    margin-left: 82px;
+    height: 32px;
+    background: #56CCF2;
+    border: 1.2px solid #56CCF2;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
