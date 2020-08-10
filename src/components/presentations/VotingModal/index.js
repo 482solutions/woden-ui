@@ -199,8 +199,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                         description: ''
                       }
                     )
-                    if (current === 3) setButtons({ ...buttons, next: "NEXT STEP" })
                     setCurrent(current - 3)
+                    setButtons({ ...buttons, next: "NEXT STEP", cancel: "CANCEL" })
                   }
                 }}>
           {buttons.next}

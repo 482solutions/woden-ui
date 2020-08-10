@@ -66,8 +66,11 @@ export function getDateTime(when){
   let date = new Date(unixTime * 1000).getDate();
   let hour = new Date(unixTime * 1000).getHours();
   let minutes = new Date(unixTime * 1000).getMinutes();
-  date < 10 || month < 10 ? dateString = `${year}-0${month}-0${date}`: dateString = `${year}-${month}-${date}`;
 
+  date < 10 ? date = `0${date}` : date
+  month < 10 ? month = `0${month}` : month
+
+  dateString = `${year}-${month}-${date}`;
   hour.toString().length === 1 ? hour = `0${hour}` : hour
   minutes.toString().length === 1 ? minutes = `0${minutes}` : minutes
   return {dateString, hour, minutes};
@@ -146,6 +149,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
         })
     }).as('Update txt file').wait(6000)
   })
+  cy.writeFile(`cypress/fixtures/${fileName}`, textAfter)
 })
 
 export function createFolderInRoot(name) {
