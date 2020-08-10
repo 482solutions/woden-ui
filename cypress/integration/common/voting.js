@@ -152,3 +152,41 @@ When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
 Then(/^Count of variants (.*)$/, (count) => {
   cy.get('.variants').should('have.length', count)
 });
+Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
+  switch (user) {
+    case 'User2':
+      user = Cypress.env('login_2');
+      break;
+    case 'User3':
+      user = Cypress.env('login_3');
+      break;
+  }
+  cy.get('.sharedUser')
+    .children('.sharedUserName')
+    .contains(user)
+    .parent()
+    .parent()
+    .children('.revokeAccess')
+    .click()
+});
+When(/^The user open Voting tab$/, () => {
+  cy.wait(2000)
+  cy.server()
+  cy.route('GET', '/api/v1/voting').as('getVote')
+  cy.get('.sideBarMode.voting').click()
+  cy.wait('@getVote').then((xhr) => {
+    expect(200).to.equal(xhr.status)
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
+});
+Then(/^The list of available voting is displayed$/, () => {
+  cy.wait(2000)
+  cy.get('.votingContainer').should('be.visible')
+
+});
+Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
+    cy.get('.ant-table-cell.table-text').contains(file).parent().should('be.visible')
+});
+Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
+  cy.get('.ant-table-cell.table-text').contains(file).should('not.exist');
+});

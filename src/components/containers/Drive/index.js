@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './style.css';
-import {Dropdown, Menu, Upload} from 'antd';
+import { Dropdown, Menu, Upload } from 'antd';
 import folderImage from '../../../assets/images/folderImage.svg';
 import More from '../../../assets/images/more-vertical.svg';
 import Share from '../../../assets/images/Share.svg';
@@ -17,7 +17,8 @@ import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import fileImageTXT from '../../../assets/images/fileImages/fileImageTXT.svg';
-import {detectUserPermission} from '../../../utils/functions';
+import { detectUserPermission } from '../../../utils/functions';
+import {VotingModal} from "../../presentations/VotingModal";
 
 export default class Drive extends Component {
   constructor(props) {
@@ -72,10 +73,10 @@ export default class Drive extends Component {
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`3${hash}`} onClick={async () => {
-          await this.props.viewAccessList(hash, 'file');
-        }}>
-          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+        <Menu.Item key={`4${hash}`}>
+          <span id={`Permissions_${hash}`} onClick={async() => {
+            await this.props.viewAccessList(hash, 'file');
+          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );

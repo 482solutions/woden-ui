@@ -25,7 +25,7 @@ Feature: Voting
     And Press "NEXT STEP"
     And User selects date and time
     And Press "NEXT STEP"
-    And Description field 256 characters
+    And Description field 5 characters
     And Press "NEXT STEP"
     And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
@@ -34,7 +34,6 @@ Feature: Voting
     When Login as new user 2 without UI
     And Spin is visible "Getting data..."
     And The user open Voting tab
-    And Spin is visible "Getting data..."
     And The list of available voting is displayed
     And Voting for a file "TestUpload.txt" is visible
 #    And Status of voting is "Active"
