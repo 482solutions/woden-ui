@@ -154,11 +154,11 @@ Feature: Grant edit access for a file
     And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
-    Then Warning message "User for sharing not found"
+    Then Warning message "This user is the editor of this file"
 
   @negative
   Scenario: 8 Owner can not grand access for a file to some users
-      And The user upload "TestUpload.txt" without UI
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And Register without UI user3
     When The user press the "Actions" button in "TestUpload.txt" "file"
@@ -188,17 +188,17 @@ Feature: Grant edit access for a file
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-   @positive
-  Scenario: 11 Owner can grand access for a file if field "email" contain username
-    And The user upload "TestUpload.txt" without UI
-    And The user 1 is the owner of the file
-    When The user press the "Actions" button in "TestUpload.txt" "file"
-    And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "UsernameUser2" email to field "#form_in_modal_email"
-    And Choose the "View and Update" option from pop-up window
-    And Press "Confirm"
-    And Spin is visible "Changing permissions..."
-    When Message about transfer ownership "Permissions updated successfully"
+#   @positive
+#  Scenario: 11 Owner can grand access for a file if field "email" contain username
+#    And The user upload "TestUpload.txt" without UI
+#    And The user 1 is the owner of the file
+#    When The user press the "Actions" button in "TestUpload.txt" "file"
+#    And The user press the "Share" button in "TestUpload.txt" "file"
+#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
+#    And Choose the "View and Update" option from pop-up window
+#    And Press "Confirm"
+#    And Spin is visible "Changing permissions..."
+#    When Message about transfer ownership "Permissions updated successfully"
 
   @negative
   Scenario: 12 Editor can can not to transfer ownership for a file
