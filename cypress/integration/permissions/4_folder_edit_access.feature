@@ -200,7 +200,7 @@ Feature: Grant edit access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 10 Owner can not grand access for a folder if field "email" contain spaces
@@ -209,24 +209,24 @@ Feature: Grant edit access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive TODO
-#  Scenario: 11 Owner can not grand access for a folder if field "email" contain username
-#    Given The user 1 is the owner of the folder "testFolder"
-#    When The user press the "Actions" button in "testFolder" "folder"
-#    And The user press the "Share" button in "testFolder" "folder"
-#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
-#    And Choose the "View and Update" option from pop-up window
-#    And Press "Confirm"
-#    And Spin is visible "Changing permissions..."
-#    When Message about transfer ownership "Permissions updated successfully"
-#    And Login as new user 2 without UI
-#    And The folder "testFolder" is visible
-#    And Login as new user without UI
-#    And The user open Shared with me
-#    And Spin is visible "Getting data..."
-#    Then "User1" has Editors rights to "testFolder" "folder"
+  @positive
+  Scenario: 11 Owner can grand access for a folder if field "email" contain username
+    Given The user 1 is the owner of the folder "testFolder"
+    When The user press the "Actions" button in "testFolder" "folder"
+    And The user press the "Share" button in "testFolder" "folder"
+    And Enter "UsernameUser2" email to field "#form_in_modal_email"
+    And Choose the "View and Update" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    When Message about transfer ownership "Permissions updated successfully"
+    And Login as new user 2 without UI
+    And The folder "testFolder" is visible
+    And Login as new user without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    Then "User1" has Editors rights to "testFolder" "folder"
 
   @negative
   Scenario: 12 Editor can can not to transfer ownership for a folder
