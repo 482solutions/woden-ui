@@ -18,7 +18,7 @@ Feature: Grant view access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -45,7 +45,7 @@ Feature: Grant view access for a file
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Choose the "View Only" option from pop-up window
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
@@ -66,7 +66,7 @@ Feature: Grant view access for a file
     And Spin is visible "Updating file..."
     Then Message about update file "File updated successfully"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -90,7 +90,7 @@ Feature: Grant view access for a file
     And Upload file "txtFile.txt" to "testFolder"
     When The user press the "Actions" button in "txtFile.txt" "file"
     And The user press the "Share" button in "txtFile.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -119,7 +119,7 @@ Feature: Grant view access for a file
     And The user upload "TestUpload.txt" without UI
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
+    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Error message "User for sharing not found"
@@ -129,14 +129,14 @@ Feature: Grant view access for a file
     And The user upload "TestUpload.txt" without UI
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the viewer of this file"
@@ -146,7 +146,7 @@ Feature: Grant view access for a file
     And The user upload "TestUpload.txt" without UI
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User1" email to field "#form_in_modal_username"
+    And Enter "User1" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the owner of this file"
@@ -159,7 +159,7 @@ Feature: Grant view access for a file
     And The user open Shared with me
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the viewer of this file"
@@ -171,9 +171,9 @@ Feature: Grant view access for a file
     And Register without UI user3
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2 and User3" email to field "#form_in_modal_username"
+    And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 11 Owner can not grand view access for a file if field "email" is empty
@@ -181,10 +181,10 @@ Feature: Grant view access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "nothing" email to field "#form_in_modal_username"
+    And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
-    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 12 Owner can not grand view access for a file if field "email" contain spaces
@@ -192,25 +192,20 @@ Feature: Grant view access for a file
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "spaces" email to field "#form_in_modal_username"
+    And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive TODO
-#  Scenario: 13 Owner can grand view access for a file if field "email" contain username
-#    And The user upload "TestUpload.txt" without UI
-#    When The user press the "Actions" button in "TestUpload.txt" "file"
-#    And The user press the "Share" button in "TestUpload.txt" "file"
-#    And Enter "UsernameUser2" email to field "#form_in_modal_username"
-#    And Choose the "View Only" option from pop-up window
-#    And Press "Confirm"
-#    And Spin is visible "Changing permissions..."
-#    When Message about transfer ownership "Permissions updated successfully"
-#    And Login as new user 2 without UI
-#    And The file "TestUpload.txt" is visible
-#    And Login as new user without UI
-#    And The user open Shared with me
-#    And Spin is visible "Getting data..."
-#    Then "User1" has Editors rights to "TestUpload.txt" "file"
+  @positive
+  Scenario: 13 Owner can grand view access for a file if field "email" contain username
+    And The user upload "TestUpload.txt" without UI
+    When The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Share" button in "TestUpload.txt" "file"
+    And Enter "UsernameUser2" email to field "#form_in_modal_email"
+    And Choose the "View Only" option from pop-up window
+    And Press "Confirm"
+    And Spin is visible "Changing permissions..."
+    When Message about transfer ownership "Permissions updated successfully"
+
 
 

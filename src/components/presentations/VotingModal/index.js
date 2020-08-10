@@ -179,7 +179,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         }}
                 disabled={state.variants.length < 2 || state.variants.length > 5 || (
                   current === 1 && state.date === null) || (current === 1 && state.time === null) || (
-                  current === 1 && prepareTime(state.date, state.time) * 1000 <= Date.now()) || (current === 3 && state.allUsers.length < 1)}
+                  current === 1 && prepareTime(state.date, state.time) * 1000 <= Date.now())}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
 
@@ -199,8 +199,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                         description: ''
                       }
                     )
-                    if (current === 3) setButtons({ ...buttons, next: "NEXT STEP" })
                     setCurrent(current - 3)
+                    setButtons({ ...buttons, next: "NEXT STEP", cancel: "CANCEL" })
                   }
                 }}>
           {buttons.next}
@@ -367,7 +367,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                                  setState({ ...state, excludeUsers })
                                  let newAllUsers = state.allUsers;
                                  newAllUsers.splice(i, 1)
-                                 setState({ ...state, allUsers: newAllUsers })
+                                 setState({ ...state, variants: newAllUsers })
                                }
                              }
                            }

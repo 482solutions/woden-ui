@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Table } from 'antd';
+import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
 import { Home } from '../../../pages/Home';
@@ -18,8 +18,7 @@ export class Voting extends Component {
   componentDidMount() {
     this.props.getVoting()
   }
-
-  prepareData() {
+  prepareData(){
     console.log(this.props.voting.data)
   }
 
@@ -51,21 +50,20 @@ export class Voting extends Component {
                     }}>Results</Button>)}
           />
           <Column className={"table-text"}
-                  title="Total votes"
-                  dataIndex="voters"
-                  key="voters"
-                  render={tags => (
-                    <>
-                      0/3
-                    </>
-                  )}
+            title="Total votes"
+            dataIndex="voters"
+            key="voters"
+            render={tags => (
+              <>
+                0/3
+              </>
+            )}
           />
         </Table>
       </>
     );
   }
 }
-
 export default connect(({ voting }) => ({
     voting: voting
   }),

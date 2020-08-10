@@ -314,7 +314,7 @@ export class Home extends React.Component {
                     <Col className='versionAuthor'>{version.user}</Col>
                     <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName);
+                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
