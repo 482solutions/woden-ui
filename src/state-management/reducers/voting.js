@@ -1,6 +1,7 @@
 import {
   GET_VOTING_DATA,
   SET_VOTING_DATA,
+  UPDATE_VOTING_DATA
 } from '../types';
 
 const initialState = {
@@ -16,8 +17,13 @@ const handleGetVoting = (state, votingData) => ({
   data: [...votingData]
 });
 
+const handleUpdateVoting = (state, voteData) => ({
+  data: [...voteData]
+});
+
 const handlers = {
   [SET_VOTING_DATA]: handleSetVoting,
+  [UPDATE_VOTING_DATA]: handleUpdateVoting,
   [GET_VOTING_DATA]: handleGetVoting,
 };
 

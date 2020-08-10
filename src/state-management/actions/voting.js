@@ -1,11 +1,10 @@
 import Woden from 'woden';
-import { message, Modal, Row } from 'antd';
+import { message } from 'antd';
 import { getTokenForHeader } from '../../utils/functions';
-import { CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA } from '../types';
+import { CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA, UPDATE_VOTING_DATA } from '../types';
 import '../../components/containers/Voting/style.css';
 import React from 'react';
-import votingLabel from '../../assets/images/successVoting.svg';
-import { VotingModalSuccess } from '../../components/containers/VotingModalSuccess/index.js';
+import { VotingModalSuccess } from '../../components/containers/VotingModalSuccess';
 
 const api = new Woden.VotingApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -78,10 +77,27 @@ export const getVotingData = () => async (dispatch) => {
           type: SET_VOTING_DATA,
           payload: response.body.response
         });
-        console.log("VOTING DATA:", votingData)
       }
     },
   );
 };
 
 
+export const vote = (voteData) => async (dispatch) => {
+  Bearer.apiKey = await getTokenForHeader();
+  message.loading('Vote...', 0);
+  const body = new Woden.Vote();
+  body.hash = voteData.votingHash;
+  body.variant = voteData.variant;
+  console.log(body)
+  api.updateVoting(body,
+    (error, data, response) => {
+      message.destroy();
+      if (error) {
+        message.error(response.body.message);
+      } else {
+        VotingModalSuccess('Congratulations!!', 'Your vote are in')
+        dispatch({ type: UPDATE_VOTING_DATA })
+      }
+    });
+};

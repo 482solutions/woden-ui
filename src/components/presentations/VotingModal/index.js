@@ -11,7 +11,6 @@ import {
   Row,
   Steps,
   TimePicker,
-  Typography,
 } from 'antd';
 import "./styles.css"
 import votingLabel from '../../../assets/images/votingFileLabel.svg'
@@ -26,7 +25,6 @@ const format = 'HH:mm';
 
 
 const { Search } = Input;
-const { Title } = Typography;
 const { Step } = Steps;
 const { TextArea } = Input;
 export const VotingModal = ({ visible, info, close, createVoting, }) => {
@@ -379,7 +377,6 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
           </Col>
         </Row>
       </div>)}
-      {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
     </Modal>
   );
 };

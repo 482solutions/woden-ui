@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
-import { VotingModal } from '../VotingModal/index.js';
-import { VotingResults } from '../VotingResults/index.js';
+import { VotingModal } from '../VotingModal';
+import { VotingResults } from '../VotingResults';
 
 import activeVoting from '../../../assets/images/activeVoting.svg';
 import closedVoting from '../../../assets/images/closedVoting.svg';
@@ -24,6 +24,7 @@ function summVotes(tags) {
 export const Voting = (props) => {
   const [voted, setVoted] = React.useState(false)
   const [btnText, setBtnText] = React.useState('Submit Your Vote'.toUpperCase())
+  const [vote, setVote] = useState('')
   useEffect(() => {
     props.getVoting();
   }, []);
@@ -37,7 +38,7 @@ export const Voting = (props) => {
 
   const handleClick = (option, record) => {
     // setVotingModal(record)
-    console.log(option === 'modal' ? VotingModal(record,[voted, setVoted], [btnText, setBtnText]) : VotingResults(record));
+    console.log(option === 'modal' ? VotingModal(record,[vote,  setVote], [voted, setVoted], [btnText, setBtnText], props.updateVoting) : VotingResults(record));
   };
 
   return (
@@ -90,6 +91,7 @@ export default connect(({ voting }) => ({
 }),
 {
   getVoting: actions.getVotingData,
+  updateVoting: actions.vote
 })(
   Voting,
 );

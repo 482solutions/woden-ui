@@ -450,6 +450,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
     updatePermission: actions.updatePermission,
     createVoting: actions.createVoting,
     getVoting: actions.getVotingData,
+    updateVoting: actions.vote,
   })(
   Home,
 );
