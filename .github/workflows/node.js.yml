@@ -32,6 +32,14 @@ jobs:
 #      - name: Run Cypress tests with Firefox
 #        run: npm run cy:run:firefox
 
+      - name: Cypress permissions tests
+        run: npm run cy:run:per
+
+      - name: Cypress authorization tests
+        run: npm run cy:run:auth
+
+      - name: Cypress navigations tests
+        run: npm run cy:run:nav
         #        run: npm run cypress:run:chrome
       #         uses: cypress-io/github-action@v2
 #         with:

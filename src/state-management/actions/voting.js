@@ -5,6 +5,7 @@ import { CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA } from '../types'
 import '../../components/containers/Voting/style.css';
 import React from 'react';
 import votingLabel from '../../assets/images/successVoting.svg';
+import { VotingModalSuccess } from '../../components/containers/VotingModalSuccess/index.js';
 
 const api = new Woden.VotingApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -26,20 +27,7 @@ export const createVoting = (votingData) => async (dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        const modal = Modal.success();
-        modal.update({
-          centered: true,
-          okText: 'CONTINUE',
-          icon: (<img className={"voting-success-image"} src={votingLabel} alt='add' title='add'/>),
-          content: (<div className={"modal-size"}>
-            <Row>
-              <h3 className={"voting-success-title"}>Done!</h3>
-            </Row>
-            <Row>
-              <h4 className={"voting-success-message"}>The voting becomes available</h4>
-            </Row>
-          </div>)
-        })
+        VotingModalSuccess('Done!', 'The voting becomes available')
         dispatch({ type: CREATE_VOTING })
       }
     });

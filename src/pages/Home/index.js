@@ -333,7 +333,7 @@ export class Home extends React.Component {
                     <Col className='versionAuthor'>{version.user}</Col>
                     <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
+                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
@@ -374,7 +374,8 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(this.props.userName) !== this.props.userName))
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(
+                            this.props.userName) !== this.props.userName))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({

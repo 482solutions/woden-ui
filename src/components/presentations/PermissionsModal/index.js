@@ -46,8 +46,7 @@ export const PermissionsModal = ({
                    rules={[
                      {
                        required: true,
-                       message: 'Please enter the username or email of the user to whom you want to transfer rights',
-                       pattern: /^[a-zA-Z0-9-_.@]{2,}$/g
+                       message: 'Please enter the username of the user to whom you want to transfer rights',
                      },
                    ]}>
           <Input style={{ width: 300 }} placeholder="User's Email"/>
