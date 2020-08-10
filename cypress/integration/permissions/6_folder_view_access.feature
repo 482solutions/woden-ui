@@ -204,15 +204,15 @@ Feature: Grant view access for a folder
     And Enter "spaces" email to field "#form_in_modal_email"
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-  @positive
-  Scenario: 12 Owner can grand view access for a folder if field "email" contain username
-    When The user press the "Actions" button in "testFolder" "folder"
-    And The user press the "Share" button in "testFolder" "folder"
-    And Enter "UsernameUser2" email to field "#form_in_modal_email"
-    And Choose the "View Only" option from pop-up window
-    And Press "Confirm"
-    And Spin is visible "Changing permissions..."
-    When Message about transfer ownership "Permissions updated successfully"
+#  @positive
+#  Scenario: 12 Owner can grand view access for a folder if field "email" contain username
+#    When The user press the "Actions" button in "testFolder" "folder"
+#    And The user press the "Share" button in "testFolder" "folder"
+#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
+#    And Choose the "View Only" option from pop-up window
+#    And Press "Confirm"
+#    And Spin is visible "Changing permissions..."
+#    When Message about transfer ownership "Permissions updated successfully"
 
   @positive
   Scenario: 13 Viewer can see files that were created in the shared folder after the transfer of viewing rights
