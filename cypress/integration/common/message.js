@@ -8,3 +8,7 @@ When(/^Message "([^"]*)"$/, (messageText) => {
       .should("contain.text", messageText)
   })
 });
+
+When(/^Info message "([^"]*)" is visible$/, (messageText) => {
+  cy.get('.ant-message-notice-content').should('contain.text', messageText)
+});

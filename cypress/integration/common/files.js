@@ -14,6 +14,7 @@ Then(/^The file "([^"]*)" is uploaded$/, (file) => {
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
     cy.wait('@getFolder').then((xhr) => {
+        cy.wait(5000)
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.uploadFile(fullFileName)
         cy.server()

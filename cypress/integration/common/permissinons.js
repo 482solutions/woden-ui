@@ -39,6 +39,9 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
       cy.server()
       cy.route('GET', '/api/v1/versions/*').as('getVersions');
       break;
+    case 'Start Voting':
+      action = 'Voting'
+      break;
   }
   switch (obj) {
     case 'folder':
@@ -98,10 +101,10 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
         toUser = Cypress.env('email_3');
         break;
     } switch (permission) {
-      case 'edit' || 'Editor':
+      case 'edit':
         permission = 'write';
         break;
-      case 'view' || 'Viewer':
+      case 'view':
         permission = 'read';
         break;
     } switch (object) {

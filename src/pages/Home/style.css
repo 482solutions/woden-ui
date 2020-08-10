@@ -1,17 +1,21 @@
 .container {
   display: flex;
-
 }
 
 .emptyHere {
   display: flex;
   justify-content: center;
   margin-top: 15%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .main {
   background: #F9FAFC;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .driveItem {
@@ -55,7 +59,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 510px;
+  min-width: 350px;
+  max-width: 350px;
   font-style: normal;
   padding: 24px;
   line-height: 40px;
@@ -78,14 +83,28 @@
   align-items: center;
   color: #3B7CFF;
 }
+
+.versionHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.versionItem {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .versionCode {
-  font-weight: normal;
   color: #333333;
 }
+
 .versionAuthor {
-  font-weight: 600;
   color: #AEB8C7;
-  /*margin-left: 0px;*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .versionDownload {
   cursor: pointer;

@@ -25,6 +25,7 @@ export class FoldersTree extends React.Component {
         treeData={tree}
         selectable={false}
         onClick={onSelect}
+        height={1000}
         icon={this.showIcon}
       />
     );

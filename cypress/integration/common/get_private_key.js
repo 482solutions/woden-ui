@@ -1,6 +1,6 @@
 import { Then } from "cypress-cucumber-preprocessor/steps";
 
-Then(/^The User got private key$/, async () => {
+Then(/^The User got private key$/,() => {
     cy.get('a[download]')
         .then((anchor) => (
             new Cypress.Promise((resolve) => {

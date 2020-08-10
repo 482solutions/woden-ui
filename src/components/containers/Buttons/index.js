@@ -67,7 +67,8 @@ class Buttons extends Component {
                 ? <span className="currentFolder">{this.props.folderData.folderName}</span>
                 : <span className="currentFolder">{this.props.mode === 'drive'
                   ? 'My Drive' : this.props.mode === 'share'
-                    ? 'Shared with me' : null}</span>
+                    ? 'Shared with me' : this.props.mode === 'voting'
+                    ? 'Voting' : null}</span>
             }
           </div>
         </div>

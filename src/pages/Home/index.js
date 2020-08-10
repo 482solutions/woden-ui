@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
-import { Buttons, Drive, Sidebar } from '../../components/containers';
-import { getRootFolderHash, detectUserPermission } from '../../utils/functions';
+import { Buttons, Drive, Sidebar, Voting } from '../../components/containers';
+import { getRootFolderHash } from '../../utils/functions';
+import { PermissionsModal, VotingModal } from '../../components/presentations';
 import { actions } from '../../state-management';
 import './style.css';
 import CloseIcon from '../../assets/images/closeIcon.svg';
@@ -11,13 +12,13 @@ import emptyHere from '../../assets/images/emptyHere.svg';
 import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
-import { PermissionsModal } from '../../components/presentations';
 
 
 export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      voting: false,
       fileWrapperVisible: false,
       accessListVisible: false,
       userPermission: 'null',
@@ -34,6 +35,7 @@ export class Home extends React.Component {
         fileHash: null,
       },
       shareModalVisible: false,
+      votingModalVisible: false,
       shareModalInfo: {
         title: null,
         hash: null,
@@ -43,6 +45,9 @@ export class Home extends React.Component {
         title: 'null',
         key: 'null',
         children: null,
+      },
+      votingModalInfo: {
+        fileData: {}
       },
       mode: 'drive',
     };
@@ -55,7 +60,10 @@ export class Home extends React.Component {
     this.closeFileWrapper = this.closeFileWrapper.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
-    this.changePermissions = this.changePermissions.bind(this);
+    this.votingModal = this.votingModal.bind(this);
+    this.closeVotingModal = this.closeVotingModal.bind(this),
+      this.changePermissions = this.changePermissions.bind(this);
+    this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
     this.viewAccessList = this.viewAccessList.bind(this);
@@ -65,9 +73,11 @@ export class Home extends React.Component {
   }
 
   async componentDidMount() {
-    this.props.initialFilesystem();
-    const hash = await getRootFolderHash();
-    this.props.getFolderData(hash, this.state.mode);
+    if (!this.state.voting) {
+      this.props.initialFilesystem();
+      const hash = await getRootFolderHash();
+      this.props.getFolderData(hash, this.state.mode);
+    }
   }
 
   async openFolder(hash) {
@@ -101,7 +111,8 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name, perm) {
-    if(perm === 'owner' || perm=== 'write' || perm === 'read') {
+    console.log(hash, cid, name, perm)
+    if (perm === 'owner' || perm === 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
   }
@@ -110,18 +121,28 @@ export class Home extends React.Component {
     this.props.changePermissions(data);
   }
 
+  createVoting(data) {
+    this.props.createVoting(data);
+  }
+
   revokePermissions(data) {
     this.props.revokePermissions(data);
   }
 
   async getVersions(hash, name) {
-    this.setState({ fileWrapperVisible: true });
+    if (this.state.accessListVisible === true) {
+      this.setState({ accessListVisible: false });
+      this.setState({ fileWrapperVisible: true });
+    } else this.setState({ fileWrapperVisible: true });
     this.setState({ wrapperInfo: { fileName: name, fileHash: hash } });
     await this.props.getVersions(hash);
   }
 
   async viewAccessList(hash, type) {
-    this.setState({ accessListVisible: true });
+    if (this.state.fileWrapperVisible === true) {
+      this.setState({ fileWrapperVisible: false });
+      this.setState({ accessListVisible: true });
+    } else this.setState({ accessListVisible: true });
     const infoArray = (type === 'file' ? this.props[this.state.mode].filesInfo : this.props[this.state.mode].foldersInfo);
     let info = {};
     for (let i = 0; i < infoArray.length; i++) {
@@ -153,6 +174,24 @@ export class Home extends React.Component {
     });
   }
 
+  votingModal(fileData) {
+    this.setState({ votingModalVisible: true });
+    this.setState({
+      votingModalInfo: {
+        fileData
+      },
+    });
+  }
+
+  closeVotingModal() {
+    this.setState({ votingModalVisible: false });
+    this.setState({
+      votingModalInfo: {
+        fileData: {}
+      },
+    });
+  }
+
   closeShareModal() {
     this.setState({ shareModalVisible: false });
     this.setState({
@@ -174,9 +213,16 @@ export class Home extends React.Component {
 
   async changeMode(mode) {
     if (mode !== this.state.mode) {
-      const hash = await getRootFolderHash();
-      this.props.getFolderData(hash, mode);
+      if (this.state.mode === 'voting') {
+        this.setState({ voting: false })
+      }
       this.setState({ mode });
+      if (mode === 'voting') {
+        this.setState({ voting: true })
+      } else {
+        const hash = await getRootFolderHash();
+        this.props.getFolderData(hash, mode);
+      }
     }
   }
 
@@ -190,14 +236,19 @@ export class Home extends React.Component {
 
   render() {
     const {
-      fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible,
-      shareModalInfo, mode,
+      fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible, votingModalVisible,
+      shareModalInfo, votingModalInfo, mode,
     } = this.state;
-    const { permissions,userName, versions } = this.props;
+    const { permissions, userName, versions } = this.props;
     return (
       <div className="container flex-direction-row">
-        <PermissionsModal visible={shareModalVisible} info={shareModalInfo}
-                          close={this.closeShareModal} changePermissions={this.changePermissions}/>
+        <PermissionsModal visible={shareModalVisible}
+                          info={shareModalInfo}
+                          close={this.closeShareModal}
+                          changePermissions={this.changePermissions}
+                          permission={this.state.userPermission}/>
+        <VotingModal key='VotingModal' visible={votingModalVisible} info={votingModalInfo}
+                     close={this.closeVotingModal} createVoting={this.createVoting}/>
         <div>
           <Sidebar changeMode={this.changeMode}
                    getFoldersTree={this.getFoldersTree}
@@ -205,41 +256,43 @@ export class Home extends React.Component {
                    tree={this.props.tree}/>
         </div>
         <div className="main flex-direction-column w100">
-          <Buttons newFolder={this.createFolder}
-                   uploadFile={this.uploadFile}
-                   getFolderData={this.openFolder}
-                   getPermission={this.getPermission}
-                   mode={mode}
-                   folderData={this.props[mode]}
-                   folderHash={this.state.folderHash}
-                   userPermission={this.state.userPermission}
-                   username={this.props.userName}/>
-          {this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
-            ? <div className="emptyHere">
-              <img src={emptyHere} alt=""/>
-            </div>
-            : <div className="flex-start ff-rw">
-              <Drive folderData={this.props[mode]}
-                     username={this.props.userName}
-                     updateFile={this.updateFile}
-                     shareModal={this.shareModal}
-                     openFolder={this.openFolder}
-                     getVersions={this.getVersions}
-                     downloadFile={this.downloadFile}
-                     viewAccessList={this.viewAccessList}
-                     getPermission={this.getPermission}/>
-            </div>
-          }
+          {!this.state.voting && (<Buttons newFolder={this.createFolder}
+                                           uploadFile={this.uploadFile}
+                                           getFolderData={this.openFolder}
+                                           getPermission={this.getPermission}
+                                           mode={mode}
+                                           folderData={this.props[mode]}
+                                           folderHash={this.state.folderHash}
+                                           userPermission={this.state.userPermission}
+                                           username={this.props.userName}/>)}
+          {!this.state.voting && (this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
+              ? <div className="emptyHere">
+                <img src={emptyHere} alt=""/>
+              </div>
+              : <div className="flex-start ff-rw">
+                <Drive folderData={this.props[mode]}
+                       username={this.props.userName}
+                       updateFile={this.updateFile}
+                       shareModal={this.shareModal}
+                       votingModal={this.votingModal}
+                       openFolder={this.openFolder}
+                       getVersions={this.getVersions}
+                       downloadFile={this.downloadFile}
+                       viewAccessList={this.viewAccessList}
+                       getPermission={this.getPermission}/>
+              </div>
+          )}
+          {this.state.voting && (<Voting/>)}
         </div>
         {
           fileWrapperVisible && <div id='VersionWrapper'
                                      className="fileInfoWrapper">
-            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}>
-              <Col className='infoTitle' span={20}>{wrapperInfo.fileName}</Col>
-              <Col id='CloseVersionsWrapper' className='closeButton' span={3} offset={1}>
+            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }} className="versionHeader">
+              <span className='infoTitle'>{wrapperInfo.fileName}</span>
+              <div id='CloseVersionsWrapper' className='closeButton'>
                 <img onClick={this.closeFileWrapper} alt='Close' title='Close info'
                      src={CloseIcon}/>
-              </Col>
+              </div>
             </Row>
             <Row style={{ width: '100%' }}>
               <Col span={10} className='infoColumnTitle'>Versions</Col>
@@ -255,17 +308,15 @@ export class Home extends React.Component {
                   minute: '2-digit',
                 });
                 return (
-                  <Row key={version.cid} style={{ width: '100%' }}>
+                  <Row key={version.cid} style={{ width: '100%' }} className="versionItem">
                     <span id={`CID_${version.cid}`} style={{ display: 'none' }}>{version.cid}</span>
-                    <Col span={10} className='versionCode'><span
+                    <Col className='versionCode'><span
                       id={`Time_${version.cid}`}>{time}</span></Col>
-                    <Col offset={1} span={10} className='versionAuthor'>{version.user}</Col>
-                    <Col span={3} className='versionDownload'>
-                      <img
-                        id={`Download_${version.cid}`}
-                        onClick={() => {
-                          this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission)}}
-                        src={DownloadIcon} alt="Download" title='Download this version'/>
+                    <Col className='versionAuthor'>{version.user}</Col>
+                    <Col className='versionDownload'>
+                      <img id={`Download_${version.cid}`} onClick={() => {
+                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
+                      }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
                 );
@@ -305,7 +356,7 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(this.props.userName) !== this.props.userName))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({
@@ -356,27 +407,30 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem, permissions }) => ({
-  userName: auth.user.name,
-  versions: filesystem.versions,
-  drive: filesystem.drive,
-  share: filesystem.share,
-  tree: filesystem.tree,
-  permissions,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  initialFilesystem: actions.initialFilesystem,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-  revokePermissions: actions.revokePermissions,
-  getFoldersTree: actions.getFoldersTree,
-  updateFolderData: actions.updateFolderData,
-  updatePermission: actions.updatePermission,
-})(
+    userName: auth.user.name,
+    versions: filesystem.versions,
+    drive: filesystem.drive,
+    share: filesystem.share,
+    voting: filesystem.voting,
+    tree: filesystem.tree,
+    permissions,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    initialFilesystem: actions.initialFilesystem,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+    revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
+    updateFolderData: actions.updateFolderData,
+    updatePermission: actions.updatePermission,
+    createVoting: actions.createVoting,
+    getVoting: actions.getVotingData,
+  })(
   Home,
 );

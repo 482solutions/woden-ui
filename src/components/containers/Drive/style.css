@@ -2,13 +2,18 @@
   margin-right: 5px;
 }
 
-.emptyHere {
-}
-
 .emptyHereImage {
   margin: 0 auto;
 }
 
 .driveItem {
   margin-top: 15px;
+}
+
+.folder, .file {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
