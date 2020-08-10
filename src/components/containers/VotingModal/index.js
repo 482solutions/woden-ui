@@ -39,6 +39,7 @@ export const VotingModal = ({
       centered={true}
       closeIcon={<p className="close-icon" onClick={() => {
         setOpenModal(false);
+        setBtnText(initialBtnText);
       }}>X</p>}
       footer={[
         <div style={{ marginTop: '20px' }}></div>,
