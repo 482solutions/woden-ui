@@ -198,6 +198,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                       }
                     )
                     setCurrent(current - 3)
+                    setButtons({ ...buttons, next: "NEXT STEP", cancel: "CANCEL" })
                   }
                 }}>
           {buttons.next}

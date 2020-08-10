@@ -17,7 +17,7 @@ Feature: Grant view access for a folder
   Scenario: 1 View access by owner
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -36,7 +36,7 @@ Feature: Grant view access for a folder
   Scenario: 2 View access by editor
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -49,7 +49,7 @@ Feature: Grant view access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Choose the "View Only" option from pop-up window
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
@@ -73,7 +73,7 @@ Feature: Grant view access for a folder
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -98,7 +98,7 @@ Feature: Grant view access for a folder
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -114,7 +114,7 @@ Feature: Grant view access for a folder
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -133,7 +133,7 @@ Feature: Grant view access for a folder
   Scenario: 5 Owner can not grand view access for a folder to the user with incorrect email
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
+    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Error message "User for sharing not found"
@@ -142,14 +142,14 @@ Feature: Grant view access for a folder
   Scenario: 6 Owner can not grand view access for a folder to the user if he already has them
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the viewer of this file"
@@ -158,7 +158,7 @@ Feature: Grant view access for a folder
   Scenario: 7 Owner can not grand view access for a folder to himself
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User1" email to field "#form_in_modal_username"
+    And Enter "User1" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the owner of this file"
@@ -167,7 +167,7 @@ Feature: Grant view access for a folder
   Scenario: 8 Viewer can not grand view access for a folder to himself
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -184,49 +184,42 @@ Feature: Grant view access for a folder
     And Register without UI user3
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2 and User3" email to field "#form_in_modal_username"
+    And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 10 Owner can not grand view access for a folder if field "email" is empty
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "nothing" email to field "#form_in_modal_username"
+    And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
-    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 11 Owner can not grand view access for a folder if field "email" contain spaces
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "spaces" email to field "#form_in_modal_username"
-    And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    And Enter "spaces" email to field "#form_in_modal_email"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive TODO
-#  Scenario: 12 Owner can not grand view access for a folder if field "email" contain username
+#  @positive
+#  Scenario: 12 Owner can grand view access for a folder if field "email" contain username
 #    When The user press the "Actions" button in "testFolder" "folder"
 #    And The user press the "Share" button in "testFolder" "folder"
-#    And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
 #    And Choose the "View Only" option from pop-up window
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
 #    When Message about transfer ownership "Permissions updated successfully"
-#    And Login as new user 2 without UI
-#    And The folder "testFolder" is visible
-#    And Login as new user without UI
-#    And The user open Shared with me
-#    And Spin is visible "Getting data..."
-#    Then "User1" has Editors rights to "testFolder" "folder"
 
   @positive
   Scenario: 13 Viewer can see files that were created in the shared folder after the transfer of viewing rights
     Given The user 1 is the owner of the folder "testFolder"
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."

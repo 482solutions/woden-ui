@@ -30,7 +30,7 @@ class Sidebar extends Component {
 
         </div>
         <div onClick={() => this.props.changeMode('voting')}
-             className="sideBarMode shared">
+             className="sideBarMode voting">
           <img src={Voting} alt="Voting"
                title="Voting"/>Voting
         </div>
