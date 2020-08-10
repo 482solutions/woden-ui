@@ -134,6 +134,7 @@ Feature: Transfer folder ownership
       And Spin is visible "Getting data..."
       When The user press the "Actions" button in "Folder1" "folder"
       And The user press the "Share" button in "Folder1" "folder"
+      And Enter "User2" email to field "#form_in_modal_email"
       And Choose the "Transfer ownership" option from pop-up window
       And Press "Confirm"
       And Spin is visible "Changing permissions..."
