@@ -9,7 +9,7 @@ export function VotingModalSuccess(title, message) {
     okText: 'Continue'.toUpperCase(),
     icon: (<img className={'voting-success-image'} src={votingLabel} alt='add' title='add'/>),
     content: (<div className={'modal-size'}>
-                <Row>
+                <Row style={{ justifyContent: 'center' }}>
                     <h3 className={'voting-success-title'}>{title}</h3>
                 </Row>
                 <Row>

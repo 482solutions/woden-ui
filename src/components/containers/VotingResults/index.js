@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Row, Progress } from 'antd';
 
 import fileIcon from '../../../assets/images/votingFileLabel.svg';
@@ -7,8 +7,9 @@ import './style.css';
 
 export function VotingResults(vote) {
   const {
-    variants, votingName, voters, versionTime, votingHash,
+    variants, votingName, voters, versionTime,
   } = vote;
+
   const colors = ['#6FCF97', '#56CCF2', '#3B7CFF', '#FB8832', '#BA33FA'];
 
   const votingResultsForEach = [];
@@ -18,15 +19,17 @@ export function VotingResults(vote) {
   });
 
   for (let i = 0; i < voters.length; i++) {
-    const k = votingResultsForEach[i].key;
-    let val = votingResultsForEach[i].value;
-    if (voters.vote == k) {
-      val = val++;
+    for (let j = 0; j < variants.length; j++) {
+      const k = votingResultsForEach[j].key;
+      const val = votingResultsForEach[j].value;
+      if (voters[i].vote == k) {
+        votingResultsForEach[j].value = val + 1;
+      }
     }
   }
 
   const countPercent = (index) => (votingResultsForEach[index].value !== 0
-    ? voters.length / votingResultsForEach[index].value * 100 : 0);
+    ? (voters.length / votingResultsForEach[index].value) * 100 : 0);
 
   const modal = Modal.info();
   modal.update({

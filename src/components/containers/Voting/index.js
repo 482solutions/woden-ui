@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
-import { VotingModal } from '../VotingModal';
-import { VotingResults } from '../VotingResults';
+import { VotingModal } from '../VotingModal/index';
+import { VotingResults } from '../VotingResults/index';
 
 import activeVoting from '../../../assets/images/activeVoting.svg';
 import closedVoting from '../../../assets/images/closedVoting.svg';
@@ -22,9 +22,9 @@ function summVotes(tags) {
 }
 
 export const Voting = (props) => {
-  const [voted, setVoted] = React.useState(false)
-  const [btnText, setBtnText] = React.useState('Submit Your Vote'.toUpperCase())
-  const [vote, setVote] = useState('')
+  const [openModal, setOpenModal] = useState(false);
+  const [record, setRecord] = useState({});
+
   useEffect(() => {
     props.getVoting();
   }, []);
@@ -36,9 +36,11 @@ export const Voting = (props) => {
     newData.push(item);
   }
 
-  const handleClick = (option, record) => {
-    // setVotingModal(record)
-    console.log(option === 'modal' ? VotingModal(record,[vote,  setVote], [voted, setVoted], [btnText, setBtnText], props.updateVoting) : VotingResults(record));
+  const handleClick = (option, inRecord) => {
+    if (option === 'modal') {
+      setOpenModal(true);
+      setRecord(inRecord);
+    } else VotingResults(inRecord);
   };
 
   return (
@@ -62,15 +64,16 @@ export const Voting = (props) => {
                   title="Actions"
                   dataIndex="status"
                   key="status"
-                  render={(text, record) => (
-                    record.status
+                  render={(text, voteObj) => (
+                    voteObj.status
                       ? <Button className='button-style-vote' onClick={() => {
-                        handleClick('modal', record);
+                        handleClick('modal', voteObj);
                       }}>Vote</Button>
                       : <Button className='button-style-result' onClick={() => {
-                        handleClick('result', record);
+                        handleClick('result', voteObj);
                       }}>Results</Button>
-                  )}
+                  )
+                  }
           />
           <Column className={'table-text'}
                   title="Total votes"
@@ -81,7 +84,7 @@ export const Voting = (props) => {
                   )}
           />
         </Table>
-        {/*{votingModal && <VotingModal {...votingModal}/>}*/}
+        <VotingModal openModal={openModal} setOpenModal={setOpenModal} record={record} updateVoting={props.updateVoting} />;
       </div>
   );
 };
@@ -91,7 +94,7 @@ export default connect(({ voting }) => ({
 }),
 {
   getVoting: actions.getVotingData,
-  updateVoting: actions.vote
+  updateVoting: actions.vote,
 })(
   Voting,
 );
