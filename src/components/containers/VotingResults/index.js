@@ -29,7 +29,7 @@ export function VotingResults(vote) {
   }
 
   const countPercent = (index) => (votingResultsForEach[index].value !== 0
-    ? (voters.length / votingResultsForEach[index].value) * 100 : 0);
+    ? (votingResultsForEach[index].value / voters.length) * 100 : 0);
 
   const modal = Modal.info();
   modal.update({
