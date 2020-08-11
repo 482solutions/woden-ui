@@ -44,12 +44,12 @@ beforeAll(() => {
   fakeFiles = [
     {
       name: 'file1.txt',
-      hash: '85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e',
+      hash: 'QmVBLeoaAkDsQfYCawFJbvEs2fwUBsCMjpKA8ELdaTC7oC',
       versions: [{ cid: 'QmRxjZDSaMdKTuGDrXYGVdzK2HHpH36K2pBoEoDunTxoTY', time: 1590657618000 }],
     },
     {
       name: 'file2.txt',
-      hash: '85f42f73d72f9c2f3a414551e9f2bb6acc6d242df3f5e6750e6a57368b78b38e',
+      hash: 'QmbyswsHbp3UtziX8FsAdxS1Mgmi75FeT8D7Et9vhkinSM',
       versions: [{ cid: 'QmeUcNsfqve3d9QVNieqHjbEWk6CqtqwAixkg3ecFVKtH5', time: 1590657000000 }],
     },
   ];
@@ -109,8 +109,8 @@ it('Simulate click on Context Menu', () => {
     filesInfo: fakeFilesInfo,
     foldersInfo: fakeFoldersInfo,
   }}/>);
-  expect(wrapper.find(`#Actions_${fakeFiles[0].hash}`)).to.be.ok;
-   expect(wrapper.find(`#Actions_${fakeFiles[1].hash}`)).to.be.ok;
+  expect(wrapper.find(`#Actions_${fakeFiles[0].hash}`).simulate('click')).to.be.ok;
+  expect(wrapper.find(`#Actions_${fakeFiles[1].hash}`).simulate('click')).to.be.ok;
 });
 it('Simulate double click on Files for download', () => {
   const wrapper = shallow(<Drive folderData={{

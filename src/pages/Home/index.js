@@ -63,7 +63,7 @@ export class Home extends React.Component {
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
     this.votingModal = this.votingModal.bind(this);
-    this.closeVotingModal = this.closeVotingModal.bind(this);
+    this.closeVotingModal = this.closeVotingModal.bind(this),
     this.changePermissions = this.changePermissions.bind(this);
     this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
@@ -304,8 +304,7 @@ export class Home extends React.Component {
         {
           fileWrapperVisible && <div id='VersionWrapper'
                                      className="fileInfoWrapper">
-            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}
-                 className="versionHeader">
+            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }} className="versionHeader">
               <span className='infoTitle'>{wrapperInfo.fileName}</span>
               <div id='CloseVersionsWrapper' className='closeButton'>
                 <img onClick={this.closeFileWrapper} alt='Close' title='Close info'
@@ -333,7 +332,7 @@ export class Home extends React.Component {
                     <Col className='versionAuthor'>{version.user}</Col>
                     <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName);
+                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>

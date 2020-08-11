@@ -106,8 +106,3 @@ Feature:  View open voting
     When The user open Voting tab
     Then The list of available voting is displayed
     And Voting for a file "test1.txt" is visible
-
-
-
-
-
