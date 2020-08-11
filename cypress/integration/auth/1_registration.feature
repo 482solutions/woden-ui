@@ -34,17 +34,17 @@ Feature: Registration
     And The User got private key
     And The User got certificate in pem format
 
-  @positive
-  Scenario: 3 Username can contain 20 lowercase letters
-    Given User username field that contains 20 lowercase letters
-    And fills in the email field
-    And fills in the password and confirm password field that contain 8 characters
-    And the data is valid
-    When The user press Sign up button
-    And Spin is visible "Registration..."
-    Then User is registered
-    And The User got private key
-    And The User got certificate in pem format
+#  @positive
+#  Scenario: 3 Username can contain 20 lowercase letters
+#    Given User username field that contains 20 lowercase letters
+#    And fills in the email field
+#    And fills in the password and confirm password field that contain 8 characters
+#    And the data is valid
+#    When The user press Sign up button
+#    And Spin is visible "Registration..."
+#    Then User is registered
+#    And The User got private key
+#    And The User got certificate in pem format
 
   @positive
   Scenario: 4 Username can contain 20 uppercase letters
