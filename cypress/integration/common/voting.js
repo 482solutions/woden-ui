@@ -169,6 +169,7 @@ Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
     .children('.revokeAccess')
     .click()
 });
+
 When(/^The user open Voting tab$/, () => {
   cy.wait(2000)
   cy.server()
@@ -190,3 +191,4 @@ Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
 Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
   cy.get('.ant-table-cell.table-text').contains(file).should('not.exist');
 });
+
