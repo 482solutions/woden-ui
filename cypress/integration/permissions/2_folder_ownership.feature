@@ -107,22 +107,22 @@ Feature: Transfer folder ownership
     And Choose the "Transfer ownership" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#    @positive
-#    Scenario: 8 User can transfer folder ownership if field "email" contain username
-#      Given The user 1 is the owner of the folder "Folder1"
-#      When The user press the "Actions" button in "Folder1" "folder"
-#      And The user press the "Share" button in "Folder1" "folder"
-#      And Enter "UsernameUser2" email to field "#form_in_modal_email"
-#      And Choose the "Transfer ownership" option from pop-up window
-#      And Press "Confirm"
-#      And Spin is visible "Changing permissions..."
-#      When Message about transfer ownership "Permissions updated successfully"
-#      And Login as new user 2 without UI
-#      And The folder "Folder1" is visible
-#      And Login as new user without UI
-#      And The user open Shared with me
-#      And Spin is visible "Getting data..."
-#      Then "User1" has Editors rights to "Folder1" "folder"
+    @positive
+    Scenario: 8 User can transfer folder ownership if field "email" contain username
+      Given The user 1 is the owner of the folder "Folder1"
+      When The user press the "Actions" button in "Folder1" "folder"
+      And The user press the "Share" button in "Folder1" "folder"
+      And Enter "UsernameUser2" email to field "#form_in_modal_email"
+      And Choose the "Transfer ownership" option from pop-up window
+      And Press "Confirm"
+      And Spin is visible "Changing permissions..."
+      When Message about transfer ownership "Permissions updated successfully"
+      And Login as new user 2 without UI
+      And The folder "Folder1" is visible
+      And Login as new user without UI
+      And The user open Shared with me
+      And Spin is visible "Getting data..."
+      Then "User1" has Editors rights to "Folder1" "folder"
 
     @positive
     Scenario: 9 User can transfer folder ownership with files in folder

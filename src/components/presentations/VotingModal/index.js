@@ -383,8 +383,4 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
     </Modal>
   );
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> origin/feature/WGRND-689
