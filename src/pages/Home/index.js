@@ -111,6 +111,7 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name, perm) {
+    console.log(hash, cid, name, perm)
     if (perm === 'owner' || perm === 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }

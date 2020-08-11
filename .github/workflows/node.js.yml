@@ -29,26 +29,22 @@ jobs:
       - run: npm run start -d & sleep 40
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
-      - uses: actions/upload-artifact@v2
-        with:
-          name: cypress-screenshots
-          path: "cypress/screenshots/"
       - run: npm run coverage
-      - name: Display structure of downloaded files
-        run: ls -R
+#      - name: Run Cypress tests with Firefox
+#        run: npm run cy:run:firefox
 
-          #      - name: Run Cypress tests with Firefox
-          #        run: npm run cy:run:firefox
+        #        run: npm run cypress:run:chrome
+      #         uses: cypress-io/github-action@v2
+#         with:
+#           wait-on-timeout: 80
+#           wait-on: 'http://localhost:3000'
+#           record: true
+#           parallel: true
+#           group: 'Actions'
+#           spec: "cypress/integration/*/*.feature"
+#         env:
+#           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+#           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
 
-          #        run: npm run cypress:run:chrome
-          #         uses: cypress-io/github-action@v2
-          #         with:
-          #           wait-on-timeout: 80
-          #           wait-on: 'http://localhost:3000'
-          #           record: true
-          #           parallel: true
-          #           group: 'Actions'
-          #           spec: "cypress/integration/*/*.feature"
-          #         env:
-          #           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        #           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
+
+
