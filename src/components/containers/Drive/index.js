@@ -72,10 +72,10 @@ export default class Drive extends Component {
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`3${hash}`} onClick={async () => {
-          await this.props.viewAccessList(hash, 'file');
-        }}>
-          <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
+        <Menu.Item key={`4${hash}`}>
+          <span id={`Permissions_${hash}`} onClick={async() => {
+            await this.props.viewAccessList(hash, 'file');
+          }}><img className="dropdownIcon" src={accessListIcon} alt=""/>Access list</span>
         </Menu.Item>
       </Menu>
     );
