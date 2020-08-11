@@ -12,11 +12,6 @@ jobs:
         node-version: [10.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v2-preview
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: "cypress/screenshots/"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -34,8 +29,11 @@ jobs:
       - run: npm run start -d & sleep 40
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cypress-screenshots
+          path: "cypress/screenshots/"
       - run: npm run coverage
-
       - name: Display structure of downloaded files
         run: ls -R
 
@@ -53,4 +51,4 @@ jobs:
           #           spec: "cypress/integration/*/*.feature"
           #         env:
           #           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          #           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
+        #           GITHUB_TOKEN: ${{ secrets.WODEN_TOKEN }}
