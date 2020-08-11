@@ -1,0 +1,43 @@
+.voting-success-title{
+  width: 55px;
+  height: 28px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 150px;
+  line-height: 28px;
+  text-align: center;
+  color: #56CCF2;
+}
+.voting-success-message{
+  font-style: normal;
+  font-size: 12px;
+  text-align: center;
+  width: 224px;
+  margin-left: 70px;
+  font-family: Montserrat;
+  color: #8998AC;
+}
+.voting-success-image{
+  margin-left: 125px;
+}
+.table-text{
+  position: absolute;
+  width: 181px;
+  left: 54px;
+  top: 32.73%;
+  bottom: 32.73%;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13.8357px;
+  line-height: 20px;
+  /* or 143% */
+
+  letter-spacing: -0.0494132px;
+
+  color: #8998AC;
+}

@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -27,18 +27,11 @@ jobs:
       - run: cd woden-server-js && docker-compose up --build -d
       - run: cd ..
       - run: npm run start -d & sleep 40
+      - name: Run Cypress tests with Chrome
+        run: npm run cy:run:chrome
+#      - name: Run Cypress tests with Firefox
+#        run: npm run cy:run:firefox
 
-      - name: Cypress CRU tests
-        run: npm run cy:run:cru
-
-      - name: Cypress permissions tests
-        run: npm run cy:run:per
-
-      - name: Cypress authorization tests
-        run: npm run cy:run:auth
-
-      - name: Cypress navigations tests
-        run: npm run cy:run:nav
         #        run: npm run cypress:run:chrome
       #         uses: cypress-io/github-action@v2
 #         with:

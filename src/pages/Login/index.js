@@ -30,7 +30,7 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div className="login flex-direction-column flex-center">
+      <div className="login">
         <div className="loginBox">
           <div className="loginBlock BGBlue flex-direction-column flex-center" id='LoginImage'>
             <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>

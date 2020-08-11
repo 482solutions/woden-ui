@@ -39,6 +39,9 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
       cy.server()
       cy.route('GET', '/api/v1/versions/*').as('getVersions');
       break;
+    case 'Start Voting':
+      action = 'Voting'
+      break;
   }
   switch (obj) {
     case 'folder':

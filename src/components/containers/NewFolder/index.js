@@ -42,7 +42,7 @@ const NewFolder = (props) => {
           <Form.Item
             name="newFolder"
             rules={[{ required: true, message: 'Please input name for new folder' }]}>
-            <Input className='formItem inputItem' id='FolderNameField' placeholder="Folder Name"/>
+            <Input className='formItem inputItem' id='FolderNameField' placeholder="Folder Name" autoFocus/>
           </Form.Item>
           <Form.Item className='formItem buttonItem'>
             <div className='flex-start'>

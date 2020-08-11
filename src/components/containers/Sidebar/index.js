@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Share from '../../../assets/images/Share.svg';
+import Voting from '../../../assets/images/votingSidebar.svg';
 import folderImage from '../../../assets/images/folderImage.svg';
 import switcherIconRight from '../../../assets/images/switcherIconRight.svg';
 import FolderTree from '../../presentations/FoldersTree';
@@ -20,12 +21,19 @@ class Sidebar extends Component {
             </div>
           </div>
           <FolderTree tree={this.props.tree}
-                      openFolder={this.props.openFolder}/>
+                      openFolder={this.props.openFolder}
+                      className="foldersTree"/>
           <div onClick={() => this.props.changeMode('share')}
                className="sideBarMode shared">
             <img src={Share} alt="Share"
                  title="Share"/>Shared with me
           </div>
+
+        </div>
+        <div onClick={() => this.props.changeMode('voting')}
+             className="sideBarMode voting">
+          <img src={Voting} alt="Voting"
+               title="Voting"/>Voting
         </div>
       </div>
     );

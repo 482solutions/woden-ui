@@ -1,6 +1,6 @@
 import Woden from 'woden';
 import download from 'downloadjs';
-import axios from 'axios'
+import axios from 'axios';
 import { message } from 'antd';
 import {
   CLEAN_STORAGE,
