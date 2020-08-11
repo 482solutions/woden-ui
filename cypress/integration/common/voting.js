@@ -152,3 +152,20 @@ When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
 Then(/^Count of variants (.*)$/, (count) => {
   cy.get('.variants').should('have.length', count)
 });
+Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
+  switch (user) {
+    case 'User2':
+      user = Cypress.env('login_2');
+      break;
+    case 'User3':
+      user = Cypress.env('login_3');
+      break;
+  }
+  cy.get('.sharedUser')
+    .children('.sharedUserName')
+    .contains(user)
+    .parent()
+    .parent()
+    .children('.revokeAccess')
+    .click()
+});

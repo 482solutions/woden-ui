@@ -41,3 +41,28 @@
 
   color: #8998AC;
 }
+
+.button-style-result {
+  height: 30px;
+  width: 103px;
+  background: rgba(59, 124, 255, 0.8);
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.button-style-vote {
+  height: 30px;
+  width: 103px;
+  background: #56CCF2;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
