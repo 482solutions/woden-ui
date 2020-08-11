@@ -53,7 +53,7 @@ export const Voting = (props) => {
   };
 
   return (
-      <div className='votingContainer' style={{ width: '1280px' }}>
+      <div className='votingContainer'>
         <Table rowKey={newData.index} tableLayout={'auto'} dataSource={newData}>
           <Column colSpan="1" width={'50px'} className={'table-text'} title="#"
                   dataIndex="index" key="index"/>
