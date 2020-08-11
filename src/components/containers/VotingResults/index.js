@@ -12,6 +12,8 @@ export function VotingResults(vote) {
 
   const colors = ['#6FCF97', '#56CCF2', '#3B7CFF', '#FB8832', '#BA33FA'];
 
+  const totalVoted = () => voters.reduce((acc, tag) => (tag.vote ? acc + 1 : acc), 0);
+
   const votingResultsForEach = [];
   variants.forEach((v) => {
     const obj = { key: v, value: 0 };
@@ -22,14 +24,14 @@ export function VotingResults(vote) {
     for (let j = 0; j < variants.length; j++) {
       const k = votingResultsForEach[j].key;
       const val = votingResultsForEach[j].value;
-      if (voters[i].vote == k) {
+      if (voters[i].vote === k) {
         votingResultsForEach[j].value = val + 1;
       }
     }
   }
 
   const countPercent = (index) => (votingResultsForEach[index].value !== 0
-    ? (votingResultsForEach[index].value / voters.length) * 100 : 0);
+    ? (votingResultsForEach[index].value / totalVoted()) * 100 : 0);
 
   const modal = Modal.info();
   modal.update({
@@ -46,7 +48,7 @@ export function VotingResults(vote) {
             </div>
             <div>
                 <p className="voting-results">Voting results</p>
-                <p className="voting-results-number">{voters.reduce((acc, tag) => (tag.vote ? acc + 1 : acc), 0)} / {voters.length}</p>
+                <p className="voting-results-number">{totalVoted()} / {voters.length}</p>
             </div>
         </Row>
             {

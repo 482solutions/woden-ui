@@ -29,7 +29,7 @@ class Sidebar extends Component {
           </div>
 
         </div>
-        <div onClick={() => this.props.changeMode('voting')}
+        <div style={{ alignItems: 'center' }} onClick={() => this.props.changeMode('voting')}
              className="sideBarMode shared">
           <img src={Voting} alt="Voting"
                title="Voting"/>Voting

@@ -9,7 +9,7 @@ export const VotingModal = ({
   record, updateVoting, setOpenModal, openModal,
 }) => {
   const {
-    variants, votingName, versionTime, votingHash,
+    variants, votingName, versionTime, votingHash, description,
   } = record;
 
   const initialBtnText = 'Submit Your Vote'.toUpperCase();
@@ -53,6 +53,7 @@ export const VotingModal = ({
           <div className={'voting-file-container'}>
             <h4 className={'voting-file-name'}>{votingName || 0}</h4>
             <p className={'voting-file-date'}>{versionTime || 0}</p>
+            <p style={{ width: '200px' }} className={'voting-file-date'}>{description || ''}</p>
           </div>
         </Row>
         {variants
