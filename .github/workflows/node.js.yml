@@ -12,6 +12,9 @@ jobs:
         node-version: [10.x]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: 'my-artifact'
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -30,11 +33,9 @@ jobs:
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
       - run: npm run coverage
-      - uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
+
       - name: Display structure of downloaded files
-          run: ls -R
+        run: ls -R
 
           #      - name: Run Cypress tests with Firefox
           #        run: npm run cy:run:firefox
