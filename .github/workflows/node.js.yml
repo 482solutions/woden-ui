@@ -12,9 +12,11 @@ jobs:
         node-version: [10.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+      - uses: actions/upload-artifact@v2-preview
+        if: failure()
         with:
-          name: 'my-artifact'
+          name: cypress-screenshots
+          path: "cypress/screenshots/"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
