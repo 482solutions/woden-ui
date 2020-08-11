@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
 // import { VotingModal } from '../VotingModal/index';
 // import { VotingResults } from '../VotingResults/index';
+
 import activeVoting from '../../../assets/images/activeVoting.svg';
 import closedVoting from '../../../assets/images/closedVoting.svg';
-
 
 const { Column } = Table;
 
@@ -88,7 +88,6 @@ export const Voting = (props) => {
       </div>
   );
 };
-
 
 export default connect(({ voting }) => ({
   voting,
