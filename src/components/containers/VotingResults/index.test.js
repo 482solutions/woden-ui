@@ -31,4 +31,6 @@ const mockData = {
   ],
 };
 
-it('Render without crashing', () => {});
+it('Render without crashing', () => {
+  expect(VotingResults(mockData)).to.equal(undefined);
+});

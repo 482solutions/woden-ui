@@ -16,6 +16,7 @@ export const VotingModal = ({
 
   const [vote, setVote] = useState(null);
   const [btnText, setBtnText] = useState(initialBtnText);
+  const [disableBtn, setDisableBtn] = useState(true);
 
   const handleClick = (variant) => {
     setBtnText((`Vote For: ${variant}`).toUpperCase());
@@ -57,12 +58,15 @@ export const VotingModal = ({
           </div>
         </Row>
         {variants
-          ? variants.map((variant) => <Row className="button-row" key={variant.index}><Button
-          className="voting-button" key={variant.index}
-          onClick={() => handleClick(variant)}>{variant}</Button></Row>)
+          ? variants.map((variant, index) => <Row className="button-row" key={index}><Button
+          className="voting-button" key={index}
+          onClick={() => {
+            setDisableBtn(false);
+            handleClick(variant);
+          }}>{variant}</Button></Row>)
           : ''}
         <Row>
-          <Button className='voting-submit-button' onClick={() => onFinish()}>{btnText} </Button>
+          <Button disabled={disableBtn} className='voting-submit-button' onClick={() => onFinish()}>{btnText} </Button>
         </Row>
       </div>
     </Modal>
