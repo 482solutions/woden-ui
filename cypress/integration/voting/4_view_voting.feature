@@ -41,21 +41,21 @@ Feature:  View open voting
     And Login as new user without UI
     When The user open Voting tab
     Then The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
 
   @positive
   Scenario: 2 Editor can view open voting
     And Login as new user 2 without UI
     When The user open Voting tab
     Then The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
 
   @positive
   Scenario: 3 Viewer can view open voting
     And Login as new user 3 without UI
     When The user open Voting tab
     Then The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
 
   @negative
   Scenario: 4 User can't view the vote if owner revokes all permissions on the file after creating the vote
@@ -105,4 +105,4 @@ Feature:  View open voting
     And Login as new user 3 without UI
     When The user open Voting tab
     Then The list of available voting is displayed
-    And Voting for a file "test1.txt" is visible
+    And Voting for a file "test1.txt" "be.visible"

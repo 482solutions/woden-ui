@@ -1,5 +1,5 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getDateTime, getHash} from "../../support/commands";
+import {getDateTime, getHash, getVoting} from "../../support/commands";
 // const sinon = require('sinon');
 const variants = {
   0: [],
@@ -13,7 +13,7 @@ const variants = {
 }
 
 const desc = {
-  5: 'ccccc',
+  5: 'some text',
   256: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   257: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   300: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
@@ -205,11 +205,11 @@ Then(/^The list of available voting is displayed$/, () => {
   cy.get('.votingContainer').should('be.visible')
 });
 
-Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
+Then(/^Voting for a file "([^"]*)" "([^"]*)"$/, (file, state) => {
     cy.get('.ant-table-cell.table-text')
       .contains(file)
       .parent()
-      .should('be.visible')
+      .should(state)
 });
 
 Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
@@ -234,7 +234,7 @@ Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (
       User2: Cypress.env('token_2'),
       User3: Cypress.env('token_3'),
     }
-    const time = Math.floor(new Date().getTime() / 1000.0) + 120
+    const time = Math.floor(new Date().getTime() / 1000.0) + 100
     cy.request({
       headers: {
         'content-type': 'application/json',
@@ -254,6 +254,12 @@ Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (
       expect(resp.body).to.not.have.property('stack');
       Cypress.env('respBody', resp.body)
       Cypress.env('respStatus', resp.status)
+      if (resp.status === 201) {
+        expect(resp.body).to.not.have.property('message');
+
+        let vote = getVoting(file, resp.body.response)
+        Cypress.env('votingHash', vote.votingHash)
+      }
     })
 });
 
@@ -313,7 +319,7 @@ When(/^Set time after voting ends$/,  () => {
   //   // let dateRestore = new Date() //=> will return the real time again (now)
   //   // console.log('dateRestore: ', dateRestore)
   // }
-  cy.wait(120000)
+  cy.wait(100000)
 });
 
 When(/^Button "([^"]*)" is disable$/,  (button) => {
@@ -322,4 +328,49 @@ When(/^Button "([^"]*)" is disable$/,  (button) => {
 
 When(/^Close pop\-up voting$/, () => {
   cy.get('.close-icon').click()
+});
+
+Given(/^"([^"]*)" send a request to vote for the "([^"]*)" variant for "([^"]*)" file$/,  (user, variant, file) => {
+  let tokens = {
+    User1: Cypress.env('token'),
+    User2: Cypress.env('token_2'),
+    User3: Cypress.env('token_3'),
+  }
+  cy.request({
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${tokens[user]}`
+    },
+    method: 'PUT',
+    url: `${Cypress.env('backendURL')}/voting`,
+    body: {
+      hash: Cypress.env('votingHash'),
+      variant: variant,
+    },
+    failOnStatusCode: false,
+  }).then((resp) => {
+    expect(resp.body).to.not.have.property('stack');
+  })
+});
+
+When(/^Pop\-up Result is opened$/,  () => {
+  cy.get('.ant-modal-body').should('be.visible')
+});
+
+When(/^Count of voters "([^"]*)" "([^"]*)" "([^"]*)"$/,  (totalVoted, slash, voters) => {
+  cy.get('.voting-results')
+    .contains('Voting results')
+    .parent()
+    .children('.voting-results-number')
+    .should('contain.text', totalVoted)
+    .should('contain.text', slash)
+    .should('contain.text', voters)
+
+});
+When(/^The percentage of those "([^"]*)" who voted for the option "([^"]*)"$/,  (perc, option) => {
+  cy.get('.result-option-variant')
+    .contains(option)
+    .parent()
+    .children('.result-option-percentage')
+    .contains(perc)
 });

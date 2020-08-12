@@ -44,7 +44,7 @@ Feature: Voting
     When Login as new user 3 without UI
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     When The user press "Vote" button for voting
@@ -68,7 +68,7 @@ Feature: Voting
     When Login as new user without UI
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     When The user press "Vote" button for voting
@@ -92,7 +92,7 @@ Feature: Voting
     When Set time after voting ends
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     Then Status of voting is "closed" for a file "TestUpload.txt"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -101,7 +101,7 @@ Feature: Voting
     And The "User1" sends a request to create vote for a file "TestUpload.txt" with 2 variants
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     When The user press "Vote" button for voting
@@ -113,7 +113,7 @@ Feature: Voting
     And The "User1" sends a request to create vote for a file "TestUpload.txt" with 2 variants
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     And The user press "Vote" button for voting

@@ -78,6 +78,7 @@ const logIn = async(user, dispatch) => {
     },
   );
 };
+
 export const loginRequest = (user) => async(dispatch) => {
   await logIn(user, dispatch);
 };
@@ -101,9 +102,11 @@ export const changePassword = async(userData) => {
     }
   });
 };
+
 export const changePasswordRequest = (data) => async(dispatch) => {
   await changePassword(data, dispatch);
 };
+
 export const logout = () => async(dispatch) => {
   const { Bearer } = defaultClient.authentications;
   Bearer.apiKey = await getTokenForHeader();
