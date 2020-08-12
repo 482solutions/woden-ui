@@ -2,7 +2,7 @@ import Woden from 'woden';
 import { message } from 'antd';
 import { getTokenForHeader } from '../../utils/functions';
 import {
-  CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA, UPDATE_VOTING_DATA,
+  CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA, UPDATE_VOTING_DATA, UPDATE_FOLDER_DATA,
 } from '../types';
 import '../../components/containers/Voting/style.css';
 import React from 'react';

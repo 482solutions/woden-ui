@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Modal, Row, Progress } from 'antd';
 
 import fileIcon from '../../../assets/images/votingFileLabel.svg';
@@ -7,34 +7,36 @@ import './style.css';
 
 export function VotingResults(vote) {
   const {
-    variants, votingName, voters, versionTime,
+    variants, votingName, voters, versionTime, description,
   } = vote;
 
   const colors = ['#6FCF97', '#56CCF2', '#3B7CFF', '#FB8832', '#BA33FA'];
 
-  const votingResultsForEach = [];
-
-  useEffect(() => {
-    variants.forEach((v) => {
-      const obj = { key: v, value: 0 };
-      votingResultsForEach.push(obj);
-    });
-
-    for (let i = 0; i < voters.length; i++) {
-      for (let j = 0; j < variants.length; j++) {
-        const k = votingResultsForEach[j].key;
-        const val = votingResultsForEach[j].value;
-        if (voters[i].vote === k) {
-          votingResultsForEach[j].value = val + 1;
-        }
-      }
-    }
-  }, []);
-
   const totalVoted = () => voters.reduce((acc, tag) => (tag.vote ? acc + 1 : acc), 0);
 
-  const countPercent = (index) => (votingResultsForEach[index].value !== 0
-    ? (votingResultsForEach[index].value / totalVoted()) * 100 : 0);
+  const votingResultsForEach = [];
+
+  variants.forEach((v) => {
+    const obj = { key: v, value: 0 };
+    votingResultsForEach.push(obj);
+  });
+
+  for (let i = 0; i < voters.length; i++) {
+    for (let j = 0; j < variants.length; j++) {
+      const k = votingResultsForEach[j].key;
+      const val = votingResultsForEach[j].value;
+      if (voters[i].vote === k) {
+        votingResultsForEach[j].value = val + 1;
+      }
+    }
+  }
+
+  const countPercent = (index) => {
+    if (votingResultsForEach[index].value !== 0) {
+      const result = (votingResultsForEach[index].value / totalVoted()) * 100;
+      return result % 1 !== 0 ? result.toFixed(2) : result;
+    } return 0;
+  };
 
   const modal = Modal.info();
   modal.update({
@@ -47,6 +49,7 @@ export function VotingResults(vote) {
                 <div>
                     <h4 className={'voting-results-title'}>{votingName}</h4>
                     <p>{versionTime}</p>
+                    <p>{description}</p>
                 </div>
             </div>
             <div>
@@ -60,7 +63,7 @@ export function VotingResults(vote) {
                             <div className="result-option">
                                 <p className="result-option-text-container">
                                     <span className="result-option-variant">{variant}</span>
-                                    <span className="result-option-percentage">{countPercent(index)}</span>
+                                    <span className="result-option-percentage">{countPercent(index)}%</span>
                                 </p>
                                 <Progress percent={countPercent(index)} strokeColor={colors[index]} strokeWidth={'4px'} showInfo={false}/>
                             </div>
