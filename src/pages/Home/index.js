@@ -12,6 +12,7 @@ import emptyHere from '../../assets/images/emptyHere.svg';
 import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
+import goHome from '../../assets/images/goHome.svg';
 
 
 export class Home extends React.Component {
@@ -51,6 +52,7 @@ export class Home extends React.Component {
       },
       mode: 'drive',
     };
+    this.goHome = this.goHome.bind(this);
     this.createFolder = this.createFolder.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.getVersions = this.getVersions.bind(this);
@@ -62,7 +64,7 @@ export class Home extends React.Component {
     this.shareModal = this.shareModal.bind(this);
     this.votingModal = this.votingModal.bind(this);
     this.closeVotingModal = this.closeVotingModal.bind(this),
-      this.changePermissions = this.changePermissions.bind(this);
+    this.changePermissions = this.changePermissions.bind(this);
     this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
     this.changeMode = this.changeMode.bind(this);
@@ -234,6 +236,12 @@ export class Home extends React.Component {
     this.setState({ userPermission: permission });
   }
 
+  async goHome() {
+    const hash = await getRootFolderHash();
+    this.setState({ mode: 'drive', voting: false })
+    this.openFolder(hash);
+  }
+
   render() {
     const {
       fileWrapperVisible, accessListVisible, wrapperInfo, permissionData, shareModalVisible, votingModalVisible,
@@ -265,6 +273,16 @@ export class Home extends React.Component {
                                            folderHash={this.state.folderHash}
                                            userPermission={this.state.userPermission}
                                            username={this.props.userName}/>)}
+          {this.state.voting && (<div className='buttonsWrapper'>
+            <div className='navigation'>
+              <div onClick={this.goHome} className="goHome">
+                <img src={goHome} alt="goHome"/>
+              </div>
+              <div>
+                <span className="currentFolder">Voting</span>
+              </div>
+            </div>
+          </div>)}
           {!this.state.voting && (this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
               ? <div className="emptyHere">
                 <img src={emptyHere} alt=""/>
@@ -356,7 +374,8 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(this.props.userName) !== this.props.userName))
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(
+                            this.props.userName) !== this.props.userName))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({

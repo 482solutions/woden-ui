@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './style.css';
-import {Dropdown, Menu, Upload} from 'antd';
+import { Dropdown, Menu, Upload } from 'antd';
 import folderImage from '../../../assets/images/folderImage.svg';
 import More from '../../../assets/images/more-vertical.svg';
 import Share from '../../../assets/images/Share.svg';
@@ -17,7 +17,8 @@ import fileImagePDF from '../../../assets/images/fileImages/fileImagePDF.svg';
 import fileImagePSD from '../../../assets/images/fileImages/fileImagePSD.svg';
 import fileImageSVG from '../../../assets/images/fileImages/fileImageSVG.svg';
 import fileImageTXT from '../../../assets/images/fileImages/fileImageTXT.svg';
-import {detectUserPermission} from '../../../utils/functions';
+import { detectUserPermission } from '../../../utils/functions';
+import {VotingModal} from "../../presentations/VotingModal";
 
 export default class Drive extends Component {
   constructor(props) {
@@ -28,10 +29,10 @@ export default class Drive extends Component {
   }
 
   fileMenu(hash, name, filesData) {
-    const fileInfo = this.getFileInfo(hash, filesData)
+    const  fileInfo = this.getFileInfo(hash, filesData)
     return (
       <Menu>
-        <Menu.Item key={`0${hash}`} onClick={async () => {
+        <Menu.Item key={`0${hash}`} onClick={async() => {
           await this.props.getVersions(hash, name);
         }}>
           <span id={`Versions_${hash}`}><img className="dropdownIcon" src={fileVersionsIcon}
@@ -53,10 +54,10 @@ export default class Drive extends Component {
           && <Menu.Item key={`2${hash}`}
                         disabled={fileInfo.writeUsers.length === 0 && fileInfo.readUsers.length === 0}
                         onClick={() => {
-                          console.log("MENU_FILESDATA:", fileInfo)
-                          this.props.votingModal(fileInfo);
+            console.log("MENU_FILESDATA:", fileInfo)
+            this.props.votingModal(fileInfo);
 
-                        }}>
+          }}>
             <span id={`Voting_${hash}`
             }><img className="dropdownIcon"
                    src={Voting}
@@ -93,7 +94,7 @@ export default class Drive extends Component {
                                             alt=""/>Share</span>
           </Menu.Item>
         }
-        <Menu.Item key={`1${hash}`} onClick={async () => {
+        <Menu.Item key={`1${hash}`} onClick={async() => {
           await this.props.viewAccessList(hash, 'folder');
         }}>
           <span id={`Permissions_${hash}`}><img className="dropdownIcon" src={accessListIcon}
@@ -133,7 +134,7 @@ export default class Drive extends Component {
 
   detectPermission(username, hash, infoArray, type) {
     const detectPermission = detectUserPermission(username, hash, infoArray, type);
-    this.setState({userPermission: detectPermission});
+    this.setState({ userPermission: detectPermission });
     this.props.getPermission(detectPermission);
     return detectPermission;
   }
@@ -148,7 +149,7 @@ export default class Drive extends Component {
     const {
       entryFolders, entryFiles, filesInfo, foldersInfo,
     } = this.props.folderData;
-    const {username} = this.props;
+    const { username } = this.props;
     return (
       <>
         {
@@ -205,8 +206,7 @@ export default class Drive extends Component {
                        file.hash,
                        filesInfo,
                        'file')
-                     this.props.downloadFile(file.hash, 'null', file.name, perm)
-                   }}
+                     this.props.downloadFile(file.hash, 'null', file.name, perm)}}
                    alt={'File'}
                    title={`File - ${file.name}`} className="file"/>
               <div className="itemData">
@@ -216,8 +216,7 @@ export default class Drive extends Component {
                           file.hash,
                           filesInfo,
                           'file')
-                        this.props.downloadFile(file.hash, 'null', file.name, perm)
-                      }}>
+                        this.props.downloadFile(file.hash, 'null', file.name, perm)}}>
                   {file.name}</span>
                 <div>
                   <Dropdown overlay={this.fileMenu(file.hash, file.name, filesInfo)}

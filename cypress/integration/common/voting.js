@@ -169,3 +169,24 @@ Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
     .children('.revokeAccess')
     .click()
 });
+When(/^The user open Voting tab$/, () => {
+  cy.wait(2000)
+  cy.server()
+  cy.route('GET', '/api/v1/voting').as('getVote')
+  cy.get('.sideBarMode.voting').click()
+  cy.wait('@getVote').then((xhr) => {
+    expect(200).to.equal(xhr.status)
+    expect(xhr.responseBody).to.not.have.property('stack')
+  })
+});
+Then(/^The list of available voting is displayed$/, () => {
+  cy.wait(2000)
+  cy.get('.votingContainer').should('be.visible')
+
+});
+Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
+    cy.get('.ant-table-cell.table-text').contains(file).parent().should('be.visible')
+});
+Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
+  cy.get('.ant-table-cell.table-text').contains(file).should('not.exist');
+});

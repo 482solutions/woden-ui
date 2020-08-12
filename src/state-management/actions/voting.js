@@ -5,6 +5,7 @@ import { CLEAN_STORAGE, CREATE_VOTING, LOGOUT, SET_VOTING_DATA } from '../types'
 import '../../components/containers/Voting/style.css';
 import React from 'react';
 import votingLabel from '../../assets/images/successVoting.svg';
+// import { VotingModalSuccess } from '../../components/containers/VotingModalSuccess/index.js';
 
 const api = new Woden.VotingApi();
 const defaultClient = Woden.ApiClient.instance;
