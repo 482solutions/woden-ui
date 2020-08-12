@@ -22,10 +22,22 @@ function summVotes(tags) {
 }
 
 export const Voting = (props) => {
+  const [name, setName] = useState(props.userName);
   const [openModal, setOpenModal] = useState(false);
   const [record, setRecord] = useState({});
 
+  const checkIfVoted = (votingData) => {
+    let result = false;
+    votingData.forEach((voter) => {
+      if (voter.name === name && voter.vote !== null) {
+        result = true;
+      }
+    });
+    return result;
+  };
+
   useEffect(() => {
+    setName(props.userName);
     props.getVoting();
   }, []);
 
@@ -75,14 +87,13 @@ export const Voting = (props) => {
                   title="Actions"
                   dataIndex="status"
                   key="status"
-                  render={(text, voteObj) => (
-                    voteObj.status
-                      ? <Button className='button-style-vote' onClick={() => {
-                        handleClick('modal', voteObj);
-                      }}>Vote</Button>
-                      : <Button className='button-style-result' onClick={() => {
-                        handleClick('result', voteObj);
-                      }}>Results</Button>
+                  render={(text, voteObj) => (voteObj.status
+                    ? <Button className='button-style-vote' disabled={checkIfVoted(voteObj.voters)} onClick={() => {
+                      handleClick('modal', voteObj);
+                    }}>Vote</Button>
+                    : <Button className='button-style-result' onClick={() => {
+                      handleClick('result', voteObj);
+                    }}>Results</Button>
                   )
                   }
           />
@@ -100,8 +111,9 @@ export const Voting = (props) => {
   );
 };
 
-export default connect(({ voting }) => ({
+export default connect(({ auth, voting }) => ({
   voting,
+  userName: auth.user.name,
 }),
 {
   getVoting: actions.getVotingData,

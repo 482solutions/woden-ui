@@ -20,7 +20,7 @@ Feature: Voting
     When Login as new user 2 without UI
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" is visible
+    And Voting for a file "TestUpload.txt" "be.visible"
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     When The user press "Vote" button for voting
@@ -31,10 +31,10 @@ Feature: Voting
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-#    TODO DELETE RELOAD
-    And RELOAD
-    And The user open Voting tab
-    And The list of available voting is displayed
+##    TODO DELETE RELOAD
+#    And RELOAD
+#    And The user open Voting tab
+#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -55,10 +55,10 @@ Feature: Voting
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-#    TODO DELETE RELOAD
-    And RELOAD
-    And The user open Voting tab
-    And The list of available voting is displayed
+##    TODO DELETE RELOAD
+#    And RELOAD
+#    And The user open Voting tab
+#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -79,10 +79,10 @@ Feature: Voting
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-#    TODO DELETE RELOAD
-    And RELOAD
-    And The user open Voting tab
-    And The list of available voting is displayed
+##    TODO DELETE RELOAD
+#    And RELOAD
+#    And The user open Voting tab
+#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -125,17 +125,3 @@ Feature: Voting
     And Pop-up "Voting" "be.visible"
     And User chooses variant "No"
     And Button "VOTE FOR: NO" "be.visible"
-
-
-
-
-
-
-
-
-
-
-
-
-
-

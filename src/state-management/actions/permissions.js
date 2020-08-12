@@ -1,7 +1,7 @@
 import Woden from 'woden';
 import { message } from 'antd';
 import { getTokenForHeader } from '../../utils/functions';
-import { UPDATE_PERMISSION } from '../types';
+import { UPDATE_PERMISSION, UPDATE_FOLDER_DATA } from '../types';
 
 const api = new Woden.PermissionsApi();
 const defaultClient = Woden.ApiClient.instance;
@@ -18,7 +18,6 @@ export const updatePermission = (info) => async(dispatch) => {
   });
 };
 
-
 export const changePermissions = (permissionData) => async(dispatch) => {
   Bearer.apiKey = await getTokenForHeader();
   message.loading('Changing permissions...', 0);
@@ -26,7 +25,7 @@ export const changePermissions = (permissionData) => async(dispatch) => {
   body.email = permissionData.email;
   body.hash = permissionData.hash;
   body.permission = permissionData.permissions;
-
+  console.log(permissionData);
   api.changePermissions(body,
     (error, data, response) => {
       message.destroy();
@@ -36,6 +35,7 @@ export const changePermissions = (permissionData) => async(dispatch) => {
         message.success('Permissions updated successfully');
         const folderData = response.body.response;
         dispatch(updatePermission(folderData));
+        dispatch({ type: UPDATE_FOLDER_DATA, payload: folderData, mode: 'drive' });
       }
     });
 };

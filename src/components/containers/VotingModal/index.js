@@ -42,7 +42,7 @@ export const VotingModal = ({
         setBtnText(initialBtnText);
       }}>X</p>}
       footer={[
-        <div style={{ marginTop: '20px' }}></div>,
+        <div key={'index'} style={{ marginTop: '20px' }}></div>,
       ]}
       >
       <div className={'modal-size'} style={{ height: 'auto' }}>
