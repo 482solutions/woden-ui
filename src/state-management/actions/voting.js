@@ -96,8 +96,9 @@ export const vote = (voteData) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
+        console.log('VOTE:', response);
         VotingModalSuccess('Congratulations!!', 'Your vote are in');
-        dispatch({ type: UPDATE_VOTING_DATA });
+        dispatch({ type: UPDATE_VOTING_DATA, payload: response.body.response });
       }
     });
 };
