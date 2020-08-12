@@ -89,7 +89,6 @@ export const vote = (voteData) => async(dispatch) => {
   const body = new Woden.Vote();
   body.hash = voteData.votingHash;
   body.variant = voteData.variant;
-  console.log(body);
   api.updateVoting(body,
     (error, data, response) => {
       message.destroy();

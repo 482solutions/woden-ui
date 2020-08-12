@@ -367,10 +367,15 @@ When(/^Count of voters "([^"]*)" "([^"]*)" "([^"]*)"$/,  (totalVoted, slash, vot
     .should('contain.text', voters)
 
 });
+
 When(/^The percentage of those "([^"]*)" who voted for the option "([^"]*)"$/,  (perc, option) => {
   cy.get('.result-option-variant')
     .contains(option)
     .parent()
     .children('.result-option-percentage')
     .contains(perc)
+});
+
+Then(/^Close pop\-up results of voting$/,  () => {
+  cy.get('.close-icon').click()
 });

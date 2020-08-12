@@ -34,6 +34,7 @@ Feature: Voting results
     And The percentage of those "33.33%" who voted for the option "Yes"
     And The percentage of those "33.33%" who voted for the option "No"
     And The percentage of those "33.33%" who voted for the option "Possibly"
+    And Close pop\-up results of voting
 
   Scenario: 2 Editor can view result of vote
     Given "User1" send a request to vote for the "Yes" variant for "TestUpload.txt" file
@@ -52,6 +53,7 @@ Feature: Voting results
     And The percentage of those "100%" who voted for the option "Yes"
     And The percentage of those "0%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
+    And Close pop\-up results of voting
 
   Scenario: 3 Viewer can view result of vote
     Given "User1" send a request to vote for the "Yes" variant for "TestUpload.txt" file
@@ -70,6 +72,7 @@ Feature: Voting results
     And The percentage of those "66,66%" who voted for the option "Yes"
     And The percentage of those "33.33%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
+    And Close pop\-up results of voting
 
   Scenario: 4 User can view result if he didn't voted
     Given Login as new user 2 without UI
@@ -88,8 +91,9 @@ Feature: Voting results
     And The percentage of those "50%" who voted for the option "Yes"
     And The percentage of those "50%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
+    And Close pop\-up results of voting
 
-  Scenario: 5 User ca't view result if permissions for a file removed after vote
+  Scenario: 5 User can't view result if permissions for a file removed after vote
     Given Login as new user 2 without UI
     And "User2" send a request to vote for the "No" variant for "TestUpload.txt" file
     And Login as new user 3 without UI
@@ -103,6 +107,11 @@ Feature: Voting results
     And Login as new user 3 without UI
     And The user open Voting tab
     And The list of available voting is displayed
-    And Voting for a file "TestUpload.txt" "not.be.visible"
+    Then Voting for a file "TestUpload.txt" "not.be.visible"
+
+
+
+
+
 
 

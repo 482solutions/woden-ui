@@ -123,7 +123,7 @@ Feature: Voting
     And Close pop-up voting
     And The user press "Vote" button for voting
     And Pop-up "Voting" "be.visible"
-    And  User chooses variant "No"
+    And User chooses variant "No"
     And Button "VOTE FOR: NO" "be.visible"
 
 
