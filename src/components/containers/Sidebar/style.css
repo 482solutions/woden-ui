@@ -38,7 +38,14 @@
 
 .shared {
   margin-top: 20px;
-  margin-left: 25px;
+  margin-left: 35px;
+  align-items: center;
+}
+
+.voting {
+  margin-top: 10px;
+  margin-left: 27px;
+  align-items: center;
 }
 
 .folderWrapper {

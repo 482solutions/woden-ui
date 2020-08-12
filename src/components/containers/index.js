@@ -9,4 +9,4 @@ export { default as Sidebar } from './Sidebar';
 export { default as Buttons } from './Buttons';
 export { default as Drive } from './Drive';
 export { default as Voting } from './Voting';
-export * from './styles.css';
+export * from './style.css';

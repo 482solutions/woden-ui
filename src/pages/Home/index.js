@@ -48,7 +48,7 @@ export class Home extends React.Component {
         children: null,
       },
       votingModalInfo: {
-        fileData: {}
+        fileData: {},
       },
       mode: 'drive',
     };
@@ -63,7 +63,7 @@ export class Home extends React.Component {
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
     this.votingModal = this.votingModal.bind(this);
-    this.closeVotingModal = this.closeVotingModal.bind(this),
+    this.closeVotingModal = this.closeVotingModal.bind(this);
     this.changePermissions = this.changePermissions.bind(this);
     this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
@@ -98,7 +98,6 @@ export class Home extends React.Component {
     }, mode);
     return false;
   }
-
 
   updateFile(file, hash) {
     this.props.updateFile({ fileHash: hash, file });
@@ -179,7 +178,7 @@ export class Home extends React.Component {
     this.setState({ votingModalVisible: true });
     this.setState({
       votingModalInfo: {
-        fileData
+        fileData,
       },
     });
   }
@@ -188,7 +187,7 @@ export class Home extends React.Component {
     this.setState({ votingModalVisible: false });
     this.setState({
       votingModalInfo: {
-        fileData: {}
+        fileData: {},
       },
     });
   }
@@ -215,11 +214,11 @@ export class Home extends React.Component {
   async changeMode(mode) {
     if (mode !== this.state.mode) {
       if (this.state.mode === 'voting') {
-        this.setState({ voting: false })
+        this.setState({ voting: false });
       }
       this.setState({ mode });
       if (mode === 'voting') {
-        this.setState({ voting: true })
+        this.setState({ voting: true });
       } else {
         const hash = await getRootFolderHash();
         this.props.getFolderData(hash, mode);
@@ -237,7 +236,7 @@ export class Home extends React.Component {
 
   async goHome() {
     const hash = await getRootFolderHash();
-    this.setState({ mode: 'drive', voting: false })
+    this.setState({ mode: 'drive', voting: false });
     this.openFolder(hash);
   }
 
@@ -283,10 +282,10 @@ export class Home extends React.Component {
             </div>
           </div>)}
           {!this.state.voting && (this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
-              ? <div className="emptyHere">
+            ? <div className="emptyHere">
                 <img src={emptyHere} alt=""/>
               </div>
-              : <div className="flex-start ff-rw">
+            : <div className="flex-start ff-rw">
                 <Drive folderData={this.props[mode]}
                        username={this.props.userName}
                        updateFile={this.updateFile}
@@ -426,30 +425,31 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem, permissions }) => ({
-    userName: auth.user.name,
-    versions: filesystem.versions,
-    drive: filesystem.drive,
-    share: filesystem.share,
-    voting: filesystem.voting,
-    tree: filesystem.tree,
-    permissions,
-  }),
-  {
-    changePasswordRequest: actions.changePasswordRequest,
-    initialFilesystem: actions.initialFilesystem,
-    getFolderData: actions.getFolderData,
-    createFolder: actions.createFolder,
-    uploadFile: actions.uploadFile,
-    updateFile: actions.updateFile,
-    downloadFile: actions.downloadFile,
-    getVersions: actions.getVersions,
-    changePermissions: actions.changePermissions,
-    revokePermissions: actions.revokePermissions,
-    getFoldersTree: actions.getFoldersTree,
-    updateFolderData: actions.updateFolderData,
-    updatePermission: actions.updatePermission,
-    createVoting: actions.createVoting,
-    getVoting: actions.getVotingData,
-  })(
+  userName: auth.user.name,
+  versions: filesystem.versions,
+  drive: filesystem.drive,
+  share: filesystem.share,
+  voting: filesystem.voting,
+  tree: filesystem.tree,
+  permissions,
+}),
+{
+  changePasswordRequest: actions.changePasswordRequest,
+  initialFilesystem: actions.initialFilesystem,
+  getFolderData: actions.getFolderData,
+  createFolder: actions.createFolder,
+  uploadFile: actions.uploadFile,
+  updateFile: actions.updateFile,
+  downloadFile: actions.downloadFile,
+  getVersions: actions.getVersions,
+  changePermissions: actions.changePermissions,
+  revokePermissions: actions.revokePermissions,
+  getFoldersTree: actions.getFoldersTree,
+  updateFolderData: actions.updateFolderData,
+  updatePermission: actions.updatePermission,
+  createVoting: actions.createVoting,
+  getVoting: actions.getVotingData,
+  updateVoting: actions.vote,
+})(
   Home,
 );

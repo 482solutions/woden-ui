@@ -48,6 +48,14 @@ export function getFolderOwner(folderName, arrFolders) {
   }
 }
 
+export function getVoting(fileName, obj) {
+  for (let key in obj) {
+    if (fileName === obj[key].votingName) {
+      return obj[key]
+    }
+  }
+}
+
 export function getDateTime(when){
   let dateString, unixTime;
   switch (when) {

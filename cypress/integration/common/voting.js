@@ -1,6 +1,6 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
-import {getDateTime} from "../../support/commands";
-
+import {getDateTime, getHash} from "../../support/commands";
+// const sinon = require('sinon');
 const variants = {
   0: [],
   1: ['Yes'],
@@ -30,8 +30,11 @@ When(/^Tab "([^"]*)" is opened and title "([^"]*)" is visible$/, (tabName, descr
     .parent('.ant-steps-item-content')
     .parent('.ant-steps-item-container')
     .children('.ant-steps-item-icon')
-    .children('.ant-steps-icon').contains(arr[0])
-  cy.get('.modal-title').contains(description).should('be.visible')
+    .children('.ant-steps-icon')
+    .contains(arr[0])
+  cy.get('.modal-title')
+    .contains(description)
+    .should('be.visible')
 });
 
 When(/^Name of the document "([^"]*)" is visible in pop\-up$/, (fileName) => {
@@ -59,12 +62,14 @@ When(/^User selects date and time$/,  () => {
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
     .type(`${fullDate.hour}:${fullDate.minutes}`)
-    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
+    .get('.ant-btn.ant-btn-primary.ant-btn-sm')
+    .click();
 });
 
 When(/^Description field (.*) characters$/,  (description) => {
   if (description !== 0) {
-    cy.get(':nth-child(3) > .ant-input-affix-wrapper > .ant-input').type(desc[description]);
+    cy.get(':nth-child(3) > .ant-input-affix-wrapper > .ant-input')
+      .type(desc[description]);
   }
 });
 
@@ -91,30 +96,43 @@ When(/^(\d+) users participate in the voting "([^"]*)"$/,  (count, user) => {
 });
 
 Given(/^Button Start Voting is disabled$/, () => {
-  cy.get('.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child').contains('Start Voting')
-  cy.get('[aria-disabled=true]').children().contains('Start Voting')
+  cy.get('.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child')
+    .contains('Start Voting')
+  cy.get('[aria-disabled=true]')
+    .children()
+    .contains('Start Voting')
 });
 
 Then(/^Pop\-up "([^"]*)" with description "([^"]*)" is visible$/,  (name, description) => {
-  cy.get('.voting-success-title').contains(name).should('be.visible')
-  cy.get('.voting-success-message').contains(description).should('be.visible')
+  cy.get('.voting-success-title')
+    .contains(name)
+    .should('be.visible')
+  cy.get('.voting-success-message')
+    .contains(description)
+    .should('be.visible')
 });
 
 Given(/^Button NEXT STEP is disabled$/, () => {
-  cy.get('.ant-btn-primary').should('be.disabled')
+  cy.get('.ant-btn-primary')
+    .should('be.disabled')
 });
 
 Then(/^Button Add variant is disabled$/, () => {
-  cy.get('.ant-input-group-addon > .ant-btn').should('be.disabled').as('Field')
-  cy.get('.ant-input').should('be.disabled').as('Button Add Variant')
+  cy.get('.ant-input-group-addon > .ant-btn')
+    .should('be.disabled').as('Field')
+  cy.get('.ant-input')
+    .should('be.disabled').as('Button Add Variant')
 });
 
 Given(/^User click CONTINUE button$/, () => {
-  cy.get('.ant-btn.ant-btn-primary').contains('CONTINUE').click()
+  cy.get('.ant-btn.ant-btn-primary')
+    .contains('CONTINUE')
+    .click()
 });
 
 Given(/^In field "([^"]*)" can contain only (\d+) characters$/, (desc, count) => {
-  cy.get('textarea').invoke('val')
+  cy.get('textarea')
+    .invoke('val')
     .then(text => expect(text.length).to.eq(256));
 });
 
@@ -127,7 +145,8 @@ When(/^User selects date and time, which is real time$/, () => {
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
     .type(`${fullDate.hour}:${fullDate.minutes}`)
-    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
+    .get('.ant-btn.ant-btn-primary.ant-btn-sm')
+    .click();
 });
 
 Then(/^User selects date and time, which less than the real time$/, () => {
@@ -141,6 +160,7 @@ Then(/^User selects date and time, which less than the real time$/, () => {
     .type(`${fullDate.hour}:${fullDate.minutes}`)
     .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
 });
+
 When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
   cy.get('.variants')
     .children('.text-users-name')
@@ -149,44 +169,157 @@ When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
     .children('.revokeAccess')
     .click()
 });
+
 Then(/^Count of variants (.*)$/, (count) => {
   cy.get('.variants').should('have.length', count)
 });
+
 Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
-  switch (user) {
-    case 'User2':
-      user = Cypress.env('login_2');
-      break;
-    case 'User3':
-      user = Cypress.env('login_3');
-      break;
+  let logins = {
+    User2: Cypress.env('login_2'),
+    User3: Cypress.env('login_3'),
   }
   cy.get('.sharedUser')
     .children('.sharedUserName')
-    .contains(user)
+    .contains(logins[user])
     .parent()
     .parent()
     .children('.revokeAccess')
     .click()
 });
+
 When(/^The user open Voting tab$/, () => {
   cy.wait(2000)
   cy.server()
   cy.route('GET', '/api/v1/voting').as('getVote')
-  cy.get('.sideBarMode.voting').click()
+  cy.get('.sideBarMode.voting')
+    .click()
   cy.wait('@getVote').then((xhr) => {
     expect(200).to.equal(xhr.status)
     expect(xhr.responseBody).to.not.have.property('stack')
   })
 });
+
 Then(/^The list of available voting is displayed$/, () => {
   cy.wait(2000)
   cy.get('.votingContainer').should('be.visible')
+});
+
+Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
+    cy.get('.ant-table-cell.table-text')
+      .contains(file)
+      .parent()
+      .should('be.visible')
+});
+
+Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
+  cy.get('.ant-table-cell.table-text')
+    .contains(file)
+    .should('not.exist');
+});
+
+Given(/^Total voters for a file "([^"]*)" "([^"]*)"$/, (file, votes) => {
+  cy.get('.ant-table-cell.table-text')
+    .contains(file)
+    .parent()
+    .parent()
+    .children()
+    .contains(votes)
+});
+
+Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (\d+) variants$/,
+  (owner, file, answers, users) => {
+    let logins = {
+      User1: Cypress.env('token'),
+      User2: Cypress.env('token_2'),
+      User3: Cypress.env('token_3'),
+    }
+    const time = Math.floor(new Date().getTime() / 1000.0) + 120
+    cy.request({
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${logins[owner]}`
+      },
+      method: 'POST',
+      url: `${Cypress.env('backendURL')}/voting`,
+      body: {
+        hash: getHash(file, Cypress.env('filesInRoot')),
+        dueDate: time.toString(),
+        variants: variants[answers],
+        excludedUsers: [],
+        description: desc[5],
+      },
+      failOnStatusCode: false,
+    }).then((resp) => {
+      expect(resp.body).to.not.have.property('stack');
+      Cypress.env('respBody', resp.body)
+      Cypress.env('respStatus', resp.status)
+    })
+});
+
+When(/^The user press "([^"]*)" button for voting$/,  (file) => {
+  cy.get('.ant-table-cell.table-text')
+    .contains(file)
+    .parent()
+    .parent()
+    .children()
+    .contains('Vote')
+    .click()
+});
+
+When(/^Pop\-up "([^"]*)" "([^"]*)"$/,  (title, state) => {
+  cy.get('.ant-modal-body')
+    .contains(title)
+    .should(state)
+});
+
+When(/^User chooses variant "([^"]*)"$/,  (variant) => {
+  cy.get('.ant-row.button-row')
+    .children('.voting-button')
+    .contains(variant)
+    .click()
+});
+
+When(/^Status of voting is "([^"]*)" for a file "([^"]*)"$/,  (status, file) => {
+  cy.get('.ant-table-cell.table-text')
+    .contains(file)
+    .parent()
+    .parent()
+    .children()
+    .children('img').should('have.attr', 'src').should('include',`${status}Voting.svg`)
 
 });
-Then(/^Voting for a file "([^"]*)" is visible$/, (file) => {
-    cy.get('.ant-table-cell.table-text').contains(file).parent().should('be.visible')
+
+Then(/^The user can not vote for this file "([^"]*)"$/,  (file) => {
+  cy.get('.ant-table-cell.table-text')
+    .contains(file)
+    .parent()
+    .parent()
+    .children()
+    .contains('Vote')
+    .should('be.disabled')
 });
-Then(/^Voting for a file "([^"]*)" is not visible$/, (file) => {
-  cy.get('.ant-table-cell.table-text').contains(file).should('not.exist');
+
+When(/^Set time after voting ends$/,  () => {
+  // const now =  new Date().getTime()
+  // const fakeTime = sinon.useFakeTimers(now)
+  //
+  // if (now !== fakeTime) {
+  //   console.log('fakeTime: ', fakeTime)
+  //
+  //   fakeTime.tick(3600000) // 1 hour
+  //   console.log(new Date())//=> return the fake Date
+  //   // fakeTime.restore()
+  //   // let dateRestore = new Date() //=> will return the real time again (now)
+  //   // console.log('dateRestore: ', dateRestore)
+  // }
+  cy.wait(120000)
+});
+
+When(/^Button "([^"]*)" is disable$/,  (button) => {
+  cy.contains(button).should('be.disabled')
+});
+
+When(/^Close pop\-up voting$/, () => {
+  cy.get('.close-icon').click()
 });
