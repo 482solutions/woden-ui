@@ -89,15 +89,13 @@ export const vote = (voteData) => async(dispatch) => {
   const body = new Woden.Vote();
   body.hash = voteData.votingHash;
   body.variant = voteData.variant;
-  console.log(body);
   api.updateVoting(body,
     (error, data, response) => {
       message.destroy();
       if (error) {
         message.error(response.body.message);
       } else {
-        console.log('VOTE:', response);
-        VotingModalSuccess('Congratulations!!', 'Your vote are in');
+        VotingModalSuccess('Congratulations!', 'Your vote are in');
         dispatch({ type: UPDATE_VOTING_DATA, payload: response.body.response });
       }
     });
