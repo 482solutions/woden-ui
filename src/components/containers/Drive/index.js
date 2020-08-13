@@ -53,7 +53,8 @@ export default class Drive extends Component {
           (this.state.userPermission === 'owner')
           && <Menu.Item key={`2${hash}`}
                         disabled={fileInfo.writeUsers.length === 0 && fileInfo.readUsers.length === 0}
-                        onClick={() => {this.props.votingModal(fileInfo);
+                        onClick={() => {
+                          this.props.votingModal(fileInfo);
                         }}>
             <span id={`Voting_${hash}`
             }><img className="dropdownIcon"

@@ -374,7 +374,8 @@ export class Home extends React.Component {
                       <Col className="revokeAccess">
                         {
                           ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(
-                            this.props.userName) !== this.props.userName))
+                            this.props.userName,
+                          ) !== this.props.userName))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({

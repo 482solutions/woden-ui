@@ -10,7 +10,7 @@ it('Render without crashing', () => {
   const wrapper = shallow(<Sidebar/>);
   expect(wrapper.find('.sidebar')).to.have.lengthOf(1);
   expect(wrapper.find('.myDrive')).to.have.lengthOf(1);
-  expect(wrapper.find('.shared')).to.have.lengthOf(1);
+  expect(wrapper.find('.shared')).to.have.lengthOf(2);
   expect(wrapper.find('.sidebarTitle').text()).to.equal('All Folders');
 });
 
