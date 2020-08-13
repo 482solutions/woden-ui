@@ -66,7 +66,7 @@ Feature:  Create voting
     And Tab "3.Description" is opened and title "Info" is visible
     And Press "NEXT STEP"
     And Tab "4.List of Voters" is opened and title "Voting participants" is visible
-    And 1 users participate in the voting "User2"
+    And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"

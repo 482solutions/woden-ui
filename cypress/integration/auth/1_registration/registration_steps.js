@@ -15,7 +15,7 @@ beforeEach(() => {
 
 Given(/^User username field that contains 2 uppercase letters$/, () => {
     login = generator.generate({
-        length: 2,
+        length: 20,
         lowercase: false,
     });
     cy.get('#name').type(login);

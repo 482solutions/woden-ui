@@ -93,7 +93,7 @@
     "startci": "webpack-dev-server --mode none",
     "build": "webpack --mode production",
     "test": "react-scripts test",
-    "coverage": "npm test -- --coverage --watchAll=false",
+    "coverage": "yarn test -- --coverage --watchAll=false",
     "cypress:open": "cypress open",
     "cy:run:chrome": "cypress run --browser chrome --spec \"cypress/integration/*/*.feature\"",
     "cy:run:firefox": "cypress run --browser firefox --spec \"cypress/integration/*/*.feature\"",

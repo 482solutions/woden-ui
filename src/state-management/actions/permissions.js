@@ -25,7 +25,6 @@ export const changePermissions = (permissionData) => async(dispatch) => {
   body.email = permissionData.email;
   body.hash = permissionData.hash;
   body.permission = permissionData.permissions;
-  console.log(permissionData);
   api.changePermissions(body,
     (error, data, response) => {
       message.destroy();

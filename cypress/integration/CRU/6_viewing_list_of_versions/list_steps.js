@@ -14,7 +14,7 @@ Then(/^The list of versions is not visible in dashboard$/, () => {
 });
 
 Then(/^List of versions should contain name of file "([^"]*)"$/,  (fileName) =>{
-    cy.get('.fileInfoWrapper').should('contain.text', fileName)
+    cy.get('.ant-col-20').should('contain.text', fileName)
 });
 
 afterEach(() => {

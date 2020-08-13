@@ -19,14 +19,14 @@ Feature:  View access list
     And The user 1 is the owner of the file
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -44,14 +44,14 @@ Feature:  View access list
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -74,14 +74,14 @@ Feature:  View access list
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -104,14 +104,14 @@ Feature:  View access list
     And The user 1 is the owner of the file
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -129,14 +129,14 @@ Feature:  View access list
     And Create folder with name "Access" in root without UI
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -159,14 +159,14 @@ Feature:  View access list
     And Create folder with name "Access" in root without UI
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -189,14 +189,14 @@ Feature:  View access list
     And Create folder with name "Access" in root without UI
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -219,14 +219,14 @@ Feature:  View access list
     And Create folder with name "Access" in root without UI
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When The user press the "Actions" button in "Access" "folder"
     And The user press the "Share" button in "Access" "folder"
-    And Enter "User3" email to field "#form_in_modal_email"
+    And Enter "User3" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -243,7 +243,7 @@ Feature:  View access list
     Given Create folder with name "testFolder" in root without UI
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."

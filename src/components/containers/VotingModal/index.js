@@ -6,7 +6,7 @@ import {
 import './style.css';
 
 export const VotingModal = ({
-  record, updateVoting, setOpenModal, openModal,
+                              openModal,setOpenModal,  record,  updateVoting,
 }) => {
   const {
     variants, votingName, versionTime, votingHash, description,
