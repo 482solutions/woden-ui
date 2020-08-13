@@ -76,8 +76,6 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     if (tempValues.variants.length < 1) {
       message.info('The answer option must have a minimum of 1 character and a maximum of 35')
     }
-
-
   }
   const onChange = (current) => {
     setCurrent(current);
@@ -93,28 +91,11 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     }
   }
   const stepTitle = () => {
-    return (<Steps
-      size="small"
-      current={current}
-      onChange={onChange}
-    >
-      <Step
-        title="Creating"
-        disabled={true}
-      />
-      <Step
-        title="Due Date"
-        disabled={true}
-
-      />
-      <Step
-        title="Description"
-        disabled={true}
-      />
-      <Step
-        title="List of Voters"
-        disabled={true}
-      />
+    return (<Steps size="small" current={current} onChange={onChange}>
+      <Step title="Creating" disabled={true}/>
+      <Step title="Due Date" disabled={true}/>
+      <Step title="Description" disabled={true}/>
+      <Step title="List of Voters" disabled={true}/>
     </Steps>)
   }
 
@@ -177,7 +158,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         }}
                 disabled={state.variants.length < 2 || state.variants.length > 5 || (
                   current === 1 && state.date === null) || (current === 1 && state.time === null) || (
-                  current === 1 && prepareTime(state.date, state.time) * 1000 <= Date.now()) || (current === 3 && state.allUsers.length < 1)}
+                  current === 1 && prepareTime(state.date,
+                  state.time) * 1000 <= Date.now()) || (current === 3 && state.allUsers.length < 1)}
                 onClick={() => {
                   current === 3 ? onFinish() : setCurrent(current + 1)
 
@@ -291,11 +273,9 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
                       {current.date()}
                     </div>
                   );
-                }}
-                onChange={(date) => {
-                  setState({ ...state, date: new Date(date).getTime() })
-                }}
-              />
+                }} onChange={(date) => {
+                setState({ ...state, date: new Date(date).getTime() })
+              }}/>
             </Row>
           </Col>
           <Row align={'top'} justify={'center'}>
@@ -306,11 +286,9 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
               <label className='modal-label'>Time</label>
             </Row>
             <Row align={'top'} justify={'center'}>
-              <TimePicker
-                format={format}
-                onChange={(time) => {
-                  setState({ ...state, time: new Date(time).getTime() })
-                }}
+              <TimePicker format={format} onChange={(time) => {
+                setState({ ...state, time: new Date(time).getTime() })
+              }}
               />
             </Row>
           </Col>
@@ -348,33 +326,27 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
         </Row>
         <Row align={'top'} justify={'center'}>
           <Col>
-            {
-              state.allUsers.map((user, i) => (
-                <Row key={user} className='sharedUser'>
-                  <Col className="sharedUserName">
-                    <div className={"text-users-name"}>{state.allUsers[i]}</div>
-                  </Col>
-                  <Col className="revokeAccess">
-                    {
-                      <img src={deleteUserIcon} alt="Revoke access"
-                           onClick={() => {
-                             {
-                               if (state.allUsers.length > 1) {
-                                 let excludeUsers = state.excludedUsers;
-                                 excludeUsers.push(state.allUsers[i])
-                                 setState({ ...state, excludeUsers })
-                                 let newAllUsers = state.allUsers;
-                                 newAllUsers.splice(i, 1)
-                                 setState({ ...state, allUsers: newAllUsers })
-                               }
-                             }
-                           }
-                           }/>
-                    }
-                  </Col>
-                </Row>
-              ))
-            }
+            {state.allUsers.map((user, i) => (
+              <Row key={user} className='sharedUser'>
+                <Col className="sharedUserName">
+                  <div className={"text-users-name"}>{state.allUsers[i]}</div>
+                </Col>
+                <Col className="revokeAccess">
+                  {<img src={deleteUserIcon} alt="Revoke access"
+                        onClick={() => {
+                          {
+                            if (state.allUsers.length > 1) {
+                              let excludeUsers = state.excludedUsers;
+                              excludeUsers.push(state.allUsers[i])
+                              setState({ ...state, excludeUsers })
+                              let newAllUsers = state.allUsers;
+                              newAllUsers.splice(i, 1)
+                              setState({ ...state, allUsers: newAllUsers })
+                            }
+                          }
+                        }}/>}
+                </Col>
+              </Row>))}
           </Col>
         </Row>
       </div>)}
