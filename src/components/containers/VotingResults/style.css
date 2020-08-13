@@ -75,3 +75,7 @@
     text-align: right;
     color: #8998AC;
 }
+
+.modal-voting-results .ant-modal-confirm-btns{
+    display: none;
+}

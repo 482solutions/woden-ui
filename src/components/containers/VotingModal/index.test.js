@@ -7,7 +7,7 @@ import { VotingModal } from './index';
 Enzyme.configure({ adapter: new Adapter() });
 
 const mockData = {
-  variants: ['123', 'no'], votingName: 'test name', versionTime: '12 Aug 2020', votingHash: '132123132', description: 'hello',
+  variants: ['yes', 'no'], votingName: 'test name', versionTime: '12 Aug 2020', votingHash: '132123132', description: 'hello',
 };
 
 it('Render without crashing', () => {

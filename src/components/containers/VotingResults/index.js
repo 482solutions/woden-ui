@@ -43,7 +43,7 @@ export function VotingResults(vote) {
     width: '512px',
     centered: true,
     icon: (<img className={'result-icon'} src={fileIcon} alt="file" title="file" />),
-    content: (<div className={'modal-size'}>
+    content: (<div className={'modal-size modal-voting-results'}>
         <Row className="file-row-info">
             <div className="file-info-container">
                 <div>
