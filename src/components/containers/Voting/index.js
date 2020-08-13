@@ -27,10 +27,10 @@ export const Voting = (props) => {
   const [record, setRecord] = useState({});
 
   const checkIfVoted = (votingData) => {
-    let result = false;
+    let result = true;
     votingData.forEach((voter) => {
-      if (voter.name === name && voter.vote !== null) {
-        result = true;
+      if (voter.name === name && voter.vote === null) {
+        result = false;
       }
     });
     return result;

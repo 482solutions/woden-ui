@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
-import { Buttons, Drive, Sidebar, Voting } from '../../components/containers';
+import {
+  Buttons, Drive, Sidebar, Voting,
+} from '../../components/containers';
 import { getRootFolderHash } from '../../utils/functions';
 import { PermissionsModal, VotingModal } from '../../components/presentations';
 import { actions } from '../../state-management';
@@ -13,7 +15,6 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import goHome from '../../assets/images/goHome.svg';
-
 
 export class Home extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name, perm) {
+    console.log(hash, cid, name, perm)
     if (perm === 'owner' || perm === 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
