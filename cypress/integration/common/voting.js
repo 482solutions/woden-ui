@@ -423,3 +423,8 @@ Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (
 Then(/^Voting for a file "([^"]*)" doesn't exist$/,  (file) => {
   cy.contains(file).should('not.be.visible')
 });
+
+When(/^Press "([^"]*)" button$/,  (button) => {
+  cy.get('.ant-row-center > .ant-btn')
+    .should('contain.text', button).click()
+});

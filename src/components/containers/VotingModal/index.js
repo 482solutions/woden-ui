@@ -65,7 +65,7 @@ export const VotingModal = ({
           : ''}
         <Row justify='center'>
           <Button disabled={disableBtn} className='voting-submit-button'
-                  onClick={() => onFinish()}><span>Vote For: </span>{ btnText} </Button>
+                  onClick={() => onFinish()}><span>VOTE FOR: </span>{ btnText} </Button>
         </Row>
       </div>
     </Modal>
