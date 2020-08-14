@@ -319,7 +319,7 @@ When(/^Set time after voting ends$/,  () => {
   //   // let dateRestore = new Date() //=> will return the real time again (now)
   //   // console.log('dateRestore: ', dateRestore)
   // }
-  cy.wait(60000)
+  cy.wait(100000)
 });
 
 When(/^Button "([^"]*)" is disable$/,  (button) => {
@@ -391,7 +391,7 @@ Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (
     User2: Cypress.env('login_2'),
     User3: Cypress.env('login_3'),
   }
-  const time = Math.floor(new Date().getTime() / 1000.0) + 60
+  const time = Math.floor(new Date().getTime() / 1000.0) + 100
   cy.request({
     headers: {
       'content-type': 'application/json',

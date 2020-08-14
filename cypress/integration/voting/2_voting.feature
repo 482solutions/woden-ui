@@ -125,3 +125,20 @@ Feature: Voting
     And Status of voting is "active" for a file "TestUpload.txt"
     And Total voters for a file "TestUpload.txt" "0/2"
     Then The user can not vote for this file "TestUpload.txt"
+
+  Scenario: 8 User can't vote if he is got permissions for a file after start vote
+    Given The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
+    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 2 variants
+    When The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
+    And The user open Voting tab
+    And The list of available voting is displayed
+    And Voting for a file "TestUpload.txt" "be.visible"
+    And Status of voting is "active" for a file "TestUpload.txt"
+    And Total voters for a file "TestUpload.txt" "0/2"
+    And Login as new user 3 without UI
+    And The user open Voting tab
+    And The list of available voting is displayed
+    And Voting for a file "TestUpload.txt" "be.visible"
+    And Status of voting is "active" for a file "TestUpload.txt"
+    Then Total voters for a file "TestUpload.txt" "0/2"
+    And The user can not vote for this file "TestUpload.txt"

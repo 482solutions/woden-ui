@@ -71,7 +71,7 @@ Feature: Voting results
     When Press "Results"
     Then Pop-up Result is opened
     And Count of voters "3" " / " "3"
-    And The percentage of those "66,67%" who voted for the option "Yes"
+    And The percentage of those "66.67%" who voted for the option "Yes"
     And The percentage of those "33.33%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
 #    And Close pop-up results of voting

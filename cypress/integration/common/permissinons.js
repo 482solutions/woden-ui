@@ -130,3 +130,18 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
       Cypress.env('respBody', resp.body)
     })
   });
+Then(/^The button revoke access is not visible near editor "([^"]*)"$/,  (user) => {
+  const logins = {
+    User1: Cypress.env('login'),
+    User2: Cypress.env('login_2'),
+    User3: Cypress.env('login_3'),
+  }
+  user = logins[user];
+  cy.get('.sharedUser.editor')
+    .children('.sharedUserName')
+    .contains(user)
+    .parent()
+    .children('.permissionIcons')
+    .children('.revokeAccess')
+    .should('not.be.visible')
+});
