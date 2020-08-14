@@ -113,7 +113,6 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name, perm) {
-    console.log(hash, cid, name, perm)
     if (perm === 'owner' || perm === 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
@@ -284,10 +283,10 @@ export class Home extends React.Component {
             </div>
           </div>)}
           {!this.state.voting && (this.props[mode].entryFolders.length + this.props[mode].entryFiles.length === 0
-            ? <div className="emptyHere">
+              ? <div className="emptyHere">
                 <img src={emptyHere} alt=""/>
               </div>
-            : <div className="flex-start ff-rw">
+              : <div className="flex-start ff-rw">
                 <Drive folderData={this.props[mode]}
                        username={this.props.userName}
                        updateFile={this.updateFile}
@@ -334,7 +333,10 @@ export class Home extends React.Component {
                     <Col className='versionAuthor'>{version.user}</Col>
                     <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
+                        this.downloadFile(wrapperInfo.fileHash,
+                          version.cid,
+                          wrapperInfo.fileName,
+                          this.state.userPermission);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
@@ -375,9 +377,8 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(
-                            this.props.userName,
-                          ) !== this.props.userName))
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                            && (this.props.userName !== permissions.writeUsers[i] && this.state.userPermission === 'write'))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({
@@ -404,7 +405,7 @@ export class Home extends React.Component {
                     </Col>
                     <Col className="revokeAccess">
                       {
-                        (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                        (this.state.userPermission === 'owner' ||  this.state.userPermission !== 'read')
                         && <img src={revokeAccessIcon} alt="Revoke access"
                                 onClick={() => {
                                   this.revokePermissions({
@@ -428,31 +429,31 @@ export class Home extends React.Component {
 }
 
 export default connect(({ auth, filesystem, permissions }) => ({
-  userName: auth.user.name,
-  versions: filesystem.versions,
-  drive: filesystem.drive,
-  share: filesystem.share,
-  voting: filesystem.voting,
-  tree: filesystem.tree,
-  permissions,
-}),
-{
-  changePasswordRequest: actions.changePasswordRequest,
-  initialFilesystem: actions.initialFilesystem,
-  getFolderData: actions.getFolderData,
-  createFolder: actions.createFolder,
-  uploadFile: actions.uploadFile,
-  updateFile: actions.updateFile,
-  downloadFile: actions.downloadFile,
-  getVersions: actions.getVersions,
-  changePermissions: actions.changePermissions,
-  revokePermissions: actions.revokePermissions,
-  getFoldersTree: actions.getFoldersTree,
-  updateFolderData: actions.updateFolderData,
-  updatePermission: actions.updatePermission,
-  createVoting: actions.createVoting,
-  getVoting: actions.getVotingData,
-  updateVoting: actions.vote,
-})(
+    userName: auth.user.name,
+    versions: filesystem.versions,
+    drive: filesystem.drive,
+    share: filesystem.share,
+    voting: filesystem.voting,
+    tree: filesystem.tree,
+    permissions,
+  }),
+  {
+    changePasswordRequest: actions.changePasswordRequest,
+    initialFilesystem: actions.initialFilesystem,
+    getFolderData: actions.getFolderData,
+    createFolder: actions.createFolder,
+    uploadFile: actions.uploadFile,
+    updateFile: actions.updateFile,
+    downloadFile: actions.downloadFile,
+    getVersions: actions.getVersions,
+    changePermissions: actions.changePermissions,
+    revokePermissions: actions.revokePermissions,
+    getFoldersTree: actions.getFoldersTree,
+    updateFolderData: actions.updateFolderData,
+    updatePermission: actions.updatePermission,
+    createVoting: actions.createVoting,
+    getVoting: actions.getVotingData,
+    updateVoting: actions.vote,
+  })(
   Home,
 );

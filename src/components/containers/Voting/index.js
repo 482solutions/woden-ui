@@ -31,6 +31,7 @@ export const Voting = (props) => {
     votingData.forEach((voter) => {
       if (voter.name === name && voter.vote === null) {
         result = false;
+        return result
       }
     });
     return result;
@@ -66,7 +67,7 @@ export const Voting = (props) => {
 
   return (
       <div className='votingContainer'>
-        <Table rowKey={newData.index} tableLayout={'auto'} dataSource={newData}>
+        <Table rowKey="index" tableLayout={'auto'} dataSource={newData}>
           <Column colSpan="1" width={'50px'} className={'table-text'} title="#"
                   dataIndex="index" key="index"/>
           <Column ellipsis={true} columnWidth={'350px'} className={'table-text'} title="Name" dataIndex="votingName" key="votingName"

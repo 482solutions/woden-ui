@@ -18,14 +18,12 @@ const handleGetVoting = (state, votingData) => ({
 });
 
 const handleUpdateVoting = (state, voteData) => {
-  const dataIndex = state.data.findIndex((element, index) => {
-    if (element.votingHash === voteData.votingHash) {
-      return index;
+  const newData = state.data.map(i => {
+    if (i.votingHash === voteData.votingHash) {
+      return voteData;
     }
-    return false;
+    return i;
   });
-  const newData = state.data;
-  newData[dataIndex] = voteData;
   return {
     ...state,
     data: newData,

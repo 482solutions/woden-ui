@@ -75,7 +75,6 @@ it('Render component Voting Table', () => {
   const wrapper = mount(<Voting voting={info} close={() => {
   }} getVoting={() => {
   }}/>);
-  console.log(wrapper.debug())
   expect(wrapper.find(Table)).to.have.lengthOf(1);
   expect(wrapper.find(Button)).to.have.lengthOf(2);
   wrapper.find(Button).at(0).props().onClick();

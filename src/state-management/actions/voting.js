@@ -72,8 +72,6 @@ export const getVotingData = () => async(dispatch) => {
             minute: '2-digit',
           });
         }
-
-        const votingData = response.body;
         dispatch({
           type: SET_VOTING_DATA,
           payload: response.body.response,
@@ -95,6 +93,25 @@ export const vote = (voteData) => async(dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
+        response.body.response.versionTime = new Date(response.body.response.versionTime * 1000).toLocaleString(
+          'en-US',
+          {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: 'numeric',
+            hour12: false,
+            minute: '2-digit',
+          },
+        );
+        response.body.response.dueDate = new Date(response.body.response.dueDate * 1000).toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: 'numeric',
+          hour12: false,
+          minute: '2-digit',
+        });
         VotingModalSuccess('Congratulations!', 'Your vote are in');
         dispatch({ type: UPDATE_VOTING_DATA, payload: response.body.response });
       }
