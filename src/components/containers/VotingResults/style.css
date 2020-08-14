@@ -4,13 +4,13 @@
 
 .file-row-info{
     display: flex;
-    margin: 50px 38px;
+    margin: 50px 0 50px 38px;
     justify-content: space-between;
 }
 
 .result-option{
     margin-top: 18px;
-    width: 410px;
+    width: 100%;
 }
 
 .result-option-text-container{
@@ -78,4 +78,14 @@
 
 .modal-voting-results .ant-modal-confirm-btns{
     display: none;
+}
+
+.modal-footer-hiden-button{
+    display: none;
+}
+.modal-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
 }

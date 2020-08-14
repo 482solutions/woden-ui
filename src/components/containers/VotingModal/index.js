@@ -41,7 +41,7 @@ export const VotingModal = ({
       closeIcon={<p className="close-icon" onClick={() => {
         setOpenModal(false);
         setBtnText(initialBtnText);
-      }}>X</p>}
+      }}><img src={closeIcon} title={'close'} alt={'close'}/></p>}
       footer={null}
       >
       <div className={'modal-size'} style={{ width: 'auto', height: 'auto' }}>
