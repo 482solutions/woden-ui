@@ -263,7 +263,7 @@ Feature: Owner revoke access
     And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -296,7 +296,7 @@ Feature: Owner revoke access
     And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -328,7 +328,7 @@ Feature: Owner revoke access
     And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -361,7 +361,7 @@ Feature: Owner revoke access
     And The "User2" is the "absent" in access list
     When The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
-    And Enter "User2" email to field "#form_in_modal_email"
+    And Enter "User2" email to field "#form_in_modal_username"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -393,7 +393,7 @@ Feature: Owner revoke access
 #    And The user press the "Actions" button in "test.pem" "file"
 #    And The user press the "Share" button in "test.pem" "file"
 #    And Register without UI user3
-#    And Enter "User3" email to field "#form_in_modal_email"
+#    And Enter "User3" email to field "#form_in_modal_username"
 #    And Choose the "View Only" option from pop-up window
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."

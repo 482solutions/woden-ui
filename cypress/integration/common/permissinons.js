@@ -101,10 +101,10 @@ When(/^The "([^"]*)" sends a request to grant "([^"]*)" access to the "([^"]*)" 
         toUser = Cypress.env('email_3');
         break;
     } switch (permission) {
-      case 'edit' || 'Editor':
+      case 'edit':
         permission = 'write';
         break;
-      case 'view' || 'Viewer':
+      case 'view':
         permission = 'read';
         break;
     } switch (object) {
