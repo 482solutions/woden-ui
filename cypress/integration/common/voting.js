@@ -377,7 +377,7 @@ When(/^The percentage of those "([^"]*)" who voted for the option "([^"]*)"$/,  
 });
 
 Then(/^Close pop\-up results of voting$/,  () => {
-  cy.get('.close-icon').click()
+  cy.get('.close-icon > img').click()
 });
 
 Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (\d+) variants without "([^"]*)"$/,

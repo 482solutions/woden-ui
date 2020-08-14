@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import {
-  Button, Modal, Row,
-} from 'antd';
+import { Button, Modal, Row} from 'antd';
 
 import './style.css';
-
-export const VotingModal = ({
-                              openModal,setOpenModal,  record,  updateVoting,
-}) => {
-  const {
-    variants, votingName, versionTime, votingHash, description,
-  } = record;
+import closeIcon from '../../../assets/images/Icon-3.svg';
+export const VotingModal = ({ openModal,setOpenModal,  record,  updateVoting }) => {
+  const { variants, votingName, versionTime, votingHash, description } = record;
 
   const initialBtnText = 'Submit Your Vote'.toUpperCase();
 

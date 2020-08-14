@@ -34,10 +34,9 @@ Feature: Voting results
     And The percentage of those "33.33%" who voted for the option "Yes"
     And The percentage of those "33.33%" who voted for the option "No"
     And The percentage of those "33.33%" who voted for the option "Possibly"
-#    And Close pop-up results of voting
+    And Close pop-up results of voting
 
   Scenario: 2 Editor can view result of vote
-    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 3 variants
     Given "User1" send a request to vote for the "Yes" variant for "TestUpload.txt" file
     And Login as new user 3 without UI
     And "User3" send a request to vote for the "Yes" variant for "TestUpload.txt" file
@@ -54,7 +53,7 @@ Feature: Voting results
     And The percentage of those "100%" who voted for the option "Yes"
     And The percentage of those "0%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
-#    And Close pop-up results of voting
+    And Close pop-up results of voting
 
   Scenario: 3 Viewer can view result of vote
     And The "User1" sends a request to create vote for a file "TestUpload.txt" with 3 variants
@@ -74,7 +73,7 @@ Feature: Voting results
     And The percentage of those "66.67%" who voted for the option "Yes"
     And The percentage of those "33.33%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
-#    And Close pop-up results of voting
+    And Close pop-up results of voting
 
   Scenario: 4 User can view result if he didn't voted
     And The "User1" sends a request to create vote for a file "TestUpload.txt" with 3 variants
@@ -94,7 +93,7 @@ Feature: Voting results
     And The percentage of those "50%" who voted for the option "Yes"
     And The percentage of those "50%" who voted for the option "No"
     And The percentage of those "0%" who voted for the option "Possibly"
-#    And Close pop-up results of voting
+    And Close pop-up results of voting
 
   Scenario: 5 User can't view result if permissions for a file removed after vote
     And The "User1" sends a request to create vote for a file "TestUpload.txt" with 3 variants
@@ -130,9 +129,3 @@ Feature: Voting results
     When Press "Results"
     Then Pop-up Result is opened
     And Count of voters "0" " / " "2"
-
-
-
-
-
-

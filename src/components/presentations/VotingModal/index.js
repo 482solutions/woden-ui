@@ -61,7 +61,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
     for (let i = 0; i < state.variants.length; i++) {
       if (tempValues.variants === state.variants[i]) {
         checkVariants = false
-        message.warning('Variant already exist')
+        message.warning('The option already exists')
       }
     }
     if (tempValues.variants.length > 0 && state.variants.length < 5 && checkVariants) {
