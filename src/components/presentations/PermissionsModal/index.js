@@ -50,7 +50,7 @@ export const PermissionsModal = ({
                        pattern: /^[a-zA-Z0-9-_.@]{2,}$/g
                      },
                    ]}>
-          <Input style={{ width: 300 }} placeholder="User's Email"/>
+          <Input style={{ width: 300 }} placeholder="User's Email or Username"/>
         </Form.Item>
         <Form.Item name="permissions"
                    rules={[{

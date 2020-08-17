@@ -259,7 +259,7 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -299,7 +299,7 @@ Feature: Editor revoke access
     And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -333,7 +333,7 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -371,7 +371,7 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Share" button in "Revoke" "folder"
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."

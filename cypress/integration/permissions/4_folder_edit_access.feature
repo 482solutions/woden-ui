@@ -17,7 +17,7 @@ Feature: Grant edit access for a folder
   Scenario: 1 Edit access by owner
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -36,7 +36,7 @@ Feature: Grant edit access for a folder
   Scenario: 2 Edit access by editor
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -55,7 +55,7 @@ Feature: Grant edit access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Choose the "View and Update" option from pop-up window
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
@@ -78,7 +78,7 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -106,7 +106,7 @@ Feature: Grant edit access for a folder
     And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -122,7 +122,7 @@ Feature: Grant edit access for a folder
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Register without UI user3
-    And Enter "User3" email to field "#form_in_modal_username"
+    And Enter "User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -139,7 +139,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_username"
+    And Enter "invalidemail@gmail.com" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Error message "User for sharing not found"
@@ -149,14 +149,14 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the editor of this file"
@@ -166,7 +166,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User1" email to field "#form_in_modal_username"
+    And Enter "User1" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     Then Warning message "This user is the owner of this file"
@@ -176,7 +176,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -187,7 +187,7 @@ Feature: Grant edit access for a folder
     Then The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Warning message "This user is the editor of this file"
@@ -198,7 +198,7 @@ Feature: Grant edit access for a folder
     And Register without UI user3
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2 and User3" email to field "#form_in_modal_username"
+    And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -207,7 +207,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "spaces" email to field "#form_in_modal_username"
+    And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter a valid Email!"
 
@@ -216,7 +216,7 @@ Feature: Grant edit access for a folder
 #    Given The user 1 is the owner of the folder "testFolder"
 #    When The user press the "Actions" button in "testFolder" "folder"
 #    And The user press the "Share" button in "testFolder" "folder"
-#    And Enter "UsernameUser2" email to field "#form_in_modal_username"
+#    And Enter "UsernameUser2" email to field "#form_in_modal_email"
 #    And Choose the "View and Update" option from pop-up window
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
@@ -233,7 +233,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
@@ -248,7 +248,7 @@ Feature: Grant edit access for a folder
     Given The user 1 is the owner of the folder "testFolder"
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
-    And Enter "User2" email to field "#form_in_modal_username"
+    And Enter "User2" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
     And Spin is visible "Changing permissions..."
