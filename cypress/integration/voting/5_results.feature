@@ -37,6 +37,7 @@ Feature: Voting results
     And Close pop-up results of voting
 
   Scenario: 2 Editor can view result of vote
+    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 3 variants
     Given "User1" send a request to vote for the "Yes" variant for "TestUpload.txt" file
     And Login as new user 3 without UI
     And "User3" send a request to vote for the "Yes" variant for "TestUpload.txt" file
