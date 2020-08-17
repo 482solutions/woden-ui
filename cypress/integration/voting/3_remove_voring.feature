@@ -40,7 +40,7 @@ Feature:  Remove users from voting
     And Button "CONTINUE" "be.visible"
 
   @negative
-  Scenario: Owner can't remove all users from voting
+  Scenario: 2 Owner can't remove all users from voting
     And 2 users participate in the voting "User2, User3"
     And Owner delete "User2" from voting
     And 1 users participate in the voting "User3"

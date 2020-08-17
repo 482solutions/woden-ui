@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
-import {
-  Button, Modal, Row,
-} from 'antd';
-
+import { Button, Modal, Row, } from 'antd';
+import closeIcon from '../../../assets/images/Icon-3.svg';
 import './style.css';
 
-export const VotingModal = ({
-  record, updateVoting, setOpenModal, openModal,
-}) => {
-  const {
-    variants, votingName, versionTime, votingHash, description,
-  } = record;
-
+export const VotingModal = ({ openModal,setOpenModal,  record,  updateVoting }) => {
+  const { variants, votingName, versionTime, votingHash, description } = record;
   const initialBtnText = 'Submit Your Vote'.toUpperCase();
-
   const [vote, setVote] = useState(null);
   const [btnText, setBtnText] = useState(initialBtnText);
   const [disableBtn, setDisableBtn] = useState(true);
 
   const handleClick = (variant) => {
-    setBtnText((`Vote For: ${variant}`).toUpperCase());
+    setBtnText((`${variant}`).toUpperCase());
     setVote(variant);
   };
 
@@ -41,12 +33,10 @@ export const VotingModal = ({
       closeIcon={<p className="close-icon" onClick={() => {
         setOpenModal(false);
         setBtnText(initialBtnText);
-      }}>X</p>}
-      footer={[
-        <div key={'index'} style={{ marginTop: '20px' }}></div>,
-      ]}
+      }}><img src={closeIcon} title={'close'} alt={'close'}/></p>}
+      footer={null}
       >
-      <div className={'modal-size'} style={{ height: 'auto' }}>
+      <div className={'modal-size'} style={{ width: 'auto', height: 'auto' }}>
         <Row>
           <h3 className={'voting-title'}>Voting</h3>
         </Row>
@@ -54,7 +44,7 @@ export const VotingModal = ({
           <div className={'voting-file-container'}>
             <h4 className={'voting-file-name'}>{votingName || 0}</h4>
             <p className={'voting-file-date'}>{versionTime || 0}</p>
-            <p style={{ width: '200px' }} className={'voting-file-date'}>{description || ''}</p>
+            <p className={'voting-file-date'}>{description || ''}</p>
           </div>
         </Row>
         {variants
@@ -65,8 +55,9 @@ export const VotingModal = ({
             handleClick(variant);
           }}>{variant}</Button></Row>)
           : ''}
-        <Row>
-          <Button disabled={disableBtn} className='voting-submit-button' onClick={() => onFinish()}>{btnText} </Button>
+        <Row justify='center'>
+          <Button disabled={disableBtn} className='voting-submit-button'
+                  onClick={() => onFinish()}><span>VOTE FOR: </span>{ btnText} </Button>
         </Row>
       </div>
     </Modal>

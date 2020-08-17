@@ -23,6 +23,7 @@
 }
 
 .voting-file-date{
+    width: 300px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
@@ -33,7 +34,8 @@
 }
 
 .voting-file-container{
-    margin-left: 82px;
+    width: 300px;
+    margin-left: 14px;
 }
 
 .button-row{
@@ -41,19 +43,19 @@
 }
 
 .voting-button{
-    width: 180px;
-    margin-left: 82px;
+    width: 100%;
     font-size: 14px;
     color: #3B7CFF;
     border: 1.2px solid #3B7CFF;
+    text-align: center;
 }
 
 .voting-submit-button{
-    position: absolute;
-    width: 180px;
+    max-width: 332px;
     margin-top: 13px;
-    margin-left: 82px;
-    height: 32px;
+    text-align: center;
+    min-height: 32px;
+    height: auto;
     background: #56CCF2;
     border: 1.2px solid #56CCF2;
     font-family: Montserrat;
@@ -66,4 +68,7 @@
     color: #FFFFFF;
     box-sizing: border-box;
     border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

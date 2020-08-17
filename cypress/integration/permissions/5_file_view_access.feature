@@ -196,7 +196,7 @@ Feature: Grant view access for a file
     And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive
+#  @positive TODO
 #  Scenario: 13 Owner can grand view access for a file if field "email" contain username
 #    And The user upload "TestUpload.txt" without UI
 #    When The user press the "Actions" button in "TestUpload.txt" "file"
@@ -206,6 +206,11 @@ Feature: Grant view access for a file
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
 #    When Message about transfer ownership "Permissions updated successfully"
-
+#    And Login as new user 2 without UI
+#    And The file "TestUpload.txt" is visible
+#    And Login as new user without UI
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    Then "User1" has Editors rights to "TestUpload.txt" "file"
 
 

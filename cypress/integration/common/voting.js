@@ -234,7 +234,7 @@ Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (
       User2: Cypress.env('token_2'),
       User3: Cypress.env('token_3'),
     }
-    const time = Math.floor(new Date().getTime() / 1000.0) + 100
+    const time = Math.floor(new Date().getTime() / 1000.0) + 60
     cy.request({
       headers: {
         'content-type': 'application/json',
@@ -377,5 +377,54 @@ When(/^The percentage of those "([^"]*)" who voted for the option "([^"]*)"$/,  
 });
 
 Then(/^Close pop\-up results of voting$/,  () => {
-  cy.get('.close-icon').click()
+  cy.get('.close-icon > img').click()
+});
+
+Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (\d+) variants without "([^"]*)"$/,
+  (owner, file, answers, users) => {
+  let tokens = {
+    User1: Cypress.env('token'),
+    User2: Cypress.env('token_2'),
+    User3: Cypress.env('token_3'),
+  }
+  let logins = {
+    User2: Cypress.env('login_2'),
+    User3: Cypress.env('login_3'),
+  }
+  const time = Math.floor(new Date().getTime() / 1000.0) + 100
+  cy.request({
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${tokens[owner]}`
+    },
+    method: 'POST',
+    url: `${Cypress.env('backendURL')}/voting`,
+    body: {
+      hash: getHash(file, Cypress.env('filesInRoot')),
+      dueDate: time.toString(),
+      variants: variants[answers],
+      excludedUsers: [logins[users]],
+      description: desc[5],
+    },
+    failOnStatusCode: false,
+  }).then((resp) => {
+    expect(resp.body).to.not.have.property('stack');
+    Cypress.env('respBody', resp.body)
+    Cypress.env('respStatus', resp.status)
+    if (resp.status === 201) {
+      expect(resp.body).to.not.have.property('message');
+
+      let vote = getVoting(file, resp.body.response)
+      Cypress.env('votingHash', vote.votingHash)
+    }
+  })
+});
+
+Then(/^Voting for a file "([^"]*)" doesn't exist$/,  (file) => {
+  cy.contains(file).should('not.be.visible')
+});
+
+When(/^Press "([^"]*)" button$/,  (button) => {
+  cy.get('.ant-row-center > .ant-btn')
+    .should('contain.text', button).click()
 });

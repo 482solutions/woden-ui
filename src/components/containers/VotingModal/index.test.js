@@ -28,7 +28,7 @@ it('Text is correct', () => {
 
 it('Button clicks work correctly', () => {
   const wrapper = shallow(<VotingModal record={mockData}/>);
-  expect(wrapper.find('.voting-submit-button').text()).to.equal('Submit Your Vote '.toUpperCase());
+  expect(wrapper.find('.voting-submit-button').text()).to.equal('VOTE FOR: Submit Your Vote '.toUpperCase());
   wrapper.find('.voting-button').at(0).simulate('click');
-  expect(wrapper.find('.voting-submit-button').text()).to.equal((`Vote For: ${mockData.variants[0]} `).toUpperCase());
+  expect(wrapper.find('.voting-submit-button').text()).to.equal((`VOTE FOR: ${mockData.variants[0]} `).toUpperCase());
 });

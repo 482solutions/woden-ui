@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Row, Progress } from 'antd';
+import { Modal, Progress, Row } from 'antd';
 
 import fileIcon from '../../../assets/images/votingFileLabel.svg';
+import closeIcon from '../../../assets/images/Icon-3.svg';
 
 import './style.css';
 
@@ -35,41 +36,49 @@ export function VotingResults(vote) {
     if (votingResultsForEach[index].value !== 0) {
       const result = (votingResultsForEach[index].value / totalVoted()) * 100;
       return result % 1 !== 0 ? result.toFixed(2) : result;
-    } return 0;
+    }
+    return 0;
   };
 
   const modal = Modal.info();
   modal.update({
     width: '512px',
     centered: true,
-    icon: (<img className={'result-icon'} src={fileIcon} alt="file" title="file" />),
+    okButtonProps: { disabled: true, className: "modal-footer-hiden-button" },
+    okText: '',
+    icon: (<img className={'result-icon'} src={fileIcon} alt="file" title="file"/>),
     content: (<div className={'modal-size modal-voting-results'}>
-        <Row className="file-row-info">
-            <div className="file-info-container">
-                <div>
-                    <h4 className={'voting-results-title'}>{votingName}</h4>
-                    <p>{versionTime}</p>
-                    <p>{description}</p>
-                </div>
+      <p className="close-icon modal-close-icon" onClick={() => {
+        modal.destroy()
+      }}><img src={closeIcon} title={'close'} alt={'close'}/></p>
+      {/*<Modal footer={null} />*/}
+      <Row className="file-row-info">
+        <div className="file-info-container">
+          <div>
+            <h4 className={'voting-results-title'}>{votingName}</h4>
+            <p>{versionTime}</p>
+            <p style={{ width: '300px' }} className={'voting-file-date'}>{description}</p>
+          </div>
+        </div>
+        <div>
+          <p className="voting-results">Voting results</p>
+          <p className="voting-results-number">{totalVoted()} / {voters.length}</p>
+        </div>
+      </Row>
+      {
+        variants.map((variant, index) => (
+          <Row key={index}>
+            <div className="result-option">
+              <p className="result-option-text-container">
+                <span className="result-option-variant">{variant}</span>
+                <span className="result-option-percentage">{countPercent(index)}%</span>
+              </p>
+              <Progress percent={countPercent(index)} strokeColor={colors[index]}
+                        strokeWidth={'4px'} showInfo={false}/>
             </div>
-            <div>
-                <p className="voting-results">Voting results</p>
-                <p className="voting-results-number">{totalVoted()} / {voters.length}</p>
-            </div>
-        </Row>
-            {
-                variants.map((variant, index) => (
-                        <Row key={index}>
-                            <div className="result-option">
-                                <p className="result-option-text-container">
-                                    <span className="result-option-variant">{variant}</span>
-                                    <span className="result-option-percentage">{countPercent(index)}%</span>
-                                </p>
-                                <Progress percent={countPercent(index)} strokeColor={colors[index]} strokeWidth={'4px'} showInfo={false}/>
-                            </div>
-                        </Row>
-                ))
-            }
-      </div>),
+          </Row>
+        ))
+      }
+    </div>),
   });
 }

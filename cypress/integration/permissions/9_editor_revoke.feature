@@ -383,3 +383,21 @@ Feature: Editor revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
+
+  Scenario: 12 Editor doesn't have remove button near himself in access list
+    And Create folder with name "Revoke" in root without UI
+    And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
+    And Login as new user 2 without UI
+    And The user open Shared with me
+    And Spin is visible "Getting data..."
+    And The folder "Revoke" is visible
+    And Upload file "TestUpload.txt" to "Revoke"
+    And The user press the "Actions" button in "TestUpload.txt" "file"
+    And The user press the "Access list" button in "TestUpload.txt" "file"
+    And The user sees the access list
+    And The "User1" is the "owner" in access list
+    And The "User2" is the "editor" in access list
+    Then The button revoke access is not visible near editor "User2"
+
+
+

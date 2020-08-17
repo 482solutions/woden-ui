@@ -16,7 +16,7 @@ Feature: Voting
   @positive
   Scenario: 1 Editor can vote
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
-    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 2 variants
+    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 5 variants
     When Login as new user 2 without UI
     And The user open Voting tab
     And The list of available voting is displayed
@@ -26,15 +26,11 @@ Feature: Voting
     When The user press "Vote" button for voting
     And Pop-up "Voting" "be.visible"
     And User chooses variant "Yes"
-    And Press "VOTE FOR: YES"
+    And Press "VOTE FOR: YES" button
     And Spin is visible "Vote..."
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-##    TODO DELETE RELOAD
-#    And RELOAD
-#    And The user open Voting tab
-#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -55,10 +51,6 @@ Feature: Voting
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-##    TODO DELETE RELOAD
-#    And RELOAD
-#    And The user open Voting tab
-#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -79,10 +71,6 @@ Feature: Voting
     Then Pop-up "Congratulations!" with description "Your vote are in" is visible
     And Button "CONTINUE" "be.visible"
     And Press "CONTINUE"
-##    TODO DELETE RELOAD
-#    And RELOAD
-#    And The user open Voting tab
-#    And The list of available voting is displayed
     Then Total voters for a file "TestUpload.txt" "1/2"
     And The user can not vote for this file "TestUpload.txt"
 
@@ -94,7 +82,7 @@ Feature: Voting
     And The list of available voting is displayed
     And Voting for a file "TestUpload.txt" "be.visible"
     Then Status of voting is "closed" for a file "TestUpload.txt"
-    And The user can not vote for this file "TestUpload.txt"
+    And Button "VOTE" "not.be.visible"
 
   Scenario: 5 User can't vote if he didn't choose an answer
     Given The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
@@ -125,3 +113,32 @@ Feature: Voting
     And Pop-up "Voting" "be.visible"
     And User chooses variant "No"
     And Button "VOTE FOR: NO" "be.visible"
+
+  Scenario: 7 User can't vote if he was removed from voting
+    Given The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
+    And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
+    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 5 variants without "User2"
+    And Login as new user 2 without UI
+    When The user open Voting tab
+    And The list of available voting is displayed
+    And Voting for a file "TestUpload.txt" "be.visible"
+    And Status of voting is "active" for a file "TestUpload.txt"
+    And Total voters for a file "TestUpload.txt" "0/2"
+    Then The user can not vote for this file "TestUpload.txt"
+
+  Scenario: 8 User can't vote if he is got permissions for a file after start vote
+    Given The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
+    And The "User1" sends a request to create vote for a file "TestUpload.txt" with 2 variants
+    When The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
+    And The user open Voting tab
+    And The list of available voting is displayed
+    And Voting for a file "TestUpload.txt" "be.visible"
+    And Status of voting is "active" for a file "TestUpload.txt"
+    And Total voters for a file "TestUpload.txt" "0/2"
+    And Login as new user 3 without UI
+    And The user open Voting tab
+    And The list of available voting is displayed
+    And Voting for a file "TestUpload.txt" "be.visible"
+    And Status of voting is "active" for a file "TestUpload.txt"
+    Then Total voters for a file "TestUpload.txt" "0/2"
+    And The user can not vote for this file "TestUpload.txt"
