@@ -23,6 +23,7 @@
 }
 
 .voting-file-date{
+    width: 300px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
@@ -33,6 +34,7 @@
 }
 
 .voting-file-container{
+    width: 300px;
     margin-left: 14px;
 }
 

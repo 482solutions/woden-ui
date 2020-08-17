@@ -1,39 +1,38 @@
 .file-info-container{
     display: flex;
+    font-family: Montserrat;
+    overflow: hidden;
+    word-break: break-word;
 }
-
+.file-info-container > div > p:last-child{
+    color: #8998AC;
+}
 .file-row-info{
     display: flex;
     margin: 50px 0 50px 38px;
     justify-content: space-between;
 }
-
 .result-option{
     margin-top: 18px;
     width: 100%;
 }
-
 .result-option-text-container{
     display: flex;
     justify-content: space-between;
 }
-
 .result-option-variant{
     margin-bottom: 6px;
     font-weight: 500;
 }
-
 .result-option-percentage{
     font-weight: 600;
 }
-
 .result-icon{
     width: 24px;
     position: absolute;
     top: 92px;
     left: 30px;
 }
-
 .voting-results-title{
     max-width: 250px;
     font-style: normal;
@@ -43,7 +42,6 @@
     font-family: Montserrat;
     color: #8998AC;
 }
-
 .voting-results-data{
     font-family: Montserrat;
     font-style: normal;
@@ -53,7 +51,6 @@
     letter-spacing: 0.4px;
     color: #8998AC;
 }
-
 .voting-results{
     font-family: Montserrat;
     font-style: normal;
@@ -65,7 +62,6 @@
     letter-spacing: 0.4px;
     color: #333333;
 }
-
 .voting-results-number{
     font-family: Montserrat;
     font-style: normal;
@@ -75,11 +71,9 @@
     text-align: right;
     color: #8998AC;
 }
-
 .modal-voting-results .ant-modal-confirm-btns{
     display: none;
 }
-
 .modal-footer-hiden-button{
     display: none;
 }

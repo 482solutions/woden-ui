@@ -195,7 +195,7 @@ Feature: Grant view access for a folder
     And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
     And Press "Confirm"
-    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 11 Owner can not grand view access for a folder if field "email" contain spaces

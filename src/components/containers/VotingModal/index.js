@@ -41,10 +41,10 @@ export const VotingModal = ({ openModal,setOpenModal,  record,  updateVoting }) 
           <h3 className={'voting-title'}>Voting</h3>
         </Row>
         <Row>
-          <div className={'voting-file-container'} style={{ width: '300px' }}>
+          <div className={'voting-file-container'}>
             <h4 className={'voting-file-name'}>{votingName || 0}</h4>
             <p className={'voting-file-date'}>{versionTime || 0}</p>
-            <p style={{ width: '300px' }} className={'voting-file-date'}>{description || ''}</p>
+            <p className={'voting-file-date'}>{description || ''}</p>
           </div>
         </Row>
         {variants

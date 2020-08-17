@@ -57,7 +57,7 @@ export function VotingResults(vote) {
           <div>
             <h4 className={'voting-results-title'}>{votingName}</h4>
             <p>{versionTime}</p>
-            <p>{description}</p>
+            <p style={{ width: '300px' }} className={'voting-file-date'}>{description}</p>
           </div>
         </div>
         <div>

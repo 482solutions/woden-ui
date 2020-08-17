@@ -177,7 +177,7 @@ Feature: Grant edit access for a file
     And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
-    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 10 Owner can not grand access for a file if field "email" contain spaces
