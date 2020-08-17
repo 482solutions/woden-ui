@@ -173,7 +173,7 @@ Feature: Grant view access for a file
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 11 Owner can not grand view access for a file if field "email" is empty
@@ -194,7 +194,7 @@ Feature: Grant view access for a file
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View Only" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
 #  @positive TODO
 #  Scenario: 13 Owner can grand view access for a file if field "email" contain username
