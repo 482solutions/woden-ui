@@ -225,6 +225,10 @@ export class Home extends React.Component {
         this.props.getFolderData(hash, mode);
       }
     }
+    this.setState({
+      fileWrapperVisible: false,
+      accessListVisible: false
+    })
   }
 
   getFoldersTree() {
@@ -405,7 +409,7 @@ export class Home extends React.Component {
                     </Col>
                     <Col className="revokeAccess">
                       {
-                        (this.state.userPermission === 'owner' ||  this.state.userPermission !== 'read')
+                        (this.state.userPermission === 'owner' || this.state.userPermission !== 'read')
                         && <img src={revokeAccessIcon} alt="Revoke access"
                                 onClick={() => {
                                   this.revokePermissions({
