@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
-import { Buttons, Drive, Sidebar, Voting } from '../../components/containers';
+import {
+  Buttons, Drive, Sidebar, Voting,
+} from '../../components/containers';
 import { getRootFolderHash } from '../../utils/functions';
 import { PermissionsModal, VotingModal } from '../../components/presentations';
 import { actions } from '../../state-management';
@@ -13,7 +15,6 @@ import revokeAccessIcon from '../../assets/images/revokeAccessIcon.svg';
 import editorIcon from '../../assets/images/editorIcon.svg';
 import viewerIcon from '../../assets/images/viewerIcon.svg';
 import goHome from '../../assets/images/goHome.svg';
-
 
 export class Home extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export class Home extends React.Component {
         children: null,
       },
       votingModalInfo: {
-        fileData: {}
+        fileData: {},
       },
       mode: 'drive',
     };
@@ -63,7 +64,7 @@ export class Home extends React.Component {
     this.closeShareModal = this.closeShareModal.bind(this);
     this.shareModal = this.shareModal.bind(this);
     this.votingModal = this.votingModal.bind(this);
-    this.closeVotingModal = this.closeVotingModal.bind(this),
+    this.closeVotingModal = this.closeVotingModal.bind(this);
     this.changePermissions = this.changePermissions.bind(this);
     this.createVoting = this.createVoting.bind(this);
     this.revokePermissions = this.revokePermissions.bind(this);
@@ -99,7 +100,6 @@ export class Home extends React.Component {
     return false;
   }
 
-
   updateFile(file, hash) {
     this.props.updateFile({ fileHash: hash, file });
     return false;
@@ -113,7 +113,6 @@ export class Home extends React.Component {
   }
 
   downloadFile(hash, cid, name, perm) {
-    console.log(hash, cid, name, perm)
     if (perm === 'owner' || perm === 'write' || perm === 'read') {
       this.props.downloadFile(hash, cid, name);
     }
@@ -180,7 +179,7 @@ export class Home extends React.Component {
     this.setState({ votingModalVisible: true });
     this.setState({
       votingModalInfo: {
-        fileData
+        fileData,
       },
     });
   }
@@ -189,7 +188,7 @@ export class Home extends React.Component {
     this.setState({ votingModalVisible: false });
     this.setState({
       votingModalInfo: {
-        fileData: {}
+        fileData: {},
       },
     });
   }
@@ -216,16 +215,20 @@ export class Home extends React.Component {
   async changeMode(mode) {
     if (mode !== this.state.mode) {
       if (this.state.mode === 'voting') {
-        this.setState({ voting: false })
+        this.setState({ voting: false });
       }
       this.setState({ mode });
       if (mode === 'voting') {
-        this.setState({ voting: true })
+        this.setState({ voting: true });
       } else {
         const hash = await getRootFolderHash();
         this.props.getFolderData(hash, mode);
       }
     }
+    this.setState({
+      fileWrapperVisible: false,
+      accessListVisible: false
+    })
   }
 
   getFoldersTree() {
@@ -238,7 +241,7 @@ export class Home extends React.Component {
 
   async goHome() {
     const hash = await getRootFolderHash();
-    this.setState({ mode: 'drive', voting: false })
+    this.setState({ mode: 'drive', voting: false });
     this.openFolder(hash);
   }
 
@@ -305,7 +308,8 @@ export class Home extends React.Component {
         {
           fileWrapperVisible && <div id='VersionWrapper'
                                      className="fileInfoWrapper">
-            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }} className="versionHeader">
+            <Row justify="center" align="middle" style={{ width: '100%', height: '35px' }}
+                 className="versionHeader">
               <span className='infoTitle'>{wrapperInfo.fileName}</span>
               <div id='CloseVersionsWrapper' className='closeButton'>
                 <img onClick={this.closeFileWrapper} alt='Close' title='Close info'
@@ -333,7 +337,10 @@ export class Home extends React.Component {
                     <Col className='versionAuthor'>{version.user}</Col>
                     <Col className='versionDownload'>
                       <img id={`Download_${version.cid}`} onClick={() => {
-                        this.downloadFile(wrapperInfo.fileHash, version.cid, wrapperInfo.fileName, this.state.userPermission);
+                        this.downloadFile(wrapperInfo.fileHash,
+                          version.cid,
+                          wrapperInfo.fileName,
+                          this.state.userPermission);
                       }} src={DownloadIcon} alt="Download" title='Download this version'/>
                     </Col>
                   </Row>
@@ -374,8 +381,8 @@ export class Home extends React.Component {
                       </Col>
                       <Col className="revokeAccess">
                         {
-                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write') && (permissions.writeUsers.includes(
-                            this.props.userName) !== this.props.userName))
+                          ((this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                            && (this.props.userName !== permissions.writeUsers[i]))
                           && <img src={revokeAccessIcon} alt="Revoke access"
                                   onClick={() => {
                                     this.revokePermissions({
@@ -402,7 +409,7 @@ export class Home extends React.Component {
                     </Col>
                     <Col className="revokeAccess">
                       {
-                        (this.state.userPermission === 'owner' || this.state.userPermission === 'write')
+                        (this.state.userPermission === 'owner' || this.state.userPermission !== 'read')
                         && <img src={revokeAccessIcon} alt="Revoke access"
                                 onClick={() => {
                                   this.revokePermissions({
@@ -450,6 +457,7 @@ export default connect(({ auth, filesystem, permissions }) => ({
     updatePermission: actions.updatePermission,
     createVoting: actions.createVoting,
     getVoting: actions.getVotingData,
+    updateVoting: actions.vote,
   })(
   Home,
 );

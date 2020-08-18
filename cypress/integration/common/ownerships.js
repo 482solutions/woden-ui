@@ -89,7 +89,7 @@ Given(/^The user 1 is the owner of the file$/, () => {
 });
 
 When(/^Enter User 2 username$/, () => {
-  cy.get('#form_in_modal_username').should('be.visible')
+  cy.get('#form_in_modal_email').should('be.visible')
     .type(Cypress.env('login_2'))
 });
 

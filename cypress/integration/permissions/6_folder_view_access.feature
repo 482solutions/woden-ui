@@ -202,10 +202,11 @@ Feature: Grant view access for a folder
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "spaces" email to field "#form_in_modal_email"
+    And Choose the "View Only" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive
-#  Scenario: 12 Owner can grand view access for a folder if field "email" contain username
+#  @positive TODO
+#  Scenario: 12 Owner can not grand view access for a folder if field "email" contain username
 #    When The user press the "Actions" button in "testFolder" "folder"
 #    And The user press the "Share" button in "testFolder" "folder"
 #    And Enter "UsernameUser2" email to field "#form_in_modal_email"
@@ -213,6 +214,12 @@ Feature: Grant view access for a folder
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
 #    When Message about transfer ownership "Permissions updated successfully"
+#    And Login as new user 2 without UI
+#    And The folder "testFolder" is visible
+#    And Login as new user without UI
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    Then "User1" has Editors rights to "testFolder" "folder"
 
   @positive
   Scenario: 13 Viewer can see files that were created in the shared folder after the transfer of viewing rights

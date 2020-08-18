@@ -5,6 +5,7 @@ import {
   SET_FOLDER_DATA,
   CLEAN_STORAGE,
   GET_FOLDERS_TREE,
+  UPDATE_FOLDER_DATA,
 } from '../types';
 
 const initialState = {
@@ -59,6 +60,21 @@ const handleGetFolder = (state, folderData, mode) => ({
   },
 });
 
+const handleUpdateFolder = (state, fileData, mode) => {
+  const dataIndex = state[mode].filesInfo.findIndex((element, index) => {
+    if (element.fileHash === fileData.fileHash) {
+      return index;
+    }
+    return false;
+  });
+  const newData = state[mode].filesInfo;
+  newData[dataIndex] = fileData;
+  return {
+    ...state,
+    [mode]: { ...state[mode], filesInfo: newData },
+  };
+};
+
 const handleSearch = (state, folderData, mode) => ({
   ...state,
   [mode]: {
@@ -86,6 +102,7 @@ const handleTree = (state, treeData) => ({
 const handlers = {
   [SET_FOLDER_DATA]: handleSetFolder,
   [GET_FOLDER_DATA]: handleGetFolder,
+  [UPDATE_FOLDER_DATA]: handleUpdateFolder,
   [SEARCH_FOLDER_FILE]: handleSearch,
   [GET_VERSIONS]: handleVersions,
   [CLEAN_STORAGE]: cleanStorage,

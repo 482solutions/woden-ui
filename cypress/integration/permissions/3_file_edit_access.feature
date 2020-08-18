@@ -148,6 +148,7 @@ Feature: Grant edit access for a file
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
+#    And Spin is visible "Getting data..."
     And "User2" has Editors rights to "TestUpload.txt" "file"
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
@@ -158,7 +159,7 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 8 Owner can not grand access for a file to some users
-    And The user upload "TestUpload.txt" without UI
+      And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And Register without UI user3
     When The user press the "Actions" button in "TestUpload.txt" "file"
@@ -188,7 +189,8 @@ Feature: Grant edit access for a file
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#   @positive
+      #      TODO
+#    @positive
 #  Scenario: 11 Owner can grand access for a file if field "email" contain username
 #    And The user upload "TestUpload.txt" without UI
 #    And The user 1 is the owner of the file
@@ -199,6 +201,12 @@ Feature: Grant edit access for a file
 #    And Press "Confirm"
 #    And Spin is visible "Changing permissions..."
 #    When Message about transfer ownership "Permissions updated successfully"
+#    And Login as new user 2 without UI
+#    And The file "TestUpload.txt" is visible
+#    And Login as new user without UI
+#    And The user open Shared with me
+#    And Spin is visible "Getting data..."
+#    Then "User1" has Editors rights to "TestUpload.txt" "file"
 
   @negative
   Scenario: 12 Editor can can not to transfer ownership for a file

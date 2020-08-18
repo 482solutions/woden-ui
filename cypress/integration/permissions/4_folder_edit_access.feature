@@ -211,8 +211,8 @@ Feature: Grant edit access for a folder
     And Choose the "View and Update" option from pop-up window
     Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
-#  @positive
-#  Scenario: 11 Owner can grand access for a folder if field "email" contain username
+#  @positive TODO
+#  Scenario: 11 Owner can not grand access for a folder if field "email" contain username
 #    Given The user 1 is the owner of the folder "testFolder"
 #    When The user press the "Actions" button in "testFolder" "folder"
 #    And The user press the "Share" button in "testFolder" "folder"
