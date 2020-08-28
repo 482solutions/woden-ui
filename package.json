@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.0.6",
+    "@babel/runtime": "^7.11.2",
     "@cypress/request": "^2.88.5",
     "@jest/environment": "^26.0.1",
     "@jest/globals": "^26.0.1",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@commitlint/cli": "^8.3.5",
