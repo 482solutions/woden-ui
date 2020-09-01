@@ -23,10 +23,8 @@ Feature: Grant edit access for a folder
     And Spin is visible "Changing permissions..."
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
-    And Spin is visible "Getting data..."
     And The folder "testFolder" is not visible
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And "User2" has Editors rights to "testFolder" "folder"
@@ -44,13 +42,11 @@ Feature: Grant edit access for a folder
     And The folder "testFolder" is visible
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     And "User1" has Editors rights to "testFolder" "folder"
     And  The user press the back button
-    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Choose the "View and Update" option from pop-up window
@@ -62,7 +58,6 @@ Feature: Grant edit access for a folder
     And Login as new user 3 without UI
     And The folder "testFolder" is not visible
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
     Then Upload file "txtFile.pem" to "testFolder"
@@ -75,7 +70,6 @@ Feature: Grant edit access for a folder
   Scenario: 3 User can grand edit access for a folder with files inside
     Given Upload file "TestUpload.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_email"
@@ -86,10 +80,8 @@ Feature: Grant edit access for a folder
     And Login as new user 2 without UI
     And The folder "testFolder" is not visible
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
     And Button "New Folder" "be.visible"
     And Button "File Upload" "be.visible"
     And The file "TestUpload.txt" is visible
@@ -100,10 +92,8 @@ Feature: Grant edit access for a folder
   folder to the user 3 and user3 has rights only for shared file
     Given Upload file "TestUpload.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
     And Upload file "image.png" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_email"
@@ -114,7 +104,6 @@ Feature: Grant edit access for a folder
     And Login as new user 2 without UI
     And The folder "testFolder" is not visible
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user opens folder "testFolder"
     And The file "TestUpload.txt" is visible
@@ -129,7 +118,6 @@ Feature: Grant edit access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     Then The folder "testFolder" is not visible
     And The file "TestUpload.txt" is visible
     And The file "image.png" is not visible
@@ -183,7 +171,6 @@ Feature: Grant edit access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
@@ -200,7 +187,7 @@ Feature: Grant edit access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 10 Owner can not grand access for a folder if field "email" contain spaces
@@ -209,7 +196,7 @@ Feature: Grant edit access for a folder
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
 #  @positive TODO
 #  Scenario: 11 Owner can not grand access for a folder if field "email" contain username
@@ -225,7 +212,7 @@ Feature: Grant edit access for a folder
 #    And The folder "testFolder" is visible
 #    And Login as new user without UI
 #    And The user open Shared with me
-#    And Spin is visible "Getting data..."
+
 #    Then "User1" has Editors rights to "testFolder" "folder"
 
   @negative
@@ -240,7 +227,6 @@ Feature: Grant edit access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     When Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     Then "Transfer ownership" option from pop-up window is not visible
 
   @positive
@@ -255,20 +241,15 @@ Feature: Grant edit access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And Login as new user without UI
     When Create folder with name "testFolder2" in "testFolder"
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible
     Then The user opens folder "testFolder2"
-    And Spin is visible "Getting data..."
     And The user is located in "testFolder2"
