@@ -21,7 +21,6 @@ Feature: Transfer folder ownership
     And The folder "Folder1" is visible
     And Login as new user without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "Folder1" is visible
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
@@ -34,7 +33,7 @@ Feature: Transfer folder ownership
   Scenario: 2 Transfer ownership to a folder in a folder
     And Create folder with name "Folder2" in "Folder1"
     And RELOAD
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user opens folder "Folder1"
     When The user press the "Actions" button in "Folder2" "folder"
     And The user press the "Share" button in "Folder2" "folder"
@@ -49,7 +48,6 @@ Feature: Transfer folder ownership
     And Login as new user without UI
     Then The folder "Folder1" is visible
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     And The folder "Folder2" is visible
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"

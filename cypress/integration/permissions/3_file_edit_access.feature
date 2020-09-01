@@ -156,14 +156,14 @@ Feature: Grant edit access for a file
 
   @negative
   Scenario: 8 Owner can not grand access for a file to some users
-      And The user upload "TestUpload.txt" without UI
+    And The user upload "TestUpload.txt" without UI
     And The user 1 is the owner of the file
     And Register without UI user3
     When The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User2 and User3" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 9 Owner can not grand access for a file if field "email" is empty
@@ -174,7 +174,7 @@ Feature: Grant edit access for a file
     And Enter "nothing" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
     And Press "Confirm"
-    Then Notification below the field "Please enter the email of the user to whom you want to transfer rights"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
   @negative
   Scenario: 10 Owner can not grand access for a file if field "email" contain spaces
@@ -184,7 +184,7 @@ Feature: Grant edit access for a file
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "spaces" email to field "#form_in_modal_email"
     And Choose the "View and Update" option from pop-up window
-    Then Notification below the field "Please enter a valid Email!"
+    Then Notification below the field "Please enter the username or email of the user to whom you want to transfer rights"
 
       #      TODO
 #    @positive
