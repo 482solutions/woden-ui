@@ -25,10 +25,10 @@ Feature: Home button
     And The "User1" sends a request to grant "edit" access to the "folder" "FolderFolder" to "User2"
     When Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "FolderFolder" is visible
     And The user opens folder "FolderFolder"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     When User click Home button
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The user is located in "Shared with me"
