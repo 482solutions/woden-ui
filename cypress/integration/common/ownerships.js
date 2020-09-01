@@ -41,8 +41,8 @@ Then(/^"([^"]*)" option from pop-up window is not visible$/, () => {
 
 Given(/^Choose the "([^"]*)" option from pop-up window$/, (option) => {
   cy.get('.ant-modal-header').should('be.visible')
-  cy.get('#form_in_modal_permissions').should('be.visible').click().wait(1000)
-  cy.contains(option).click().wait(1000)
+  cy.get('#form_in_modal_permissions').should('be.visible').click().wait(100)
+  cy.contains(option).click().wait(100)
 });
 
 Given(/^Press "([^"]*)"$/, (button) => {

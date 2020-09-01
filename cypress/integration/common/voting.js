@@ -47,7 +47,7 @@ When(/^User adding (.*) of choices$/,  (count) => {
     cy.get('.ant-input-wrapper > .ant-input')
       .type(variants[count][index]);
     cy.get('.ant-input-group-addon > .ant-btn')
-      .click().wait(1000);
+      .click().wait(100);
     cy.get('.ant-row.ant-row-middle.variants')
       .should('have.length', index+1);
   }
@@ -57,7 +57,7 @@ When(/^User selects date and time$/,  () => {
   const fullDate = getDateTime('future')
   cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
     .type(fullDate.dateString)
-    .wait(3000);
+    .wait(500);
 
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
@@ -141,7 +141,7 @@ When(/^User selects date and time, which is real time$/, () => {
   cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
     .type(fullDate.dateString)
 
-    .wait(3000);
+    .wait(500);
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
     .type(`${fullDate.hour}:${fullDate.minutes}`)
@@ -154,7 +154,7 @@ Then(/^User selects date and time, which less than the real time$/, () => {
   cy.get(':nth-child(1) > .ant-row-center > .ant-picker > .ant-picker-input')
     .type(fullDate.dateString)
 
-    .wait(3000);
+    .wait(500);
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
     .click()
     .type(`${fullDate.hour}:${fullDate.minutes}`)
@@ -189,7 +189,7 @@ Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
 });
 
 When(/^The user open Voting tab$/, () => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.server()
   cy.route('GET', '/api/v1/voting').as('getVote')
   cy.get('.sideBarMode.voting')
@@ -201,7 +201,7 @@ When(/^The user open Voting tab$/, () => {
 });
 
 Then(/^The list of available voting is displayed$/, () => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.get('.votingContainer').should('be.visible')
 });
 

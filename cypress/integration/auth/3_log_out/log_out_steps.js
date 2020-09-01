@@ -19,10 +19,10 @@ Then(/^Login as new user$/, () => {
     cy.get('#name').type(Cypress.env('login'));
     cy.get('#password').type(Cypress.env('password'));
     cy.get('input[type=file]').attachFile('cert.pem')
-    cy.wait(1000)
+    cy.wait(100)
     cy.get('input[type=file]').attachFile('privateKey.pem');
     cy.get('.ant-btn').as('Log in btn').click()
-    cy.wait(1000)
+    cy.wait(100)
 });
 
 When(/^The user press "([^"]*)" button for exit$/, (logoutBtn) => {

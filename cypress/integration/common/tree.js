@@ -1,7 +1,7 @@
 import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^The user open folders tree$/,  () => {
-  cy.wait(3000)
+  cy.wait(500)
   cy.server()
   cy.route('GET', '/api/v1/tree').as('getTree')
   cy.get('.switcherIconRight').click()
@@ -20,7 +20,7 @@ Given(/^The tree is contain "([^"]*)"$/,  (folders) => {
 });
 
 When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.get('.ant-tree-title').contains(folderTitle).click()
   cy.get('.ant-message-notice-content')
     .should('be.visible')

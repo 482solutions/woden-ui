@@ -38,6 +38,6 @@ Then(/^The user gets error notification "([^"]*)"$/, (errMessage) => {
 });
 
 Then(/^The file "([^"]*)" is not uploaded$/, (file) => {
-  cy.contains(file).should('be.visible').wait(1000)
+  cy.contains(file).should('be.visible').wait(100)
 });
 

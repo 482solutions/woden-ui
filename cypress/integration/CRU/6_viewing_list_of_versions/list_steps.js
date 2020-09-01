@@ -6,7 +6,7 @@ Then(/^Button Close versions is visible$/, () => {
 });
 
 Then(/^User click Close list of versions button$/, () => {
-    cy.get('#CloseVersionsWrapper').click().wait(1000)
+    cy.get('#CloseVersionsWrapper').click().wait(100)
 });
 
 Then(/^The list of versions is not visible in dashboard$/, () => {

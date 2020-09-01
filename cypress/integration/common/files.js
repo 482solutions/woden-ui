@@ -14,7 +14,7 @@ Then(/^The file "([^"]*)" is uploaded$/, (file) => {
 
 Given(/^The user upload "([^"]*)" without UI$/, (fullFileName) => {
     cy.wait('@getFolder').then((xhr) => {
-        cy.wait(5000)
+        cy.wait(700)
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.uploadFile(fullFileName)
         cy.server()
@@ -48,7 +48,7 @@ Then(/^The file "([^"]*)" is visible$/, (file) => {
 
 });
 Then(/^The file "([^"]*)" is not visible$/, (file) => {
-    cy.wait(1000)
+    cy.wait(100)
     cy.contains(file).should('not.be.visible')
 });
 

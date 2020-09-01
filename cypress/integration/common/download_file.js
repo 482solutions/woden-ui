@@ -1,7 +1,7 @@
 import {Then, When} from "cypress-cucumber-preprocessor/steps";
 
 When(/^The user double click the file "([^"]*)"$/, (filename) => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.server()
   cy.route('GET', '/api/v1/file/*/*').as('getFile')
   cy.contains(filename).dblclick()

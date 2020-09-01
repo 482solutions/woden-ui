@@ -6,7 +6,7 @@ Then(/^Versions of "([^"]*)" are 2$/, () => {
 
 Then(/^The user sees the list of available versions and the time, date when the version was created$/,  () => {
     cy.wait('@getVersions').then((xhr) => {
-        cy.wait(2000)
+        cy.wait(400)
         Cypress.env('versions', xhr.responseBody.versions)
         expect(xhr.responseBody).to.not.have.property('stack')
         cy.get('#VersionWrapper').should("be.visible")

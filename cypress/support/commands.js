@@ -155,7 +155,7 @@ Cypress.Commands.add('updateTxtFile', (fileName) => {
           expect(fileName).to.equal(data.file.fileName)
           Cypress.env('versions', data.file.versions)
         })
-    }).as('Update txt file').wait(6000)
+    }).as('Update txt file').wait(800)
   })
   cy.writeFile(`cypress/fixtures/${fileName}`, textAfter)
 })

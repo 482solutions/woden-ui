@@ -7,7 +7,7 @@ before(() => {
     Cypress.env('password', getPassword(8, false))
 
     cy.visit('/');
-    cy.wait(3000)
+    cy.wait(500)
     cy.get('.ant-col-offset-2 > a').click();
     cy.get('#name').type(Cypress.env('login'));
     cy.get('#email').type(Cypress.env('email'));
@@ -16,7 +16,7 @@ before(() => {
     cy.server()
     cy.route('POST', `/api/v1/user`).as('getCert')
     cy.get('.ant-btn').as('Sign Up Now Btn').click()
-    cy.wait(2000)
+    cy.wait(400)
     cy.get('a[download]')
         .then((anchor) => (
             new Cypress.Promise((resolve) => {
@@ -39,11 +39,11 @@ before(() => {
         )).wait('@getCert').then((xhr) => {
         cy.writeFile('cypress/fixtures/cert.pem', xhr.responseBody.cert)
     })
-    cy.wait(5000)
+    cy.wait(700)
 });
 
 Given(/^User has filled in the field valid username$/, () => {
-    cy.wait(2000)
+    cy.wait(400)
     cy.get('#name').type(Cypress.env('login'));
 });
 
@@ -52,20 +52,20 @@ Given(/^filled valid password field$/, () => {
 });
 
 Given(/^Pin cert$/, () => {
-    cy.get('input[type=file]').attachFile('cert.pem').wait(2000)
+    cy.get('input[type=file]').attachFile('cert.pem').wait(400)
 });
 
 Given(/^Pin privateKey$/, () => {
-    cy.get('input[type=file]').attachFile('privateKey.pem').wait(2000)
+    cy.get('input[type=file]').attachFile('privateKey.pem').wait(400)
 });
 
 Given(/^User has filled in the field valid email$/, () => {
-    cy.wait(2000)
+    cy.wait(400)
     cy.get('#name').type(Cypress.env('email'));
 });
 
 Given(/^User has filled invalid username (.*) in the field username from list$/, (invUsername) => {
-    cy.wait(2000)
+    cy.wait(400)
     cy.get('#name').type(invUsername);
 });
 
