@@ -11,7 +11,7 @@ Given(/^The user sees the list of versions$/, () => {
 });
 
 When(/^The user press Download button on (\d+) version$/, (version) => {
-  cy.wait(3000)
+  cy.wait(500)
   cy.server()
   cy.route('GET', '/api/v1/file/*/*').as('getFile')
   cy.get(`#Download_${Cypress.env('versions')[version].cid}`).click()

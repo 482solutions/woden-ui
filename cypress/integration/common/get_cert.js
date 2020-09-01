@@ -8,6 +8,6 @@ Then(/^The User got certificate in pem format$/, () => {
     expect(text).to.include('-----BEGIN CERTIFICATE-----')
     expect(text).to.include('-----END CERTIFICATE-----');
   })
-  cy.wait(2000)
+  cy.wait(400)
 });
 

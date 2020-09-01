@@ -24,7 +24,7 @@ When(/^the user press Log in button$/, () => {
 });
 
 Then(/^User is signed in$/, () => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.contains('Logout').should('be.visible')
 });
 
@@ -42,7 +42,7 @@ Then(/^Error notification User not found is shown$/, () => {
 });
 
 Then(/^Error notification is shown Invalid password supplied$/, () => {
-  cy.wait(2000)
+  cy.wait(400)
   cy.contains('Invalid password supplied').should('be.visible')
 });
 
@@ -57,18 +57,18 @@ Then(/^Error message Password can not be empty$/, () => {
 When(/^The user press Create a new folder button$/, () => {
   cy.wait('@getFolder').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
-    cy.get('.ant-btn.newFolder-button').click().wait(2000)
+    cy.get('.ant-btn.newFolder-button').click().wait(400)
   })
 });
 
 When(/^The field name is empty$/, () => {
-  cy.wait(3000)
+  cy.wait(500)
   cy.get('.ant-input.formItem.inputItem').should('be.empty')
 });
 
 When(/^The field name (.*) is filled by user from list of folder name$/, (folderName) => {
-  cy.wait(1000)
-  cy.get('.ant-input.formItem.inputItem').type(folderName).wait(1000)
+  cy.wait(100)
+  cy.get('.ant-input.formItem.inputItem').type(folderName).wait(100)
 });
 
 Then(/^The folder is created with name (.*)$/, (folderName) => {
@@ -85,7 +85,7 @@ When(/^Press Create folder$/, () => {
 });
 
 When(/^The user press Upload a new file button$/, () => {
-  cy.contains('File Upload').click().wait(2000)
+  cy.contains('File Upload').click().wait(400)
 });
 
 Given(/^The user is authorized$/, () => {
@@ -93,7 +93,7 @@ Given(/^The user is authorized$/, () => {
 });
 
 Then(/^The file is uploaded$/, (file) => {
-  cy.contains(file).should('be.visible').wait(1000)
+  cy.contains(file).should('be.visible').wait(100)
 });
 
 When(/^Folder is opened (.*)$/, (userCreatedFolder) => {
@@ -105,7 +105,7 @@ Given(/^The user located on root dashboard$/, () => {
 });
 
 Given(/^RELOAD$/, () => {
-  cy.wait(1000)
+  cy.wait(100)
   cy.reload()
 });
 
@@ -114,7 +114,7 @@ When(/^The user press the back button$/, () => {
 });
 
 When(/^User click Home button$/, () => {
-  cy.get('.goHome').click().wait(1000)
+  cy.get('.goHome').click().wait(100)
 });
 
 Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) => {

@@ -32,7 +32,7 @@ before(() => {
 })
 
 When(/^The user double click this folder (.*) from list$/, (createdFolder) => {
-  cy.contains(createdFolder).dblclick().wait(1000)
+  cy.contains(createdFolder).dblclick().wait(100)
 });
 
 
