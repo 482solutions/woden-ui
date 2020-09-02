@@ -203,7 +203,7 @@ Feature:  View access list
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Access" is visible
     And Button "New Folder" "not.be.visible"
     And Button "File Upload" "not.be.visible"
@@ -250,11 +250,11 @@ Feature:  View access list
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     When Create folder with name "testFolder2" in "testFolder"
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder2" is visible
     And The user press the "Actions" button in "testFolder2" "folder"
     And The user press the "Access list" button in "testFolder2" "folder"

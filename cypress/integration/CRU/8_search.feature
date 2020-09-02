@@ -17,11 +17,9 @@ Feature:  Search of files and folders
       And Upload file "test1.txt" to "testFolder"
       And The file "test1.txt" is visible
       And The user press the back button
-      And Spin is visible "Getting data..."
       And Upload file "test.pem" to "testFolder"
       And The folder "test.pem" is visible
       And The user press the back button
-      And Spin is visible "Getting data..."
 
     @positive
     Scenario: 1 Search file by full name

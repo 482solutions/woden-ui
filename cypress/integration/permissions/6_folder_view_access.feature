@@ -24,7 +24,7 @@ Feature: Grant view access for a folder
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
     And Button "Share " "not.be.visible"
@@ -43,7 +43,7 @@ Feature: Grant view access for a folder
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
@@ -55,7 +55,7 @@ Feature: Grant view access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
     And Button "Share " "not.be.visible"
@@ -67,10 +67,10 @@ Feature: Grant view access for a folder
   Scenario: 3 User can grand view access for a folder with files inside
     And Upload file "TestUpload.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_email"
@@ -80,7 +80,7 @@ Feature: Grant view access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
     And The user opens folder "testFolder"
     And The file "txtFile.txt" is visible
@@ -92,10 +92,10 @@ Feature: Grant view access for a folder
   Scenario: 4 Editor can grand view access for a folder in the shared folder to the user 3
     And Upload file "TestUpload.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And Upload file "txtFile.txt" to "testFolder"
     And The user press the back button
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "testFolder" "folder"
     And The user press the "Share" button in "testFolder" "folder"
     And Enter "User2" email to field "#form_in_modal_email"
@@ -105,10 +105,10 @@ Feature: Grant view access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The file "txtFile.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
@@ -121,9 +121,9 @@ Feature: Grant view access for a folder
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The folder "testFolder" is not visible
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The file "txtFile.txt" is not visible
     And Button "New Folder" "not.be.visible"
@@ -174,7 +174,7 @@ Feature: Grant view access for a folder
     Then Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The folder "testFolder" is visible
     And The user press the "Actions" button in "testFolder" "folder"
     And Button "Share " "not.be.visible"
@@ -218,7 +218,7 @@ Feature: Grant view access for a folder
 #    And The folder "testFolder" is visible
 #    And Login as new user without UI
 #    And The user open Shared with me
-#    And Spin is visible "Getting data..."
+##    And Spin is visible "Getting data..."
 #    Then "User1" has Editors rights to "testFolder" "folder"
 
   @positive
@@ -234,8 +234,8 @@ Feature: Grant view access for a folder
     And Upload file "TestUpload.txt" to "testFolder"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "testFolder" is visible
     And The user opens folder "testFolder"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible

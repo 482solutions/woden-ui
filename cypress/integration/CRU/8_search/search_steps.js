@@ -40,9 +40,6 @@ When(/^The user presses the search button$/, () => {
   cy.server()
   cy.route('GET', '/api/v1/search/*').as('search')
   cy.get('.ant-input-suffix').should('be.visible').click()
-  cy.get('.ant-message-notice-content')
-    .should('be.visible')
-    .should('contain.text', 'Getting data...')
   cy.wait('@search').then((xhr) => {
     expect(xhr.responseBody).to.not.have.property('stack')
   })

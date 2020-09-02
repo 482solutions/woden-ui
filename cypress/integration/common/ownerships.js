@@ -113,7 +113,7 @@ Then(/^User has View rights to "([^"]*)" file that contain "([^"]*)"$/, (file, t
   cy.server()
   cy.route('GET', '/api/v1/file/*/*').as('getFile')
   cy.contains(file).dblclick()
-  cy.get('.ant-message-notice-content').should('be.visible')
+  // cy.get('.ant-message-notice-content').should('be.visible')
   cy.wait('@getFile').then((xhr) => {
     expect(200).to.equal(xhr.status)
     const blob = xhr.responseBody;

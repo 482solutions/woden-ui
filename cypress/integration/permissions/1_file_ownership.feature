@@ -87,6 +87,5 @@ Feature:  Transfer file ownership
     And The file "TestUpload.txt" is visible
     And Login as new user without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
     Then "User1" has Editors rights to "TestUpload.txt" "file"
 
