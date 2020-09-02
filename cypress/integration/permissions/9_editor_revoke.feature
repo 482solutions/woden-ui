@@ -12,7 +12,7 @@ Feature: Editor revoke access
     And Register without UI user2
     And Register without UI user3
     And Login as new user without UI
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
 
   @positive
   Scenario: 1 Editor can revoke edit access for a file
@@ -20,7 +20,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
@@ -30,7 +30,7 @@ Feature: Editor revoke access
     And The "User2" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -44,7 +44,7 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And Button "Update File" "not.be.visible"
@@ -55,7 +55,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
@@ -65,7 +65,7 @@ Feature: Editor revoke access
     And The "User2" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -79,7 +79,7 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is not visible
 
   Scenario: 3 Editor can revoke edit access for a folder
@@ -87,11 +87,11 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And Login as new user 2 without UI
     And The "User2" sends a request to grant "edit" access to the "folder" "Revoke" to "User3"
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
@@ -106,7 +106,7 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And The user press the "Actions" button in "Revoke" "folder"
     And Button "Share " "not.be.visible"
@@ -119,11 +119,11 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And Login as new user 2 without UI
     And The "User2" sends a request to grant "view" access to the "folder" "Revoke" to "User3"
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
@@ -138,7 +138,7 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is not visible
 
   @positive
@@ -150,7 +150,7 @@ Feature: Editor revoke access
     And Login as new user 2 without UI
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User3"
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -158,7 +158,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
     And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The user sees the access list
@@ -172,7 +172,7 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is not visible
     And The file "TestUpload.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
@@ -186,7 +186,7 @@ Feature: Editor revoke access
     And Create folder with name "Revoke2" in "Revoke1"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user opens folder "Revoke1"
     And The user press the "Actions" button in "Revoke2" "folder"
     And The user press the "Access list" button in "Revoke2" "folder"
@@ -198,9 +198,9 @@ Feature: Editor revoke access
     And Spin is visible "Revoking access..."
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user opens folder "Revoke1"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke2" "folder"
     And The user press the "Access list" button in "Revoke2" "folder"
     And The user sees the access list
@@ -220,9 +220,9 @@ Feature: Editor revoke access
     And The "User3" is the "viewer" in access list
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
@@ -235,9 +235,9 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user opens folder "Revoke"
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     Then The file "TestUpload.txt" is visible
 
   Scenario: 8 After revoking the viewing rights for a file, the editor can restore them
@@ -246,7 +246,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
@@ -266,7 +266,7 @@ Feature: Editor revoke access
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
@@ -279,7 +279,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
@@ -296,7 +296,7 @@ Feature: Editor revoke access
     And The "User3" is the "absent" in access list
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Share" button in "TestUpload.txt" "file"
     And Enter "User3" email to field "#form_in_modal_email"
@@ -306,7 +306,7 @@ Feature: Editor revoke access
     And Message about transfer ownership "Permissions updated successfully"
     And Login as new user 3 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Access list" button in "TestUpload.txt" "file"
     And The "User1" is the "owner" in access list
@@ -319,7 +319,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "view" access to the "folder" "Revoke" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -339,7 +339,7 @@ Feature: Editor revoke access
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The "User1" is the "owner" in access list
@@ -352,7 +352,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -362,7 +362,7 @@ Feature: Editor revoke access
     When The user press the "delete" button near "editor" "User3"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The user sees the access list
@@ -377,7 +377,7 @@ Feature: Editor revoke access
     And Spin is visible "Changing permissions..."
     And Message about transfer ownership "Permissions updated successfully"
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "Revoke" "folder"
     And The user press the "Access list" button in "Revoke" "folder"
     And The "User1" is the "owner" in access list
@@ -389,7 +389,7 @@ Feature: Editor revoke access
     And The "User1" sends a request to grant "edit" access to the "folder" "Revoke" to "User2"
     And Login as new user 2 without UI
     And The user open Shared with me
-    And Spin is visible "Getting data..."
+#    And Spin is visible "Getting data..."
     And The folder "Revoke" is visible
     And Upload file "TestUpload.txt" to "Revoke"
     And The user press the "Actions" button in "TestUpload.txt" "file"
