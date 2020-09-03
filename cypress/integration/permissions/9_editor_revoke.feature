@@ -253,7 +253,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
-    And Spin is visible "Revoking access..."
+#    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
@@ -286,7 +286,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "editor" in access list
     And The user press the "delete" button near "editor" "User3"
-    And Spin is visible "Revoking access..."
+#    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
@@ -327,7 +327,7 @@ Feature: Editor revoke access
     And The "User2" is the "editor" in access list
     And The "User3" is the "viewer" in access list
     When The user press the "delete" button near "viewer" "User3"
-    And Spin is visible "Revoking access..."
+#    And Spin is visible "Revoking access..."
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     And The "User3" is the "absent" in access list
