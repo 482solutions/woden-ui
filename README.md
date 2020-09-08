@@ -12,8 +12,7 @@
 2. `npm install`
 3. `npm start`
 4. Available at http://0.0.0.0:3000/
-## How to deploy:
+## How to build:
 1. Clone this repository
 2. `npm install`
 3. `npm run build`
-4. Copy `dist` directory to cloud storage 
