@@ -16,4 +16,4 @@
 1. Clone this repository
 2. `npm install`
 3. `npm run build`
-4. Get your project from  dist directory
+4. Get your project from  `dist` directory
