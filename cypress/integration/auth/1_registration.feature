@@ -239,7 +239,7 @@ Feature: Registration
     And fills in the password and confirm password field without characters in uppercase
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 1 uppercase letter" is shown
 
   @negative @password
   Scenario: 23 Password should contain min 1 character in lowercase
@@ -248,7 +248,7 @@ Feature: Registration
     And fills in the password and confirm password field without characters in lowercase
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 1 lowercase letter" is shown
 
   @negative @password
   Scenario: 24 Password should contain min 1 number
@@ -257,7 +257,7 @@ Feature: Registration
     And fills in the password and confirm password field without numbers
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 1 digit" is shown
 
   @negative @password
   Scenario: 25 Password should contain upper and lower case characters
@@ -266,7 +266,7 @@ Feature: Registration
     And fills in the password and confirm password that contain only numbers
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 1 uppercase letter" is shown
 
   @negative @password
   Scenario: 26 Password can not contain only symbols
@@ -275,7 +275,7 @@ Feature: Registration
     And fills in the password and confirm password that contain only symbols
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 1 digit" is shown
 
   @negative @one_field_empty
   Scenario: 27 User can not register without username
@@ -333,7 +333,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 7 characters
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password should contain at least 8 characters" is shown
 
   @negative @password
   Scenario: 33 User can not register with password that contain 101 characters
@@ -342,7 +342,7 @@ Feature: Registration
     And fills in the password and confirm password field that contain 101 characters
     When The user press Sign up button
     Then User is not registered
-    And Error notification about not correct password "Incorrect password!" is shown
+    And Error notification about not correct password "The password can't contain more than 100 characters" is shown
 
   @positive @password
   Scenario: 34 User can register with password that contain 100 characters

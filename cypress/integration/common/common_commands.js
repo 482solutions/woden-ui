@@ -110,7 +110,8 @@ Given(/^RELOAD$/, () => {
 });
 
 When(/^The user press the back button$/, () => {
-  cy.get('.goBack').click()
+  cy.wait(1000)
+  cy.get('.goBack').click().wait(100)
 });
 
 When(/^User click Home button$/, () => {

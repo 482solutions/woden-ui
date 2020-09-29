@@ -93,9 +93,14 @@ export class RegistrationForm extends Component {
                   return Promise.resolve();
                 }
                 if (!value.match(
-                  /(?=^.{8,100}$).*$/g,
+                  /(?=^.{8,}$).*$/g,
                 )) {
                   return Promise.reject('The password should contain at least 8 characters');
+                }
+                if (value.match(
+                  /(?=^.{101,}$).*$/g,
+                )) {
+                  return Promise.reject('The password can\'t contain more than 100 characters');
                 }
                 if (!value.match(
                   /(?=^.*\d).*$/g,

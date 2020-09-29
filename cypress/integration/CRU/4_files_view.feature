@@ -8,7 +8,8 @@ Feature: Files view
   Rule: user should be registered.
 
     Background: Create a user before starting the tests
-      Given Register without UI
+      Given Write "This file is ok!" to file "txtFile.pem"
+      And Register without UI
       When Login as new user without UI
       And The user upload "txtFile.pem" without UI
 

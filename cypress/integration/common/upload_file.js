@@ -1,4 +1,4 @@
-import {Given} from "cypress-cucumber-preprocessor/steps";
+import {Given, Then} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
   cy.wait('@getFolder').then((xhr) => {
@@ -23,4 +23,8 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
       })
     })
   })
+});
+
+Then(/^Write "([^"]*)" to file "([^"]*)"$/,  (txt, filename) => {
+  cy.writeFile(`cypress/fixtures/${filename}`, txt);
 });

@@ -260,7 +260,8 @@ Given(/^fills in the password and confirm password field without characters in l
     const passw = generator.generate({
         length: 8,
         numbers: true,
-        uppercase: false,
+        uppercase: true,
+        lowercase: false,
         // symbols: true,
         exclude: /['"`]/,
     });
