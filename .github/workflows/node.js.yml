@@ -20,10 +20,10 @@ jobs:
       - run: npm run fix:js
       - run: npm run lint:js
       - run: sudo docker system prune -a -f
-      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-network.git
+      - run: git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-network.git
       - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
       - run: cd ..
-      - run: git clone https://andrii482:$GithubToken@github.com/482solutions/woden-server-js.git
+      - run: git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-server-js.git
       - run: cd woden-server-js && docker-compose up --build -d
       - run: cd ..
       - run: npm run start -d & sleep 40
