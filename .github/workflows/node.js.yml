@@ -31,14 +31,14 @@ jobs:
       - run: npm run start -d & sleep 40
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
-#      - run: npm run coverage
+      - run: ls -a
       - uses: actions/upload-artifact@master
-        if: failure()
+#        if: failure()
         with:
           name: screenshots
-          path:  /woden-ui/cypress/screenshots
-           video should always be generated
+          path:  woden-ui/cypress/screenshots
+#           video should always be generated
       - uses: actions/upload-artifact@master
         with:
           name: videos
-          path: /woden-ui/cypress/videos
+          path: woden-ui/cypress/videos
