@@ -47,7 +47,7 @@ Feature: Editor revoke access
 #    And Spin is visible "Getting data..."
     And The file "TestUpload.txt" is visible
     And The user press the "Actions" button in "TestUpload.txt" "file"
-    And Button "Update File" "not.be.visible"
+    And Button "Update File" "be.visible"
 
   @positive
   Scenario: 2 Editor can revoke view access for a file

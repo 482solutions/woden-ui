@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
   "env": {
-    "RETRIES": 2,
+    "RETRIES": 0,
     "backendURL": "http://localhost:1823/api/v1",
     "respStatus": null,
     "rootFolder": null,
@@ -23,7 +23,7 @@
     "rootFolder_3": null,
     "token_3": null
   },
-  "defaultCommandTimeout": 12000,
+  "defaultCommandTimeout": 20000,
   "requestTimeout": 10000,
   "video": true,
   "videoCompression": 0,
