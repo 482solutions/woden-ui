@@ -25,7 +25,7 @@
   },
   "defaultCommandTimeout": 12000,
   "requestTimeout": 10000,
-  "video": false,
+  "video": true,
   "videoCompression": 0,
   "viewportWidth": 1920,
   "viewportHeight": 1080,
