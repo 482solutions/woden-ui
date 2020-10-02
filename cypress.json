@@ -24,7 +24,7 @@
     "token_3": null
   },
   "defaultCommandTimeout": 30000,
-  "requestTimeout": 15000,
+  "requestTimeout": 16000,
   "screenshots": false,
   "video": true,
   "videoCompression": 0,
