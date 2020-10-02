@@ -18,26 +18,30 @@ jobs:
           node-version: ${{ matrix.node-version }}
  #       env:
  #         PASS: ${{ secrets.PASSWORD }}
-      - run: npm i
-      - run: npm run fix:js
-      - run: npm run lint:js
-      - run: sudo docker system prune -a -f
-      - run: git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-network.git
-      - run: cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
-      - run: cd ..
-      - run: git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-server-js.git
-      - run: cd woden-server-js && docker-compose up --build -d
-      - run: cd ..
-      - run: npm run start -d & sleep 40
+
+      - name: Installing dependencies and start server
+        run: |
+          npm ci
+          npm run fix:js
+          npm run lint:js
+          sudo docker system prune -a -f
+          git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-network.git
+          cd woden-network && sudo chmod 777 ./deploy.sh && sudo ./deploy.sh
+          cd ..
+          git clone https://andrii482:${{ secrets.PASSWORD }}@github.com/482solutions/woden-server-js.git
+          cd woden-server-js && docker-compose up --build -d
+          cd ..
+          npm run start -d & sleep 40
+
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
-      - run: ls -a
+
       - uses: actions/upload-artifact@master
-#        if: failure()
+        if: failure()
         with:
           name: screenshots
           path:  woden-ui/cypress/screenshots
-#           video should always be generated
+
       - uses: actions/upload-artifact@master
         with:
           name: videos
