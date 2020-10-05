@@ -100,7 +100,7 @@
     "cy:run:chrome": "cypress run --browser chrome --spec \"cypress/integration/permissions/9_editor_revoke.feature\"",
     "cy:run:firefox": "cypress run --browser firefox --spec \"cypress/integration/*/*.feature\"",
     "cypress:tags": "cypress run -e TAGS='@step'",
-    "cypress:report": "cypress run --spec cypress/integration/API/POST_user.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",
+    "cypress:report": "cypress run --spec cypress/integration/*/9_editor_revoke.feature --reporter mochawesome && open ./mochawesome-report/mochawesome.html",
     "lint:js": "eslint src/**/*.js",
     "fix:js": "eslint src/**/*.js --fix",
     "eject": "react-scripts eject"
