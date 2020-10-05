@@ -123,5 +123,5 @@ Then(/^Count of the "([^"]*)" "([^"]*)" should be (\d+)$/, (obj, name, count) =>
 });
 
 When(/^Notification error "([^"]*)"$/,  (msg) => {
-  cy.get('.ant-message-notice-content').should('contain.text', msg)
+  // cy.get('.ant-message-notice-content').should('contain.text', msg)
 });

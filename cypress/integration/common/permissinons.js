@@ -30,7 +30,7 @@ Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
 
 When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, name, obj) => {
   let hash;
-  cy.wait(100)
+  cy.wait(2000)
   switch (action) {
     case 'Access list':
       action = 'Permissions';
