@@ -39,7 +39,7 @@ jobs:
       - name: Run Cypress tests with Chrome
         run: npm run cy:run:chrome
 
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: screenshots

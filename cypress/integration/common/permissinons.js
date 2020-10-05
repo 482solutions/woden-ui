@@ -54,9 +54,9 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
       break;
   }
   if (hash === undefined) {
-    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(100)
+    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(1500)
   } else {
-    cy.get(`#${action}_${hash}`).click().wait(100)
+    cy.get(`#${action}_${hash}`).click().wait(1500)
   }
 });
 
