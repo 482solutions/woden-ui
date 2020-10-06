@@ -54,15 +54,12 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
       break;
   }
   if (hash === undefined) {
-    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(2000)
+    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click({ force: true }).wait(2000)
   } else {
-    cy.get(`#${action}_${hash}`).click().wait(2000)
+    cy.get(`#${action}_${hash}`).click({ force: true }).wait(2000)
   }
   if (action === 'Actions') {
     cy.get('.ant-dropdown-menu').should('be.visible').wait(1500)
-    // if (cy.get('.ant-dropdown-menu').should('not.be.visible')){
-    //   cy.get(`#Actions_${hash}`).click().wait(1500)
-    // }
   }
 });
 
