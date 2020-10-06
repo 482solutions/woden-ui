@@ -8,14 +8,14 @@ before(() => {
 
     cy.visit('/');
     cy.wait(500)
-    cy.get('.ant-col-offset-2 > a').click();
+    cy.get('.ant-col-offset-2 > a').click({ force: true });
     cy.get('#name').type(Cypress.env('login'));
     cy.get('#email').type(Cypress.env('email'));
     cy.get('#password').type(Cypress.env('password'));
     cy.get('#confirm').type(Cypress.env('password'));
     cy.server()
     cy.route('POST', `/api/v1/user`).as('getCert')
-    cy.get('.ant-btn').as('Sign Up Now Btn').click()
+    cy.get('.ant-btn').as('Sign Up Now Btn').click({ force: true })
     cy.wait(400)
     cy.get('a[download]')
         .then((anchor) => (

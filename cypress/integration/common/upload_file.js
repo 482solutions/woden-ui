@@ -10,7 +10,7 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
 
       cy.server()
       cy.route('POST', '/api/v1/file').as('uploadFile')
-      cy.contains('File Upload').click().wait(100)
+      cy.contains('File Upload').click({ force: true }).wait(100)
 
       cy.get(`input[type=file]`).attachFile(fileName)
       cy.get('.ant-message-custom-content').as('spin').should('be.visible')

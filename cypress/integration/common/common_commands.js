@@ -12,7 +12,7 @@ When(/^there is no open session$/, () => {
 });
 
 When(/^The user press Register now button$/, () => {
-  cy.get('.ant-col-offset-2 > a').click();
+  cy.get('.ant-col-offset-2 > a').click({ force: true });
 });
 
 Then(/^Sign Up form is open$/, () => {

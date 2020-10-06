@@ -3,12 +3,12 @@ import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
 Given(/^The user open folders tree$/,  () => {
   cy.wait(500)
   cy.server()
-  cy.route('GET', '/api/v1/tree').as('getTree')
-  cy.get('.switcherIconRight').click()
-  // cy.get('.ant-message-notice-content')
-  //   .should('be.visible')
-  //   .and('contain.text', 'Getting folders tree..')
-  cy.wait('@getTree').then((xhr) => {
+  cy.route('GET', '/api/v1/tree')
+    .as('getTree')
+  cy.get('.switcherIconRight')
+    .click({ force: true })
+  cy.wait('@getTree')
+    .then((xhr) => {
     expect(200).to.equal(xhr.status)
     expect(xhr.responseBody).to.not.have.property('stack')
   })
@@ -21,10 +21,7 @@ Given(/^The tree is contain "([^"]*)"$/,  (folders) => {
 
 When(/^User presses on "([^"]*)" folder in the tree$/, (folderTitle) => {
   cy.wait(400)
-  cy.get('.ant-tree-title').contains(folderTitle).click()
-  // cy.get('.ant-message-notice-content')
-  //   .should('be.visible')
-  //   .and('contain.text', 'Getting data...')
+  cy.get('.ant-tree-title').contains(folderTitle).click({ force: true })
   cy.wait('@getFolder').then((xhr) => {
     expect(200).to.equal(xhr.status)
     expect(xhr.responseBody).to.not.have.property('stack')
@@ -37,5 +34,6 @@ Given(/^The user presses on arrow near "([^"]*)"$/, (folderTitle) => {
     .contains(folderTitle)
     .parent()
     .parent()
-    .children('.ant-tree-switcher.ant-tree-switcher_close').click()
+    .children('.ant-tree-switcher.ant-tree-switcher_close')
+    .click({ force: true })
 });

@@ -47,7 +47,7 @@ When(/^User adding (.*) of choices$/,  (count) => {
     cy.get('.ant-input-wrapper > .ant-input')
       .type(variants[count][index]);
     cy.get('.ant-input-group-addon > .ant-btn')
-      .click().wait(100);
+      .click({ force: true }).wait(100);
     cy.get('.ant-row.ant-row-middle.variants')
       .should('have.length', index+1);
   }
@@ -60,10 +60,10 @@ When(/^User selects date and time$/,  () => {
     .wait(500);
 
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
-    .click()
+    .click({ force: true })
     .type(`${fullDate.hour}:${fullDate.minutes}`)
     .get('.ant-btn.ant-btn-primary.ant-btn-sm')
-    .click();
+    .click({ force: true });
 });
 
 When(/^Description field (.*) characters$/,  (description) => {
@@ -127,7 +127,7 @@ Then(/^Button Add variant is disabled$/, () => {
 Given(/^User click CONTINUE button$/, () => {
   cy.get('.ant-btn.ant-btn-primary')
     .contains('CONTINUE')
-    .click()
+    .click({ force: true })
 });
 
 Given(/^In field "([^"]*)" can contain only (\d+) characters$/, (desc, count) => {
@@ -143,10 +143,10 @@ When(/^User selects date and time, which is real time$/, () => {
 
     .wait(500);
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
-    .click()
+    .click({ force: true })
     .type(`${fullDate.hour}:${fullDate.minutes}`)
     .get('.ant-btn.ant-btn-primary.ant-btn-sm')
-    .click();
+    .click({ force: true });
 });
 
 Then(/^User selects date and time, which less than the real time$/, () => {
@@ -156,9 +156,9 @@ Then(/^User selects date and time, which less than the real time$/, () => {
 
     .wait(500);
   cy.get(':nth-child(3) > .ant-row-center > .ant-picker > .ant-picker-input > input')
-    .click()
+    .click({ force: true })
     .type(`${fullDate.hour}:${fullDate.minutes}`)
-    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click();
+    .get('.ant-btn.ant-btn-primary.ant-btn-sm').click({ force: true });
 });
 
 When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
@@ -167,7 +167,7 @@ When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
     .contains(variant)
     .parent()
     .children('.revokeAccess')
-    .click()
+    .click({ force: true })
 });
 
 Then(/^Count of variants (.*)$/, (count) => {
@@ -185,7 +185,7 @@ Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
     .parent()
     .parent()
     .children('.revokeAccess')
-    .click()
+    .click({ force: true })
 });
 
 When(/^The user open Voting tab$/, () => {
@@ -193,7 +193,7 @@ When(/^The user open Voting tab$/, () => {
   cy.server()
   cy.route('GET', '/api/v1/voting').as('getVote')
   cy.get('.sideBarMode.voting')
-    .click()
+    .click({ force: true })
   cy.wait('@getVote').then((xhr) => {
     expect(200).to.equal(xhr.status)
     expect(xhr.responseBody).to.not.have.property('stack')
@@ -270,7 +270,7 @@ When(/^The user press "([^"]*)" button for voting$/,  (file) => {
     .parent()
     .children()
     .contains('Vote')
-    .click()
+    .click({ force: true })
 });
 
 When(/^Pop\-up "([^"]*)" "([^"]*)"$/,  (title, state) => {
@@ -283,7 +283,7 @@ When(/^User chooses variant "([^"]*)"$/,  (variant) => {
   cy.get('.ant-row.button-row')
     .children('.voting-button')
     .contains(variant)
-    .click()
+    .click({ force: true })
 });
 
 When(/^Status of voting is "([^"]*)" for a file "([^"]*)"$/,  (status, file) => {
@@ -327,7 +327,7 @@ When(/^Button "([^"]*)" is disable$/,  (button) => {
 });
 
 When(/^Close pop\-up voting$/, () => {
-  cy.get('.close-icon').click()
+  cy.get('.close-icon').click({ force: true })
 });
 
 Given(/^"([^"]*)" send a request to vote for the "([^"]*)" variant for "([^"]*)" file$/,  (user, variant, file) => {
@@ -377,7 +377,7 @@ When(/^The percentage of those "([^"]*)" who voted for the option "([^"]*)"$/,  
 });
 
 Then(/^Close pop\-up results of voting$/,  () => {
-  cy.get('.close-icon > img').click()
+  cy.get('.close-icon > img').click({ force: true })
 });
 
 Given(/^The "([^"]*)" sends a request to create vote for a file "([^"]*)" with (\d+) variants without "([^"]*)"$/,
@@ -426,5 +426,5 @@ Then(/^Voting for a file "([^"]*)" doesn't exist$/,  (file) => {
 
 When(/^Press "([^"]*)" button$/,  (button) => {
   cy.get('.ant-row-center > .ant-btn')
-    .should('contain.text', button).click()
+    .should('contain.text', button).click({ force: true })
 });

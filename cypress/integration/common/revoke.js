@@ -15,7 +15,7 @@ When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, acc
         .parent()
         .children('.permissionIcons')
         .children('.revokeAccess')
-        .click()
+        .click({ force: true })
       break;
     case 'viewer':
       cy.get('.sharedUser.viewer')
@@ -24,7 +24,7 @@ When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, acc
         .parent()
         .children('.permissionIcons')
         .children('.revokeAccess')
-        .click()
+        .click({ force: true })
       break;
   }
 });

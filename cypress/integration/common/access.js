@@ -13,8 +13,8 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
     switch (obj) {
       case 'file':
         const hashFile = getHash(name, Cypress.env('filesInRoot'));
-        cy.get(`#Actions_${hashFile}`).click().wait(400);
-        cy.get(`#Update_${hashFile}`).click().wait(400);
+        cy.get(`#Actions_${hashFile}`).click({ force: true }).wait(400);
+        cy.get(`#Update_${hashFile}`).click({ force: true }).wait(400);
         cy.server();
         cy.route('PUT', '/api/v1/file').as('updateFile');
         cy.get(`#Update_${hashFile} input[type=file]`).attachFile(name);
@@ -33,7 +33,7 @@ Then(/^"([^"]*)" has Editors rights to "([^"]*)" "([^"]*)"$/, (user, name, obj) 
           expect(xhr.responseBody).to.not.have.property('stack')
           cy.server()
           cy.route('POST', '/api/v1/file').as('uploadFile')
-          cy.contains('File Upload').click().wait(100)
+          cy.contains('File Upload').click({ force: true }).wait(100)
           cy.server()
           cy.route('POST', '/api/v1/file').as('uploadFile')
 
