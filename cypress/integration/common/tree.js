@@ -35,5 +35,5 @@ Given(/^The user presses on arrow near "([^"]*)"$/, (folderTitle) => {
     .parent()
     .parent()
     .children('.ant-tree-switcher.ant-tree-switcher_close')
-    .click({ force: true })
+    .click()
 });

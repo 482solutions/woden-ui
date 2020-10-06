@@ -1,4 +1,4 @@
-import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
+import {When} from "cypress-cucumber-preprocessor/steps";
 
 When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, access, user) => {
   const logins = {
@@ -15,7 +15,7 @@ When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, acc
         .parent()
         .children('.permissionIcons')
         .children('.revokeAccess')
-        .click({ force: true })
+        .click()
       break;
     case 'viewer':
       cy.get('.sharedUser.viewer')
@@ -24,7 +24,7 @@ When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, acc
         .parent()
         .children('.permissionIcons')
         .children('.revokeAccess')
-        .click({ force: true })
+        .click()
       break;
   }
 });

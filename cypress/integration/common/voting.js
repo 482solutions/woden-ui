@@ -167,7 +167,7 @@ When(/^Delete (\d+) variant "([^"]*)"$/, (count, variant) => {
     .contains(variant)
     .parent()
     .children('.revokeAccess')
-    .click({ force: true })
+    .click()
 });
 
 Then(/^Count of variants (.*)$/, (count) => {
@@ -185,7 +185,7 @@ Given(/^Owner delete "([^"]*)" from voting$/, (user) => {
     .parent()
     .parent()
     .children('.revokeAccess')
-    .click({ force: true })
+    .click()
 });
 
 When(/^The user open Voting tab$/, () => {
@@ -202,7 +202,8 @@ When(/^The user open Voting tab$/, () => {
 
 Then(/^The list of available voting is displayed$/, () => {
   cy.wait(400)
-  cy.get('.votingContainer').should('be.visible')
+  cy.get('.votingContainer')
+    .should('be.visible')
 });
 
 Then(/^Voting for a file "([^"]*)" "([^"]*)"$/, (file, state) => {
@@ -270,7 +271,7 @@ When(/^The user press "([^"]*)" button for voting$/,  (file) => {
     .parent()
     .children()
     .contains('Vote')
-    .click({ force: true })
+    .click()
 });
 
 When(/^Pop\-up "([^"]*)" "([^"]*)"$/,  (title, state) => {
@@ -327,7 +328,7 @@ When(/^Button "([^"]*)" is disable$/,  (button) => {
 });
 
 When(/^Close pop\-up voting$/, () => {
-  cy.get('.close-icon').click({ force: true })
+  cy.get('.close-icon').click()
 });
 
 Given(/^"([^"]*)" send a request to vote for the "([^"]*)" variant for "([^"]*)" file$/,  (user, variant, file) => {
