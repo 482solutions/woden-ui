@@ -14,7 +14,7 @@ When(/^The user press Download button on (\d+) version$/, (version) => {
   cy.wait(500)
   cy.server()
   cy.route('GET', '/api/v1/file/*/*').as('getFile')
-  cy.get(`#Download_${Cypress.env('versions')[version].cid}`).click()
+  cy.get(`#Download_${Cypress.env('versions')[version].cid}`).click({ force: true })
 });
 
 Then(/^Version (\d+) should contain text "([^"]*)"$/, (version, textFile) => {

@@ -398,6 +398,3 @@ Feature: Editor revoke access
     And The "User1" is the "owner" in access list
     And The "User2" is the "editor" in access list
     Then The button revoke access is not visible near editor "User2"
-
-
-

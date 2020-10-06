@@ -82,10 +82,40 @@ export class RegistrationForm extends Component {
             },
             () => ({
               validator(rule, value) {
+                if (value.match(
+                  /(?=^.*\s).*$/g,
+                )) {
+                  return Promise.reject('The password can\'t contain spaces');
+                }
                 if (!value || value.match(
-                  /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
+                  /(?=^.{8,100}$)((?=.*\d)|(?=.*\W+))(?![.\s])(?=.*[A-Z])(?=.*[a-z]).*$/g,
                 )) {
                   return Promise.resolve();
+                }
+                if (!value.match(
+                  /(?=^.{8,}$).*$/g,
+                )) {
+                  return Promise.reject('The password should contain at least 8 characters');
+                }
+                if (value.match(
+                  /(?=^.{101,}$).*$/g,
+                )) {
+                  return Promise.reject('The password can\'t contain more than 100 characters');
+                }
+                if (!value.match(
+                  /(?=^.*\d).*$/g,
+                )) {
+                  return Promise.reject('The password should contain at least 1 digit');
+                }
+                if (!value.match(
+                  /(?=.*[A-Z]).*$/g,
+                )) {
+                  return Promise.reject('The password should contain at least 1 uppercase letter');
+                }
+                if (!value.match(
+                  /(?=.*[a-z]).*$/g,
+                )) {
+                  return Promise.reject('The password should contain at least 1 lowercase letter');
                 }
                 return Promise.reject('Incorrect password!');
               },

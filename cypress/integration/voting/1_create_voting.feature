@@ -14,12 +14,10 @@ Feature:  Create voting
   @positive
   Scenario Outline: 1 Owner can create voting of the file with variants of answers
     And The user upload "TestUpload.txt" without UI
-##    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Register without UI user3
     And The "User1" sends a request to grant "view" access to the "file" "TestUpload.txt" to "User3"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -36,7 +34,6 @@ Feature:  Create voting
     And Tab "4.List of Voters" is opened and title "Voting participants" is visible
     And 2 users participate in the voting "User2, User3"
     And Press "START VOTING"
-#    And Spin is visible "Creating vote..."
     Then Pop-up "Done!" with description "The voting becomes available" is visible
     And Button "CONTINUE" "be.visible"
     Examples: Count of answers
@@ -49,10 +46,8 @@ Feature:  Create voting
   @positive
   Scenario: 2 Owner can create voting without description
     And The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -76,24 +71,20 @@ Feature:  Create voting
     Given Create folder with name "Folder123" in root without UI
     And The "User1" sends a request to grant "edit" access to the "folder" "Folder123" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "Folder123" "folder"
     Then Button "Start Voting" "be.not.visible"
 
   @negative
   Scenario: 4 Owner can't create voting if another users haven't got permissions for this file
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     When The user press the "Actions" button in "TestUpload.txt" "file"
     Then Button Start Voting is disabled
 
   @negative
   Scenario: 5 Owner can't create voting with less than 2 answer options
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -106,10 +97,8 @@ Feature:  Create voting
   @negative
   Scenario: 6 Owner can't add more than 5 answer options
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -123,10 +112,8 @@ Feature:  Create voting
   @positive
   Scenario Outline: 7 Owner can re-create a vote for the same file
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -168,10 +155,8 @@ Feature:  Create voting
   @negative
   Scenario Outline: 8 Owner can't create voting if description more than 256 characters
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -197,10 +182,8 @@ Feature:  Create voting
   @negative
   Scenario: 9 Owner can't create voting if due time is real time
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -214,10 +197,8 @@ Feature:  Create voting
   @negative
   Scenario: 10 Owner can't create voting if due time less than the real time
     Given The user upload "TestUpload.txt" without UI
-##    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-##    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -231,10 +212,8 @@ Feature:  Create voting
   @positive
   Scenario Outline: 11 Owner can delete variant of answer
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -253,10 +232,8 @@ Feature:  Create voting
   @positive
   Scenario: 12 Owner can close pop-up "Creating voting"
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     And The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -267,10 +244,8 @@ Feature:  Create voting
   @positive
   Scenario: 13 Owner can back to any previous tab
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened
@@ -295,11 +270,9 @@ Feature:  Create voting
   @positive
   Scenario: 14 Owner can create voting for the second versions of the file with variants of answers
     Given The user upload "TestUpload.txt" without UI
-#    And Spin is visible "Getting data..."
     And The user updating file "TestUpload.txt"
     And The "User1" sends a request to grant "edit" access to the "file" "TestUpload.txt" to "User2"
     And Login as new user without UI
-#    And Spin is visible "Getting data..."
     And The user press the "Actions" button in "TestUpload.txt" "file"
     When The user press the "Start Voting" button in "TestUpload.txt" "file"
     And The screen for entering voting parameters is opened

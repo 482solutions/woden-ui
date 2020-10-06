@@ -1,4 +1,4 @@
-import {Given, Then, When} from "cypress-cucumber-preprocessor/steps";
+import {When} from "cypress-cucumber-preprocessor/steps";
 
 When(/^The user press the "([^"]*)" button near "([^"]*)" "([^"]*)"$/, (btn, access, user) => {
   const logins = {

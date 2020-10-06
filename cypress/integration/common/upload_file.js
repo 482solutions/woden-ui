@@ -1,4 +1,4 @@
-import {Given} from "cypress-cucumber-preprocessor/steps";
+import {Given, Then} from "cypress-cucumber-preprocessor/steps";
 
 Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
   cy.wait('@getFolder').then((xhr) => {
@@ -10,7 +10,7 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
 
       cy.server()
       cy.route('POST', '/api/v1/file').as('uploadFile')
-      cy.contains('File Upload').click().wait(100)
+      cy.contains('File Upload').click({ force: true }).wait(100)
 
       cy.get(`input[type=file]`).attachFile(fileName)
       cy.get('.ant-message-custom-content').as('spin').should('be.visible')
@@ -23,4 +23,8 @@ Given(/^Upload file "([^"]*)" to "([^"]*)"$/,  (fileName, folder) => {
       })
     })
   })
+});
+
+Then(/^Write "([^"]*)" to file "([^"]*)"$/,  (txt, filename) => {
+  cy.writeFile(`cypress/fixtures/${filename}`, txt);
 });

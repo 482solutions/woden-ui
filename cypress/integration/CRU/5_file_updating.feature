@@ -6,6 +6,7 @@ Feature:  File updating
   As an owner or editor, I want to update the file so that the correct version could be used.
 
   Background: Create a user before starting the tests
+    Given Write "Good night!" to file "txtFile.pem"
     Given Register without UI
     When Login as new user without UI
     Then The user upload "test.pem" without UI

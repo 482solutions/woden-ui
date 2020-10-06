@@ -123,6 +123,7 @@ class LoginForm extends Component {
             htmlType='submit'
             loading={isLoading}
             className="loginFormItem LoginButtonItem loginButton"
+            // disabled={!this.state.privateKey || !this.state.certificate}
           >
             Log In
           </Button>

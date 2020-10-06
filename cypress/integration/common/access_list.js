@@ -29,5 +29,5 @@ Then(/^The "([^"]*)" is the "([^"]*)" in access list$/,  (user, access) => {
 });
 
 Given(/^Close Access list$/,  () => {
-  cy.get('#CloseVersionsWrapper').click()
+  cy.get('#CloseVersionsWrapper').click({ force: true })
 });

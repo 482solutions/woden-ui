@@ -36,7 +36,7 @@ class ChangePassword extends Component {
     return (
       <div>
         <div >
-           <img className="settingsIcon" id="SettingsIcon"  onClick={this.showModal} src={settingsIcon} alt="settings"/>
+           <img className="settingsIcon" id="SettingsIcon" onClick={this.showModal} src={settingsIcon} alt="settings"/>
         </div>
         <Modal
           title="Change password"

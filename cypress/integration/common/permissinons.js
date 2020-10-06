@@ -30,7 +30,7 @@ Given(/^The user 1 is the owner of the folder "([^"]*)"$/, () => {
 
 When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, name, obj) => {
   let hash;
-  cy.wait(100)
+  cy.wait(1000)
   switch (action) {
     case 'Access list':
       action = 'Permissions';
@@ -54,9 +54,12 @@ When(/^The user press the "([^"]*)" button in "([^"]*)" "([^"]*)"$/, (action, na
       break;
   }
   if (hash === undefined) {
-    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click().wait(100)
+    cy.get(`#${action}_${Cypress.env('rootFolder')}`).click({ force: true }).wait(1000)
   } else {
-    cy.get(`#${action}_${hash}`).click().wait(100)
+    cy.get(`#${action}_${hash}`).click({ force: true }).wait(1000)
+  }
+  if (action === 'Actions') {
+    cy.get('.ant-dropdown-menu').should('be.visible').wait(1000)
   }
 });
 

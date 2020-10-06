@@ -1,7 +1,7 @@
 import {Then, When} from "cypress-cucumber-preprocessor/steps";
 
 When(/^Login as new user without UI$/, (user) => {
-  cy.wait(400)
+  cy.wait(2000)
   cy.readFile('cypress/fixtures/cert.pem').then((certificate) => {
     cy.readFile('cypress/fixtures/privateKey.pem').then((key) => {
       cy.request({
@@ -37,7 +37,7 @@ When(/^Login as new user without UI$/, (user) => {
 });
 
 Then(/^Login as new user 2 without UI$/, () => {
-  cy.wait(600)
+  cy.wait(2000)
   cy.readFile('cypress/fixtures/cert_2.pem').then((certificate) => {
     cy.readFile('cypress/fixtures/privateKey_2.pem').then((key) => {
       cy.request({
@@ -76,7 +76,7 @@ Then(/^Login as new user 2 without UI$/, () => {
 });
 
 When(/^Login as new user 3 without UI$/, () => {
-  cy.wait(600)
+  cy.wait(2000)
   cy.readFile('cypress/fixtures/cert_3.pem').then((certificate) => {
     cy.readFile('cypress/fixtures/privateKey_3.pem').then((key) => {
       cy.request({
