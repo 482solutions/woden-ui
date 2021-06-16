@@ -198,7 +198,7 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       {current === 0 && info.fileData.versions && (
         <div>
           <Row align={'top'} justify={'center'}>
-            <h2 className='modal-title'>Create voting</h2>
+            <h2 className='modal-title'>Create Signing</h2>
           </Row>
           <Row align={'top'} justify={'center'}>
             <h2 className='modal-title'></h2>
@@ -320,9 +320,8 @@ export const VotingModal = ({ visible, info, close, createVoting, }) => {
       </div>)}
       {current === 3 && (<div>
         <Row align={'top'} justify={'center'}>
-          <h2 className='modal-title'>Voting participants</h2>
-          <h3
-            className='modal-filetime-title'>{"*At least 1 user can participate in the vote."}</h3>
+          <h2 className='modal-title'>Signing participants</h2>
+
         </Row>
         <Row align={'top'} justify={'center'}>
           <Col>

@@ -59,7 +59,7 @@ export default class Drive extends Component {
             <span id={`Voting_${hash}`
             }><img className="dropdownIcon"
                    src={Voting}
-                   alt=""/>Start Voting</span>
+                   alt=""/>Start Signing</span>
           </Menu.Item>
         }
         {

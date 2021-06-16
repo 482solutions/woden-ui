@@ -38,7 +38,7 @@ export const VotingModal = ({ openModal,setOpenModal,  record,  updateVoting }) 
       >
       <div className={'modal-size'} style={{ width: 'auto', height: 'auto' }}>
         <Row>
-          <h3 className={'voting-title'}>Voting</h3>
+          <h3 className={'voting-title'}>Signing</h3>
         </Row>
         <Row>
           <div className={'voting-file-container'}>
@@ -57,7 +57,7 @@ export const VotingModal = ({ openModal,setOpenModal,  record,  updateVoting }) 
           : ''}
         <Row justify='center'>
           <Button disabled={disableBtn} className='voting-submit-button'
-                  onClick={() => onFinish()}><span>VOTE FOR: </span>{ btnText} </Button>
+                  onClick={() => onFinish()}><span>Sign: </span>{ btnText} </Button>
         </Row>
       </div>
     </Modal>

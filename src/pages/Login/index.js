@@ -33,7 +33,6 @@ export class Login extends React.Component {
       <div className="login">
         <div className="loginBox">
           <div className="loginBlock BGBlue flex-direction-column flex-center" id='LoginImage'>
-            <img src={logoCol} alt="WodenLogo" className="WodenLogo"/>
             <img src={loginWelcome} alt="Welcome" className="Welcome"/>
           </div>
           <div className="loginBlock flex-direction-column flex-center">

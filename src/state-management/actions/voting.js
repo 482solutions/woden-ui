@@ -27,7 +27,7 @@ export const createVoting = (votingData) => async (dispatch) => {
       if (error) {
         message.error(response.body.message);
       } else {
-        VotingModalSuccess('Done!', 'The voting becomes available');
+        VotingModalSuccess('Done!', 'The signing becomes available');
         dispatch({ type: CREATE_VOTING });
       }
     });
