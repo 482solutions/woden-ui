@@ -29,7 +29,7 @@ export class Header extends Component {
     return (
       <Row className="holder">
         <Col span={3} className={'headerLogo flex-start'}>
-          <img src={logoRow} alt="Woden logo" id="HeaderLogo"/>
+          <img src={logoRow} alt="Woden logo" id="HeaderLogo" width="130px"/>
         </Col>
         {
           isLoggedIn && (

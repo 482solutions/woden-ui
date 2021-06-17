@@ -99,7 +99,7 @@ export const Voting = (props) => {
                   }
           />
           <Column className={'table-text'}
-                  title="Total votes"
+                  title="Total signings"
                   dataIndex="voters"
                   key="voters"
                   render={(tags) => (

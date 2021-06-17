@@ -61,7 +61,7 @@ export function VotingResults(vote) {
           </div>
         </div>
         <div>
-          <p className="voting-results">Voting results</p>
+          <p className="voting-results">Signing results</p>
           <p className="voting-results-number">{totalVoted()} / {voters.length}</p>
         </div>
       </Row>
