@@ -1,4 +1,4 @@
-# Woden UI
+# ElectrodoDoc UI
 
 [![Build Status](https://travis-ci.com/482solutions/woden-ui.svg?token=4rsqzqXw7ZTfg4fDzTv7&branch=master)](https://travis-ci.com/482solutions/woden-ui)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
