@@ -27,7 +27,7 @@
 }
 
 .BGBlue {
-    background-color: #8BADF0;
+    background: linear-gradient(360deg, #4BE4C0 -89.47%, #75EEE2 -55.58%, #8980F3 130.26%), #C4C4C4;
     display: flex;
     justify-content: center;
     align-items: center;

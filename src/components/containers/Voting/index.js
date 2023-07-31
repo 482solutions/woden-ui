@@ -91,7 +91,7 @@ export const Voting = (props) => {
                   render={(text, voteObj) => (voteObj.status
                     ? <Button className='button-style-vote' disabled={checkIfVoted(voteObj.voters)} onClick={() => {
                       handleClick('modal', voteObj);
-                    }}>Vote</Button>
+                    }}>Sign</Button>
                     : <Button className='button-style-result' onClick={() => {
                       handleClick('result', voteObj);
                     }}>Results</Button>
@@ -99,7 +99,7 @@ export const Voting = (props) => {
                   }
           />
           <Column className={'table-text'}
-                  title="Total votes"
+                  title="Total signings"
                   dataIndex="voters"
                   key="voters"
                   render={(tags) => (
